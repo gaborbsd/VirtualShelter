@@ -14,7 +14,7 @@ public class Species {
 	
 	private String speciesName;
 	
-	private Set<Breed> breeds;
+	//private Set<Breed> breeds;
 	
 	public int getId() {
 		return id;
@@ -31,7 +31,7 @@ public class Species {
 	public void setSpeciesName(String speciesName) {
 		this.speciesName = speciesName;
 	}
-	
+	/*
 	public Set<Breed> getBreeds() {
 		return breeds;
 	}
@@ -39,7 +39,7 @@ public class Species {
 	public void setBreeds(Set<Breed> breeds) {
 		this.breeds = breeds;
 	}
-	
+	*/
 	@Override
 	public int hashCode() {
 		final int prime = 31;

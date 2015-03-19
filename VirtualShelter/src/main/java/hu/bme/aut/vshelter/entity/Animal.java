@@ -15,37 +15,37 @@ public class Animal {
 
 	private String name;
 	
-	private AdoptionType adoptionTpye;
+	//private AdoptionType adoptionTpye;
 	
-	private Breed breed;
+	//private Breed breed;
 	
 	private int height;
 	
 	private int weight;
 	
-	private Date age;
+	//private Date age;
 	
-	private Sex sex;
+	//private Sex sex;
 	
 	private boolean spayed;
 	
-	private VaccinationStatus vaccinationStatus;
+	//private VaccinationStatus vaccinationStatus;
 	
 	private String description;
 	
-	private List<String> knownDiseases;
+	//private List<String> knownDiseases;
 	
-	private List<String> knownHandicaps;
+	//private List<String> knownHandicaps;
 	
-	private Address address;
+	//private Address address;
 	
-	private List<Picture> picture;
+	//private List<Picture> picture;
 	
-	private DeliveryType deliveryType;
+	//private DeliveryType deliveryType;
 	
 	private String otherCosts;
 	
-	private Advertisement advertisement;
+	//private Advertisement advertisement;
 	
 	
 	public String getName() {
@@ -55,7 +55,7 @@ public class Animal {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+	/*
 	public AdoptionType getAdoptionTpye() {
 		return adoptionTpye;
 	}
@@ -71,7 +71,7 @@ public class Animal {
 	public void setBreed(Breed breed) {
 		this.breed = breed;
 	}
-	
+	*/
 	public int getHeight() {
 		return height;
 	}
@@ -87,7 +87,7 @@ public class Animal {
 	public void setWeight(int weight) {
 		this.weight = weight;
 	}
-	
+	/*
 	public Date getAge() {
 		return age;
 	}
@@ -103,7 +103,7 @@ public class Animal {
 	public void setSex(Sex sex) {
 		this.sex = sex;
 	}
-	
+	*/
 	public boolean isSpayed() {
 		return spayed;
 	}
@@ -111,7 +111,7 @@ public class Animal {
 	public void setSpayed(boolean spayed) {
 		this.spayed = spayed;
 	}
-	
+	/*
 	public VaccinationStatus getVaccinationStatus() {
 		return vaccinationStatus;
 	}
@@ -119,7 +119,7 @@ public class Animal {
 	public void setVaccinationStatus(VaccinationStatus vaccinationStatus) {
 		this.vaccinationStatus = vaccinationStatus;
 	}
-	
+	*/
 	public String getDescription() {
 		return description;
 	}
@@ -127,7 +127,7 @@ public class Animal {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+	/*
 	public List<String> getKnownDiseases() {
 		return knownDiseases;
 	}
@@ -167,7 +167,7 @@ public class Animal {
 	public void setDeliveryType(DeliveryType deliveryType) {
 		this.deliveryType = deliveryType;
 	}
-	
+	*/
 	public String getOtherCosts() {
 		return otherCosts;
 	}
@@ -175,7 +175,7 @@ public class Animal {
 	public void setOtherCosts(String otherCosts) {
 		this.otherCosts = otherCosts;
 	}
-	
+	/*
 	public Advertisement getAdvertisement() {
 		return advertisement;
 	}
@@ -183,7 +183,7 @@ public class Animal {
 	public void setAdvertisement(Advertisement advertisement) {
 		this.advertisement = advertisement;
 	}
-
+*/
 	public int getId() {
 		return id;
 	}

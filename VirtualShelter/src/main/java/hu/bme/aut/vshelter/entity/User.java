@@ -12,7 +12,7 @@ public class User extends Advertiser {
 	
 	private String introductionText;
 	
-	private Set<String> roles;
+	//private Set<String> roles;
 	
 	public String getPassword() {
 		return password;
@@ -29,7 +29,7 @@ public class User extends Advertiser {
 	public void setIntroductionText(String introductionText) {
 		this.introductionText = introductionText;
 	}
-	
+	/*
 	public Set<String> getRoles() {
 		return roles;
 	}
@@ -37,7 +37,7 @@ public class User extends Advertiser {
 	public void setRoles(Set<String> roles) {
 		this.roles = roles;
 	}
-	
+	*/
 	@Override
 	public int hashCode() {
 		final int prime = 31;

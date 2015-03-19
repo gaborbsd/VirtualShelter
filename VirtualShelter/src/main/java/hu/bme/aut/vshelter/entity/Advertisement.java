@@ -12,11 +12,11 @@ public class Advertisement {
 	@GeneratedValue
 	private int id;
 	
-	private Advertiser advertiser;
+	//private Advertiser advertiser;
 	
-	private Animal animal;
+	//private Animal animal;
 	
-	private Calendar dateOfAdvertisement;
+	//private Calendar dateOfAdvertisement;
 	
 	public int getId() {
 		return id;
@@ -25,7 +25,7 @@ public class Advertisement {
 	public void setId(int id) {
 		this.id = id;
 	}
-	
+	/*
 	public Advertiser getAdvertiser() {
 		return advertiser;
 	}
@@ -49,7 +49,7 @@ public class Advertisement {
 	public void setDateOfAdvertisement(Calendar dateOfAdvertisement) {
 		this.dateOfAdvertisement = dateOfAdvertisement;
 	}
-	
+	*/
 	@Override
 	public int hashCode() {
 		final int prime = 31;

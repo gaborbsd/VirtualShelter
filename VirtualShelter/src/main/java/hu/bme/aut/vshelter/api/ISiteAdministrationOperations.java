@@ -15,7 +15,7 @@ public interface ISiteAdministrationOperations {
 	
 	/**
 	 * Promotes a user to site administrator
-	 * @param user user to be promoted to sie administrator
+	 * @param user user to be promoted to site administrator
 	 * @throws VirtualShelterException
 	 */
 	public void promoteSiteAdministrator(User user) throws VirtualShelterException;

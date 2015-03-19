@@ -16,9 +16,9 @@ public class Advertiser {
 	
 	private String email;
 	
-	private Address address;
+	//private Address address;
 	
-	private List<Picture> picturesList;
+	//private List<Picture> picturesList;
 	
 	private String phoneNumber;
 	
@@ -47,7 +47,7 @@ public class Advertiser {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
+	/*
 	public Address getAddress() {
 		return address;
 	}
@@ -63,7 +63,7 @@ public class Advertiser {
 	public void setPicturesList(List<Picture> picturesList) {
 		this.picturesList = picturesList;
 	}
-	
+	*/
 	public String getPhoneNumber() {
 		return phoneNumber;
 	}
