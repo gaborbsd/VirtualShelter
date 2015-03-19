@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Advertiser {
@@ -16,7 +17,8 @@ public class Advertiser {
 	
 	private String email;
 	
-	//private Address address;
+	@ManyToOne
+	private Address address;
 	
 	//private List<Picture> picturesList;
 	
@@ -47,7 +49,7 @@ public class Advertiser {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	/*
+	
 	public Address getAddress() {
 		return address;
 	}
@@ -55,7 +57,7 @@ public class Advertiser {
 	public void setAddress(Address address) {
 		this.address = address;
 	}
-	
+	/*
 	public List<Picture> getPicturesList() {
 		return picturesList;
 	}

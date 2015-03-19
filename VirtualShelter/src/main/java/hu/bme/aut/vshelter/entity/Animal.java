@@ -8,6 +8,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Animal {
@@ -20,7 +21,8 @@ public class Animal {
 	@Enumerated(EnumType.STRING)
 	AdoptionType adoptionTpye;
 	
-	//private Breed breed;
+	@ManyToOne
+	private Breed breed;
 	
 	private int height;
 	
@@ -42,7 +44,8 @@ public class Animal {
 	
 	//private List<String> knownHandicaps;
 	
-	//private Address address;
+	@ManyToOne
+	private Address address;
 	
 	//private List<Picture> picture;
 	
@@ -51,7 +54,8 @@ public class Animal {
 	
 	private String otherCosts;
 	
-	//private Advertisement advertisement;
+	@ManyToOne
+	private Advertisement advertisement;
 	
 	
 	public String getName() {
@@ -69,7 +73,7 @@ public class Animal {
 	public void setAdoptionTpye(AdoptionType adoptionTpye) {
 		this.adoptionTpye = adoptionTpye;
 	}
-	/*
+	
 	public Breed getBreed() {
 		return breed;
 	}
@@ -77,7 +81,7 @@ public class Animal {
 	public void setBreed(Breed breed) {
 		this.breed = breed;
 	}
-	*/
+	
 	public int getHeight() {
 		return height;
 	}
@@ -149,7 +153,7 @@ public class Animal {
 	public void setKnownHandicaps(List<String> knownHandicaps) {
 		this.knownHandicaps = knownHandicaps;
 	}
-	
+	*/
 	public Address getAddress() {
 		return address;
 	}
@@ -157,7 +161,7 @@ public class Animal {
 	public void setAddress(Address address) {
 		this.address = address;
 	}
-	
+	/*
 	public List<Picture> getPicture() {
 		return picture;
 	}
@@ -181,7 +185,7 @@ public class Animal {
 	public void setOtherCosts(String otherCosts) {
 		this.otherCosts = otherCosts;
 	}
-	/*
+	
 	public Advertisement getAdvertisement() {
 		return advertisement;
 	}
@@ -189,7 +193,7 @@ public class Animal {
 	public void setAdvertisement(Advertisement advertisement) {
 		this.advertisement = advertisement;
 	}
-*/
+
 	public int getId() {
 		return id;
 	}

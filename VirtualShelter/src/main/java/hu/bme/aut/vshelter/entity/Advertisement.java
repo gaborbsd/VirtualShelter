@@ -5,6 +5,7 @@ import java.util.Calendar;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Advertisement {
@@ -12,9 +13,11 @@ public class Advertisement {
 	@GeneratedValue
 	private int id;
 	
-	//private Advertiser advertiser;
+	@ManyToOne
+	private Advertiser advertiser;
 	
-	//private Animal animal;
+	@ManyToOne
+	private Animal animal;
 	
 	//private Calendar dateOfAdvertisement;
 	
@@ -25,7 +28,7 @@ public class Advertisement {
 	public void setId(int id) {
 		this.id = id;
 	}
-	/*
+	
 	public Advertiser getAdvertiser() {
 		return advertiser;
 	}
@@ -41,7 +44,7 @@ public class Advertisement {
 	public void setAnimal(Animal animal) {
 		this.animal = animal;
 	}
-	
+	/*
 	public Calendar getDateOfAdvertisement() {
 		return dateOfAdvertisement;
 	}
