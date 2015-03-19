@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
@@ -15,7 +17,8 @@ public class Animal {
 
 	private String name;
 	
-	//private AdoptionType adoptionTpye;
+	@Enumerated(EnumType.STRING)
+	AdoptionType adoptionTpye;
 	
 	//private Breed breed;
 	
@@ -25,11 +28,13 @@ public class Animal {
 	
 	//private Date age;
 	
-	//private Sex sex;
+	@Enumerated(EnumType.STRING)
+	private Sex sex;
 	
 	private boolean spayed;
 	
-	//private VaccinationStatus vaccinationStatus;
+	@Enumerated(EnumType.STRING)
+	private VaccinationStatus vaccinationStatus;
 	
 	private String description;
 	
@@ -41,7 +46,8 @@ public class Animal {
 	
 	//private List<Picture> picture;
 	
-	//private DeliveryType deliveryType;
+	@Enumerated(EnumType.STRING)
+	private DeliveryType deliveryType;
 	
 	private String otherCosts;
 	
@@ -55,7 +61,7 @@ public class Animal {
 	public void setName(String name) {
 		this.name = name;
 	}
-	/*
+	
 	public AdoptionType getAdoptionTpye() {
 		return adoptionTpye;
 	}
@@ -63,7 +69,7 @@ public class Animal {
 	public void setAdoptionTpye(AdoptionType adoptionTpye) {
 		this.adoptionTpye = adoptionTpye;
 	}
-	
+	/*
 	public Breed getBreed() {
 		return breed;
 	}
@@ -95,7 +101,7 @@ public class Animal {
 	public void setAge(Date age) {
 		this.age = age;
 	}
-	
+	*/
 	public Sex getSex() {
 		return sex;
 	}
@@ -103,7 +109,7 @@ public class Animal {
 	public void setSex(Sex sex) {
 		this.sex = sex;
 	}
-	*/
+	
 	public boolean isSpayed() {
 		return spayed;
 	}
@@ -111,7 +117,7 @@ public class Animal {
 	public void setSpayed(boolean spayed) {
 		this.spayed = spayed;
 	}
-	/*
+	
 	public VaccinationStatus getVaccinationStatus() {
 		return vaccinationStatus;
 	}
@@ -119,7 +125,7 @@ public class Animal {
 	public void setVaccinationStatus(VaccinationStatus vaccinationStatus) {
 		this.vaccinationStatus = vaccinationStatus;
 	}
-	*/
+	
 	public String getDescription() {
 		return description;
 	}
@@ -159,7 +165,7 @@ public class Animal {
 	public void setPicture(List<Picture> picture) {
 		this.picture = picture;
 	}
-	
+	*/
 	public DeliveryType getDeliveryType() {
 		return deliveryType;
 	}
@@ -167,7 +173,7 @@ public class Animal {
 	public void setDeliveryType(DeliveryType deliveryType) {
 		this.deliveryType = deliveryType;
 	}
-	*/
+	
 	public String getOtherCosts() {
 		return otherCosts;
 	}
