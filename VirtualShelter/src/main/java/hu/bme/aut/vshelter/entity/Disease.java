@@ -1,16 +1,23 @@
 package hu.bme.aut.vshelter.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
+@Table(name = "disease", catalog = "vshelter", uniqueConstraints = {
+		@UniqueConstraint(columnNames = "diseaseName")})
 public class Disease {
 	@Id
 	@GeneratedValue
+	@Column(name = "id", unique = true, nullable = false)
 	private int id;
 	
-	private String diceaseName;
+	@Column(name = "diseaseName", unique = true, nullable = false)
+	private String diseaseName;
 	
 	public int getId() {
 		return id;
@@ -21,11 +28,11 @@ public class Disease {
 	}
 	
 	public String getDiceaseName() {
-		return diceaseName;
+		return diseaseName;
 	}
 
 	public void setDiceaseName(String diceaseName) {
-		this.diceaseName = diceaseName;
+		this.diseaseName = diceaseName;
 	}
 
 	@Override

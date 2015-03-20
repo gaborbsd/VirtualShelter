@@ -1,18 +1,27 @@
 package hu.bme.aut.vshelter.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
+@Table(name = "institution", catalog = "vshelter")
 public class Institution extends Advertiser {
 	
+	@Column(name = "taxNumber", unique = false, nullable = true)
 	private String taxNumber;
 	
+	@Column(name = "bankAccount", unique = false, nullable = true)
 	private String bankAccount;
 	
+	@Column(name = "PayPal", unique = false, nullable = true)
 	private String PayPal;
 	
+	@Column(name = "longitude", unique = false, nullable = true)
 	private double longitude;
 	
+	@Column(name = "lattitude", unique = false, nullable = true)
 	private double lattitude;
 
 	

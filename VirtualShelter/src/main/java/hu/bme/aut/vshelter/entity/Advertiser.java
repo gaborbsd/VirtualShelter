@@ -3,6 +3,7 @@ package hu.bme.aut.vshelter.entity;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -11,16 +12,24 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED)
+@Table(name = "advertiser", catalog = "vshelter", uniqueConstraints = {
+		@UniqueConstraint(columnNames = "email"),
+		@UniqueConstraint(columnNames = "name")})
 public class Advertiser {
 	@Id
 	@GeneratedValue
+	@Column(name = "id", unique = true, nullable = false)
 	protected int id;
 	
+	@Column(name = "name", unique = true, nullable = false)
 	private String name;
 	
+	@Column(name = "email", unique = true, nullable = false)
 	private String email;
 	
 	@ManyToOne
@@ -29,8 +38,10 @@ public class Advertiser {
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Picture> picturesList;
 	
+	@Column(name = "phoneNumber", unique = false, nullable = true)
 	private String phoneNumber;
 	
+	@Column(name = "mobilePhoneNumber", unique = false, nullable = true)
 	private String mobilePhoneNumber;
 	
 	public int getId() {

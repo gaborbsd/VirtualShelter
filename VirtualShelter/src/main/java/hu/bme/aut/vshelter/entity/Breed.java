@@ -1,16 +1,23 @@
 package hu.bme.aut.vshelter.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
+@Table(name = "breed", catalog = "vshelter", uniqueConstraints = {
+		@UniqueConstraint(columnNames = "breedName")})
 public class Breed {
 	@Id
 	@GeneratedValue
+	@Column(name = "id", unique = true, nullable = false)
 	private int id;
 	
+	@Column(name = "breedName", unique = true, nullable = false)
 	private String breedName;
 	
 	@ManyToOne

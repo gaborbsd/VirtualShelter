@@ -3,18 +3,25 @@ package hu.bme.aut.vshelter.entity;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
+@Table(name = "species", catalog = "vshelter", uniqueConstraints = {
+		@UniqueConstraint(columnNames = "speciesName")})
 public class Species {
 	@Id
 	@GeneratedValue
+	@Column(name = "id", unique = true, nullable = false)
 	private int id;
 	
+	@Column(name = "speciesName", unique = true, nullable = false)
 	private String speciesName;
 	
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)

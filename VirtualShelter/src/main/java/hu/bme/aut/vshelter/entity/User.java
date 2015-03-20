@@ -2,15 +2,22 @@ package hu.bme.aut.vshelter.entity;
 
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
+@Table(name = "user", catalog = "vshelter")
 public class User extends Advertiser {
+	
+	@Column(name = "password", unique = false, nullable = false)
 	private String password;
 	
+	@Column(name = "introductionText", unique = false, nullable = true)
 	private String introductionText;
 	
 	@ManyToMany

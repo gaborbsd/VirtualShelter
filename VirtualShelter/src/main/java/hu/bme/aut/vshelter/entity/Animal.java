@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Calendar;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -13,35 +14,48 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
+@Table(name = "animal", catalog = "vshelter")
 public class Animal {
 	@Id
 	@GeneratedValue
+	@Column(name = "id", unique = true, nullable = false)
 	private int id;
-
+	
+	@Column(name = "name", unique = false, nullable = false)
 	private String name;
 	
 	@Enumerated(EnumType.STRING)
+	@Column(name = "adoptionTpye", unique = false, nullable = true)
 	AdoptionType adoptionTpye;
 	
 	@ManyToOne
 	private Breed breed;
 	
+	@Column(name = "height", unique = false, nullable = true)
 	private int height;
 	
+	@Column(name = "weight", unique = false, nullable = true)
 	private int weight;
 	
+	@Column(name = "age", unique = false, nullable = true)
 	private Calendar age;
 	
 	@Enumerated(EnumType.STRING)
+	@Column(name = "sex", unique = false, nullable = true)
 	private Sex sex;
 	
+	@Column(name = "spayed", unique = false, nullable = true)
 	private boolean spayed;
 	
 	@Enumerated(EnumType.STRING)
+	@Column(name = "vaccinationStatus", unique = false, nullable = true)
 	private VaccinationStatus vaccinationStatus;
 	
+	@Column(name = "description", unique = false, nullable = true)
 	private String description;
 	
 	@ManyToMany
@@ -57,13 +71,14 @@ public class Animal {
 	private List<Picture> picture;
 	
 	@Enumerated(EnumType.STRING)
+	@Column(name = "deliveryType", unique = false, nullable = true)
 	private DeliveryType deliveryType;
 	
+	@Column(name = "otherCosts", unique = false, nullable = true)
 	private String otherCosts;
 	
 	@ManyToOne
 	private Advertisement advertisement;
-	
 	
 	public String getName() {
 		return name;

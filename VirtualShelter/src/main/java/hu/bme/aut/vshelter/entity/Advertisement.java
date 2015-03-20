@@ -2,15 +2,20 @@ package hu.bme.aut.vshelter.entity;
 
 import java.util.Calendar;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
+@Table(name = "advertisement", catalog = "vshelter")
 public class Advertisement {
 	@Id
 	@GeneratedValue
+	@Column(name = "id", unique = true, nullable = false)
 	private int id;
 	
 	@ManyToOne
@@ -19,6 +24,7 @@ public class Advertisement {
 	@ManyToOne
 	private Animal animal;
 	
+	@Column(name = "dateOfAdvertisement", unique = true, nullable = true)
 	private Calendar dateOfAdvertisement;
 	
 	public int getId() {

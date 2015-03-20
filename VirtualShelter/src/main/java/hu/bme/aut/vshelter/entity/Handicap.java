@@ -1,16 +1,23 @@
 package hu.bme.aut.vshelter.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
+@Table(name = "handicap", catalog = "vshelter", uniqueConstraints = {
+		@UniqueConstraint(columnNames = "handicapName")})
 public class Handicap {
 	
 	@Id
 	@GeneratedValue
+	@Column(name = "id", unique = true, nullable = false)
 	private int id;
 	
+	@Column(name = "handicapName", unique = true, nullable = false)
 	private String handicapName;
 
 	public int getId() {

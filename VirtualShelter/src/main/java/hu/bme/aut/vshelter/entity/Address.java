@@ -1,30 +1,42 @@
 package hu.bme.aut.vshelter.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
+@Table(name = "address", catalog = "vshelter")
 public class Address {
 	@Id
 	@GeneratedValue
+	@Column(name = "id", unique = true, nullable = false)
 	private int id;
 	
+	@Column(name = "country", unique = false, nullable = false)
 	private String country;
 	
+	@Column(name = "state", unique = false, nullable = true)
 	private String state;
 	
+	@Column(name = "province", unique = false, nullable = true)
 	private String province;
 	
+	@Column(name = "city", unique = false, nullable = false)
 	private String city;
 	
+	@Column(name = "zipCode", unique = false, nullable = false)
 	private String zipCode;
 	
+	@Column(name = "address", unique = false, nullable = false)
 	private String address;
 	
+	@Column(name = "latitude", unique = false, nullable = true)
 	private double latitude;
 	
+	@Column(name = "longitude", unique = false, nullable = true)
 	private double longitude;
 	
 	public int getId() {
