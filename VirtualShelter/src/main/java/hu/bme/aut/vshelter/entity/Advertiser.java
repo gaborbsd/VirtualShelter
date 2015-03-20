@@ -2,9 +2,12 @@ package hu.bme.aut.vshelter.entity;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -20,7 +23,8 @@ public class Advertiser {
 	@ManyToOne
 	private Address address;
 	
-	//private List<Picture> picturesList;
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<Picture> picturesList;
 	
 	private String phoneNumber;
 	
@@ -57,7 +61,7 @@ public class Advertiser {
 	public void setAddress(Address address) {
 		this.address = address;
 	}
-	/*
+	
 	public List<Picture> getPicturesList() {
 		return picturesList;
 	}
@@ -65,7 +69,7 @@ public class Advertiser {
 	public void setPicturesList(List<Picture> picturesList) {
 		this.picturesList = picturesList;
 	}
-	*/
+	
 	public String getPhoneNumber() {
 		return phoneNumber;
 	}

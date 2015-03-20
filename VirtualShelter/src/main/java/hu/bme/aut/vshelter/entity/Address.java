@@ -3,8 +3,10 @@ package hu.bme.aut.vshelter.entity;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "my_address")
 public class Address {
 	@Id
 	@GeneratedValue

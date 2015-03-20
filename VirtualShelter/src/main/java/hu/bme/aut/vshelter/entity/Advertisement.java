@@ -19,7 +19,7 @@ public class Advertisement {
 	@ManyToOne
 	private Animal animal;
 	
-	//private Calendar dateOfAdvertisement;
+	private Calendar dateOfAdvertisement;
 	
 	public int getId() {
 		return id;
@@ -44,7 +44,7 @@ public class Advertisement {
 	public void setAnimal(Animal animal) {
 		this.animal = animal;
 	}
-	/*
+	
 	public Calendar getDateOfAdvertisement() {
 		return dateOfAdvertisement;
 	}
@@ -52,7 +52,7 @@ public class Advertisement {
 	public void setDateOfAdvertisement(Calendar dateOfAdvertisement) {
 		this.dateOfAdvertisement = dateOfAdvertisement;
 	}
-	*/
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

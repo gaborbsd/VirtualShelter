@@ -1,25 +1,18 @@
 package hu.bme.aut.vshelter.entity;
 
-import java.util.Set;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 
 @Entity
-public class Species {
+public class Handicap {
+	
 	@Id
 	@GeneratedValue
 	private int id;
 	
-	private String speciesName;
-	
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private Set<Breed> breeds;
-	
+	private String handicapName;
+
 	public int getId() {
 		return id;
 	}
@@ -27,21 +20,13 @@ public class Species {
 	public void setId(int id) {
 		this.id = id;
 	}
-	
-	public String getSpeciesName() {
-		return speciesName;
+
+	public String getHandicapName() {
+		return handicapName;
 	}
-	
-	public void setSpeciesName(String speciesName) {
-		this.speciesName = speciesName;
-	}
-	
-	public Set<Breed> getBreeds() {
-		return breeds;
-	}
-	
-	public void setBreeds(Set<Breed> breeds) {
-		this.breeds = breeds;
+
+	public void setHandicapName(String handicapName) {
+		this.handicapName = handicapName;
 	}
 	
 	@Override
@@ -60,10 +45,10 @@ public class Species {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Species other = (Species) obj;
+		Handicap other = (Handicap) obj;
 		if (id != other.id)
 			return false;
 		return true;
 	}
-	
+
 }

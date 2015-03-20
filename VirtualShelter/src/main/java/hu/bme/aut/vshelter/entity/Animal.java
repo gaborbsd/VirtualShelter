@@ -2,12 +2,16 @@ package hu.bme.aut.vshelter.entity;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Calendar;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -28,7 +32,7 @@ public class Animal {
 	
 	private int weight;
 	
-	//private Date age;
+	private Calendar age;
 	
 	@Enumerated(EnumType.STRING)
 	private Sex sex;
@@ -40,14 +44,17 @@ public class Animal {
 	
 	private String description;
 	
-	//private List<String> knownDiseases;
+	@ManyToMany
+	private List<Disease> knownDiseases;
 	
-	//private List<String> knownHandicaps;
+	@ManyToMany
+	private List<Handicap> knownHandicaps;
 	
 	@ManyToOne
 	private Address address;
 	
-	//private List<Picture> picture;
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<Picture> picture;
 	
 	@Enumerated(EnumType.STRING)
 	private DeliveryType deliveryType;
@@ -97,15 +104,15 @@ public class Animal {
 	public void setWeight(int weight) {
 		this.weight = weight;
 	}
-	/*
-	public Date getAge() {
+	
+	public Calendar getAge() {
 		return age;
 	}
 	
-	public void setAge(Date age) {
+	public void setAge(Calendar age) {
 		this.age = age;
 	}
-	*/
+	
 	public Sex getSex() {
 		return sex;
 	}
@@ -137,23 +144,23 @@ public class Animal {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	/*
-	public List<String> getKnownDiseases() {
+	
+	public List<Disease> getKnownDiseases() {
 		return knownDiseases;
 	}
 	
-	public void setKnownDiseases(List<String> knownDiseases) {
+	public void setKnownDiseases(List<Disease> knownDiseases) {
 		this.knownDiseases = knownDiseases;
 	}
 	
-	public List<String> getKnownHandicaps() {
+	public List<Handicap> getKnownHandicaps() {
 		return knownHandicaps;
 	}
 	
-	public void setKnownHandicaps(List<String> knownHandicaps) {
+	public void setKnownHandicaps(List<Handicap> knownHandicaps) {
 		this.knownHandicaps = knownHandicaps;
 	}
-	*/
+	
 	public Address getAddress() {
 		return address;
 	}
@@ -161,7 +168,7 @@ public class Animal {
 	public void setAddress(Address address) {
 		this.address = address;
 	}
-	/*
+	
 	public List<Picture> getPicture() {
 		return picture;
 	}
@@ -169,7 +176,7 @@ public class Animal {
 	public void setPicture(List<Picture> picture) {
 		this.picture = picture;
 	}
-	*/
+	
 	public DeliveryType getDeliveryType() {
 		return deliveryType;
 	}

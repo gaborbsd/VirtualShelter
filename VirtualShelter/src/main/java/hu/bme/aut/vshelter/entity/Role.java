@@ -1,24 +1,17 @@
 package hu.bme.aut.vshelter.entity;
 
-import java.util.Set;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 
 @Entity
-public class Species {
+public class Role {
+	
 	@Id
 	@GeneratedValue
 	private int id;
 	
-	private String speciesName;
-	
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private Set<Breed> breeds;
+	private String roleName;
 	
 	public int getId() {
 		return id;
@@ -28,22 +21,14 @@ public class Species {
 		this.id = id;
 	}
 	
-	public String getSpeciesName() {
-		return speciesName;
+	public String getRoleName() {
+		return roleName;
 	}
-	
-	public void setSpeciesName(String speciesName) {
-		this.speciesName = speciesName;
+
+	public void setRoleName(String roleName) {
+		this.roleName = roleName;
 	}
-	
-	public Set<Breed> getBreeds() {
-		return breeds;
-	}
-	
-	public void setBreeds(Set<Breed> breeds) {
-		this.breeds = breeds;
-	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -60,10 +45,10 @@ public class Species {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Species other = (Species) obj;
+		Role other = (Role) obj;
 		if (id != other.id)
 			return false;
 		return true;
 	}
-	
+
 }

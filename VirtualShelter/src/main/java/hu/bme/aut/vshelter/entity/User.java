@@ -5,6 +5,7 @@ import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class User extends Advertiser {
@@ -12,7 +13,8 @@ public class User extends Advertiser {
 	
 	private String introductionText;
 	
-	//private Set<String> roles;
+	@ManyToMany
+	private Set<Role> roles;
 	
 	public String getPassword() {
 		return password;
@@ -29,15 +31,15 @@ public class User extends Advertiser {
 	public void setIntroductionText(String introductionText) {
 		this.introductionText = introductionText;
 	}
-	/*
-	public Set<String> getRoles() {
+	
+	public Set<Role> getRoles() {
 		return roles;
 	}
 	
-	public void setRoles(Set<String> roles) {
+	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
 	}
-	*/
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
