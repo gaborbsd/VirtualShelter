@@ -1,7 +1,4 @@
-DELETE FROM species;
-DELETE FROM breed;
-DELETE FROM address;
-DELETE FROM animal;
+
 
 INSERT INTO species VALUES (1, 'kutya');
 INSERT INTO breed VALUES (1, 'német juhász', 1);
