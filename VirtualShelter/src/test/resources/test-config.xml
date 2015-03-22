@@ -15,5 +15,17 @@
 	http://www.springframework.org/schema/aop
 	http://www.springframework.org/schema/aop/spring-aop.xsd">
 
+	<bean id="addressFacade" class="hu.bme.aut.vshelter.dal.AddressFacadeInMemoryImpl" />
+	<bean id="advertisementFacade" class="hu.bme.aut.vshelter.dal.AdvertisementFacadeInMemoryImpl" />
+	<bean id="advertiserFacade" class="hu.bme.aut.vshelter.dal.AdvertiserFacadeInMemoryImpl" />
 	<bean id="animalFacade" class="hu.bme.aut.vshelter.dal.AnimalFacadeInMemoryImpl" />
+	<bean id="breedFacade" class="hu.bme.aut.vshelter.dal.BreedFacadeInMemoryImpl" />
+	<bean id="diseaseFacade" class="hu.bme.aut.vshelter.dal.DiseaseFacadeInMemoryImpl" />
+	<bean id="handicapFacade" class="hu.bme.aut.vshelter.dal.HandicapFacadeInMemoryImpl" />
+	<bean id="institutionFacade" class="hu.bme.aut.vshelter.dal.InstitutionFacadeInMemoryImpl" />
+	<bean id="pictureFacade" class="hu.bme.aut.vshelter.dal.PictureFacadeInMemoryImpl" />
+	<bean id="roleFacade" class="hu.bme.aut.vshelter.dal.RoleFacadeInMemoryImpl" />
+	<bean id="speciesFacade" class="hu.bme.aut.vshelter.dal.SpeciesFacadeInMemoryImpl" />
+	<bean id="userFacade" class="hu.bme.aut.vshelter.dal.UserFacadeInMemoryImpl" />
+	
 </beans>
