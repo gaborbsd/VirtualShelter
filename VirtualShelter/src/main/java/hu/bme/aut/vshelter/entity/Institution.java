@@ -17,14 +17,7 @@ public class Institution extends Advertiser {
 	
 	@Column(name = "PayPal", unique = false, nullable = true)
 	private String PayPal;
-	
-	@Column(name = "longitude", unique = false, nullable = true)
-	private double longitude;
-	
-	@Column(name = "lattitude", unique = false, nullable = true)
-	private double lattitude;
 
-	
 	public String getTaxNumber() {
 		return taxNumber;
 	}
@@ -47,22 +40,6 @@ public class Institution extends Advertiser {
 	
 	public void setPayPal(String payPal) {
 		PayPal = payPal;
-	}
-	
-	public double getLongitude() {
-		return longitude;
-	}
-	
-	public void setLongitude(double longitude) {
-		this.longitude = longitude;
-	}
-	
-	public double getLattitude() {
-		return lattitude;
-	}
-	
-	public void setLattitude(double lattitude) {
-		this.lattitude = lattitude;
 	}
 	
 	@Override

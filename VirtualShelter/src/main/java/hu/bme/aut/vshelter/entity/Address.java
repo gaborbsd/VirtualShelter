@@ -28,7 +28,7 @@ public class Address {
 	private String city;
 	
 	@Column(name = "zipCode", unique = false, nullable = false)
-	private String zipCode;
+	private int zipCode;
 	
 	@Column(name = "address", unique = false, nullable = false)
 	private String address;
@@ -79,11 +79,11 @@ public class Address {
 		this.city = city;
 	}
 	
-	public String getZipCode() {
+	public int getZipCode() {
 		return zipCode;
 	}
 	
-	public void setZipCode(String zipCode) {
+	public void setZipCode(int zipCode) {
 		this.zipCode = zipCode;
 	}
 	
