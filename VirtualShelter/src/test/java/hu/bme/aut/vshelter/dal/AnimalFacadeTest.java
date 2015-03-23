@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.util.List;
 
 import hu.bme.aut.vshelter.entity.Animal;
+import hu.bme.aut.vshelter.entity.User;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,10 +15,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "/test-config.xml" })
-public class ExampleTest {
+public class AnimalFacadeTest {
 	@Autowired
 	private AnimalFacade animalFacade;
-
+	
 	@Test
 	public void testDI() {
 		assertNotNull(animalFacade);
