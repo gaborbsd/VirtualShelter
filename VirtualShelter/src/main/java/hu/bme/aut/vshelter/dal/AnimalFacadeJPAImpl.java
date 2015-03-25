@@ -28,4 +28,22 @@ public class AnimalFacadeJPAImpl implements AnimalFacade {
 				Animal.class);
 		return query.getResultList();
 	}
+
+	@Override
+	public Animal findAnimalById(int animalId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void edit(Animal animal) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteAnimalById(int animalId) {
+		// TODO Auto-generated method stub
+		
+	}
 }
