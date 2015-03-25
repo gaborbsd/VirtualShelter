@@ -30,7 +30,7 @@ public class Animal {
 	
 	@Enumerated(EnumType.STRING)
 	@Column(name = "adoptionTpye", unique = false, nullable = true)
-	AdoptionType adoptionTpye;
+	private AdoptionType adoptionTpye;
 	
 	@ManyToOne
 	private Breed breed;
@@ -76,9 +76,6 @@ public class Animal {
 	
 	@Column(name = "otherCosts", unique = false, nullable = true)
 	private String otherCosts;
-	
-	@ManyToOne
-	private Advertisement advertisement;
 	
 	public String getName() {
 		return name;
@@ -206,14 +203,6 @@ public class Animal {
 	
 	public void setOtherCosts(String otherCosts) {
 		this.otherCosts = otherCosts;
-	}
-	
-	public Advertisement getAdvertisement() {
-		return advertisement;
-	}
-	
-	public void setAdvertisement(Advertisement advertisement) {
-		this.advertisement = advertisement;
 	}
 
 	public int getId() {
