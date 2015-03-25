@@ -1,6 +1,9 @@
 package hu.bme.aut.vshelter.rest;
 
+
 import hu.bme.aut.vshelter.entity.Animal;
+import hu.bme.aut.vshelter.entity.Disease;
+import hu.bme.aut.vshelter.entity.Handicap;
 
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 import org.springframework.stereotype.Component;
@@ -23,6 +26,19 @@ public class AnimalResourceAssembler extends
 	protected AnimalResource instantiateResource(Animal entity) {
 		AnimalResource resource = new AnimalResource();
 		resource.setName(entity.getName());
+		resource.setAdoptionType(entity.getAdoptionTpye());
+//		resource.setBreed(entity.getBreed()!=null?entity.getBreed():null);
+		resource.setHeight(entity.getHeight());
+		resource.setWeight(entity.getWeight());
+		resource.setAge(entity.getAge()!=null?entity.getAge().getTime().toString():null);
+		resource.setSex(entity.getSex());
+		resource.setSpayed(entity.isSpayed());
+		resource.setVaccinationStatus(entity.getVaccinationStatus());
+		resource.setDescription(entity.getDescription());
+//		resource.setKnownDiseases(entity.getKnownDiseases());
+//		resource.setKnownHandicaps(entity.getKnownHandicaps());
+		resource.setAddress(entity.getAddress());
 		return resource;
 	}
+	
 }
