@@ -1,11 +1,13 @@
 package hu.bme.aut.vshelter.dal;
 
+import hu.bme.aut.vshelter.entity.Advertisement;
 import hu.bme.aut.vshelter.entity.Animal;
 
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import org.springframework.transaction.annotation.Transactional;
@@ -26,24 +28,28 @@ public class AnimalFacadeJPAImpl implements AnimalFacade {
 	public List<Animal> findAll() {
 		TypedQuery<Animal> query = em.createQuery("SELECT a FROM Animal a",
 				Animal.class);
+
 		return query.getResultList();
 	}
 
 	@Override
+	@Transactional
 	public Animal findAnimalById(int animalId) {
-		// TODO Auto-generated method stub
-		return null;
+		return em.find(Animal.class, animalId);
 	}
 
 	@Override
+	@Transactional
 	public void edit(Animal animal) {
-		// TODO Auto-generated method stub
-		
+		em.merge(animal);
 	}
 
 	@Override
+	@Transactional
 	public void deleteAnimalById(int animalId) {
-		// TODO Auto-generated method stub
-		
+		Query deleteQuery = em.createQuery(
+				"DELETE FROM Advertisement where id=:p")
+				.setParameter("p", animalId);
+		deleteQuery.executeUpdate();
 	}
 }

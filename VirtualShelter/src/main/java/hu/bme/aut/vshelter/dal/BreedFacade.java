@@ -10,9 +10,9 @@ public interface BreedFacade {
 	
 	List<Breed> findAll();
 	
-	void create(Breed Breed);
+	void create(Breed breed);
 	
-	void edit(Breed Breed);
+	void edit(Breed breed);
 	
 	void deleteBreedById(int breedId);
 

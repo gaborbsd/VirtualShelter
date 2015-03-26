@@ -10,9 +10,9 @@ public interface RoleFacade {
 	
 	List<Role> findAll();
 	
-	void create(Role Role);
+	void create(Role role);
 	
-	void edit(Role Role);
+	void edit(Role role);
 	
 	void deleteRoleById(int roleId);
 

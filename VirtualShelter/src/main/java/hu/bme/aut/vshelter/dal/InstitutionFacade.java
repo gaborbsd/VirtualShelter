@@ -10,9 +10,9 @@ public interface InstitutionFacade {
 	
 	List<Institution> findAll();
 	
-	void create(Institution Institution);
+	void create(Institution institution);
 	
-	void edit(Institution Institution);
+	void edit(Institution institution);
 	
 	void deleteInstitutionById(int institutionId);
 

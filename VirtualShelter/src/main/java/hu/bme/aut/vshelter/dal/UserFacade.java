@@ -10,9 +10,9 @@ public interface UserFacade {
 	
 	List<User> findAll();
 	
-	void create(User User);
+	void create(User user);
 	
-	void edit(User User);
+	void edit(User user);
 	
 	void deleteUserById(int userId);
 

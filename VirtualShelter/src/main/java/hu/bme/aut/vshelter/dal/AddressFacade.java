@@ -10,9 +10,9 @@ public interface AddressFacade {
 	
 	List<Address> findAll();
 	
-	void create(Address Address);
+	void create(Address address);
 	
-	void edit(Address Address);
+	void edit(Address address);
 	
 	void deleteAddressById(int addressId);
 

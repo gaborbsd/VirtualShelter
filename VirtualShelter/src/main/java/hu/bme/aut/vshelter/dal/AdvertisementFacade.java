@@ -10,9 +10,9 @@ public interface AdvertisementFacade {
 	
 	List<Advertisement> findAll();
 	
-	void create(Advertisement Advertisement);
+	void create(Advertisement advertisement);
 	
-	void edit(Advertisement Advertisement);
+	void edit(Advertisement advertisement);
 	
 	void deleteAdvertisementById(int advertisementId);
 

@@ -10,9 +10,9 @@ public interface SpeciesFacade {
 	
 	List<Species> findAll();
 	
-	void create(Species Species);
+	void create(Species species);
 	
-	void edit(Species Species);
+	void edit(Species species);
 	
 	void deleteSpeciesById(int speciesId);
 

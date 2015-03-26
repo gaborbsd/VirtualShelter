@@ -10,9 +10,9 @@ public interface DiseaseFacade {
 	
 	List<Disease> findAll();
 	
-	void create(Disease Disease);
+	void create(Disease disease);
 	
-	void edit(Disease Disease);
+	void edit(Disease disease);
 	
 	void deleteDiseaseById(int diseaseId);
 

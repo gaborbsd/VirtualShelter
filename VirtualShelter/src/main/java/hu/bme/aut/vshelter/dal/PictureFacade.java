@@ -10,9 +10,9 @@ public interface PictureFacade {
 	
 	List<Picture> findAll();
 	
-	void create(Picture Picture);
+	void create(Picture picture);
 	
-	void edit(Picture Picture);
+	void edit(Picture picture);
 	
 	void deletePictureById(int pictureId);
 

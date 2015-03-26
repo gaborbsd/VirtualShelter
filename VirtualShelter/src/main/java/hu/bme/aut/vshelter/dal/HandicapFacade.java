@@ -10,9 +10,9 @@ public interface HandicapFacade {
 	
 	List<Handicap> findAll();
 	
-	void create(Handicap Handicap);
+	void create(Handicap handicap);
 	
-	void edit(Handicap Handicap);
+	void edit(Handicap handicap);
 	
 	void deleteHandicapById(int handicapId);
 
