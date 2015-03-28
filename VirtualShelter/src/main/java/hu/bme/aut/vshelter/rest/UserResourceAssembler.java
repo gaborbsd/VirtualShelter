@@ -1,6 +1,5 @@
 package hu.bme.aut.vshelter.rest;
 
-import hu.bme.aut.vshelter.entity.Address;
 import hu.bme.aut.vshelter.entity.User;
 
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
