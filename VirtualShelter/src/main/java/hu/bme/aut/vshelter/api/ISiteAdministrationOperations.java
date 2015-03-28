@@ -29,29 +29,31 @@ public interface ISiteAdministrationOperations {
 	
 	/**
 	 * Adds a new species to the database
-	 * @param species species to be added
+	 * @param speciesName name of the species to be added
 	 * @throws VirtualShelterException
 	 */
-	public void addSpecies(String species) throws VirtualShelterException;
+	public void addSpecies(String speciesName) throws VirtualShelterException;
 	
 	/**
 	 * Deletes a species from database
-	 * @param species species to be deleted
+	 * @param speciesName name of the species to be deleted
 	 * @throws VirtualShelterException
 	 */
-	public void deleteSpecies(String species) throws VirtualShelterException;
+	public void deleteSpecies(String speciesName) throws VirtualShelterException;
 	
 	/**
 	 * Adds a new breed to the database
-	 * @param breed breed to be added
+	 * @param breedName name of the breed to be added
+	 * @param speciesName species name of the breed
 	 * @throws VirtualShelterException
 	 */
-	public void addBreed(String breed) throws VirtualShelterException;
+	public void addBreed(String breedName, String speciesName) throws VirtualShelterException;
 	
 	/**
 	 * Deletes a breed from the database
-	 * @param breed breed to be deleted
+	 * @param breedName name of the breed to be deleted
 	 * @throws VirtualShelterException
 	 */
-	public void deleteBreed(String breed) throws VirtualShelterException;
+	public void deleteBreed(String breedName) throws VirtualShelterException;
+	
 }

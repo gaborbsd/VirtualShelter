@@ -1,5 +1,6 @@
 package hu.bme.aut.vshelter.dal;
 
+import hu.bme.aut.vshelter.api.VirtualShelterException;
 import hu.bme.aut.vshelter.entity.Species;
 
 import java.util.List;
@@ -15,5 +16,12 @@ public interface SpeciesFacade {
 	void edit(Species species);
 	
 	void deleteSpeciesById(int speciesId);
+	
+	/**
+	 * Returns the speciesID from the owner of the given species name
+	 * @return
+	 * @throws VirtualShelterException
+	 */
+	public int getSpeciesIdfromSpeciesName(String speciesName)  throws VirtualShelterException;
 
 }

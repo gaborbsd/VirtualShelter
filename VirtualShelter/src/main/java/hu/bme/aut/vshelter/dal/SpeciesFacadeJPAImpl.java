@@ -1,5 +1,6 @@
 package hu.bme.aut.vshelter.dal;
 
+import hu.bme.aut.vshelter.api.VirtualShelterException;
 import hu.bme.aut.vshelter.entity.Species;
 
 import java.util.List;
@@ -33,16 +34,9 @@ public class SpeciesFacadeJPAImpl implements SpeciesFacade {
 	@Override
 	@Transactional
 	public void create(Species species) {
-		TypedQuery<Species> query = em.createQuery("SELECT s FROM Species s where s.speciesName=:p", Species.class)
-				.setParameter("p", species.getSpeciesName());
-		if(query.getClass() == null) {
 			em.persist(species);
-		} else {
-			System.out.println();
-		}
-		
 	}
-
+		
 	@Override
 	@Transactional
 	public void edit(Species species) {
@@ -56,6 +50,13 @@ public class SpeciesFacadeJPAImpl implements SpeciesFacade {
 				"DELETE FROM Species where id=:p")
 				.setParameter("p", speciesId);
 		deleteQuery.executeUpdate();
+	}
+	
+	@Override
+	public int getSpeciesIdfromSpeciesName(String speciesName) throws VirtualShelterException {
+		List<Integer> list = em.createQuery(
+		        "SELECT s.id FROM Species s WHERE s.speciesName = ?1").setParameter(1, speciesName).getResultList();
+		return list.get(0);
 	}
 
 }

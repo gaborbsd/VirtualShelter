@@ -1,5 +1,6 @@
 package hu.bme.aut.vshelter.dal;
 
+import hu.bme.aut.vshelter.api.VirtualShelterException;
 import hu.bme.aut.vshelter.entity.Breed;
 
 import java.util.List;
@@ -50,5 +51,14 @@ public class BreedFacadeJPAImpl implements BreedFacade {
 				.setParameter("p", breedId);
 		deleteQuery.executeUpdate();
 	}
+
+	@Override
+	public int getBreedIdfromSpeciesName(String breedName)
+			throws VirtualShelterException {
+		List<Integer> list = em.createQuery(
+		        "SELECT b.id FROM Breed b WHERE b.breedName = ?1").setParameter(1, breedName).getResultList();
+		return list.get(0);
+	}
+	
 
 }
