@@ -10,7 +10,7 @@ import javax.persistence.Query;
 import javax.transaction.Transactional;
 import javax.persistence.TypedQuery;
 
-public class SpeciesFacadeImpl implements SpeciesFacade {
+public class SpeciesFacadeJPAImpl implements SpeciesFacade {
 	
 	@PersistenceContext
 	private EntityManager em;
@@ -33,7 +33,14 @@ public class SpeciesFacadeImpl implements SpeciesFacade {
 	@Override
 	@Transactional
 	public void create(Species species) {
-		em.persist(species);
+		TypedQuery<Species> query = em.createQuery("SELECT s FROM Species s where s.speciesName=:p", Species.class)
+				.setParameter("p", species.getSpeciesName());
+		if(query.getClass() == null) {
+			em.persist(species);
+		} else {
+			System.out.println();
+		}
+		
 	}
 
 	@Override

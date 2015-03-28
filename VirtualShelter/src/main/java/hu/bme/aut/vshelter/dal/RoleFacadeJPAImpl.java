@@ -10,7 +10,7 @@ import javax.persistence.Query;
 import javax.transaction.Transactional;
 import javax.persistence.TypedQuery;
 
-public class RoleFacadeImpl implements RoleFacade {
+public class RoleFacadeJPAImpl implements RoleFacade {
 	
 	@PersistenceContext
 	private EntityManager em;
