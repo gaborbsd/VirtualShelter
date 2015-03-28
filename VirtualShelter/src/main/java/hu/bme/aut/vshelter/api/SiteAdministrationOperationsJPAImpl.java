@@ -26,13 +26,13 @@ public class SiteAdministrationOperationsJPAImpl implements
 	@Override
 	public void promoteSiteAdministrator(User user)
 			throws VirtualShelterException {
+		userDaO.promoteUserToSiteAdministrator(user.getId());
 	}
 
 	@Override
 	public void revokeSiteAdministrator(User user)
 			throws VirtualShelterException {
-		// TODO Auto-generated method stub
-
+		userDaO.revokeUserFromSiteAdministrator(user.getId());
 	}
 
 	@Override
