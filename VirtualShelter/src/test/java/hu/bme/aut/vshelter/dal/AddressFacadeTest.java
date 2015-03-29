@@ -34,8 +34,8 @@ public class AddressFacadeTest {
 		address.setAddress("Irinyi József utca");
 		address.setId(1);
 		addressFacade.create(address);
-		List<Address> animals = addressFacade.findAll();
-		assertTrue(animals.contains(address));
+		List<Address> addresses = addressFacade.findAll();
+		assertTrue(addresses.contains(address));
 	}
 	
 	@Test
@@ -45,8 +45,8 @@ public class AddressFacadeTest {
 		address.setCity("1117");
 		address.setAddress("Irinyi József utca");
 		address.setId(2);
-		List<Address> animals = addressFacade.findAll();
-		assertFalse(animals.contains(address));
+		List<Address> addresses = addressFacade.findAll();
+		assertFalse(addresses.contains(address));
 	}
 	
 	@Test
