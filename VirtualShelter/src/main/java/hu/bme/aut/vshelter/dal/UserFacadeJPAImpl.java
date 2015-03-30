@@ -18,7 +18,7 @@ public class UserFacadeJPAImpl implements UserFacade {
 	private EntityManager em;
 
 	@Override
-	public User findUserById(int userId) {
+	public User findUserById(long userId) {
 		return em.find(User.class, userId);
 	}
 
@@ -41,7 +41,7 @@ public class UserFacadeJPAImpl implements UserFacade {
 	}
 
 	@Override
-	public void deleteUserById(int userId) {
+	public void deleteUserById(long userId) {
 		Query deleteQuery = em.createQuery(
 				"DELETE FROM User where id=:p")
 				.setParameter("p", userId);

@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface UserFacade {
 	
-	User findUserById(int userId);
+	User findUserById(long userId);
 	
 	List<User> findAll();
 	
@@ -15,7 +15,7 @@ public interface UserFacade {
 	
 	void edit(User user);
 	
-	void deleteUserById(int userId);
+	void deleteUserById(long userId);
 	
 	/**
 	 * Adds site-administrator role to the user with the given id
@@ -35,5 +35,6 @@ public interface UserFacade {
 	 * @throws VirtualShelterException
 	 */
 	public int getUserIdfromEmail(String email) throws VirtualShelterException;
+	
 
 }

@@ -1,7 +1,11 @@
 package hu.bme.aut.vshelter.entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -17,6 +21,12 @@ public class Institution extends Advertiser {
 	
 	@Column(name = "PayPal", unique = false, nullable = true)
 	private String PayPal;
+	
+	@ManyToOne
+	private User owner;
+
+	@ManyToMany
+	private List<User> institutionAdministrators;
 
 	public String getTaxNumber() {
 		return taxNumber;
@@ -40,6 +50,22 @@ public class Institution extends Advertiser {
 	
 	public void setPayPal(String payPal) {
 		PayPal = payPal;
+	}
+	
+	public List<User> getInstitutionAdministrators() {
+		return institutionAdministrators;
+	}
+
+	public void setInstitutionAdministrators(List<User> institutionAdministrators) {
+		this.institutionAdministrators = institutionAdministrators;
+	}
+	
+	public User getOwner() {
+		return owner;
+	}
+
+	public void setOwner(User owner) {
+		this.owner = owner;
 	}
 	
 	@Override

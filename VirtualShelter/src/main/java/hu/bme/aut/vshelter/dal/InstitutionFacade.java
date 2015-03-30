@@ -14,6 +14,6 @@ public interface InstitutionFacade {
 	
 	void edit(Institution institution);
 	
-	void deleteInstitutionById(int institutionId);
+	void deleteInstitutionById(long institutionId);
 
 }

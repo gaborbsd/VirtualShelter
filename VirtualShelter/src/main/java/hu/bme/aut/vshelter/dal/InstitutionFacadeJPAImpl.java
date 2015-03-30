@@ -45,7 +45,7 @@ public class InstitutionFacadeJPAImpl implements InstitutionFacade {
 
 	@Override
 	@Transactional
-	public void deleteInstitutionById(int institutionId) {
+	public void deleteInstitutionById(long institutionId) {
 		Query deleteQuery = em.createQuery(
 				"DELETE FROM Institution where id=:p")
 				.setParameter("p", institutionId);

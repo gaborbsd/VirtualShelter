@@ -44,7 +44,7 @@ public class AdvertisementFacadeJPAImpl implements AdvertisementFacade {
 
 	@Override
 	@Transactional
-	public void deleteAdvertisementById(int advertisementId) {
+	public void deleteAdvertisementById(long advertisementId) {
 		Query deleteQuery = em.createQuery(
 				"DELETE FROM Advertisement where id=:p")
 				.setParameter("p", advertisementId);

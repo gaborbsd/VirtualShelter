@@ -14,6 +14,6 @@ public interface AdvertisementFacade {
 	
 	void edit(Advertisement advertisement);
 	
-	void deleteAdvertisementById(int advertisementId);
+	void deleteAdvertisementById(long advertisementId);
 
 }
