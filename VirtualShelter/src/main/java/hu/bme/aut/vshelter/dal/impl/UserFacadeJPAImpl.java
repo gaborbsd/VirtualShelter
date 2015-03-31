@@ -2,7 +2,6 @@ package hu.bme.aut.vshelter.dal.impl;
 
 import hu.bme.aut.vshelter.api.VirtualShelterException;
 import hu.bme.aut.vshelter.dal.UserFacade;
-import hu.bme.aut.vshelter.entity.Role;
 import hu.bme.aut.vshelter.entity.User;
 
 import java.util.List;
@@ -51,9 +50,9 @@ public class UserFacadeJPAImpl implements UserFacade {
 
 	@Override
 	public void promoteUserToSiteAdministrator(int userId) {
-		List<Role> list = em.createQuery(
+		List<String> list = em.createQuery(
 		        "SELECT r FROM Role r WHERE r.roleName = 'site-administrator'").getResultList();
-		Role role = list.get(0);
+		String role = list.get(0);
 		User user = this.findUserById(userId);
 		
 		if( !user.getRoles().contains(role)) {
@@ -63,9 +62,9 @@ public class UserFacadeJPAImpl implements UserFacade {
 	
 	@Override
 	public void revokeUserFromSiteAdministrator(int userId) {
-		List<Role> list = em.createQuery(
+		List<String> list = em.createQuery(
 		        "SELECT r FROM Role r WHERE r.roleName = 'site-administrator'").getResultList();
-		Role role = list.get(0);
+		String role = list.get(0);
 		User user = this.findUserById(userId);
 		
 		if( user.getRoles().contains(role)) {
