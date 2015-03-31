@@ -23,13 +23,6 @@ public class AdvertisementFacadeTest {
 	private AdvertisementFacade advertisementFacade;
 
 	@Test
-	public void testDI() {
-		assertNotNull(advertisementFacade);
-		assertEquals(advertisementFacade.getClass().getSimpleName(),
-				"AdvertisementFacadeInMemoryImpl");
-	}
-
-	@Test
 	public void testPersistAddedIsContains() {
 		Advertisement advertisement = new Advertisement();
 		Advertiser advertiser = new User();
@@ -83,7 +76,7 @@ public class AdvertisementFacadeTest {
 	public void testNoFindAdvertisementByNotExistId(){
 		Advertisement actual;
 		actual = advertisementFacade.findAdvertisementById(3301);
-		assertTrue(actual == null);
+		assertNull(actual);
 	}
 	
 	@Test
@@ -129,7 +122,7 @@ public class AdvertisementFacadeTest {
 		
 		Advertisement actual;
 		actual = advertisementFacade.findAdvertisementById(6);
-		assertTrue(actual == null);
+		assertNull(actual);
 	}
 
 }
