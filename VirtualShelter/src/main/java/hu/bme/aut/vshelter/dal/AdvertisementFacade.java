@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface AdvertisementFacade {
 	
-	Advertisement findAdvertisementById(int advertisementId);
+	Advertisement findAdvertisementById(long advertisementId);
 	
 	List<Advertisement> findAll();
 	

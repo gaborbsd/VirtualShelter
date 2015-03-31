@@ -17,7 +17,7 @@ public class AdvertisementFacadeJPAImpl implements AdvertisementFacade {
 
 	@Override
 	@Transactional
-	public Advertisement findAdvertisementById(int advertisementId) {
+	public Advertisement findAdvertisementById(long advertisementId) {
 		return em.find(Advertisement.class, advertisementId);
 	}
 
