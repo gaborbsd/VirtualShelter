@@ -27,8 +27,8 @@ public class Animal {
 	private String name;
 	
 	@Enumerated(EnumType.STRING)
-	@Column(name = "adoptionTpye", unique = false, nullable = true)
-	private AdoptionType adoptionTpye;
+	@Column(name = "adoptionType", unique = false, nullable = true)
+	private AdoptionType adoptionType;
 	
 	@ManyToOne
 	private Breed breed;
@@ -83,12 +83,12 @@ public class Animal {
 		this.name = name;
 	}
 	
-	public AdoptionType getAdoptionTpye() {
-		return adoptionTpye;
+	public AdoptionType getAdoptionType() {
+		return adoptionType;
 	}
 	
-	public void setAdoptionTpye(AdoptionType adoptionTpye) {
-		this.adoptionTpye = adoptionTpye;
+	public void setAdoptionType(AdoptionType adoptionType) {
+		this.adoptionType = adoptionType;
 	}
 	
 	public Breed getBreed() {
