@@ -1,4 +1,4 @@
-package hu.bme.aut.vshelter.dal;
+package hu.bme.aut.vshelter.dal.impl;
 
 import hu.bme.aut.vshelter.entity.Disease;
 
