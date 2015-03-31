@@ -11,7 +11,7 @@ import hu.bme.aut.vshelter.entity.User;
 
 import java.util.List;
 
-public class SiteAdministrationOperationsJPAImpl implements
+public class SiteAdministrationOperationsImpl implements
 		ISiteAdministrationOperations {
 	
 	UserFacadeJPAImpl userDaO = new UserFacadeJPAImpl();

@@ -21,7 +21,7 @@ import hu.bme.aut.vshelter.entity.User;
 
 import java.util.List;
 
-public class AdvertisementOperationsJPAImpl implements IAdvertisementOperations {
+public class AdvertisementOperationsImpl implements IAdvertisementOperations {
 	
 	private AdvertisementFacade advertisementDAO;
 	private UserFacade userDAO;
@@ -29,7 +29,7 @@ public class AdvertisementOperationsJPAImpl implements IAdvertisementOperations 
 	private SpeciesFacade speciesDAO;
 	private BreedFacade breedDAO;
 	
-	public AdvertisementOperationsJPAImpl() {
+	public AdvertisementOperationsImpl() {
 		advertisementDAO = new AdvertisementFacadeJPAImpl();
 		userDAO = new UserFacadeJPAImpl();
 		institutionDAO = new InstitutionFacadeJPAImpl();
