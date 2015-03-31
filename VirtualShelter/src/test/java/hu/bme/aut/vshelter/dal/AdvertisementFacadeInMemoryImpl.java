@@ -11,7 +11,7 @@ public class AdvertisementFacadeInMemoryImpl implements AdvertisementFacade {
 	private List<Advertisement> advertisements = new ArrayList<Advertisement>();
 
 	@Override
-	public Advertisement findAdvertisementById(int addressId) {
+	public Advertisement findAdvertisementById(long addressId) {
 		for(Advertisement addr : advertisements)
 			if(addr.getId() == addressId){
 				return addr;
@@ -35,7 +35,7 @@ public class AdvertisementFacadeInMemoryImpl implements AdvertisementFacade {
 	}
 
 	@Override
-	public void deleteAdvertisementById(int addressId) {
+	public void deleteAdvertisementById(long addressId) {
 		Advertisement deleteAdvertisement = findAdvertisementById(addressId);
 
 		if(deleteAdvertisement != null)
