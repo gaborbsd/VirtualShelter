@@ -7,6 +7,7 @@ import java.util.List;
 import hu.bme.aut.vshelter.entity.Advertisement;
 import hu.bme.aut.vshelter.entity.Advertiser;
 import hu.bme.aut.vshelter.entity.Animal;
+import hu.bme.aut.vshelter.entity.User;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,7 +32,7 @@ public class AdvertisementFacadeTest {
 	@Test
 	public void testPersistAddedIsContains() {
 		Advertisement advertisement = new Advertisement();
-		Advertiser advertiser = new Advertiser();
+		Advertiser advertiser = new User();
 		Animal animal = new Animal();
 		
 		advertisement.setAnimal(animal);
@@ -47,7 +48,7 @@ public class AdvertisementFacadeTest {
 	@Test
 	public void testPersistNotAddedIsNotContains() {
 		Advertisement advertisement = new Advertisement();
-		Advertiser advertiser = new Advertiser();
+		Advertiser advertiser = new User();
 		Animal animal = new Animal();
 		
 		advertisement.setAnimal(animal);
@@ -62,7 +63,7 @@ public class AdvertisementFacadeTest {
 	public void testFindAdvertisementById(){
 		Advertisement advertisement = new Advertisement();
 		Advertisement actual;
-		Advertiser advertiser = new Advertiser();
+		Advertiser advertiser = new User();
 		Animal animal = new Animal();
 		
 		advertisement.setAnimal(animal);
@@ -88,7 +89,7 @@ public class AdvertisementFacadeTest {
 	@Test
 	public void testEditAdvertisement(){
 		Advertisement advertisement = new Advertisement();
-		Advertiser advertiser = new Advertiser();
+		Advertiser advertiser = new User();
 		Animal animal = new Animal();
 		advertisement.setAnimal(animal);
 		advertisement.setAdvertiser(advertiser);
@@ -97,7 +98,7 @@ public class AdvertisementFacadeTest {
 		advertisementFacade.create(advertisement);
 		
 		Advertisement modified = new Advertisement();
-		Advertiser advertiser2 = new Advertiser();
+		Advertiser advertiser2 = new User();
 		Animal animal2 = new Animal();
 		modified.setAdvertiser(advertiser2);
 		modified.setAnimal(animal2);
@@ -116,7 +117,7 @@ public class AdvertisementFacadeTest {
 	@Test
 	public void testDeleteAdvertisementById(){
 		Advertisement advertisement = new Advertisement();
-		Advertiser advertiser = new Advertiser();
+		Advertiser advertiser = new User();
 		Animal animal = new Animal();
 		advertisement.setAnimal(animal);
 		advertisement.setAdvertiser(advertiser);
