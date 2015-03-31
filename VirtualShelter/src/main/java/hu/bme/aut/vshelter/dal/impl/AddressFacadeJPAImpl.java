@@ -1,4 +1,4 @@
-package hu.bme.aut.vshelter.dal;
+package hu.bme.aut.vshelter.dal.impl;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -7,6 +7,7 @@ import javax.persistence.Query;
 import javax.transaction.Transactional;
 import javax.persistence.TypedQuery;
 
+import hu.bme.aut.vshelter.dal.AddressFacade;
 import hu.bme.aut.vshelter.entity.Address;
 
 

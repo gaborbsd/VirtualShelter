@@ -1,6 +1,7 @@
-package hu.bme.aut.vshelter.dal;
+package hu.bme.aut.vshelter.dal.impl;
 
 import hu.bme.aut.vshelter.api.VirtualShelterException;
+import hu.bme.aut.vshelter.dal.BreedFacade;
 import hu.bme.aut.vshelter.entity.Breed;
 
 import java.util.List;

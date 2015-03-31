@@ -26,7 +26,7 @@ public class AnimalResourceAssembler extends
 	protected AnimalResource instantiateResource(Animal entity) {
 		AnimalResource resource = new AnimalResource();
 		resource.setName(entity.getName());
-		resource.setAdoptionType(entity.getAdoptionTpye());
+		resource.setAdoptionType(entity.getAdoptionType());
 //		resource.setBreed(entity.getBreed()!=null?entity.getBreed():null);
 		resource.setHeight(entity.getHeight());
 		resource.setWeight(entity.getWeight());

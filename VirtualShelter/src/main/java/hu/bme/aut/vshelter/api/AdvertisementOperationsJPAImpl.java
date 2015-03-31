@@ -1,15 +1,15 @@
 package hu.bme.aut.vshelter.api;
 
 import hu.bme.aut.vshelter.dal.AdvertisementFacade;
-import hu.bme.aut.vshelter.dal.AdvertisementFacadeJPAImpl;
 import hu.bme.aut.vshelter.dal.BreedFacade;
-import hu.bme.aut.vshelter.dal.BreedFacadeJPAImpl;
 import hu.bme.aut.vshelter.dal.InstitutionFacade;
-import hu.bme.aut.vshelter.dal.InstitutionFacadeJPAImpl;
 import hu.bme.aut.vshelter.dal.SpeciesFacade;
-import hu.bme.aut.vshelter.dal.SpeciesFacadeJPAImpl;
 import hu.bme.aut.vshelter.dal.UserFacade;
-import hu.bme.aut.vshelter.dal.UserFacadeJPAImpl;
+import hu.bme.aut.vshelter.dal.impl.AdvertisementFacadeJPAImpl;
+import hu.bme.aut.vshelter.dal.impl.BreedFacadeJPAImpl;
+import hu.bme.aut.vshelter.dal.impl.InstitutionFacadeJPAImpl;
+import hu.bme.aut.vshelter.dal.impl.SpeciesFacadeJPAImpl;
+import hu.bme.aut.vshelter.dal.impl.UserFacadeJPAImpl;
 import hu.bme.aut.vshelter.entity.Advertisement;
 import hu.bme.aut.vshelter.entity.AdvertisementQueryFilter;
 import hu.bme.aut.vshelter.entity.Advertiser;

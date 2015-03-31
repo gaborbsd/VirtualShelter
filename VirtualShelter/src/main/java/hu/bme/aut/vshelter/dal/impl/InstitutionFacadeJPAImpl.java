@@ -1,5 +1,6 @@
-package hu.bme.aut.vshelter.dal;
+package hu.bme.aut.vshelter.dal.impl;
 
+import hu.bme.aut.vshelter.dal.InstitutionFacade;
 import hu.bme.aut.vshelter.entity.Institution;
 
 import java.util.List;

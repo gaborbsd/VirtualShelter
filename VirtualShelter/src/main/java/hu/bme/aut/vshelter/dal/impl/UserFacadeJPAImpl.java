@@ -1,6 +1,7 @@
-package hu.bme.aut.vshelter.dal;
+package hu.bme.aut.vshelter.dal.impl;
 
 import hu.bme.aut.vshelter.api.VirtualShelterException;
+import hu.bme.aut.vshelter.dal.UserFacade;
 import hu.bme.aut.vshelter.entity.Role;
 import hu.bme.aut.vshelter.entity.User;
 
