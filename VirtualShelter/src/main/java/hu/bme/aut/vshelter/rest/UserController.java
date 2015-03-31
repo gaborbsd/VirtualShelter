@@ -10,7 +10,12 @@ import hu.bme.aut.vshelter.entity.Animal;
 import hu.bme.aut.vshelter.entity.Institution;
 import hu.bme.aut.vshelter.entity.Picture;
 import hu.bme.aut.vshelter.entity.User;
-
+import hu.bme.aut.vshelter.rest.resources.AnimalResource;
+import hu.bme.aut.vshelter.rest.resources.InstitutionResource;
+import hu.bme.aut.vshelter.rest.resources.InstitutionResourceAssembler;
+import hu.bme.aut.vshelter.rest.resources.PictureResource;
+import hu.bme.aut.vshelter.rest.resources.UserResource;
+import hu.bme.aut.vshelter.rest.resources.UserResourceAssembler;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
 
 import org.springframework.beans.factory.annotation.Autowired;

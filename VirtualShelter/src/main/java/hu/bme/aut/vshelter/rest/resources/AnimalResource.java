@@ -1,4 +1,4 @@
-package hu.bme.aut.vshelter.rest;
+package hu.bme.aut.vshelter.rest.resources;
 
 import java.util.Calendar;
 import java.util.List;

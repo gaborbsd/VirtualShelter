@@ -7,6 +7,9 @@ import hu.bme.aut.vshelter.api.IAdvertisementOperations;
 import hu.bme.aut.vshelter.api.ISiteAdministrationOperations;
 import hu.bme.aut.vshelter.api.VirtualShelterException;
 import hu.bme.aut.vshelter.entity.Species;
+import hu.bme.aut.vshelter.rest.resources.BreedResource;
+import hu.bme.aut.vshelter.rest.resources.SpeciesResource;
+import hu.bme.aut.vshelter.rest.resources.SpeciesResourceAssembler;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
 
 import org.springframework.beans.factory.annotation.Autowired;

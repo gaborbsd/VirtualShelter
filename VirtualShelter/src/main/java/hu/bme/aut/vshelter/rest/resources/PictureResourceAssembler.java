@@ -1,6 +1,7 @@
-package hu.bme.aut.vshelter.rest;
+package hu.bme.aut.vshelter.rest.resources;
 
 import hu.bme.aut.vshelter.entity.Picture;
+import hu.bme.aut.vshelter.rest.PictureController;
 
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 

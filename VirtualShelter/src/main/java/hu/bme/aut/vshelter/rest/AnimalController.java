@@ -7,6 +7,10 @@ import hu.bme.aut.vshelter.dal.AnimalFacade;
 import hu.bme.aut.vshelter.entity.Advertisement;
 import hu.bme.aut.vshelter.entity.Animal;
 import hu.bme.aut.vshelter.entity.Picture;
+import hu.bme.aut.vshelter.rest.resources.AnimalResource;
+import hu.bme.aut.vshelter.rest.resources.AnimalResourceAssembler;
+import hu.bme.aut.vshelter.rest.resources.PictureResource;
+import hu.bme.aut.vshelter.rest.resources.UserResource;
 
 import java.util.ArrayList;
 import java.util.List;

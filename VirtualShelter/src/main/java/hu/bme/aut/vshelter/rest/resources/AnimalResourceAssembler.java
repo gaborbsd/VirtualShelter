@@ -1,9 +1,10 @@
-package hu.bme.aut.vshelter.rest;
+package hu.bme.aut.vshelter.rest.resources;
 
 
 import hu.bme.aut.vshelter.entity.Animal;
 import hu.bme.aut.vshelter.entity.Disease;
 import hu.bme.aut.vshelter.entity.Handicap;
+import hu.bme.aut.vshelter.rest.AnimalController;
 
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 import org.springframework.stereotype.Component;
