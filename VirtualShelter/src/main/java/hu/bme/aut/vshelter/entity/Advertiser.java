@@ -20,7 +20,7 @@ import javax.persistence.UniqueConstraint;
 @Table(name = "advertiser", catalog = "vshelter", uniqueConstraints = {
 		@UniqueConstraint(columnNames = "email"),
 		@UniqueConstraint(columnNames = "name")})
-public class Advertiser {
+public abstract class Advertiser {
 	@Id
 	@GeneratedValue
 	@Column(name = "id", unique = true, nullable = false)
