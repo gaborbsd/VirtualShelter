@@ -13,11 +13,8 @@ public class AddressFacadeInMemoryImpl implements AddressFacade {
 
 	@Override
 	public Address findAddressById(long addressId) {
-		for(Address addr : addresses)
-			if(addr.getId() == addressId){
-				return addr;
-			}
-		return null;
+		return addresses.stream().filter(a -> a.getId() == addressId)
+				.findFirst().get();
 	}
 
 	@Override
