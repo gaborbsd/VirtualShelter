@@ -82,7 +82,6 @@ public class AnimalFacadeTest {
 		assertEquals( modified, actual);
 		assertEquals(modified.getName(), actual.getName());
 		assertEquals(modified.getDescription(), actual.getDescription());
-		assertEquals(animal.getName(), actual.getName());
 	}
 	
 	@Test
