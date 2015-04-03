@@ -22,5 +22,5 @@ public interface BreedFacade {
 	 * @return
 	 * @throws VirtualShelterException
 	 */
-	public int getBreedIdfromSpeciesName(String breedName)  throws VirtualShelterException;
+	public long getBreedIdfromSpeciesName(String breedName)  throws VirtualShelterException;
 }
