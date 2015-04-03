@@ -86,7 +86,7 @@ public class AdvertisementFacadeTest {
 		Animal animal = new Animal();
 		advertisement.setAnimal(animal);
 		advertisement.setAdvertiser(advertiser);
-		advertisement.setId(1);
+		advertisement.setId(5);
 
 		advertisementFacade.create(advertisement);
 		
