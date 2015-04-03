@@ -13,8 +13,6 @@ INSERT INTO species_breed VALUES (1, 1);
 INSERT INTO species_breed VALUES (2, 2);
 INSERT INTO species_breed VALUES (3, 3);
 
-INSERT INTO role VALUES (1, 'site-administrator');
-
 INSERT INTO handicap VALUES (1, 'vak');
 INSERT INTO handicap VALUES (2, 'sánta');
 INSERT INTO handicap VALUES (3, 'süket');
@@ -41,11 +39,11 @@ INSERT INTO user VALUES ('Kedves idős házaspár nagy kertes ház', 'csipella96
 INSERT INTO user VALUES ('Szeretek vadászni vadászkutyát keresek', 'asd123', 2);
 INSERT INTO user VALUES ('Halakat tartok, tóparti otthonomban', 'skywalker24', 3);
  
-INSERT INTO institution VALUES (null ,'17136433-44432345-00000000', '235732461', 4); 
-INSERT INTO institution VALUES (null ,'43422643-66356353-63452452', '562452348', 5);
-INSERT INTO institution VALUES (null ,'87654375-53453452-24563462', '54262452', 6);
+INSERT INTO institution VALUES (null ,'17136433-44432345-00000000', '235732461', 4,1); 
+INSERT INTO institution VALUES (null ,'43422643-66356353-63452452', '562452348', 5,2);
+INSERT INTO institution VALUES (null ,'87654375-53453452-24563462', '54262452', 6,3);
 
-INSERT INTO animal VALUES (1, 'PERMANENT',DATE_SUB(NOW(), INTERVAL 2 YEAR), 'ADOPTIER', 'jo alvo', 20, 'Alfred', 'nincs', 'MALE', false, 'PARTLY',53, 1, 1);
+INSERT INTO animal VALUES (1, 'PERMANENT',DATE_SUB(NOW(), INTERVAL 2 YEAR), 'ADOPTER', 'jo alvo', 20, 'Alfred', 'nincs', 'MALE', false, 'PARTLY',53, 1, 1);
 INSERT INTO animal VALUES (2, 'BOTH', DATE_SUB(NOW(), INTERVAL 43 DAY), 'ADVERTISER', 'rossz alvo', 50, 'Cirmi', 'nincs', 'FEMALE', false, 'NO',52, 2, 2);
 INSERT INTO animal VALUES (3, 'PERMANENT', DATE_SUB(NOW(), INTERVAL 17 MONTH), 'ADVERTISER',  'jo alvo', 45, 'Bundas', 'feregtelenito', 'MALE', true, 'YES',45, 5, 3);
 
@@ -57,8 +55,7 @@ INSERT INTO animal_disease VALUES (1, 1);
 
 INSERT INTO animal_handicap VALUES (2, 2);
 
-INSERT INTO user_role VALUES (2, 1);
-
+INSERT INTO user_roles VALUES (1, 'site-administrator');
 
 SET FOREIGN_KEY_CHECKS=1;
 

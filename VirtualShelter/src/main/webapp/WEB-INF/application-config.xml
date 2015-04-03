@@ -53,5 +53,5 @@
 
 	<bean id="jacksonObjectMapper" class="com.fasterxml.jackson.databind.ObjectMapper" />
 
-	<bean id="animalFacade" class="hu.bme.aut.vshelter.dal.AnimalFacadeJPAImpl" />
+	<bean id="animalFacade" class="hu.bme.aut.vshelter.dal.impl.AnimalFacadeJPAImpl" />
 </beans>
