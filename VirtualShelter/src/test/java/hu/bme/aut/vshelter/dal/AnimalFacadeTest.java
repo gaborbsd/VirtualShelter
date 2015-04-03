@@ -65,7 +65,7 @@ public class AnimalFacadeTest {
 	}
 	
 	@Test
-	public void testEditAnimalt(){
+	public void testEditAnimal(){
 		Animal animal = new Animal();
 		animal.setName("Vörös");
 		animal.setId(4);
@@ -73,9 +73,11 @@ public class AnimalFacadeTest {
 		animalFacade.create(animal);
 		
 		Animal modified = new Animal();
-		modified.setName("Vörös");
+		modified.setName("Veres");
 		animal.setDescription("aranyos vörös cica");
 		modified.setId(4);
+		
+		animalFacade.edit(modified);
 		
 		Animal actual;
 		actual = animalFacade.findAnimalById(4);
