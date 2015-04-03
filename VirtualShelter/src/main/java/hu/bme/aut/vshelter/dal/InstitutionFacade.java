@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface InstitutionFacade {
 	
-	Institution findInstitutionById(int institutionId);
+	Institution findInstitutionById(long institutionId);
 	
 	List<Institution> findAll();
 	

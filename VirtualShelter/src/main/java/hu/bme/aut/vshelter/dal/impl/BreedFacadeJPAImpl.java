@@ -19,7 +19,7 @@ public class BreedFacadeJPAImpl implements BreedFacade {
 
 	@Override
 	@Transactional
-	public Breed findBreedById(int breedId) {
+	public Breed findBreedById(long breedId) {
 		return em.find(Breed.class, breedId);
 	}
 
@@ -46,7 +46,7 @@ public class BreedFacadeJPAImpl implements BreedFacade {
 
 	@Override
 	@Transactional
-	public void deleteBreedById(int breedId) {
+	public void deleteBreedById(long breedId) {
 		Query deleteQuery = em.createQuery(
 				"DELETE FROM Breed where id=:p")
 				.setParameter("p", breedId);

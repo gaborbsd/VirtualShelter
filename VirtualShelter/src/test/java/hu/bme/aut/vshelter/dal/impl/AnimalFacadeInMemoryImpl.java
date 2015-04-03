@@ -22,7 +22,7 @@ public class AnimalFacadeInMemoryImpl implements AnimalFacade {
 	}
 
 	@Override
-	public Animal findAnimalById(int animalId) {
+	public Animal findAnimalById(long animalId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -34,7 +34,7 @@ public class AnimalFacadeInMemoryImpl implements AnimalFacade {
 	}
 
 	@Override
-	public void deleteAnimalById(int animalId) {
+	public void deleteAnimalById(long animalId) {
 		// TODO Auto-generated method stub
 		
 	}

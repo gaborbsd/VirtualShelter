@@ -21,7 +21,7 @@ public class Animal {
 	@Id
 	@GeneratedValue
 	@Column(name = "id", unique = true, nullable = false)
-	private int id;
+	private long id;
 	
 	@Column(name = "name", unique = false, nullable = false)
 	private String name;
@@ -75,6 +75,14 @@ public class Animal {
 	@Column(name = "otherCosts", unique = false, nullable = true)
 	private String otherCosts;
 	
+	public long getId() {
+		return id;
+	}
+	
+	public void setId(long id) {
+		this.id = id;
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -203,19 +211,11 @@ public class Animal {
 		this.otherCosts = otherCosts;
 	}
 
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + id;
+		result = prime * result + (int)id;
 		return result;
 	}
 

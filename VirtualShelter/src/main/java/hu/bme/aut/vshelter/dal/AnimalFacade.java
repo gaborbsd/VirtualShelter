@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface AnimalFacade {
 	
-	Animal findAnimalById(int animalId);
+	Animal findAnimalById(long animalId);
 	
 	List<Animal> findAll();
 	
@@ -15,5 +15,5 @@ public interface AnimalFacade {
 	
 	void edit(Animal animal);
 	
-	void deleteAnimalById(int animalId);	
+	void deleteAnimalById(long animalId);	
 }

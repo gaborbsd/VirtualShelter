@@ -19,7 +19,7 @@ public class Species {
 	@Id
 	@GeneratedValue
 	@Column(name = "id", unique = true, nullable = false)
-	private int id;
+	private long id;
 	
 	@Column(name = "speciesName", unique = true, nullable = false)
 	private String speciesName;
@@ -27,11 +27,11 @@ public class Species {
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Set<Breed> breeds;
 	
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 	
@@ -55,7 +55,7 @@ public class Species {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + id;
+		result = prime * result + (int)id;
 		return result;
 	}
 

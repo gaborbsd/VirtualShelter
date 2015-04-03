@@ -18,7 +18,7 @@ public class HandicapFacadeJPAImpl implements HandicapFacade {
 
 	@Override
 	@Transactional
-	public Handicap findHandicapById(int handicapId) {
+	public Handicap findHandicapById(long handicapId) {
 		return em.find(Handicap.class, handicapId);
 	}
 
@@ -45,7 +45,7 @@ public class HandicapFacadeJPAImpl implements HandicapFacade {
 
 	@Override
 	@Transactional
-	public void deleteHandicapById(int handicapId) {
+	public void deleteHandicapById(long handicapId) {
 		Query deleteQuery = em.createQuery(
 				"DELETE FROM Handicap where id=:p")
 				.setParameter("p", handicapId);

@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface DiseaseFacade {
 	
-	Disease findDiseaseById(int diseaseId);
+	Disease findDiseaseById(long diseaseId);
 	
 	List<Disease> findAll();
 	
@@ -14,6 +14,6 @@ public interface DiseaseFacade {
 	
 	void edit(Disease disease);
 	
-	void deleteDiseaseById(int diseaseId);
+	void deleteDiseaseById(long diseaseId);
 
 }

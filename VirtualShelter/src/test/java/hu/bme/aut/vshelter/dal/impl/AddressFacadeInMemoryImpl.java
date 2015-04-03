@@ -12,7 +12,7 @@ public class AddressFacadeInMemoryImpl implements AddressFacade {
 	private List<Address> addresses = new ArrayList<Address>();
 
 	@Override
-	public Address findAddressById(int addressId) {
+	public Address findAddressById(long addressId) {
 		for(Address addr : addresses)
 			if(addr.getId() == addressId){
 				return addr;
@@ -36,7 +36,7 @@ public class AddressFacadeInMemoryImpl implements AddressFacade {
 	}
 
 	@Override
-	public void deleteAddressById(int addressId) {
+	public void deleteAddressById(long addressId) {
 		Address deleteAddress = findAddressById(addressId);
 
 		if(deleteAddress != null)

@@ -14,16 +14,16 @@ public class Disease {
 	@Id
 	@GeneratedValue
 	@Column(name = "id", unique = true, nullable = false)
-	private int id;
+	private long id;
 	
 	@Column(name = "diseaseName", unique = true, nullable = false)
 	private String diseaseName;
 	
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 	
@@ -39,7 +39,7 @@ public class Disease {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + id;
+		result = prime * result + (int)id;
 		return result;
 	}
 

@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface AddressFacade {
 	
-	Address findAddressById(int addressId);
+	Address findAddressById(long addressId);
 	
 	List<Address> findAll();
 	
@@ -14,6 +14,6 @@ public interface AddressFacade {
 	
 	void edit(Address address);
 	
-	void deleteAddressById(int addressId);
+	void deleteAddressById(long addressId);
 
 }

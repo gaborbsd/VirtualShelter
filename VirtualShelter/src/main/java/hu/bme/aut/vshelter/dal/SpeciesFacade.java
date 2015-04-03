@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface SpeciesFacade {
 	
-	Species findSpeciesById(int speciesId);
+	Species findSpeciesById(long speciesId);
 	
 	List<Species> findAll();
 	
@@ -15,7 +15,7 @@ public interface SpeciesFacade {
 	
 	void edit(Species species);
 	
-	void deleteSpeciesById(int speciesId);
+	void deleteSpeciesById(long speciesId);
 	
 	/**
 	 * Returns the speciesID from the owner of the given species name

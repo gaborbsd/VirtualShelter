@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface BreedFacade {
 		
-	Breed findBreedById(int breedId);
+	Breed findBreedById(long breedId);
 	
 	List<Breed> findAll();
 	
@@ -15,7 +15,7 @@ public interface BreedFacade {
 	
 	void edit(Breed breed);
 	
-	void deleteBreedById(int breedId);
+	void deleteBreedById(long breedId);
 	
 	/**
 	 * Returns the breedID from the owner of the given breed name

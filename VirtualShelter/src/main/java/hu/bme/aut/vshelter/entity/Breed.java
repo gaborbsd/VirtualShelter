@@ -15,7 +15,7 @@ public class Breed {
 	@Id
 	@GeneratedValue
 	@Column(name = "id", unique = true, nullable = false)
-	private int id;
+	private long id;
 	
 	@Column(name = "breedName", unique = true, nullable = false)
 	private String breedName;
@@ -23,11 +23,11 @@ public class Breed {
 	@ManyToOne
 	private Species species;
 	
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 	
@@ -51,7 +51,7 @@ public class Breed {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + id;
+		result = prime * result + (int)id;
 		return result;
 	}
 

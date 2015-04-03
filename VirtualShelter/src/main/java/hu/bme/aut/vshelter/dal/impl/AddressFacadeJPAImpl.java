@@ -18,7 +18,7 @@ public class AddressFacadeJPAImpl implements AddressFacade {
 	
 	@Override
 	@Transactional
-	public Address findAddressById(int addressId) {
+	public Address findAddressById(long addressId) {
 		return em.find(Address.class, addressId);
 	}
 
@@ -45,7 +45,7 @@ public class AddressFacadeJPAImpl implements AddressFacade {
 
 	@Override
 	@Transactional
-	public void deleteAddressById(int addressId) {
+	public void deleteAddressById(long addressId) {
 		Query deleteQuery = em.createQuery(
 				"DELETE FROM Address where id=:p")
 				.setParameter("p", addressId);

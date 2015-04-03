@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface HandicapFacade {
 	
-	Handicap findHandicapById(int handicapId);
+	Handicap findHandicapById(long handicapId);
 	
 	List<Handicap> findAll();
 	
@@ -14,6 +14,6 @@ public interface HandicapFacade {
 	
 	void edit(Handicap handicap);
 	
-	void deleteHandicapById(int handicapId);
+	void deleteHandicapById(long handicapId);
 
 }

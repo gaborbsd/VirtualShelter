@@ -18,7 +18,7 @@ public class DiseaseFacadeJPAImpl implements DiseaseFacade {
 
 	@Override
 	@Transactional
-	public Disease findDiseaseById(int diseaseId) {
+	public Disease findDiseaseById(long diseaseId) {
 		return em.find(Disease.class, diseaseId);
 	}
 
@@ -45,7 +45,7 @@ public class DiseaseFacadeJPAImpl implements DiseaseFacade {
 
 	@Override
 	@Transactional
-	public void deleteDiseaseById(int diseaseId) {
+	public void deleteDiseaseById(long diseaseId) {
 		Query deleteQuery = em.createQuery(
 				"DELETE FROM Disease where id=:p")
 				.setParameter("p", diseaseId);

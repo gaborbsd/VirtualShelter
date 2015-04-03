@@ -12,7 +12,7 @@ public class Address {
 	@Id
 	@GeneratedValue
 	@Column(name = "id", unique = true, nullable = false)
-	private int id;
+	private long id;
 	
 	@Column(name = "country", unique = false, nullable = false)
 	private String country;
@@ -38,11 +38,11 @@ public class Address {
 	@Column(name = "longitude", unique = false, nullable = true)
 	private double longitude;
 	
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -114,7 +114,7 @@ public class Address {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + id;
+		result = prime * result + (int)id;
 		return result;
 	}
 

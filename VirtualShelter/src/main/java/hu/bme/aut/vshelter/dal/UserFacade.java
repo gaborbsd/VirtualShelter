@@ -21,13 +21,13 @@ public interface UserFacade {
 	 * Adds site-administrator role to the user with the given id
 	 * @param userId
 	 */
-	void promoteUserToSiteAdministrator(int userId);
+	void promoteUserToSiteAdministrator(long userId);
 	
 	/**
 	 * Removes site-administrator role from user with the given id
 	 * @param userId
 	 */
-	void revokeUserFromSiteAdministrator(int userId);
+	void revokeUserFromSiteAdministrator(long userId);
 	
 	/**
 	 * Returns the userId from the owner of the given email

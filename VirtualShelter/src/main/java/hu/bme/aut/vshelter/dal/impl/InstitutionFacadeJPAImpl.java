@@ -18,7 +18,7 @@ public class InstitutionFacadeJPAImpl implements InstitutionFacade {
 
 	@Override
 	@Transactional
-	public Institution findInstitutionById(int institutionId) {
+	public Institution findInstitutionById(long institutionId) {
 		return em.find(Institution.class, institutionId);
 	}
 

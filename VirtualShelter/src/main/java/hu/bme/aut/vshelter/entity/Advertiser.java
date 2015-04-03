@@ -24,7 +24,7 @@ public abstract class Advertiser {
 	@Id
 	@GeneratedValue
 	@Column(name = "id", unique = true, nullable = false)
-	protected int id;
+	protected long id;
 	
 	@Column(name = "name", unique = true, nullable = false)
 	private String name;
@@ -44,11 +44,11 @@ public abstract class Advertiser {
 	@Column(name = "mobilePhoneNumber", unique = false, nullable = true)
 	private String mobilePhoneNumber;
 	
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 	
@@ -104,7 +104,7 @@ public abstract class Advertiser {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + id;
+		result = prime * result + (int)id;
 		return result;
 	}
 

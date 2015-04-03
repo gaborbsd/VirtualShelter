@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface PictureFacade {
 	
-	Picture findPictureById(int pictureId);
+	Picture findPictureById(long pictureId);
 	
 	List<Picture> findAll();
 	
@@ -14,6 +14,6 @@ public interface PictureFacade {
 	
 	void edit(Picture picture);
 	
-	void deletePictureById(int pictureId);
+	void deletePictureById(long pictureId);
 
 }
