@@ -1,9 +1,50 @@
 package hu.bme.aut.vshelter.dal.impl;
 
+import hu.bme.aut.vshelter.dal.DiseaseFacade;
 import hu.bme.aut.vshelter.entity.Disease;
 
-public class DiseaseFacadeInMemoryImpl {
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.NoSuchElementException;
 
-	private Disease disease = new Disease();
+public class DiseaseFacadeInMemoryImpl implements DiseaseFacade {
+
+	private List<Disease> diseases = new ArrayList<Disease>();
+
+	@Override
+	public Disease findDiseaseById(long diseaseId) {
+		try {
+			return diseases.stream()
+					.filter(a -> a.getId() == diseaseId).findFirst()
+					.get();
+		} catch (NoSuchElementException e) {
+			return null;
+		}
+	}
+
+	@Override
+	public List<Disease> findAll() {
+		return Collections.unmodifiableList(diseases);
+	}
+
+	@Override
+	public void create(Disease disease) {
+		diseases.add(disease);
+	}
+
+	@Override
+	public void edit(Disease disease) {
+		diseases
+		.set(diseases.indexOf(disease), disease);
+	}
+
+	@Override
+	public void deleteDiseaseById(long diseaseId) {
+		Disease deleteDisease = findDiseaseById(diseaseId);
+
+		if (deleteDisease != null)
+			diseases.remove(deleteDisease);
+	}
 	
 }
