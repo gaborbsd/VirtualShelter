@@ -6,6 +6,7 @@ import hu.bme.aut.vshelter.dal.AddressFacade;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public class AddressFacadeInMemoryImpl implements AddressFacade {
 	
@@ -13,8 +14,12 @@ public class AddressFacadeInMemoryImpl implements AddressFacade {
 
 	@Override
 	public Address findAddressById(long addressId) {
-		return addresses.stream().filter(a -> a.getId() == addressId)
-				.findFirst().get();
+		try{
+			return addresses.stream().filter(a -> a.getId() == addressId)
+					.findFirst().get();
+		}catch(NoSuchElementException e){
+			return null;
+		}
 	}
 
 	@Override

@@ -19,12 +19,6 @@ public class AddressFacadeTest {
 	@Autowired
 	private AddressFacade addressFacade;
 	
-	@Test
-	public void testDI() {
-		assertNotNull(addressFacade);
-		assertEquals(addressFacade.getClass().getSimpleName(),
-				"AddressFacadeInMemoryImpl");
-	}
 	
 	@Test
 	public void testPersistAddedIsContains() {
