@@ -2,7 +2,6 @@ package hu.bme.aut.vshelter.dal;
 
 import static org.junit.Assert.*;
 import hu.bme.aut.vshelter.entity.Breed;
-import hu.bme.aut.vshelter.entity.Breed;
 import hu.bme.aut.vshelter.entity.Species;
 
 import java.util.List;
@@ -55,7 +54,6 @@ public class BreedFacadeTest {
 		assertEquals(breed, actual);
 		assertEquals(breed.getBreedName(), actual.getBreedName());
 		assertEquals(breed.getId(), actual.getId());
-
 	}
 	
 	@Test
@@ -77,9 +75,11 @@ public class BreedFacadeTest {
 		modified.setBreedName("majom");
 		modified.setId(4);
 		
+		breedFacade.edit(modified);
+		
 		Breed actual;
 		actual = breedFacade.findBreedById(4);
-		assertEquals( modified, actual);
+		assertEquals(modified, actual);
 		assertEquals(modified.getBreedName(), actual.getBreedName());
 		assertEquals(breed.getId(), actual.getId());
 	}
