@@ -24,15 +24,15 @@ public class SiteAdministrationOperationsImpl implements
 	}
 
 	@Override
-	public void promoteSiteAdministrator(User user)
+	public void promoteSiteAdministrator(long userId)
 			throws VirtualShelterException {
-		userDaO.promoteUserToSiteAdministrator(user.getId());
+		userDaO.promoteUserToSiteAdministrator(userId);
 	}
 
 	@Override
-	public void revokeSiteAdministrator(User user)
+	public void revokeSiteAdministrator(long userId)
 			throws VirtualShelterException {
-		userDaO.revokeUserFromSiteAdministrator(user.getId());
+		userDaO.revokeUserFromSiteAdministrator(userId);
 	}
 
 	@Override
@@ -44,22 +44,22 @@ public class SiteAdministrationOperationsImpl implements
 	}
 
 	@Override
-	public void deleteSpecies(String speciesName) throws VirtualShelterException {
-		speciesDAO.deleteSpeciesById(speciesDAO.getSpeciesIdfromSpeciesName(speciesName));
+	public void deleteSpecies(long speciesId) throws VirtualShelterException {
+		speciesDAO.deleteSpeciesById(speciesId);
 	}
 
 	@Override
-	public void addBreed(String breedName, String speciesName) throws VirtualShelterException {
+	public void addBreed(String breedName, long speciesId) throws VirtualShelterException {
 		Breed breed = new Breed();
 		breed.setBreedName(breedName);
-		Species species = speciesDAO.findSpeciesById(speciesDAO.getSpeciesIdfromSpeciesName(speciesName));
+		Species species = speciesDAO.findSpeciesById(speciesId);
 		breed.setSpecies(species);
 		breedDAO.create(breed);
 	}
 
 	@Override
-	public void deleteBreed(String breedName) throws VirtualShelterException {
-		breedDAO.deleteBreedById(breedDAO.getBreedIdfromSpeciesName(breedName));
+	public void deleteBreed(long breedId) throws VirtualShelterException {
+		breedDAO.deleteBreedById(breedId);
 	}
 
 }

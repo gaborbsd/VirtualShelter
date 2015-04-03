@@ -12,7 +12,6 @@ import hu.bme.aut.vshelter.dal.impl.SpeciesFacadeJPAImpl;
 import hu.bme.aut.vshelter.dal.impl.UserFacadeJPAImpl;
 import hu.bme.aut.vshelter.entity.Advertisement;
 import hu.bme.aut.vshelter.entity.AdvertisementQueryFilter;
-import hu.bme.aut.vshelter.entity.Advertiser;
 import hu.bme.aut.vshelter.entity.Breed;
 import hu.bme.aut.vshelter.entity.Institution;
 import hu.bme.aut.vshelter.entity.Picture;
@@ -38,14 +37,14 @@ public class AdvertisementOperationsImpl implements IAdvertisementOperations {
 	}
 
 	@Override
-	public void advertise(Institution instituion, Advertisement advertisement)
+	public void advertise(long instituionID, long advertisementID)
 			throws VirtualShelterException {
 		// ID - val johet majd es akkor nem is kell ketto
 
 	}
 
 	@Override
-	public void advertise(Advertisement advertisement)
+	public void advertise(long advertisementId)
 			throws VirtualShelterException {
 		// TODO Auto-generated method stub
 
@@ -67,14 +66,14 @@ public class AdvertisementOperationsImpl implements IAdvertisementOperations {
 	}
 
 	@Override
-	public void uploadPicture(Picture picture, Advertiser advertiser)
+	public void uploadPicture(Picture picture, long advertiserId)
 			throws VirtualShelterException {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void deletePicture(Picture picture, Advertiser advertiser)
+	public void deletePicture(long pictureId, long advertiserId)
 			throws VirtualShelterException {
 		// TODO Auto-generated method stub
 
@@ -102,14 +101,14 @@ public class AdvertisementOperationsImpl implements IAdvertisementOperations {
 	}
 
 	@Override
-	public void changeInstitutionOwner(User user, Institution institution)
+	public void changeInstitutionOwner(long userId, long institutionId)
 			throws VirtualShelterException {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void addInstitutionAdministrator(User user, Institution institution)
+	public void addInstitutionAdministrator(long userId, long institutionId)
 			throws VirtualShelterException {
 		
 

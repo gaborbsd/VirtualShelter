@@ -8,18 +8,18 @@ public interface IAdvertisementOperations {
 	
 	/**
 	 * Advertises the given advertisement in the name of the given institution
-	 * @param instituion the creator of the advertisement
-	 * @param advertisement contains the advertisement's data
+	 * @param instituionID the creator of the advertisement
+	 * @param advertisementID contains the advertisement's data
 	 * @throws VirtualShelterException
 	 */
-	public void advertise(Institution instituion, Advertisement advertisement) throws VirtualShelterException;
+	public void advertise(long instituionID, long advertisementID) throws VirtualShelterException;
 	
 	/**
 	 * Advertises the given advertisement in the name of the logged in user
-	 * @param advertisement contains the advertisement's data
+	 * @param advertisementId contains the advertisement's data
 	 * @throws VirtualShelterException
 	 */
-	public void advertise(Advertisement advertisement) throws VirtualShelterException;
+	public void advertise(long advertisementId) throws VirtualShelterException;
 
 	/**
 	 * Registers a user if there is no other user with the given e-mail address
@@ -45,18 +45,18 @@ public interface IAdvertisementOperations {
 	/**
 	 * Uploads a picture to a user account (for the given advertiser)
 	 * @param picture picture to be uploaded
-	 * @param advertiser for this user (advertiser) will be the picture uploaded
+	 * @param advertiserId for this user (advertiser) will be the picture uploaded
 	 * @throws VirtualShelterException
 	 */
-	public void uploadPicture(Picture picture, Advertiser advertiser) throws VirtualShelterException;
+	public void uploadPicture(Picture picture, long advertiserId) throws VirtualShelterException;
 	
 	/**
 	 * Deletes a picture from a user account (from the given advertiser)
-	 * @param picture
-	 * @param advertiser
+	 * @param pictureId
+	 * @param advertiserId
 	 * @throws VirtualShelterException
 	 */
-	public void deletePicture(Picture picture, Advertiser advertiser) throws VirtualShelterException; 
+	public void deletePicture(long pictureId, long advertiserId) throws VirtualShelterException; 
 	
 	/**
 	 * Creates an institution if there is no other institution with the given e-mail address
@@ -82,19 +82,19 @@ public interface IAdvertisementOperations {
 	
 	/**
 	 * Changes the given instituion's owner
-	 * @param user the new owner
-	 * @param institution the owner of this instituion's will be changed
+	 * @param userId the new owner
+	 * @param institutionId the owner of this instituion's will be changed
 	 * @throws VirtualShelterException
 	 */
-	public void changeInstitutionOwner(User user, Institution institution) throws VirtualShelterException;
+	public void changeInstitutionOwner(long userId, long institutionId) throws VirtualShelterException;
 	
 	/**
 	 * Adds to the given institution a new administrator
-	 * @param user the new institution administrator
-	 * @param institution this institution will get a new administrator
+	 * @param userId the new institution administrator
+	 * @param institutionId this institution will get a new administrator
 	 * @throws VirtualShelterException
 	 */
-	public void addInstitutionAdministrator(User user, Institution institution) throws VirtualShelterException;
+	public void addInstitutionAdministrator(long userId, long institutionId) throws VirtualShelterException;
 	
 	/**
 	 * Deletes the administrator with the given userID from the institution with the given instituionID

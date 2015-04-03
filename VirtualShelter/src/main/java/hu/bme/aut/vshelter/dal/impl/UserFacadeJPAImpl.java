@@ -50,9 +50,8 @@ public class UserFacadeJPAImpl implements UserFacade {
 
 	@Override
 	public void promoteUserToSiteAdministrator(long userId) {
-		List<String> list = em.createQuery(
-		        "SELECT r FROM Role r WHERE r.roleName = 'site-administrator'").getResultList();
-		String role = list.get(0);
+		
+		String role = "site-administrator";
 		User user = this.findUserById(userId);
 		
 		if( !user.getRoles().contains(role)) {
@@ -62,9 +61,8 @@ public class UserFacadeJPAImpl implements UserFacade {
 	
 	@Override
 	public void revokeUserFromSiteAdministrator(long userId) {
-		List<String> list = em.createQuery(
-		        "SELECT r FROM Role r WHERE r.roleName = 'site-administrator'").getResultList();
-		String role = list.get(0);
+		
+		String role = "site-administrator";
 		User user = this.findUserById(userId);
 		
 		if( user.getRoles().contains(role)) {
