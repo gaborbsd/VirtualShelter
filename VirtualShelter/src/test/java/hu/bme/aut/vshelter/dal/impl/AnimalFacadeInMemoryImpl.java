@@ -1,7 +1,6 @@
 package hu.bme.aut.vshelter.dal.impl;
 
 import hu.bme.aut.vshelter.dal.AnimalFacade;
-import hu.bme.aut.vshelter.entity.Advertisement;
 import hu.bme.aut.vshelter.entity.Animal;
 
 import java.util.ArrayList;

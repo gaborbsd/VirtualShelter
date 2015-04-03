@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 import hu.bme.aut.vshelter.dal.InstitutionFacade;
-import hu.bme.aut.vshelter.entity.Breed;
 import hu.bme.aut.vshelter.entity.Institution;
 
 public class InstitutionFacadeInMemoryImpl implements InstitutionFacade {
