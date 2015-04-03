@@ -6,6 +6,7 @@ import hu.bme.aut.vshelter.entity.Advertisement;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public class AdvertisementFacadeInMemoryImpl implements AdvertisementFacade {
 
@@ -13,8 +14,14 @@ public class AdvertisementFacadeInMemoryImpl implements AdvertisementFacade {
 
 	@Override
 	public Advertisement findAdvertisementById(long advertisementId) {
-		return advertisements.stream().filter(a -> a.getId() == advertisementId)
-				.findFirst().get();
+		try {
+			return advertisements.stream()
+					.filter(a -> a.getId() == advertisementId).findFirst()
+					.get();
+		} catch (NoSuchElementException e) {
+			return null;
+		}
+
 	}
 
 	@Override
@@ -29,7 +36,8 @@ public class AdvertisementFacadeInMemoryImpl implements AdvertisementFacade {
 
 	@Override
 	public void edit(Advertisement advertisement) {
-		advertisements.set(advertisements.indexOf(advertisement), advertisement);
+		advertisements
+				.set(advertisements.indexOf(advertisement), advertisement);
 	}
 
 	@Override
