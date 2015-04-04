@@ -34,7 +34,7 @@ public interface UserFacade {
 	 * @return
 	 * @throws VirtualShelterException
 	 */
-	public int getUserIdfromEmail(String email) throws VirtualShelterException;
+	public long getUserIdfromEmail(String email) throws VirtualShelterException;
 	
 
 }

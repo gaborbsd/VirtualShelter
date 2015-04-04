@@ -71,7 +71,7 @@ public class UserFacadeJPAImpl implements UserFacade {
 	}
 
 	@Override
-	public int getUserIdfromEmail(String email) throws VirtualShelterException {
+	public long getUserIdfromEmail(String email) throws VirtualShelterException {
 		List<Integer> list = em.createQuery(
 		        "SELECT u.id FROM User u WHERE u.email = ?1").setParameter(1, email).getResultList();
 		return list.get(0);
