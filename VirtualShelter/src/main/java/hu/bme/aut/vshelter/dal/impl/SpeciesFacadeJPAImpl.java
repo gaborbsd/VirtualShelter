@@ -54,7 +54,7 @@ public class SpeciesFacadeJPAImpl implements SpeciesFacade {
 	}
 	
 	@Override
-	public int getSpeciesIdfromSpeciesName(String speciesName) throws VirtualShelterException {
+	public long getSpeciesIdfromSpeciesName(String speciesName) throws VirtualShelterException {
 		List<Integer> list = em.createQuery(
 		        "SELECT s.id FROM Species s WHERE s.speciesName = ?1").setParameter(1, speciesName).getResultList();
 		return list.get(0);

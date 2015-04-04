@@ -22,6 +22,6 @@ public interface SpeciesFacade {
 	 * @return
 	 * @throws VirtualShelterException
 	 */
-	public int getSpeciesIdfromSpeciesName(String speciesName)  throws VirtualShelterException;
+	public long getSpeciesIdfromSpeciesName(String speciesName)  throws VirtualShelterException;
 
 }
