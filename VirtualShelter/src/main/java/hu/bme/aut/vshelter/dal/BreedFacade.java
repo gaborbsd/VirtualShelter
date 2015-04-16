@@ -17,10 +17,4 @@ public interface BreedFacade {
 	
 	void deleteBreedById(long breedId);
 	
-	/**
-	 * Returns the breedID from the owner of the given breed name
-	 * @return
-	 * @throws VirtualShelterException
-	 */
-	public long getBreedIdfromSpeciesName(String breedName)  throws VirtualShelterException;
 }

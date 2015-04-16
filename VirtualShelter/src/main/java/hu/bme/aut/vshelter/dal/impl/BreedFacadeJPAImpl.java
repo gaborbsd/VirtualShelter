@@ -53,13 +53,4 @@ public class BreedFacadeJPAImpl implements BreedFacade {
 		deleteQuery.executeUpdate();
 	}
 
-	@Override
-	public long getBreedIdfromSpeciesName(String breedName)
-			throws VirtualShelterException {
-		List<Integer> list = em.createQuery(
-		        "SELECT b.id FROM Breed b WHERE b.breedName = ?1").setParameter(1, breedName).getResultList();
-		return list.get(0);
-	}
-	
-
 }

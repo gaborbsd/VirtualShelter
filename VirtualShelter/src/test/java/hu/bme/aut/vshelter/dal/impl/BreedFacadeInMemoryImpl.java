@@ -48,17 +48,5 @@ public class BreedFacadeInMemoryImpl implements BreedFacade {
 			breeds.remove(deleteBreed);
 
 	}
-
-	@Override
-	public long getBreedIdfromSpeciesName(String breedName)
-			throws VirtualShelterException {
-		try {
-			return breeds.stream()
-					.filter(a -> a.getBreedName() == breedName).findFirst()
-					.get().getId();
-		} catch (NoSuchElementException e) {
-			return 0;
-		}
-	}
 	
 }
