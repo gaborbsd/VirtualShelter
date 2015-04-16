@@ -127,8 +127,7 @@ public class Address {
 		if (getClass() != obj.getClass())
 			return false;
 		Address other = (Address) obj;
-		if (id == other.id && 
-				country.equals(other.country) && 
+		if (country.equals(other.country) && 
 				address.equals(other.address) &&
 				city.equals(other.city) &&
 				latitude == other.latitude &&
