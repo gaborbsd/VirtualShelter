@@ -52,6 +52,25 @@
 	</bean>
 
 	<bean id="jacksonObjectMapper" class="com.fasterxml.jackson.databind.ObjectMapper" />
+	
+	<bean id="animalResourceAssembler" class="hu.bme.aut.vshelter.rest.resources.AnimalResourceAssembler" />
+	<bean id="breedResourceAssembler" class="hu.bme.aut.vshelter.rest.resources.BreedResourceAssembler" />
+	<bean id="institutionResourceAssembler" class="hu.bme.aut.vshelter.rest.resources.InstitutionResourceAssembler" />
+	<bean id="pictureResourceAssembler" class="hu.bme.aut.vshelter.rest.resources.PictureResourceAssembler" />
+	<bean id="speciesResourceAssembler" class="hu.bme.aut.vshelter.rest.resources.SpeciesResourceAssembler" />
+	<bean id="userResourceAssembler" class="hu.bme.aut.vshelter.rest.resources.UserResourceAssembler" />
+	
+	<bean id="siteAdministrationOperations" class="hu.bme.aut.vshelter.api.SiteAdministrationOperationsImpl" />
+	<bean id="advertisementOperations" class="hu.bme.aut.vshelter.api.AdvertisementOperationsImpl" />
 
+	<bean id="addressFacade" class="hu.bme.aut.vshelter.dal.impl.AddressFacadeJPAImpl" />
+	<bean id="advertisementFacade" class="hu.bme.aut.vshelter.dal.impl.AdvertisementFacadeJPAImpl" />
 	<bean id="animalFacade" class="hu.bme.aut.vshelter.dal.impl.AnimalFacadeJPAImpl" />
+	<bean id="breedFacade" class="hu.bme.aut.vshelter.dal.impl.BreedFacadeJPAImpl" />
+	<bean id="diseaseFacade" class="hu.bme.aut.vshelter.dal.impl.DiseaseFacadeJPAImpl" />
+	<bean id="handicapFacade" class="hu.bme.aut.vshelter.dal.impl.HandicapFacadeJPAImpl" />
+	<bean id="institutionFacade" class="hu.bme.aut.vshelter.dal.impl.InstitutionFacadeJPAImpl" />
+	<bean id="pictureFacade" class="hu.bme.aut.vshelter.dal.impl.PictureFacadeJPAImpl" />
+	<bean id="speciesFacade" class="hu.bme.aut.vshelter.dal.impl.SpeciesFacadeJPAImpl" />
+	<bean id="userFacade" class="hu.bme.aut.vshelter.dal.impl.UserFacadeJPAImpl" />
 </beans>

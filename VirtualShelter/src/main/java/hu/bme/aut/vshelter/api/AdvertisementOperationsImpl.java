@@ -5,11 +5,6 @@ import hu.bme.aut.vshelter.dal.BreedFacade;
 import hu.bme.aut.vshelter.dal.InstitutionFacade;
 import hu.bme.aut.vshelter.dal.SpeciesFacade;
 import hu.bme.aut.vshelter.dal.UserFacade;
-import hu.bme.aut.vshelter.dal.impl.AdvertisementFacadeJPAImpl;
-import hu.bme.aut.vshelter.dal.impl.BreedFacadeJPAImpl;
-import hu.bme.aut.vshelter.dal.impl.InstitutionFacadeJPAImpl;
-import hu.bme.aut.vshelter.dal.impl.SpeciesFacadeJPAImpl;
-import hu.bme.aut.vshelter.dal.impl.UserFacadeJPAImpl;
 import hu.bme.aut.vshelter.entity.Advertisement;
 import hu.bme.aut.vshelter.entity.AdvertisementQueryFilter;
 import hu.bme.aut.vshelter.entity.Breed;
@@ -20,22 +15,25 @@ import hu.bme.aut.vshelter.entity.User;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
 public class AdvertisementOperationsImpl implements IAdvertisementOperations {
 	
-	private AdvertisementFacade advertisementDAO;
-	private UserFacade userDAO;
-	private InstitutionFacade institutionDAO;
-	private SpeciesFacade speciesDAO;
-	private BreedFacade breedDAO;
+	@Inject
+	private AdvertisementFacade addressFacade;
+	@Inject
+	private UserFacade userFacade;
+	@Inject
+	private InstitutionFacade institutionFacade;
+	@Inject
+	private SpeciesFacade speciesFacade;
+	@Inject
+	private AdvertisementFacade advertismentFacade;
+	@Inject
+	private BreedFacade breedFacade;
 	
-	public AdvertisementOperationsImpl() {
-		advertisementDAO = new AdvertisementFacadeJPAImpl();
-		userDAO = new UserFacadeJPAImpl();
-		institutionDAO = new InstitutionFacadeJPAImpl();
-		speciesDAO = new SpeciesFacadeJPAImpl();
-		breedDAO = new BreedFacadeJPAImpl();
-	}
-
 	@Override
 	public void advertise(long instituionID, long advertisementID)
 			throws VirtualShelterException {
@@ -52,17 +50,17 @@ public class AdvertisementOperationsImpl implements IAdvertisementOperations {
 
 	@Override
 	public void registerUser(User user) throws VirtualShelterException {
-		userDAO.create(user);
+		userFacade.create(user);
 	}
 
 	@Override
 	public void deleteUser(long userId) throws VirtualShelterException {
-		userDAO.deleteUserById(userId);
+		userFacade.deleteUserById(userId);
 	}
 
 	@Override
 	public void updateUser(User user) throws VirtualShelterException {
-		userDAO.edit(user);
+		userFacade.edit(user);
 	}
 
 	@Override
@@ -82,21 +80,21 @@ public class AdvertisementOperationsImpl implements IAdvertisementOperations {
 	@Override
 	public void registerInstitution(Institution institution)
 			throws VirtualShelterException {
-		institutionDAO.create(institution);
+		institutionFacade.create(institution);
 
 	}
 
 	@Override
 	public void deleteInstitution(long institutionId)
 			throws VirtualShelterException {
-		institutionDAO.deleteInstitutionById(institutionId);
+		institutionFacade.deleteInstitutionById(institutionId);
 
 	}
 
 	@Override
 	public void updateInstitution(Institution institution)
 			throws VirtualShelterException {
-		institutionDAO.edit(institution);
+		institutionFacade.edit(institution);
 
 	}
 
@@ -124,14 +122,14 @@ public class AdvertisementOperationsImpl implements IAdvertisementOperations {
 	@Override
 	public void createAdvertisement(Advertisement advertisement)
 			throws VirtualShelterException {
-		advertisementDAO.create(advertisement);
+		advertismentFacade.create(advertisement);
 
 	}
 
 	@Override
 	public void deleteAdvertisement(long advertisementId)
 			throws VirtualShelterException {
-		advertisementDAO.deleteAdvertisementById(advertisementId);
+		advertismentFacade.deleteAdvertisementById(advertisementId);
 	}
 
 	@Override
@@ -144,17 +142,17 @@ public class AdvertisementOperationsImpl implements IAdvertisementOperations {
 	@Override
 	public List<Advertisement> listAllAdvertisements()
 			throws VirtualShelterException {
-		return advertisementDAO.findAll();
+		return advertismentFacade.findAll();
 	}
 
 	@Override
 	public List<Species> listAllSpecies() throws VirtualShelterException {
-		return speciesDAO.findAll();
+		return speciesFacade.findAll();
 	}
 
 	@Override
 	public List<Breed> listAllBreeds() throws VirtualShelterException {
-		return breedDAO.findAll();
+		return breedFacade.findAll();
 	}
 
 }

@@ -1,65 +1,68 @@
 package hu.bme.aut.vshelter.api;
 
 import hu.bme.aut.vshelter.dal.BreedFacade;
-import hu.bme.aut.vshelter.dal.impl.AddressFacadeJPAImpl;
-import hu.bme.aut.vshelter.dal.impl.BreedFacadeJPAImpl;
-import hu.bme.aut.vshelter.dal.impl.SpeciesFacadeJPAImpl;
-import hu.bme.aut.vshelter.dal.impl.UserFacadeJPAImpl;
+import hu.bme.aut.vshelter.dal.SpeciesFacade;
+import hu.bme.aut.vshelter.dal.UserFacade;
 import hu.bme.aut.vshelter.entity.Breed;
 import hu.bme.aut.vshelter.entity.Species;
 import hu.bme.aut.vshelter.entity.User;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 public class SiteAdministrationOperationsImpl implements
 		ISiteAdministrationOperations {
 	
-	UserFacadeJPAImpl userDaO = new UserFacadeJPAImpl();
-	SpeciesFacadeJPAImpl speciesDAO = new SpeciesFacadeJPAImpl();
-	BreedFacadeJPAImpl breedDAO = new BreedFacadeJPAImpl();
+	@Inject
+	UserFacade userFacade;
+	@Inject
+	SpeciesFacade speciesFacade;
+	@Inject
+	BreedFacade breedFacade;
 
 	@Override
 	public List<User> listAllUsers() throws VirtualShelterException {
-		return userDaO.findAll();
+		return userFacade.findAll();
 	}
 
 	@Override
 	public void promoteSiteAdministrator(long userId)
 			throws VirtualShelterException {
-		userDaO.promoteUserToSiteAdministrator(userId);
+		userFacade.promoteUserToSiteAdministrator(userId);
 	}
 
 	@Override
 	public void revokeSiteAdministrator(long userId)
 			throws VirtualShelterException {
-		userDaO.revokeUserFromSiteAdministrator(userId);
+		userFacade.revokeUserFromSiteAdministrator(userId);
 	}
 
 	@Override
 	public void addSpecies(String speciesName) throws VirtualShelterException {
 		Species species = new Species();
 		species.setSpeciesName(speciesName);
-		speciesDAO.create(species);
+		speciesFacade.create(species);
 
 	}
 
 	@Override
 	public void deleteSpecies(long speciesId) throws VirtualShelterException {
-		speciesDAO.deleteSpeciesById(speciesId);
+		speciesFacade.deleteSpeciesById(speciesId);
 	}
 
 	@Override
 	public void addBreed(String breedName, long speciesId) throws VirtualShelterException {
 		Breed breed = new Breed();
 		breed.setBreedName(breedName);
-		Species species = speciesDAO.findSpeciesById(speciesId);
+		Species species = speciesFacade.findSpeciesById(speciesId);
 		breed.setSpecies(species);
-		breedDAO.create(breed);
+		breedFacade.create(breed);
 	}
 
 	@Override
 	public void deleteBreed(long breedId) throws VirtualShelterException {
-		breedDAO.deleteBreedById(breedId);
+		breedFacade.deleteBreedById(breedId);
 	}
 
 }
