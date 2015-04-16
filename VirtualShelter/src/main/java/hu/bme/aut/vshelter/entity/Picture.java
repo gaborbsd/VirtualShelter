@@ -1,9 +1,12 @@
 package hu.bme.aut.vshelter.entity;
 
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 
 @Entity
@@ -15,6 +18,11 @@ public class Picture {
 	@Column(name = "id", unique = true, nullable = false)
 	private long id;
 	
+	@Basic(fetch = FetchType.LAZY)
+	@Lob 
+	@Column(name="picture")
+	private byte[] picture;
+	
 	public long getId() {
 		return id;
 	}
@@ -23,6 +31,14 @@ public class Picture {
 		this.id = id;
 	}
 	
+	public byte[] getPicture() {
+		return picture;
+	}
+
+	public void setPicture(byte[] picture) {
+		this.picture = picture;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

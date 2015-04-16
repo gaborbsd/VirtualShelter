@@ -1,6 +1,5 @@
 package hu.bme.aut.vshelter.dal;
 
-import hu.bme.aut.vshelter.api.VirtualShelterException;
 import hu.bme.aut.vshelter.entity.Animal;
 
 import java.util.List;
