@@ -66,7 +66,7 @@ public class Animal {
 	private Address address;
 	
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<Picture> picture;
+	private List<Picture> picturesList;
 	
 	@Enumerated(EnumType.STRING)
 	@Column(name = "deliveryType", unique = false, nullable = true)
@@ -188,11 +188,11 @@ public class Animal {
 	}
 	
 	public List<Picture> getPicture() {
-		return picture;
+		return picturesList;
 	}
 	
-	public void setPicture(List<Picture> picture) {
-		this.picture = picture;
+	public void setPicture(List<Picture> picturesList) {
+		this.picturesList = picturesList;
 	}
 	
 	public DeliveryType getDeliveryType() {
