@@ -146,4 +146,8 @@ public interface IAdvertisementOperations {
 	 * @throws VirtualShelterException
 	 */
 	public List<Breed> listAllBreeds() throws VirtualShelterException;
+	
+	public void addAnimal(Animal animal) throws VirtualShelterException;
+	
+	public void deleteAnimal(long animalId) throws VirtualShelterException;
 }
