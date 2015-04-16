@@ -127,8 +127,16 @@ public class Address {
 		if (getClass() != obj.getClass())
 			return false;
 		Address other = (Address) obj;
-		if (id != other.id)
-			return false;
-		return true;
+		if (id == other.id && 
+				country.equals(other.country) && 
+				address.equals(other.address) &&
+				city.equals(other.city) &&
+				latitude == other.latitude &&
+				longitude == other.longitude &&
+				province.equals(other.province) &&
+				state.equals(other.state) &&
+				zipCode == other.zipCode)
+			return true;
+		return false;
 	}
 }
