@@ -121,7 +121,7 @@ public class SpeciesController {
 	 * @param id
 	 * @return
 	 */
-	@RequestMapping(value="/{id}", method=RequestMethod.GET)
+	@RequestMapping(value="/{id}/breeds", method=RequestMethod.GET)
 	ResponseEntity<List<BreedResource>> findAllBreedOfSpecies(@PathVariable Long id) {
 		//TODO
 		return null;
