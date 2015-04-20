@@ -13,7 +13,7 @@ import javax.transaction.Transactional;
 import javax.persistence.TypedQuery;
 
 public class SpeciesFacadeJPAImpl implements SpeciesFacade {
-	
+
 	@PersistenceContext
 	private EntityManager em;
 
@@ -35,9 +35,9 @@ public class SpeciesFacadeJPAImpl implements SpeciesFacade {
 	@Override
 	@Transactional
 	public void create(Species species) {
-			em.persist(species);
+		em.persist(species);
 	}
-		
+
 	@Override
 	@Transactional
 	public void edit(Species species) {
@@ -47,17 +47,18 @@ public class SpeciesFacadeJPAImpl implements SpeciesFacade {
 	@Override
 	@Transactional
 	public void deleteSpeciesById(long speciesId) {
-		Query deleteQuery = em.createQuery(
-				"DELETE FROM Species where id=:p")
+		Query deleteQuery = em.createQuery("DELETE FROM Species where id=:p")
 				.setParameter("p", speciesId);
 		deleteQuery.executeUpdate();
 	}
-	
+
 	@Override
-	public long getSpeciesIdfromSpeciesName(String speciesName) throws VirtualShelterException {
-		List<Integer> list = em.createQuery(
-		        "SELECT s.id FROM Species s WHERE s.speciesName = ?1").setParameter(1, speciesName).getResultList();
-		return list.get(0);
+	public long getSpeciesIdfromSpeciesName(String speciesName)
+			throws VirtualShelterException {
+		TypedQuery<Long> query = em.createQuery(
+				"SELECT s.id FROM Species s WHERE s.speciesName = ?1",
+				Long.class).setParameter(1, speciesName);
+		return query.getSingleResult();
 	}
 
 }
