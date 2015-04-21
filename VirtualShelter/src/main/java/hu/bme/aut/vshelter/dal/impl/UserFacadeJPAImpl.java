@@ -13,7 +13,7 @@ import javax.transaction.Transactional;
 import javax.persistence.TypedQuery;
 
 public class UserFacadeJPAImpl implements UserFacade {
-	
+
 	@PersistenceContext
 	private EntityManager em;
 
@@ -47,8 +47,7 @@ public class UserFacadeJPAImpl implements UserFacade {
 	@Override
 	@Transactional
 	public void deleteUserById(long userId) {
-		Query deleteQuery = em.createQuery(
-				"DELETE FROM User where id=:p")
+		Query deleteQuery = em.createQuery("DELETE FROM User where id=:p")
 				.setParameter("p", userId);
 		deleteQuery.executeUpdate();
 	}
@@ -56,23 +55,23 @@ public class UserFacadeJPAImpl implements UserFacade {
 	@Override
 	@Transactional
 	public void promoteUserToSiteAdministrator(long userId) {
-		
+
 		String role = "site-administrator";
 		User user = this.findUserById(userId);
-		
-		if( !user.getRoles().contains(role)) {
+
+		if (!user.getRoles().contains(role)) {
 			user.getRoles().add(role);
 		}
 	}
-	
+
 	@Override
 	@Transactional
 	public void revokeUserFromSiteAdministrator(long userId) {
-		
+
 		String role = "site-administrator";
 		User user = this.findUserById(userId);
-		
-		if( user.getRoles().contains(role)) {
+
+		if (user.getRoles().contains(role)) {
 			user.getRoles().remove(role);
 		}
 	}
@@ -80,9 +79,10 @@ public class UserFacadeJPAImpl implements UserFacade {
 	@Override
 	@Transactional
 	public long getUserIdfromEmail(String email) throws VirtualShelterException {
-		List<Integer> list = em.createQuery(
-		        "SELECT u.id FROM User u WHERE u.email = ?1").setParameter(1, email).getResultList();
-		return list.get(0);
+		TypedQuery<Long> query = em.createQuery(
+				"SELECT u.id FROM User u WHERE u.email = ?1", Long.class)
+				.setParameter(1, email);
+		return query.getSingleResult();
 	}
 
 }
