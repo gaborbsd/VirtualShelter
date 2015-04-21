@@ -1,5 +1,7 @@
 package hu.bme.aut.vshelter.rest;
 
+import hu.bme.aut.vshelter.api.ISiteAdministrationOperations;
+import hu.bme.aut.vshelter.api.VirtualShelterException;
 import hu.bme.aut.vshelter.rest.resources.BreedResource;
 import hu.bme.aut.vshelter.rest.resources.BreedResourceAssembler;
 
@@ -20,6 +22,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value="/breed")
 public class BreedController {
 
+	@Autowired
+	private ISiteAdministrationOperations siteAdministrationOperations;
+	
 	@Autowired
 	private BreedResourceAssembler breedResourceAssembler;
 	
@@ -42,6 +47,10 @@ public class BreedController {
 	 */
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
 	void deleteBreed(@PathVariable Long id) {
-		//TODO
+		try {
+			this.siteAdministrationOperations.deleteBreed(id);
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+		}
 	}
 }

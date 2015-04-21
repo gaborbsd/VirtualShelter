@@ -54,7 +54,13 @@ public class AnimalController {
 	 */
 	@RequestMapping(method = RequestMethod.POST)
 	ResponseEntity<AnimalResource> addAnimal(@RequestBody Animal animal) {
-		animalFacade.create(animal);
+		
+		try {
+			this.advertisementOperations.addAnimal(animal);
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+		}
+		
 		AnimalResource resource = animalResourceAssembler.toResource(animal);
 		return new ResponseEntity<AnimalResource>(resource, HttpStatus.CREATED);
 	}
@@ -114,7 +120,13 @@ public class AnimalController {
 	 */
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
 	void deleteAnimal(@PathVariable Long id) {
-		//TODO
+
+		try {
+			this.advertisementOperations.deleteAnimal(id);
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+		}
+		
 	}
 	
 	/**

@@ -6,8 +6,10 @@ import java.util.List;
 import hu.bme.aut.vshelter.api.IAdvertisementOperations;
 import hu.bme.aut.vshelter.api.ISiteAdministrationOperations;
 import hu.bme.aut.vshelter.api.VirtualShelterException;
+import hu.bme.aut.vshelter.entity.Breed;
 import hu.bme.aut.vshelter.entity.Species;
 import hu.bme.aut.vshelter.rest.resources.BreedResource;
+import hu.bme.aut.vshelter.rest.resources.BreedResourceAssembler;
 import hu.bme.aut.vshelter.rest.resources.SpeciesResource;
 import hu.bme.aut.vshelter.rest.resources.SpeciesResourceAssembler;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
@@ -33,6 +35,9 @@ public class SpeciesController {
 
 	@Autowired
 	private SpeciesResourceAssembler speciesResourceAssembler;
+	
+	@Autowired
+	private BreedResourceAssembler breedResourceAssembler;
 	
 	@Autowired
 	private ISiteAdministrationOperations siteAdministrationOperations;
@@ -112,7 +117,13 @@ public class SpeciesController {
 	 */
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
 	void deleteSpecies(@PathVariable Long id) {
-		//TODO
+
+		try {
+			this.siteAdministrationOperations.deleteSpecies(id);
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+		}
+	
 	}
 	
 	/**
@@ -121,7 +132,7 @@ public class SpeciesController {
 	 * @param id
 	 * @return
 	 */
-	@RequestMapping(value="/{id}", method=RequestMethod.GET)
+	@RequestMapping(value="/{id}/breed", method=RequestMethod.GET)
 	ResponseEntity<List<BreedResource>> findAllBreedOfSpecies(@PathVariable Long id) {
 		//TODO
 		return null;
@@ -133,9 +144,16 @@ public class SpeciesController {
 	 * @param id
 	 * @return
 	 */
-	@RequestMapping(value="/{id}", method=RequestMethod.POST)
-	ResponseEntity<BreedResource> createNewBreed(@PathVariable Long id) {
-		//TODO
+	@RequestMapping(value="/{id}/breed", method=RequestMethod.POST)
+	ResponseEntity<BreedResource> createNewBreed(@PathVariable Long id, @RequestBody Breed breed) {
+
+		BreedResource breedResource = this.breedResourceAssembler.toResource(breed);
+		try {
+			this.siteAdministrationOperations.addBreed(breed.getBreedName(), id);
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+		}
+		
 		return null;
 	}
 }

@@ -3,6 +3,7 @@ package hu.bme.aut.vshelter.rest;
 import hu.bme.aut.vshelter.api.IAdvertisementOperations;
 import hu.bme.aut.vshelter.api.ISiteAdministrationOperations;
 import hu.bme.aut.vshelter.api.VirtualShelterException;
+import hu.bme.aut.vshelter.entity.Advertisement;
 import hu.bme.aut.vshelter.entity.Animal;
 import hu.bme.aut.vshelter.entity.Institution;
 import hu.bme.aut.vshelter.entity.Picture;
@@ -93,8 +94,16 @@ public class InstitutionController {
 	 */
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
 	ResponseEntity<InstitutionResource> setInstitution(@PathVariable Long id, @RequestBody Institution institution) {
-		//TODO
-		return null;
+		institution.setId(id);
+		InstitutionResource resource = this.institutionResourceAssembler.toResource(institution);
+		HttpStatus responseStatus = HttpStatus.OK;
+		try {
+			this.advertisementOperations.updateInstitution(institution);
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+		}
+		
+		return new ResponseEntity<InstitutionResource>(resource, responseStatus);
 	}
 	
 	/**
@@ -131,7 +140,13 @@ public class InstitutionController {
 	 */
 	@RequestMapping(value="/{id}/admin", method=RequestMethod.POST)
 	void postAdmin(@PathVariable Long id, @RequestBody User user) {
-		//TODO
+
+		try {
+			this.advertisementOperations.addInstitutionAdministrator(user.getId(), id);
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+		}
+		
 	}
 	
 	/**
@@ -170,7 +185,9 @@ public class InstitutionController {
 	 */
 	@RequestMapping(value="/{id}/advertisement", method=RequestMethod.POST)
 	ResponseEntity<AnimalResource> createNewAdvertisement(@PathVariable Long id, @RequestBody Animal animal) {
-		//TODO
+		Advertisement advertisement = new Advertisement();
+		advertisement.setAnimal(animal);
+		//Get institution by id
 		return null;
 	}
 	
@@ -195,7 +212,12 @@ public class InstitutionController {
 	 */
 	@RequestMapping(value="/{id}/pictures", method=RequestMethod.POST)
 	ResponseEntity<PictureResource> createInstitutionsPicture(@PathVariable Long id, @RequestBody Picture picture) {
-		//TODO
+		
+		try {
+			this.advertisementOperations.uploadPicture(picture, id);
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+		}
 		return null;
 	}
 	

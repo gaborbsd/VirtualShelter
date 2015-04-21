@@ -6,6 +6,7 @@ import java.util.List;
 import hu.bme.aut.vshelter.api.IAdvertisementOperations;
 import hu.bme.aut.vshelter.api.ISiteAdministrationOperations;
 import hu.bme.aut.vshelter.api.VirtualShelterException;
+import hu.bme.aut.vshelter.entity.Advertisement;
 import hu.bme.aut.vshelter.entity.Animal;
 import hu.bme.aut.vshelter.entity.Institution;
 import hu.bme.aut.vshelter.entity.Picture;
@@ -127,7 +128,6 @@ public class UserController {
 			this.advertisementOperations.updateUser(user);
 		} catch (VirtualShelterException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		return new ResponseEntity<UserResource>(resource, responseStatus);
 	}
@@ -142,6 +142,7 @@ public class UserController {
 		try {
 			this.advertisementOperations.deleteUser(id);
 		} catch (VirtualShelterException e) {
+			// TODO
 		}
 	}
 	
@@ -188,7 +189,13 @@ public class UserController {
 	 */
 	@RequestMapping(value="/{id}/institution", method=RequestMethod.PUT)
 	void makeOwnerOfInstitution(@PathVariable Long id, @RequestBody Institution institution) {
-		//TODO
+		try {
+			this.advertisementOperations.changeInstitutionOwner(id, institution.getId());
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
 	}
 	
 	/**
@@ -199,7 +206,7 @@ public class UserController {
 	 */
 	@RequestMapping(value="/{id}/institution", method=RequestMethod.DELETE)
 	void takeOwnerOfInstitution(@PathVariable Long id, @RequestBody Institution institution) {
-		//TODO
+		//TODO ?
 	}
 	
 	/**
@@ -224,7 +231,22 @@ public class UserController {
 	 */
 	@RequestMapping(value="/{id}/advertisement", method=RequestMethod.POST)
 	ResponseEntity<AnimalResource> createNewAdvertisement(@PathVariable Long id, @RequestBody Animal animal) {
-		//TODO
+		Advertisement advertisement = new Advertisement();
+		advertisement.setAnimal(animal);
+		try {
+			this.advertisementOperations.createAdvertisement(advertisement);
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
+			this.advertisementOperations.advertise(advertisement.getId());
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		return null;
 	}
 	
@@ -236,7 +258,7 @@ public class UserController {
 	 */
 	@RequestMapping(value="/{id}/pictures", method=RequestMethod.GET)
 	ResponseEntity<List<PictureResource>> getUsersPictures(@PathVariable Long id) {
-		//TODO
+		//TODO 
 		return null;
 	}
 	
@@ -249,7 +271,15 @@ public class UserController {
 	 */
 	@RequestMapping(value="/{id}/pictures", method=RequestMethod.POST)
 	ResponseEntity<PictureResource> createUsersPicture(@PathVariable Long id, @RequestBody Picture picture) {
-		//TODO
+		
+		try {
+			//Visszatérési értékben picutre kéne
+			this.advertisementOperations.uploadPicture(picture, id);
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		return null;
 	}
 	
@@ -261,7 +291,7 @@ public class UserController {
 	 */
 	@RequestMapping(value="/{id}/admin", method=RequestMethod.GET)
 	ResponseEntity<Boolean> isUserSiteAdmin(@PathVariable Long id) {
-		//TODO
+		//TODO 
 		return null;
 	}
 	
@@ -272,7 +302,13 @@ public class UserController {
 	 */
 	@RequestMapping(value="/{id}/admin", method=RequestMethod.POST)
 	void setUserSiteAdmin(@PathVariable Long id) {
-		//TODO
+		
+		try {
+			this.siteAdministrationOperations.promoteSiteAdministrator(id);
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+		}
+	
 	}
 	
 	/**
@@ -282,7 +318,13 @@ public class UserController {
 	 */
 	@RequestMapping(value="/{id}/admin", method=RequestMethod.DELETE)
 	void deleteUserSiteAdmin(@PathVariable Long id) {
-		//TODO
+
+		try {
+			this.siteAdministrationOperations.revokeSiteAdministrator(id);
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+		}
+		
 	}
 	
 	/**
@@ -293,7 +335,7 @@ public class UserController {
 	 */
 	@RequestMapping(value="/{id}/profile", method=RequestMethod.GET)
 	ResponseEntity<PictureResource> getUsersProfilePicture(@PathVariable Long id) {
-		//TODO
+		//TODO 
 		return null;
 	}
 	
