@@ -34,7 +34,8 @@ public class AddressFacadeInMemoryImpl implements AddressFacade {
 
 	@Override
 	public void edit(Address address) {
-		addresses.set(addresses.indexOf(address), address);
+		System.out.println(findAddressById(address.getId()).getId());
+		addresses.set(addresses.indexOf(findAddressById(address.getId())), address);
 	}
 
 	@Override

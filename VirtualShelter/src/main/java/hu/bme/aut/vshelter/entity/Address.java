@@ -132,8 +132,8 @@ public class Address {
 				city.equals(other.city) &&
 				latitude == other.latitude &&
 				longitude == other.longitude &&
-				province.equals(other.province) &&
-				state.equals(other.state) &&
+			//	province.equals(other.province) &&
+			//	state.equals(other.state) &&
 				zipCode == other.zipCode)
 			return true;
 		return false;

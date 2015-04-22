@@ -36,8 +36,8 @@ public class AddressFacadeTest {
 	public void testPersistNotAddedIsNotContains() {
 		Address address = new Address();
 		address.setCountry("Magyarország");
-		address.setCity("1117");
-		address.setAddress("Irinyi József utca");
+		address.setCity("1118");
+		address.setAddress("Apostol József tér 9");
 		address.setId(2);
 		List<Address> addresses = addressFacade.findAll();
 		assertFalse(addresses.contains(address));
@@ -48,7 +48,7 @@ public class AddressFacadeTest {
 		Address address = new Address();
 		Address actual;
 		address.setCountry("Magyar");
-		address.setCity("1118");
+		address.setCity("1120");
 		address.setAddress("Irinyi József ut");
 		address.setId(3);
 		addressFacade.create(address);
@@ -71,9 +71,9 @@ public class AddressFacadeTest {
 	@Test
 	public void testEditAddress(){
 		Address address = new Address();
-		address.setCountry("Magyar");
-		address.setCity("1118");
-		address.setAddress("Irinyi József ut");
+		address.setCountry("Masgyar");
+		address.setCity("3118");
+		address.setAddress("Irinyi József utas");
 		address.setId(5);
 		addressFacade.create(address);
 		
