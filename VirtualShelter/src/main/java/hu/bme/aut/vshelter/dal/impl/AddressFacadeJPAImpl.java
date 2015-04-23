@@ -16,6 +16,15 @@ public class AddressFacadeJPAImpl implements AddressFacade {
 	@PersistenceContext
 	private EntityManager em;
 	
+	public AddressFacadeJPAImpl(EntityManager em) {
+		super();
+		this.em = em;
+	}
+	
+	public AddressFacadeJPAImpl() {
+		super();
+	}
+	
 	@Override
 	@Transactional
 	public Address findAddressById(long addressId) {
