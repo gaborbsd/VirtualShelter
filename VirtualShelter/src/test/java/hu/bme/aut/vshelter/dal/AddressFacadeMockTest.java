@@ -1,6 +1,7 @@
 package hu.bme.aut.vshelter.dal;
 
 import static org.easymock.EasyMock.createNiceMock;
+import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
@@ -16,6 +17,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class AddressFacadeMockTest {
@@ -30,7 +32,7 @@ public class AddressFacadeMockTest {
 	    // NiceMocks return default values for
 	    // unimplemented methods
 		mockEm = createNiceMock(EntityManager.class);
-		mockQuery = (TypedQuery<Address>) createNiceMock(TypedQuery.class);
+		mockQuery = (TypedQuery<Address>)createMock(TypedQuery.class);
 	    addressFacade = new AddressFacadeJPAImpl(mockEm);
 	  }
 
@@ -53,8 +55,9 @@ public class AddressFacadeMockTest {
 	    verify(mockEm);
 	  }
 	  
+	 
 	  @Test
-	  public void findAllTest() {
+	  public void findAllAnimalTest() {
 	    // Setting up the expected value of the method call calc
 		Address address = new Address();
 		address.setId(1);
@@ -63,15 +66,19 @@ public class AddressFacadeMockTest {
 		address.setCountry("Hungary");
 		List<Address> addresses = new ArrayList<Address>();
 		addresses.add(address);
-	
-	    expect(mockQuery.getResultList()).andReturn(addresses).times(1);
-	    // Setup is finished need to activate the mock
-	    replay(mockQuery);
+
+		expect(mockEm.createQuery("SELECT a FROM Address a",
+				Address.class)).andReturn(mockQuery).times(1);
 	    
+		expect(mockQuery.getResultList()).andReturn(addresses).times(1);
+	    // Setup is finished need to activate the mock
+	    replay(mockEm);
+	    replay(mockQuery);
 	    
 	    assertEquals(addresses, addressFacade.findAll());
 
 	    verify(mockEm);
+	    verify(mockQuery);
 	  }
 	
 }
