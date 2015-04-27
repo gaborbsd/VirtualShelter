@@ -38,18 +38,20 @@ public class AddressFacadeMockTest {
 
 	  @Test
 	  public void findAddressByIdTest() {
-	    // Setting up the expected value of the method call calc
+	    
 		Address address = new Address();
 		address.setId(1);
 		address.setAddress("alma street");
 		address.setCity("Nagyvárad");
 		address.setCountry("Hungary");
 		
+		// Setting up the expected value of the method call find
 	    expect(mockEm.find(Address.class, address.getId())).andReturn(address).times(1);
 	    
 	    // Setup is finished need to activate the mock
 	    replay(mockEm);
-	     
+	    
+	    addressFacade.create(address); // add an address 
 	    assertEquals(address, addressFacade.findAddressById(address.getId()));
 
 	    verify(mockEm);
@@ -58,7 +60,6 @@ public class AddressFacadeMockTest {
 	 
 	  @Test
 	  public void findAllAnimalTest() {
-	    // Setting up the expected value of the method call calc
 		Address address = new Address();
 		address.setId(1);
 		address.setAddress("alma street");
@@ -66,17 +67,19 @@ public class AddressFacadeMockTest {
 		address.setCountry("Hungary");
 		List<Address> addresses = new ArrayList<Address>();
 		addresses.add(address);
-
+		
+		// Setting up the expected value of the method createQuery and getResultList
 		expect(mockEm.createQuery("SELECT a FROM Address a",
-				Address.class)).andReturn(mockQuery).times(1);
-	    
-		expect(mockQuery.getResultList()).andReturn(addresses).times(1);
-	    // Setup is finished need to activate the mock
+				Address.class)).andReturn(mockQuery);
+		expect(mockQuery.getResultList()).andReturn(addresses);
+		
+		// Setup is finished need to activate the mock
 	    replay(mockEm);
 	    replay(mockQuery);
 	    
+	    addressFacade.create(address); // add an address
 	    assertEquals(addresses, addressFacade.findAll());
-
+	    
 	    verify(mockEm);
 	    verify(mockQuery);
 	  }
