@@ -185,4 +185,17 @@ public interface IAdvertisementOperations {
 	 * @param speciesId
 	 */
 	public Set<Breed> listBreedsOfTheSpecies(long speciesId);
+	
+	/**
+	 * Returns the animal identified by the given animalId
+	 * @param animalID
+	 * @return
+	 */
+	public Animal findAnimalById(long animalId);
+	
+	/**
+	 * Updates the animal identified by the given animal's id
+	 * @param animal
+	 */
+	public void updateAnimal(Animal animal);
 }

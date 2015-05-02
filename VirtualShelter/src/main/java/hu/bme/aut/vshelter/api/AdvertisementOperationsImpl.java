@@ -217,4 +217,14 @@ public class AdvertisementOperationsImpl implements IAdvertisementOperations {
 		return species.getBreeds();
 	}
 
+	@Override
+	public Animal findAnimalById(long animalId) {
+		return animalFacade.findAnimalById(animalId);
+	}
+
+	@Override
+	public void updateAnimal(Animal animal) {
+		animalFacade.edit(animal);
+	}
+
 }
