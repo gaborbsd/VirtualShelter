@@ -205,4 +205,11 @@ public interface IAdvertisementOperations {
 	 * @return
 	 */
 	public Advertiser getAdvertiserOfAnimal(long animalId);
+	
+	/**
+	 * Lists the animals advertised by the advertiser with the given advertiserId: 
+	 * @param advertiserId
+	 * @return
+	 */
+	public List<Animal> listAnimalsAdvertisedByAdvertiser(long advertiserId);
 }

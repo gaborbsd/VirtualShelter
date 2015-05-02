@@ -232,4 +232,9 @@ public class AdvertisementOperationsImpl implements IAdvertisementOperations {
 		return advertismentFacade.getAdvertiserOfAnimal(animalId);
 	}
 
+	@Override
+	public List<Animal> listAnimalsAdvertisedByAdvertiser(long advertiserId) {
+		return advertismentFacade.listAnimalsAdvertisedByAdvertiser(advertiserId);
+	}
+
 }

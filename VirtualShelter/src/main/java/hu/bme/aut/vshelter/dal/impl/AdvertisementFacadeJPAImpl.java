@@ -3,6 +3,7 @@ package hu.bme.aut.vshelter.dal.impl;
 import hu.bme.aut.vshelter.dal.AdvertisementFacade;
 import hu.bme.aut.vshelter.entity.Advertisement;
 import hu.bme.aut.vshelter.entity.Advertiser;
+import hu.bme.aut.vshelter.entity.Animal;
 
 import java.util.List;
 
@@ -63,10 +64,19 @@ public class AdvertisementFacadeJPAImpl implements AdvertisementFacade {
 
 	@Override
 	public Advertiser getAdvertiserOfAnimal(long animalId) {
-		Query query2 = em.createQuery(
+		Query getAdvertiserOfAnimalQuery = em.createQuery(
 				"SELECT a.advertiser FROM Advertisement a WHERE a.animal.id=:p")
-				.setParameter("p", Long.valueOf(2));
+				.setParameter("p", animalId);
 		
-		return (Advertiser)query2.getSingleResult();
+		return (Advertiser)getAdvertiserOfAnimalQuery.getSingleResult();
+	}
+
+	@Override
+	public List<Animal> listAnimalsAdvertisedByAdvertiser(long advertiserId) {
+		Query listAnimalQuery = em.createQuery(
+				"SELECT a.animal FROM Advertisement a WHERE a.advertiser.id=:p")
+				.setParameter("p", advertiserId);
+		
+		return (List<Animal>)listAnimalQuery.getResultList();
 	}
 }
