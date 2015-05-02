@@ -1,5 +1,6 @@
 package hu.bme.aut.vshelter.api;
 
+import hu.bme.aut.vshelter.entity.Breed;
 import hu.bme.aut.vshelter.entity.Institution;
 import hu.bme.aut.vshelter.entity.User;
 
@@ -76,5 +77,18 @@ public interface ISiteAdministrationOperations {
 	 * @return
 	 */
 	public List<Institution> listInstituitionsOwnedByUser(long userId);
+	
+	/**
+	 * Updates the breed identified by the given breed's id
+	 * @param breed
+	 */
+	public void updateBreed(Breed breed);
+	
+	/**
+	 * Returns the owner of the given institution's id
+	 * @param institutionId
+	 * @return
+	 */
+	public User findOwnerOfInstitution(long institutionId);
 	
 }

@@ -93,4 +93,15 @@ public class SiteAdministrationOperationsImpl implements
 		return institutionFacade.listInstituitionsOwnedByUser(userId);
 	}
 
+	@Override
+	public void updateBreed(Breed breed) {
+		breedFacade.edit(breed);
+	}
+
+	@Override
+	public User findOwnerOfInstitution(long institutionId) {
+		Institution institution = institutionFacade.findInstitutionById(institutionId);
+		return institution.getOwner();
+	}
+
 }
