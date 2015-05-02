@@ -24,9 +24,14 @@ public class AddressFacadeTest {
 	public void testPersistAddedIsContains() {
 		Address address = new Address();
 		address.setCountry("Magyarország");
-		address.setCity("1117");
+		address.setCity("Budapest");
+		address.setZipCode(1117);
 		address.setAddress("Irinyi József utca");
 		address.setId(1);
+		address.setState("Pest");
+		address.setProvince("province");
+		address.setLatitude(47.473044);
+		address.setLongitude(19.052765);
 		addressFacade.create(address);
 		List<Address> addresses = addressFacade.findAll();
 		assertTrue(addresses.contains(address));
@@ -47,18 +52,29 @@ public class AddressFacadeTest {
 	public void testFindAddressById(){
 		Address address = new Address();
 		Address actual;
-		address.setCountry("Magyar");
-		address.setCity("1120");
-		address.setAddress("Irinyi József ut");
+		address.setCountry("Magyarors");
+		address.setCity("Budape");
+		address.setZipCode(1116);
+		address.setAddress("József utca");
 		address.setId(3);
-		addressFacade.create(address);
+		address.setState("hajdú");
+		address.setProvince("adda");
+		address.setLatitude(12.473044);
+		address.setLongitude(18.052765);
 		
+		addressFacade.create(address);
 		actual = addressFacade.findAddressById(3);
 		assertEquals(address, actual);
 		assertEquals(address.getCountry(), actual.getCountry());
 		assertEquals(address.getCity(), actual.getCity());
+		assertEquals(address.getZipCode(), actual.getZipCode());
 		assertEquals(address.getAddress(), actual.getAddress());
 		assertEquals(address.getId(), actual.getId());
+		assertEquals(address.getState(), actual.getState());
+		assertEquals(address.getProvince(), actual.getProvince());
+		assertTrue(address.getLongitude() == actual.getLongitude());
+		assertTrue(address.getLatitude() == actual.getLatitude());
+		assertEquals(address.hashCode(), actual.hashCode());
 	}
 	
 	@Test
