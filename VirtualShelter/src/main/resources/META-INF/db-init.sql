@@ -57,5 +57,9 @@ INSERT INTO animal_handicap VALUES (2, 2);
 
 INSERT INTO user_roles VALUES (1, 'site-administrator');
 
+INSERT INTO institution_user VALUES (4,1);
+INSERT INTO institution_user VALUES (5,2);
+INSERT INTO institution_user VALUES (5,3);
+
 SET FOREIGN_KEY_CHECKS=1;
 

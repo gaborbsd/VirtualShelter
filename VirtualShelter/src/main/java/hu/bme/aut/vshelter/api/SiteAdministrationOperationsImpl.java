@@ -1,9 +1,11 @@
 package hu.bme.aut.vshelter.api;
 
 import hu.bme.aut.vshelter.dal.BreedFacade;
+import hu.bme.aut.vshelter.dal.InstitutionFacade;
 import hu.bme.aut.vshelter.dal.SpeciesFacade;
 import hu.bme.aut.vshelter.dal.UserFacade;
 import hu.bme.aut.vshelter.entity.Breed;
+import hu.bme.aut.vshelter.entity.Institution;
 import hu.bme.aut.vshelter.entity.Species;
 import hu.bme.aut.vshelter.entity.User;
 
@@ -20,6 +22,8 @@ public class SiteAdministrationOperationsImpl implements
 	SpeciesFacade speciesFacade;
 	@Inject
 	BreedFacade breedFacade;
+	@Inject
+	private InstitutionFacade institutionFacade;
 
 	@Override
 	public List<User> listAllUsers() throws VirtualShelterException {
@@ -63,6 +67,12 @@ public class SiteAdministrationOperationsImpl implements
 	@Override
 	public void deleteBreed(long breedId) throws VirtualShelterException {
 		breedFacade.deleteBreedById(breedId);
+	}
+
+	@Override
+	public List<User> listInstitutionAdministrators(long institutionId) {
+		Institution institution = institutionFacade.findInstitutionById(institutionId);
+		return institution.getInstitutionAdministrators();
 	}
 
 }
