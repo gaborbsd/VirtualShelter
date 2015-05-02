@@ -15,5 +15,7 @@ public interface InstitutionFacade {
 	void edit(Institution institution);
 	
 	void deleteInstitutionById(long institutionId);
+	
+	public List<Institution> listInstituitionsOwnedByUser(long userId);
 
 }

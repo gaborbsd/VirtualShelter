@@ -53,4 +53,11 @@ public class InstitutionFacadeJPAImpl implements InstitutionFacade {
 		deleteQuery.executeUpdate();
 	}
 
+	@Override
+	public List<Institution> listInstituitionsOwnedByUser(long userId) {
+		TypedQuery<Institution> query = em.createQuery("SELECT i FROM Institution i where owner_id=:p",
+				Institution.class).setParameter("p", userId);
+		return query.getResultList();
+	}
+
 }

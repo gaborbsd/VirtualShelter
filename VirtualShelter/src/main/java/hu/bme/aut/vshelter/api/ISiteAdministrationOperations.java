@@ -1,5 +1,6 @@
 package hu.bme.aut.vshelter.api;
 
+import hu.bme.aut.vshelter.entity.Institution;
 import hu.bme.aut.vshelter.entity.User;
 
 import java.util.List;
@@ -12,6 +13,13 @@ public interface ISiteAdministrationOperations {
 	 * @throws VirtualShelterException
 	 */
 	public List<User> listAllUsers() throws VirtualShelterException;
+	
+	/**
+	 * Returns user with the give id
+	 * @param userId
+	 * @return
+	 */
+	public User findUserById(long userId);
 	
 	/**
 	 * Promotes a user to site administrator
@@ -55,5 +63,12 @@ public interface ISiteAdministrationOperations {
 	 * @throws VirtualShelterException
 	 */
 	public void deleteBreed(long breedId) throws VirtualShelterException;
+	
+	/**
+	 * Returns the Institution(s) owned by the user with the given userId
+	 * @param userId
+	 * @return
+	 */
+	public List<Institution> listInstituitionsOwnedByUser(long userId);
 	
 }

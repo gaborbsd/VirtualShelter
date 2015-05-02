@@ -31,6 +31,11 @@ public class SiteAdministrationOperationsImpl implements
 	}
 
 	@Override
+	public User findUserById(long userId) {
+		return userFacade.findUserById(userId);
+	}
+
+	@Override
 	public void promoteSiteAdministrator(long userId)
 			throws VirtualShelterException {
 		userFacade.promoteUserToSiteAdministrator(userId);
@@ -67,6 +72,11 @@ public class SiteAdministrationOperationsImpl implements
 	@Override
 	public void deleteBreed(long breedId) throws VirtualShelterException {
 		breedFacade.deleteBreedById(breedId);
+	}
+
+	@Override
+	public List<Institution> listInstituitionsOwnedByUser(long userId) {
+		return institutionFacade.listInstituitionsOwnedByUser(userId);
 	}
 
 }

@@ -47,4 +47,10 @@ public class InstitutionFacadeInMemoryImpl implements InstitutionFacade {
 		if (deleteInstitution != null)
 			institutions.remove(deleteInstitution);
 	}
+
+	@Override
+	public List<Institution> listInstituitionsOwnedByUser(long userId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
