@@ -2,6 +2,7 @@ package hu.bme.aut.vshelter.dal.impl;
 
 import hu.bme.aut.vshelter.dal.AdvertisementFacade;
 import hu.bme.aut.vshelter.entity.Advertisement;
+import hu.bme.aut.vshelter.entity.Advertiser;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -51,6 +52,12 @@ public class AdvertisementFacadeInMemoryImpl implements AdvertisementFacade {
 	@Override
 	public List<Advertisement> listAdvertisementsFromAdvertiser(
 			long advertiserId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Advertiser getAdvertiserOfAnimal(long animalId) {
 		// TODO Auto-generated method stub
 		return null;
 	}

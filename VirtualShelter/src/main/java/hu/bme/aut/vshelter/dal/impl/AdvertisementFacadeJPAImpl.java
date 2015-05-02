@@ -2,7 +2,7 @@ package hu.bme.aut.vshelter.dal.impl;
 
 import hu.bme.aut.vshelter.dal.AdvertisementFacade;
 import hu.bme.aut.vshelter.entity.Advertisement;
-import hu.bme.aut.vshelter.entity.Institution;
+import hu.bme.aut.vshelter.entity.Advertiser;
 
 import java.util.List;
 
@@ -28,7 +28,7 @@ public class AdvertisementFacadeJPAImpl implements AdvertisementFacade {
 	public List<Advertisement> findAll() {
 		TypedQuery<Advertisement> query = em.createQuery("SELECT a FROM Advertisement a",
 				Advertisement.class);
-
+		
 		return query.getResultList();
 	}
 
@@ -59,5 +59,14 @@ public class AdvertisementFacadeJPAImpl implements AdvertisementFacade {
 		TypedQuery<Advertisement> query = em.createQuery("SELECT a FROM Advertisement a where advertiser_id=:p",
 				Advertisement.class).setParameter("p", advertiserId);
 		return query.getResultList();
+	}
+
+	@Override
+	public Advertiser getAdvertiserOfAnimal(long animalId) {
+		Query query2 = em.createQuery(
+				"SELECT a.advertiser FROM Advertisement a WHERE a.animal.id=:p")
+				.setParameter("p", Long.valueOf(2));
+		
+		return (Advertiser)query2.getSingleResult();
 	}
 }

@@ -227,4 +227,9 @@ public class AdvertisementOperationsImpl implements IAdvertisementOperations {
 		animalFacade.edit(animal);
 	}
 
+	@Override
+	public Advertiser getAdvertiserOfAnimal(long animalId) {
+		return advertismentFacade.getAdvertiserOfAnimal(animalId);
+	}
+
 }

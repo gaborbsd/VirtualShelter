@@ -198,4 +198,11 @@ public interface IAdvertisementOperations {
 	 * @param animal
 	 */
 	public void updateAnimal(Animal animal);
+	
+	/**
+	 * Returns the Advertiser of the Animal with the given animalId
+	 * @param animalId
+	 * @return
+	 */
+	public Advertiser getAdvertiserOfAnimal(long animalId);
 }
