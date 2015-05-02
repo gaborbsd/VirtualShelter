@@ -56,11 +56,4 @@ public interface ISiteAdministrationOperations {
 	 */
 	public void deleteBreed(long breedId) throws VirtualShelterException;
 	
-	/**
-	 * Returns the institution administrators for the institution with the given id
-	 * @param institutionId
-	 * @return
-	 */
-	public List<User> listInstitutionAdministrators(long institutionId);
-	
 }

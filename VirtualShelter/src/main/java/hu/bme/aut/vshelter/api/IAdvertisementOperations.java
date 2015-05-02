@@ -104,11 +104,19 @@ public interface IAdvertisementOperations {
 	 */
 	public void deleteInstitutionAdministrator(long userId, long institutionId) throws VirtualShelterException;
 	
+	
+	/**
+	 * Returns the institution administrators for the institution with the given id
+	 * @param institutionId
+	 * @return
+	 */
+	public List<User> listInstitutionAdministrators(long institutionId);
+	
 	/**
 	 * Creates an advertisement
 	 * @param advertisement contains the advertisement's data to be created
 	 * @throws VirtualShelterException
-	 */
+	 */	
 	public void createAdvertisement(Advertisement advertisement) throws VirtualShelterException;
 	
 	/**

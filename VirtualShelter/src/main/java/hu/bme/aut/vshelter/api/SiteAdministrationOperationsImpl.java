@@ -69,10 +69,4 @@ public class SiteAdministrationOperationsImpl implements
 		breedFacade.deleteBreedById(breedId);
 	}
 
-	@Override
-	public List<User> listInstitutionAdministrators(long institutionId) {
-		Institution institution = institutionFacade.findInstitutionById(institutionId);
-		return institution.getInstitutionAdministrators();
-	}
-
 }

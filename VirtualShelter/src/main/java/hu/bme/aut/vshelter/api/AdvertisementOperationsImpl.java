@@ -140,7 +140,12 @@ public class AdvertisementOperationsImpl implements IAdvertisementOperations {
 	public void deleteInstitutionAdministrator(long userId, long institutionId)
 			throws VirtualShelterException {
 		
-
+	}
+	
+	@Override
+	public List<User> listInstitutionAdministrators(long institutionId) {
+		Institution institution = institutionFacade.findInstitutionById(institutionId);
+		return institution.getInstitutionAdministrators();
 	}
 
 	@Override
