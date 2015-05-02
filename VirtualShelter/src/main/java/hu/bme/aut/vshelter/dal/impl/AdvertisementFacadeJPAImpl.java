@@ -2,6 +2,7 @@ package hu.bme.aut.vshelter.dal.impl;
 
 import hu.bme.aut.vshelter.dal.AdvertisementFacade;
 import hu.bme.aut.vshelter.entity.Advertisement;
+import hu.bme.aut.vshelter.entity.Institution;
 
 import java.util.List;
 
@@ -52,4 +53,11 @@ public class AdvertisementFacadeJPAImpl implements AdvertisementFacade {
 		deleteQuery.executeUpdate();
 	}
 
+	@Override
+	public List<Advertisement> listAdvertisementsFromAdvertiser(
+			long advertiserId) {
+		TypedQuery<Advertisement> query = em.createQuery("SELECT a FROM Advertisement a where advertiser_id=:p",
+				Advertisement.class).setParameter("p", advertiserId);
+		return query.getResultList();
+	}
 }

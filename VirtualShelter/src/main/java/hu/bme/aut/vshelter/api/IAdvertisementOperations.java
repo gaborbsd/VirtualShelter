@@ -158,4 +158,11 @@ public interface IAdvertisementOperations {
 	public void addAnimal(Animal animal) throws VirtualShelterException;
 	
 	public void deleteAnimal(long animalId) throws VirtualShelterException;
+	
+	/**
+	 * Returns the advertisements of the advertiser(user or institution)
+	 * @param advertiserId
+	 * @return
+	 */
+	public List<Advertisement> listAdvertisementsFromAdvertiser(long advertiserId);
 }

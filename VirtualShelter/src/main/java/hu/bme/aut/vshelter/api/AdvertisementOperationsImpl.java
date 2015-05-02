@@ -194,4 +194,10 @@ public class AdvertisementOperationsImpl implements IAdvertisementOperations {
 		animalFacade.deleteAnimalById(animalId);
 	}
 
+	@Override
+	public List<Advertisement> listAdvertisementsFromAdvertiser(
+			long advertiserId) {
+		return advertismentFacade.listAdvertisementsFromAdvertiser(advertiserId);
+	}
+
 }

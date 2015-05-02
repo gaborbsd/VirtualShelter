@@ -48,4 +48,11 @@ public class AdvertisementFacadeInMemoryImpl implements AdvertisementFacade {
 			advertisements.remove(deleteAdvertisement);
 	}
 
+	@Override
+	public List<Advertisement> listAdvertisementsFromAdvertiser(
+			long advertiserId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
