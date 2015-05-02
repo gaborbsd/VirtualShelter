@@ -3,6 +3,7 @@ package hu.bme.aut.vshelter.api;
 import hu.bme.aut.vshelter.entity.*;
 
 import java.util.List;
+import java.util.Set;
 
 public interface IAdvertisementOperations {
 	
@@ -165,4 +166,23 @@ public interface IAdvertisementOperations {
 	 * @return
 	 */
 	public List<Advertisement> listAdvertisementsFromAdvertiser(long advertiserId);
+	
+	/**
+	 * Returns the species by the given speciesId
+	 * @param speciesId
+	 * @return
+	 */
+	public Species findSpeciesById(long speciesId);
+	
+	/**
+	 * Updates the species identified by given species' id
+	 * @param species
+	 */
+	public void updateSpecies(Species species);
+	
+	/**
+	 * list all breeds of the given speciesId
+	 * @param speciesId
+	 */
+	public Set<Breed> listBreedsOfTheSpecies(long speciesId);
 }

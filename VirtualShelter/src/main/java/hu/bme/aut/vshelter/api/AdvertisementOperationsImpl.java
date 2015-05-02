@@ -19,6 +19,7 @@ import hu.bme.aut.vshelter.entity.User;
 
 import java.util.Calendar;
 import java.util.List;
+import java.util.Set;
 
 import javax.inject.Inject;
 
@@ -198,6 +199,22 @@ public class AdvertisementOperationsImpl implements IAdvertisementOperations {
 	public List<Advertisement> listAdvertisementsFromAdvertiser(
 			long advertiserId) {
 		return advertismentFacade.listAdvertisementsFromAdvertiser(advertiserId);
+	}
+
+	@Override
+	public Species findSpeciesById(long speciesId) {
+		return speciesFacade.findSpeciesById(speciesId);
+	}
+
+	@Override
+	public void updateSpecies(Species species) {
+		speciesFacade.edit(species);
+	}
+
+	@Override
+	public Set<Breed> listBreedsOfTheSpecies(long speciesId) {
+		Species species = speciesFacade.findSpeciesById(speciesId);
+		return species.getBreeds();
 	}
 
 }
