@@ -34,6 +34,20 @@ public class SiteAdministrationOperationsImpl implements
 	public User findUserById(long userId) {
 		return userFacade.findUserById(userId);
 	}
+	
+	@Override
+	public boolean isUserSiteAdministrator(long userId) {
+		User user = userFacade.findUserById(userId);
+		
+		String role = "site-administrator";
+
+		if (!user.getRoles().contains(role)) {
+			return true;
+		} else {
+			return false;
+		}
+		
+	}
 
 	@Override
 	public void promoteSiteAdministrator(long userId)

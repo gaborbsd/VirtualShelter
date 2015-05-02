@@ -22,6 +22,12 @@ public interface ISiteAdministrationOperations {
 	public User findUserById(long userId);
 	
 	/**
+	 * Returns whether the user is a site administrator or not
+	 * @return
+	 */
+	public boolean isUserSiteAdministrator(long userId);
+	
+	/**
 	 * Promotes a user to site administrator
 	 * @param userId user to be promoted to site administrator
 	 * @throws VirtualShelterException
