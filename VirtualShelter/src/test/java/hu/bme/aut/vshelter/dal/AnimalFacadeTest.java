@@ -49,7 +49,7 @@ public class AnimalFacadeTest {
 		
 		animalFacade.create(animal);
 		
-		actual = animalFacade.findAnimalById(3);
+		actual = animalFacade.findById(3);
 		assertEquals(animal, actual);
 		assertEquals(animal.getName(), actual.getName());
 		assertEquals(animal.getDescription(), actual.getDescription());
@@ -60,7 +60,7 @@ public class AnimalFacadeTest {
 	@Test
 	public void testNoFindAnimalByNotExistId(){
 		Animal actual;
-		actual = animalFacade.findAnimalById(4012);
+		actual = animalFacade.findById(4012);
 		assertNull(actual);
 	}
 	
@@ -80,7 +80,7 @@ public class AnimalFacadeTest {
 		animalFacade.edit(modified);
 		
 		Animal actual;
-		actual = animalFacade.findAnimalById(4);
+		actual = animalFacade.findById(4);
 		assertEquals( modified, actual);
 		assertEquals(modified.getName(), actual.getName());
 		assertEquals(modified.getDescription(), actual.getDescription());
@@ -94,10 +94,10 @@ public class AnimalFacadeTest {
 		
 		animalFacade.create(animal);
 		
-		animalFacade.deleteAnimalById(5);
+		animalFacade.deleteById(5);
 		
 		Animal actual;
-		actual = animalFacade.findAnimalById(5);
+		actual = animalFacade.findById(5);
 		assertNull(actual);
 	}
 }

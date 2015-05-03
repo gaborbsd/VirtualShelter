@@ -14,7 +14,7 @@ public class BreedFacadeInMemoryImpl implements BreedFacade {
 	private List<Breed> breeds = new ArrayList<Breed>();
 
 	@Override
-	public Breed findBreedById(long breedId) {
+	public Breed findById(long breedId) {
 		try {
 			return breeds.stream()
 					.filter(a -> a.getId() == breedId).findFirst()
@@ -41,8 +41,8 @@ public class BreedFacadeInMemoryImpl implements BreedFacade {
 	}
 
 	@Override
-	public void deleteBreedById(long breedId) {
-		Breed deleteBreed = findBreedById(breedId);
+	public void deleteById(long breedId) {
+		Breed deleteBreed = findById(breedId);
 
 		if (deleteBreed != null)
 			breeds.remove(deleteBreed);

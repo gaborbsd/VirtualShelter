@@ -51,7 +51,7 @@ public class AddressFacadeMockTest {
 		replay(mockEm);
 
 		addressFacade.create(address);
-		assertEquals(address, addressFacade.findAddressById(address.getId()));
+		assertEquals(address, addressFacade.findById(address.getId()));
 
 		verify(mockEm);
 	}
@@ -62,7 +62,7 @@ public class AddressFacadeMockTest {
 
 		replay(mockEm);
 
-		assertEquals(null, addressFacade.findAddressById((long) 1));
+		assertEquals(null, addressFacade.findById((long) 1));
 
 		verify(mockEm);
 	}
@@ -169,7 +169,7 @@ public class AddressFacadeMockTest {
 
 		addressFacade.create(address);
 		
-		addressFacade.deleteAddressById(address.getId());
+		addressFacade.deleteById(address.getId());
 		
 		assertEquals(null, addressFacade.findAll());
 

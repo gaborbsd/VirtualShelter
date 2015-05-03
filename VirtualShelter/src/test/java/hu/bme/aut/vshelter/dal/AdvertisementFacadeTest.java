@@ -65,7 +65,7 @@ public class AdvertisementFacadeTest {
 
 		advertisementFacade.create(advertisement);
 		
-		actual = advertisementFacade.findAdvertisementById(3);
+		actual = advertisementFacade.findById(3);
 		assertEquals(advertisement, actual);
 		assertEquals(advertisement.getAnimal(), actual.getAnimal());
 		assertEquals(advertisement.getAdvertiser(), actual.getAdvertiser());
@@ -75,7 +75,7 @@ public class AdvertisementFacadeTest {
 	@Test
 	public void testNoFindAdvertisementByNotExistId(){
 		Advertisement actual;
-		actual = advertisementFacade.findAdvertisementById(3301);
+		actual = advertisementFacade.findById(3301);
 		assertNull(actual);
 	}
 	
@@ -100,7 +100,7 @@ public class AdvertisementFacadeTest {
 		advertisementFacade.edit(modified);
 		
 		Advertisement actual;
-		actual = advertisementFacade.findAdvertisementById(5);
+		actual = advertisementFacade.findById(5);
 		assertEquals(modified, actual);
 		assertEquals(modified.getAnimal(), actual.getAnimal());
 		assertEquals(modified.getAdvertiser(), actual.getAdvertiser());
@@ -118,10 +118,10 @@ public class AdvertisementFacadeTest {
 
 		advertisementFacade.create(advertisement);
 		
-		advertisementFacade.deleteAdvertisementById(6);
+		advertisementFacade.deleteById(6);
 		
 		Advertisement actual;
-		actual = advertisementFacade.findAdvertisementById(6);
+		actual = advertisementFacade.findById(6);
 		assertNull(actual);
 	}
 

@@ -48,7 +48,7 @@ public class InstitutionFacadeTest {
 		
 		institutionFacade.create(institution);
 		
-		actual = institutionFacade.findInstitutionById(3);
+		actual = institutionFacade.findById(3);
 		assertEquals(institution, actual);
 		assertEquals(institution.getTaxNumber(), actual.getTaxNumber());
 		assertEquals(institution.getId(), actual.getId());
@@ -57,7 +57,7 @@ public class InstitutionFacadeTest {
 	@Test
 	public void testNoFindInstitutionByNotExistId(){
 		Institution actual;
-		actual = institutionFacade.findInstitutionById(4012);
+		actual = institutionFacade.findById(4012);
 		assertNull(actual);
 	}
 	
@@ -76,7 +76,7 @@ public class InstitutionFacadeTest {
 		institutionFacade.edit(modified);
 		
 		Institution actual;
-		actual = institutionFacade.findInstitutionById(4);
+		actual = institutionFacade.findById(4);
 		assertEquals(modified, actual);
 		assertEquals(modified.getTaxNumber(), actual.getTaxNumber());
 		assertEquals(institution.getId(), actual.getId());
@@ -90,10 +90,10 @@ public class InstitutionFacadeTest {
 		
 		institutionFacade.create(institution);
 		
-		institutionFacade.deleteInstitutionById(5);
+		institutionFacade.deleteById(5);
 		
 		Institution actual;
-		actual = institutionFacade.findInstitutionById(5);
+		actual = institutionFacade.findById(5);
 		assertNull(actual);
 	}
 }

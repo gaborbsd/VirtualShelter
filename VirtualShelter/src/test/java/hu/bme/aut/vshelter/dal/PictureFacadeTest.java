@@ -45,7 +45,7 @@ public class PictureFacadeTest {
 		
 		pictureFacade.create(picture);
 		
-		actual = pictureFacade.findPictureById(3);
+		actual = pictureFacade.findById(3);
 		assertEquals(picture, actual);
 		assertEquals(picture.getId(), actual.getId());
 	}
@@ -53,7 +53,7 @@ public class PictureFacadeTest {
 	@Test
 	public void testNoFindPictureByNotExistId(){
 		Picture actual;
-		actual = pictureFacade.findPictureById(4012);
+		actual = pictureFacade.findById(4012);
 		assertNull(actual);
 	}
 	
@@ -72,7 +72,7 @@ public class PictureFacadeTest {
 		pictureFacade.edit(modified);
 		
 		Picture actual;
-		actual = pictureFacade.findPictureById(4);
+		actual = pictureFacade.findById(4);
 		assertEquals(modified, actual);
 
 		assertEquals(picture.getId(), actual.getId());
@@ -86,10 +86,10 @@ public class PictureFacadeTest {
 		
 		pictureFacade.create(picture);
 		
-		pictureFacade.deletePictureById(5);
+		pictureFacade.deleteById(5);
 		
 		Picture actual;
-		actual = pictureFacade.findPictureById(5);
+		actual = pictureFacade.findById(5);
 		assertNull(actual);
 	}
 }

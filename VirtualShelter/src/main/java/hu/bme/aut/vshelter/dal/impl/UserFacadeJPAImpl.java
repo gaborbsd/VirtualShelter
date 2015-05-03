@@ -19,7 +19,7 @@ public class UserFacadeJPAImpl implements UserFacade {
 
 	@Override
 	@Transactional
-	public User findUserById(long userId) {
+	public User findById(long userId) {
 		return em.find(User.class, userId);
 	}
 
@@ -46,7 +46,7 @@ public class UserFacadeJPAImpl implements UserFacade {
 
 	@Override
 	@Transactional
-	public void deleteUserById(long userId) {
+	public void deleteById(long userId) {
 		Query deleteQuery = em.createQuery("DELETE FROM User where id=:p")
 				.setParameter("p", userId);
 		deleteQuery.executeUpdate();
@@ -57,7 +57,7 @@ public class UserFacadeJPAImpl implements UserFacade {
 	public void promoteUserToSiteAdministrator(long userId) {
 
 		String role = "site-administrator";
-		User user = this.findUserById(userId);
+		User user = this.findById(userId);
 
 		if (!user.getRoles().contains(role)) {
 			user.getRoles().add(role);
@@ -69,7 +69,7 @@ public class UserFacadeJPAImpl implements UserFacade {
 	public void revokeUserFromSiteAdministrator(long userId) {
 
 		String role = "site-administrator";
-		User user = this.findUserById(userId);
+		User user = this.findById(userId);
 
 		if (user.getRoles().contains(role)) {
 			user.getRoles().remove(role);

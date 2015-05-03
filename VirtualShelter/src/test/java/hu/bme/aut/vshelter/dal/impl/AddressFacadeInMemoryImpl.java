@@ -13,7 +13,7 @@ public class AddressFacadeInMemoryImpl implements AddressFacade {
 	private List<Address> addresses = new ArrayList<Address>();
 
 	@Override
-	public Address findAddressById(long addressId) {
+	public Address findById(long addressId) {
 		try{
 			return addresses.stream().filter(a -> a.getId() == addressId)
 					.findFirst().get();
@@ -34,13 +34,13 @@ public class AddressFacadeInMemoryImpl implements AddressFacade {
 
 	@Override
 	public void edit(Address address) {
-		System.out.println(findAddressById(address.getId()).getId());
-		addresses.set(addresses.indexOf(findAddressById(address.getId())), address);
+		System.out.println(findById(address.getId()).getId());
+		addresses.set(addresses.indexOf(findById(address.getId())), address);
 	}
 
 	@Override
-	public void deleteAddressById(long addressId) {
-		Address deleteAddress = findAddressById(addressId);
+	public void deleteById(long addressId) {
+		Address deleteAddress = findById(addressId);
 
 		if(deleteAddress != null)
 			addresses.remove(deleteAddress);

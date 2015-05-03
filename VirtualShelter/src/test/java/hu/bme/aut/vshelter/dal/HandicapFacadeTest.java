@@ -48,7 +48,7 @@ public class HandicapFacadeTest {
 		
 		handicapFacade.create(handicap);
 		
-		actual = handicapFacade.findHandicapById(3);
+		actual = handicapFacade.findById(3);
 		assertEquals(handicap, actual);
 		assertEquals(handicap.getHandicapName(), actual.getHandicapName());
 		assertEquals(handicap.getId(), actual.getId());
@@ -57,7 +57,7 @@ public class HandicapFacadeTest {
 	@Test
 	public void testNoFindHandicapByNotExistId(){
 		Handicap actual;
-		actual = handicapFacade.findHandicapById(4012);
+		actual = handicapFacade.findById(4012);
 		assertNull(actual);
 	}
 	
@@ -76,7 +76,7 @@ public class HandicapFacadeTest {
 		handicapFacade.edit(modified);
 		
 		Handicap actual;
-		actual = handicapFacade.findHandicapById(4);
+		actual = handicapFacade.findById(4);
 		assertEquals(modified, actual);
 		assertEquals(modified.getHandicapName(), actual.getHandicapName());
 		assertEquals(handicap.getId(), actual.getId());
@@ -90,10 +90,10 @@ public class HandicapFacadeTest {
 		
 		handicapFacade.create(handicap);
 		
-		handicapFacade.deleteHandicapById(5);
+		handicapFacade.deleteById(5);
 		
 		Handicap actual;
-		actual = handicapFacade.findHandicapById(5);
+		actual = handicapFacade.findById(5);
 		assertNull(actual);
 	}
 	

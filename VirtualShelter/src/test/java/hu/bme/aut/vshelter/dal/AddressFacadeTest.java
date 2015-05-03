@@ -63,7 +63,7 @@ public class AddressFacadeTest {
 		address.setLongitude(18.052765);
 		
 		addressFacade.create(address);
-		actual = addressFacade.findAddressById(3);
+		actual = addressFacade.findById(3);
 		assertEquals(address, actual);
 		assertEquals(address.getCountry(), actual.getCountry());
 		assertEquals(address.getCity(), actual.getCity());
@@ -80,7 +80,7 @@ public class AddressFacadeTest {
 	@Test
 	public void testNoFindAddressByNotExistId(){
 		Address actual;
-		actual = addressFacade.findAddressById(4031);
+		actual = addressFacade.findById(4031);
 		assertTrue(actual == null);
 	}
 	
@@ -102,7 +102,7 @@ public class AddressFacadeTest {
 		addressFacade.edit(modified);
 		
 		Address actual;
-		actual = addressFacade.findAddressById(5);
+		actual = addressFacade.findById(5);
 		assertEquals(modified, actual);
 		assertEquals(modified.getCountry(), actual.getCountry());
 		assertEquals(modified.getCity(), actual.getCity());
@@ -119,10 +119,10 @@ public class AddressFacadeTest {
 		address.setId(6);
 		addressFacade.create(address);
 		
-		addressFacade.deleteAddressById(6);
+		addressFacade.deleteById(6);
 		
 		Address actual;
-		actual = addressFacade.findAddressById(6);
+		actual = addressFacade.findById(6);
 		assertTrue(actual == null);
 	}
 	

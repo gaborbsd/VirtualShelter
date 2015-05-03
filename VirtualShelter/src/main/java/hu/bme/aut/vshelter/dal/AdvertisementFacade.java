@@ -6,17 +6,7 @@ import hu.bme.aut.vshelter.entity.Animal;
 
 import java.util.List;
 
-public interface AdvertisementFacade {
-	
-	Advertisement findAdvertisementById(long advertisementId);
-	
-	List<Advertisement> findAll();
-	
-	void create(Advertisement advertisement);
-	
-	void edit(Advertisement advertisement);
-	
-	void deleteAdvertisementById(long advertisementId);
+public interface AdvertisementFacade extends AbstractFacade<Advertisement> {
 	
 	public List<Advertisement> listAdvertisementsFromAdvertiser(long advertiserId);
 	

@@ -47,7 +47,7 @@ public class DiseaseFacadeTest {
 		
 		diseaseFacade.create(disease);
 		
-		actual = diseaseFacade.findDiseaseById(3);
+		actual = diseaseFacade.findById(3);
 		assertEquals(disease, actual);
 		assertEquals(disease.getDiceaseName(), actual.getDiceaseName());
 		assertEquals(disease.getId(), actual.getId());
@@ -56,7 +56,7 @@ public class DiseaseFacadeTest {
 	@Test
 	public void testNoFindDiseaseByNotExistId(){
 		Disease actual;
-		actual = diseaseFacade.findDiseaseById(4012);
+		actual = diseaseFacade.findById(4012);
 		assertNull(actual);
 	}
 	
@@ -75,7 +75,7 @@ public class DiseaseFacadeTest {
 		diseaseFacade.edit(modified);
 		
 		Disease actual;
-		actual = diseaseFacade.findDiseaseById(4);
+		actual = diseaseFacade.findById(4);
 		assertEquals(modified, actual);
 		assertEquals(modified.getDiceaseName(), actual.getDiceaseName());
 		assertEquals(disease.getId(), actual.getId());
@@ -89,10 +89,10 @@ public class DiseaseFacadeTest {
 		
 		diseaseFacade.create(disease);
 		
-		diseaseFacade.deleteDiseaseById(5);
+		diseaseFacade.deleteById(5);
 		
 		Disease actual;
-		actual = diseaseFacade.findDiseaseById(5);
+		actual = diseaseFacade.findById(5);
 		assertNull(actual);
 	}
 }

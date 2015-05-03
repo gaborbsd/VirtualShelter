@@ -13,7 +13,7 @@ public class DiseaseFacadeInMemoryImpl implements DiseaseFacade {
 	private List<Disease> diseases = new ArrayList<Disease>();
 
 	@Override
-	public Disease findDiseaseById(long diseaseId) {
+	public Disease findById(long diseaseId) {
 		try {
 			return diseases.stream()
 					.filter(a -> a.getId() == diseaseId).findFirst()
@@ -40,8 +40,8 @@ public class DiseaseFacadeInMemoryImpl implements DiseaseFacade {
 	}
 
 	@Override
-	public void deleteDiseaseById(long diseaseId) {
-		Disease deleteDisease = findDiseaseById(diseaseId);
+	public void deleteById(long diseaseId) {
+		Disease deleteDisease = findById(diseaseId);
 
 		if (deleteDisease != null)
 			diseases.remove(deleteDisease);

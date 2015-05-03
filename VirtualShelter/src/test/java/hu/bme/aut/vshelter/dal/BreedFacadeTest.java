@@ -50,7 +50,7 @@ public class BreedFacadeTest {
 		
 		breedFacade.create(breed);
 		
-		actual = breedFacade.findBreedById(3);
+		actual = breedFacade.findById(3);
 		assertEquals(breed, actual);
 		assertEquals(breed.getBreedName(), actual.getBreedName());
 		assertEquals(breed.getId(), actual.getId());
@@ -59,7 +59,7 @@ public class BreedFacadeTest {
 	@Test
 	public void testNoFindBreedByNotExistId(){
 		Breed actual;
-		actual = breedFacade.findBreedById(4012);
+		actual = breedFacade.findById(4012);
 		assertNull(actual);
 	}
 	
@@ -78,7 +78,7 @@ public class BreedFacadeTest {
 		breedFacade.edit(modified);
 		
 		Breed actual;
-		actual = breedFacade.findBreedById(4);
+		actual = breedFacade.findById(4);
 		assertEquals(modified, actual);
 		assertEquals(modified.getBreedName(), actual.getBreedName());
 		assertEquals(breed.getId(), actual.getId());
@@ -92,10 +92,10 @@ public class BreedFacadeTest {
 		
 		breedFacade.create(breed);
 		
-		breedFacade.deleteBreedById(5);
+		breedFacade.deleteById(5);
 		
 		Breed actual;
-		actual = breedFacade.findBreedById(5);
+		actual = breedFacade.findById(5);
 		assertNull(actual);
 	}
 }

@@ -35,7 +35,7 @@ public class AnimalFacadeJPAImpl implements AnimalFacade {
 
 	@Override
 	@Transactional
-	public Animal findAnimalById(long animalId) {
+	public Animal findById(long animalId) {
 		return em.find(Animal.class, animalId);
 	}
 
@@ -47,7 +47,7 @@ public class AnimalFacadeJPAImpl implements AnimalFacade {
 
 	@Override
 	@Transactional
-	public void deleteAnimalById(long animalId) {
+	public void deleteById(long animalId) {
 		Query deleteQuery = em.createQuery(
 				"DELETE FROM Advertisement where id=:p")
 				.setParameter("p", animalId);

@@ -18,7 +18,7 @@ public class PictureFacadeJPAImpl implements PictureFacade {
 
 	@Override
 	@Transactional
-	public Picture findPictureById(long pictureId) {
+	public Picture findById(long pictureId) {
 		return em.find(Picture.class, pictureId);
 	}
 
@@ -45,7 +45,7 @@ public class PictureFacadeJPAImpl implements PictureFacade {
 
 	@Override
 	@Transactional
-	public void deletePictureById(long pictureId) {
+	public void deleteById(long pictureId) {
 		Query deleteQuery = em.createQuery(
 				"DELETE FROM em where id=:p")
 				.setParameter("p", pictureId);

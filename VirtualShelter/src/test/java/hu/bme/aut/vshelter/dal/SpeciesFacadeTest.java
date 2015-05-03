@@ -47,7 +47,7 @@ public class SpeciesFacadeTest {
 		
 		speciesFacade.create(species);
 		
-		actual = speciesFacade.findSpeciesById(3);
+		actual = speciesFacade.findById(3);
 		assertEquals(species, actual);
 		assertEquals(species.getSpeciesName(), actual.getSpeciesName());
 		assertEquals(species.getId(), actual.getId());
@@ -56,7 +56,7 @@ public class SpeciesFacadeTest {
 	@Test
 	public void testNoFindSpeciesByNotExistId(){
 		Species actual;
-		actual = speciesFacade.findSpeciesById(4012);
+		actual = speciesFacade.findById(4012);
 		assertNull(actual);
 	}
 	
@@ -75,7 +75,7 @@ public class SpeciesFacadeTest {
 		speciesFacade.edit(modified);
 		
 		Species actual;
-		actual = speciesFacade.findSpeciesById(4);
+		actual = speciesFacade.findById(4);
 		assertEquals(modified, actual);
 		assertEquals(modified.getSpeciesName(), actual.getSpeciesName());
 		assertEquals(species.getId(), actual.getId());
@@ -89,10 +89,10 @@ public class SpeciesFacadeTest {
 		
 		speciesFacade.create(species);
 		
-		speciesFacade.deleteSpeciesById(5);
+		speciesFacade.deleteById(5);
 		
 		Species actual;
-		actual = speciesFacade.findSpeciesById(5);
+		actual = speciesFacade.findById(5);
 		assertNull(actual);
 	}
 }

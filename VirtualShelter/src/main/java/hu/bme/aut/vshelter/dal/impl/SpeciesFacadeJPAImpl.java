@@ -19,7 +19,7 @@ public class SpeciesFacadeJPAImpl implements SpeciesFacade {
 
 	@Override
 	@Transactional
-	public Species findSpeciesById(long speciesId) {
+	public Species findById(long speciesId) {
 		return em.find(Species.class, speciesId);
 	}
 
@@ -46,7 +46,7 @@ public class SpeciesFacadeJPAImpl implements SpeciesFacade {
 
 	@Override
 	@Transactional
-	public void deleteSpeciesById(long speciesId) {
+	public void deleteById(long speciesId) {
 		Query deleteQuery = em.createQuery("DELETE FROM Species where id=:p")
 				.setParameter("p", speciesId);
 		deleteQuery.executeUpdate();

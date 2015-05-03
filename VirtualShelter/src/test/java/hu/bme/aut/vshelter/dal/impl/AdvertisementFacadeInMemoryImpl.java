@@ -15,7 +15,7 @@ public class AdvertisementFacadeInMemoryImpl implements AdvertisementFacade {
 	private List<Advertisement> advertisements = new ArrayList<Advertisement>();
 
 	@Override
-	public Advertisement findAdvertisementById(long advertisementId) {
+	public Advertisement findById(long advertisementId) {
 		try {
 			return advertisements.stream()
 					.filter(a -> a.getId() == advertisementId).findFirst()
@@ -43,8 +43,8 @@ public class AdvertisementFacadeInMemoryImpl implements AdvertisementFacade {
 	}
 
 	@Override
-	public void deleteAdvertisementById(long advertisementId) {
-		Advertisement deleteAdvertisement = findAdvertisementById(advertisementId);
+	public void deleteById(long advertisementId) {
+		Advertisement deleteAdvertisement = findById(advertisementId);
 
 		if (deleteAdvertisement != null)
 			advertisements.remove(deleteAdvertisement);

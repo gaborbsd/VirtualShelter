@@ -47,7 +47,7 @@ public class UserFacadeTest {
 		
 		userFacade.create(user);
 		
-		actual = userFacade.findUserById(3);
+		actual = userFacade.findById(3);
 		assertEquals(user, actual);
 		assertEquals(user.getEmail(), actual.getEmail());
 		assertEquals(user.getId(), actual.getId());
@@ -56,7 +56,7 @@ public class UserFacadeTest {
 	@Test
 	public void testNoFindUsersByNotExistId(){
 		User actual;
-		actual = userFacade.findUserById(4012);
+		actual = userFacade.findById(4012);
 		assertNull(actual);
 	}
 	
@@ -75,7 +75,7 @@ public class UserFacadeTest {
 		userFacade.edit(modified);
 		
 		User actual;
-		actual = userFacade.findUserById(4);
+		actual = userFacade.findById(4);
 		assertEquals(modified, actual);
 		assertEquals(modified.getEmail(), actual.getEmail());
 		assertEquals(user.getId(), actual.getId());
@@ -89,10 +89,10 @@ public class UserFacadeTest {
 		
 		userFacade.create(user);
 		
-		userFacade.deleteUserById(5);
+		userFacade.deleteById(5);
 		
 		User actual;
-		actual = userFacade.findUserById(5);
+		actual = userFacade.findById(5);
 		assertNull(actual);
 	}
 	

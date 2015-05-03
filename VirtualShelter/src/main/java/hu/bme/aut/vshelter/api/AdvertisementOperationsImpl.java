@@ -48,9 +48,9 @@ public class AdvertisementOperationsImpl implements IAdvertisementOperations {
 	public void advertise(long instituionId, long animalId)
 			throws VirtualShelterException {
 		Advertisement advertisement = new Advertisement();
-		Institution institution = institutionFacade.findInstitutionById(instituionId);
+		Institution institution = institutionFacade.findById(instituionId);
 		advertisement.setAdvertiser(institution);
-		Animal animal = animalFacade.findAnimalById(animalId);
+		Animal animal = animalFacade.findById(animalId);
 		advertisement.setAnimal(animal);
 		advertisement.setDateOfAdvertisement(Calendar.getInstance());
 		advertismentFacade.create(advertisement);
@@ -61,9 +61,9 @@ public class AdvertisementOperationsImpl implements IAdvertisementOperations {
 	public void advertise(long animalId)
 			throws VirtualShelterException {
 		Advertisement advertisement = new Advertisement();
-		User user = userFacade.findUserById(1);
+		User user = userFacade.findById(1);
 		advertisement.setAdvertiser(user);
-		Animal animal = animalFacade.findAnimalById(animalId);
+		Animal animal = animalFacade.findById(animalId);
 		advertisement.setAnimal(animal);
 		advertisement.setDateOfAdvertisement(Calendar.getInstance());
 		advertismentFacade.create(advertisement);
@@ -77,7 +77,7 @@ public class AdvertisementOperationsImpl implements IAdvertisementOperations {
 
 	@Override
 	public void deleteUser(long userId) throws VirtualShelterException {
-		userFacade.deleteUserById(userId);
+		userFacade.deleteById(userId);
 	}
 
 	@Override
@@ -109,7 +109,7 @@ public class AdvertisementOperationsImpl implements IAdvertisementOperations {
 	@Override
 	public void deleteInstitution(long institutionId)
 			throws VirtualShelterException {
-		institutionFacade.deleteInstitutionById(institutionId);
+		institutionFacade.deleteById(institutionId);
 
 	}
 
@@ -123,8 +123,8 @@ public class AdvertisementOperationsImpl implements IAdvertisementOperations {
 	@Override
 	public void changeInstitutionOwner(long userId, long institutionId)
 			throws VirtualShelterException {
-		User owner = userFacade.findUserById(userId);
-		Institution institution = institutionFacade.findInstitutionById(institutionId);
+		User owner = userFacade.findById(userId);
+		Institution institution = institutionFacade.findById(institutionId);
 		institution.setOwner(owner);
 		institutionFacade.edit(institution);
 
@@ -145,7 +145,7 @@ public class AdvertisementOperationsImpl implements IAdvertisementOperations {
 	
 	@Override
 	public List<User> listInstitutionAdministrators(long institutionId) {
-		Institution institution = institutionFacade.findInstitutionById(institutionId);
+		Institution institution = institutionFacade.findById(institutionId);
 		return institution.getInstitutionAdministrators();
 	}
 
@@ -159,7 +159,7 @@ public class AdvertisementOperationsImpl implements IAdvertisementOperations {
 	@Override
 	public void deleteAdvertisement(long advertisementId)
 			throws VirtualShelterException {
-		advertismentFacade.deleteAdvertisementById(advertisementId);
+		advertismentFacade.deleteById(advertisementId);
 	}
 
 	@Override
@@ -192,7 +192,7 @@ public class AdvertisementOperationsImpl implements IAdvertisementOperations {
 
 	@Override
 	public void deleteAnimal(long animalId) throws VirtualShelterException {
-		animalFacade.deleteAnimalById(animalId);
+		animalFacade.deleteById(animalId);
 	}
 
 	@Override
@@ -203,7 +203,7 @@ public class AdvertisementOperationsImpl implements IAdvertisementOperations {
 
 	@Override
 	public Species findSpeciesById(long speciesId) {
-		return speciesFacade.findSpeciesById(speciesId);
+		return speciesFacade.findById(speciesId);
 	}
 
 	@Override
@@ -213,13 +213,13 @@ public class AdvertisementOperationsImpl implements IAdvertisementOperations {
 
 	@Override
 	public Set<Breed> listBreedsOfTheSpecies(long speciesId) {
-		Species species = speciesFacade.findSpeciesById(speciesId);
+		Species species = speciesFacade.findById(speciesId);
 		return species.getBreeds();
 	}
 
 	@Override
 	public Animal findAnimalById(long animalId) {
-		return animalFacade.findAnimalById(animalId);
+		return animalFacade.findById(animalId);
 	}
 
 	@Override

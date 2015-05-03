@@ -18,7 +18,7 @@ public class InstitutionFacadeJPAImpl implements InstitutionFacade {
 
 	@Override
 	@Transactional
-	public Institution findInstitutionById(long institutionId) {
+	public Institution findById(long institutionId) {
 		return em.find(Institution.class, institutionId);
 	}
 
@@ -46,7 +46,7 @@ public class InstitutionFacadeJPAImpl implements InstitutionFacade {
 
 	@Override
 	@Transactional
-	public void deleteInstitutionById(long institutionId) {
+	public void deleteById(long institutionId) {
 		Query deleteQuery = em.createQuery(
 				"DELETE FROM Institution where id=:p")
 				.setParameter("p", institutionId);

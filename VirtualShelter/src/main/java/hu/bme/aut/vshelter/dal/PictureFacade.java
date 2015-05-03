@@ -2,18 +2,6 @@ package hu.bme.aut.vshelter.dal;
 
 import hu.bme.aut.vshelter.entity.Picture;
 
-import java.util.List;
-
-public interface PictureFacade {
-	
-	Picture findPictureById(long pictureId);
-	
-	List<Picture> findAll();
-	
-	void create(Picture picture);
-	
-	void edit(Picture picture);
-	
-	void deletePictureById(long pictureId);
+public interface PictureFacade extends AbstractFacade<Picture>{
 
 }
