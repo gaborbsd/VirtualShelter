@@ -1,6 +1,7 @@
 package hu.bme.aut.vshelter.dal;
 
 import static org.junit.Assert.*;
+import hu.bme.aut.vshelter.api.VirtualShelterException;
 import hu.bme.aut.vshelter.entity.User;
 
 import java.util.List;
@@ -23,9 +24,23 @@ public class UserFacadeTest {
 		user.setEmail("aldar@aladar.hu");
 		user.setId(1);
 		
-		userFacade.create(user);
-		List<User> users = userFacade.findAll();
-		assertTrue(users.contains(user));
+		try {
+			userFacade.create(user);
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
+		List<User> users;
+		try {
+			users = userFacade.findAll();
+			assertTrue(users.contains(user));
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
+
 	}
 	
 	@Test
@@ -34,8 +49,16 @@ public class UserFacadeTest {
 		user.setEmail("erdo@fa.hu");
 		user.setId(2);
 		
-		List<User> users = userFacade.findAll();
-		assertFalse(users.contains(users));
+		List<User> users;
+		try {
+			users = userFacade.findAll();
+			assertFalse(users.contains(users));
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
+
 	}
 	
 	@Test
@@ -45,19 +68,39 @@ public class UserFacadeTest {
 		user.setEmail("alma@alma.hu");
 		user.setId(3);
 		
-		userFacade.create(user);
+		try {
+			userFacade.create(user);
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
 		
-		actual = userFacade.findById(3);
-		assertEquals(user, actual);
-		assertEquals(user.getEmail(), actual.getEmail());
-		assertEquals(user.getId(), actual.getId());
+		try {
+			actual = userFacade.findById(3);
+			assertEquals(user, actual);
+			assertEquals(user.getEmail(), actual.getEmail());
+			assertEquals(user.getId(), actual.getId());
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
+
 	}
 	
 	@Test
 	public void testNoFindUsersByNotExistId(){
 		User actual;
-		actual = userFacade.findById(4012);
-		assertNull(actual);
+		try {
+			actual = userFacade.findById(4012);
+			assertNull(actual);
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
+
 	}
 	
 	@Test
@@ -66,19 +109,38 @@ public class UserFacadeTest {
 		user.setEmail("tiger@hotmail.com");
 		user.setId(4);
 		
-		userFacade.create(user);
+		try {
+			userFacade.create(user);
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
 		
 		User modified = new User();
 		modified.setEmail("monkey@hotmail.com");
 		modified.setId(4);
 		
-		userFacade.edit(modified);
+		try {
+			userFacade.edit(modified);
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
 		
 		User actual;
-		actual = userFacade.findById(4);
-		assertEquals(modified, actual);
-		assertEquals(modified.getEmail(), actual.getEmail());
-		assertEquals(user.getId(), actual.getId());
+		try {
+			actual = userFacade.findById(4);
+			assertEquals(modified, actual);
+			assertEquals(modified.getEmail(), actual.getEmail());
+			assertEquals(user.getId(), actual.getId());
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
+
 	}
 	
 	@Test
@@ -87,13 +149,32 @@ public class UserFacadeTest {
 		user.setEmail("crocodile@animals.hu");
 		user.setId(5);
 		
-		userFacade.create(user);
+		try {
+			userFacade.create(user);
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
 		
-		userFacade.deleteById(5);
+		try {
+			userFacade.deleteById(5);
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
 		
 		User actual;
-		actual = userFacade.findById(5);
-		assertNull(actual);
+		try {
+			actual = userFacade.findById(5);
+			assertNull(actual);
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
+
 	}
 	
 	//Todo role and email tests

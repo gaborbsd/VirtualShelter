@@ -1,6 +1,7 @@
 package hu.bme.aut.vshelter.dal;
 
 import static org.junit.Assert.*;
+import hu.bme.aut.vshelter.api.VirtualShelterException;
 import hu.bme.aut.vshelter.entity.Disease;
 
 import java.util.List;
@@ -23,9 +24,23 @@ public class DiseaseFacadeTest {
 		disease.setDiceaseName("köhögős");
 		disease.setId(1);
 		
-		diseaseFacade.create(disease);
-		List<Disease> diseases = diseaseFacade.findAll();
-		assertTrue(diseases.contains(disease));
+		try {
+			diseaseFacade.create(disease);
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
+		List<Disease> diseases;
+		try {
+			diseases = diseaseFacade.findAll();
+			assertTrue(diseases.contains(disease));
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
+
 	}
 	
 	@Test
@@ -34,8 +49,16 @@ public class DiseaseFacadeTest {
 		disease.setDiceaseName("rossz májú");
 		disease.setId(2);
 		
-		List<Disease> diseases = diseaseFacade.findAll();
-		assertFalse(diseases.contains(disease));
+		List<Disease> diseases;
+		try {
+			diseases = diseaseFacade.findAll();
+			assertFalse(diseases.contains(disease));
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
+
 	}
 	
 	@Test
@@ -45,19 +68,39 @@ public class DiseaseFacadeTest {
 		disease.setDiceaseName("himlős");
 		disease.setId(3);
 		
-		diseaseFacade.create(disease);
+		try {
+			diseaseFacade.create(disease);
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
 		
-		actual = diseaseFacade.findById(3);
-		assertEquals(disease, actual);
-		assertEquals(disease.getDiceaseName(), actual.getDiceaseName());
-		assertEquals(disease.getId(), actual.getId());
+		try {
+			actual = diseaseFacade.findById(3);
+			assertEquals(disease, actual);
+			assertEquals(disease.getDiceaseName(), actual.getDiceaseName());
+			assertEquals(disease.getId(), actual.getId());
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
+
 	}
 	
 	@Test
 	public void testNoFindDiseaseByNotExistId(){
 		Disease actual;
-		actual = diseaseFacade.findById(4012);
-		assertNull(actual);
+		try {
+			actual = diseaseFacade.findById(4012);
+			assertNull(actual);
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
+
 	}
 	
 	@Test
@@ -66,19 +109,38 @@ public class DiseaseFacadeTest {
 		disease.setDiceaseName("bolhás");
 		disease.setId(4);
 		
-		diseaseFacade.create(disease);
+		try {
+			diseaseFacade.create(disease);
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
 		
 		Disease modified = new Disease();
 		modified.setDiceaseName("tetves");
 		modified.setId(4);
 		
-		diseaseFacade.edit(modified);
+		try {
+			diseaseFacade.edit(modified);
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
 		
 		Disease actual;
-		actual = diseaseFacade.findById(4);
-		assertEquals(modified, actual);
-		assertEquals(modified.getDiceaseName(), actual.getDiceaseName());
-		assertEquals(disease.getId(), actual.getId());
+		try {
+			actual = diseaseFacade.findById(4);
+			assertEquals(modified, actual);
+			assertEquals(modified.getDiceaseName(), actual.getDiceaseName());
+			assertEquals(disease.getId(), actual.getId());
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
+
 	}
 	
 	@Test
@@ -87,13 +149,32 @@ public class DiseaseFacadeTest {
 		disease.setDiceaseName("álomkóros");
 		disease.setId(5);
 		
-		diseaseFacade.create(disease);
+		try {
+			diseaseFacade.create(disease);
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
 		
-		diseaseFacade.deleteById(5);
+		try {
+			diseaseFacade.deleteById(5);
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
 		
 		Disease actual;
-		actual = diseaseFacade.findById(5);
-		assertNull(actual);
+		try {
+			actual = diseaseFacade.findById(5);
+			assertNull(actual);
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
+
 	}
 }
 

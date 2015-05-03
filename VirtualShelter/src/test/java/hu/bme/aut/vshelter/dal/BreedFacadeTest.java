@@ -1,6 +1,7 @@
 package hu.bme.aut.vshelter.dal;
 
 import static org.junit.Assert.*;
+import hu.bme.aut.vshelter.api.VirtualShelterException;
 import hu.bme.aut.vshelter.entity.Breed;
 import hu.bme.aut.vshelter.entity.Species;
 
@@ -26,9 +27,23 @@ public class BreedFacadeTest {
 		breed.setId(1);
 		breed.setSpecies(species);
 		
-		breedFacade.create(breed);
-		List<Breed> breeds = breedFacade.findAll();
-		assertTrue(breeds.contains(breed));
+		try {
+			breedFacade.create(breed);
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
+		List<Breed> breeds;
+		try {
+			breeds = breedFacade.findAll();
+			assertTrue(breeds.contains(breed));
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
+
 	}
 	
 	@Test
@@ -37,8 +52,16 @@ public class BreedFacadeTest {
 		breed.setBreedName("macska");
 		breed.setId(2);
 		
-		List<Breed> breeds = breedFacade.findAll();
-		assertFalse(breeds.contains(breed));
+		List<Breed> breeds;
+		try {
+			breeds = breedFacade.findAll();
+			assertFalse(breeds.contains(breed));
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
+
 	}
 	
 	@Test
@@ -48,19 +71,39 @@ public class BreedFacadeTest {
 		breed.setBreedName("leopárd");
 		breed.setId(3);
 		
-		breedFacade.create(breed);
+		try {
+			breedFacade.create(breed);
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
 		
-		actual = breedFacade.findById(3);
-		assertEquals(breed, actual);
-		assertEquals(breed.getBreedName(), actual.getBreedName());
-		assertEquals(breed.getId(), actual.getId());
+		try {
+			actual = breedFacade.findById(3);
+			assertEquals(breed, actual);
+			assertEquals(breed.getBreedName(), actual.getBreedName());
+			assertEquals(breed.getId(), actual.getId());
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
+
 	}
 	
 	@Test
 	public void testNoFindBreedByNotExistId(){
 		Breed actual;
-		actual = breedFacade.findById(4012);
-		assertNull(actual);
+		try {
+			actual = breedFacade.findById(4012);
+			assertNull(actual);
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
+
 	}
 	
 	@Test
@@ -69,19 +112,38 @@ public class BreedFacadeTest {
 		breed.setBreedName("tigris");
 		breed.setId(4);
 		
-		breedFacade.create(breed);
+		try {
+			breedFacade.create(breed);
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
 		
 		Breed modified = new Breed();
 		modified.setBreedName("majom");
 		modified.setId(4);
 		
-		breedFacade.edit(modified);
+		try {
+			breedFacade.edit(modified);
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
 		
 		Breed actual;
-		actual = breedFacade.findById(4);
-		assertEquals(modified, actual);
-		assertEquals(modified.getBreedName(), actual.getBreedName());
-		assertEquals(breed.getId(), actual.getId());
+		try {
+			actual = breedFacade.findById(4);
+			assertEquals(modified, actual);
+			assertEquals(modified.getBreedName(), actual.getBreedName());
+			assertEquals(breed.getId(), actual.getId());
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
+
 	}
 	
 	@Test
@@ -90,12 +152,32 @@ public class BreedFacadeTest {
 		breed.setBreedName("aligátor");
 		breed.setId(5);
 		
-		breedFacade.create(breed);
+		try {
+			breedFacade.create(breed);
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
 		
-		breedFacade.deleteById(5);
+		try {
+			breedFacade.deleteById(5);
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
 		
 		Breed actual;
-		actual = breedFacade.findById(5);
-		assertNull(actual);
+		try {
+			actual = breedFacade.findById(5);
+			assertNull(actual);
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+			
+		}
+
 	}
 }

@@ -1,6 +1,7 @@
 package hu.bme.aut.vshelter.dal;
 
 import static org.junit.Assert.*;
+import hu.bme.aut.vshelter.api.VirtualShelterException;
 import hu.bme.aut.vshelter.entity.Institution;
 
 import java.util.List;
@@ -24,9 +25,23 @@ public class InstitutionFacadeTest {
 		institution.setTaxNumber("123455");
 		institution.setId(1);
 		
-		institutionFacade.create(institution);
-		List<Institution> institutions = institutionFacade.findAll();
-		assertTrue(institutions.contains(institution));
+		try {
+			institutionFacade.create(institution);
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
+		List<Institution> institutions;
+		try {
+			institutions = institutionFacade.findAll();
+			assertTrue(institutions.contains(institution));
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
+		
 	}
 	
 	@Test
@@ -35,8 +50,16 @@ public class InstitutionFacadeTest {
 		institution.setTaxNumber("3353455");
 		institution.setId(2);
 		
-		List<Institution> institutions = institutionFacade.findAll();
-		assertFalse(institutions.contains(institution));
+		List<Institution> institutions;
+		try {
+			institutions = institutionFacade.findAll();
+			assertFalse(institutions.contains(institution));
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
+
 	}
 	
 	@Test
@@ -46,19 +69,39 @@ public class InstitutionFacadeTest {
 		institution.setTaxNumber("2456345634");
 		institution.setId(3);
 		
-		institutionFacade.create(institution);
+		try {
+			institutionFacade.create(institution);
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
 		
-		actual = institutionFacade.findById(3);
-		assertEquals(institution, actual);
-		assertEquals(institution.getTaxNumber(), actual.getTaxNumber());
-		assertEquals(institution.getId(), actual.getId());
+		try {
+			actual = institutionFacade.findById(3);
+			assertEquals(institution, actual);
+			assertEquals(institution.getTaxNumber(), actual.getTaxNumber());
+			assertEquals(institution.getId(), actual.getId());
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
+
 	}
 	
 	@Test
 	public void testNoFindInstitutionByNotExistId(){
 		Institution actual;
-		actual = institutionFacade.findById(4012);
-		assertNull(actual);
+		try {
+			actual = institutionFacade.findById(4012);
+			assertNull(actual);
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
+
 	}
 	
 	@Test
@@ -67,19 +110,38 @@ public class InstitutionFacadeTest {
 		institution.setTaxNumber("3456345634");
 		institution.setId(4);
 		
-		institutionFacade.create(institution);
+		try {
+			institutionFacade.create(institution);
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
 		
 		Institution modified = new Institution();
 		modified.setTaxNumber("456345634");
 		modified.setId(4);
 		
-		institutionFacade.edit(modified);
+		try {
+			institutionFacade.edit(modified);
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
 		
 		Institution actual;
-		actual = institutionFacade.findById(4);
-		assertEquals(modified, actual);
-		assertEquals(modified.getTaxNumber(), actual.getTaxNumber());
-		assertEquals(institution.getId(), actual.getId());
+		try {
+			actual = institutionFacade.findById(4);
+			assertEquals(modified, actual);
+			assertEquals(modified.getTaxNumber(), actual.getTaxNumber());
+			assertEquals(institution.getId(), actual.getId());
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
+
 	}
 	
 	@Test
@@ -88,12 +150,31 @@ public class InstitutionFacadeTest {
 		institution.setTaxNumber("45634563");
 		institution.setId(5);
 		
-		institutionFacade.create(institution);
+		try {
+			institutionFacade.create(institution);
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
 		
-		institutionFacade.deleteById(5);
+		try {
+			institutionFacade.deleteById(5);
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
 		
 		Institution actual;
-		actual = institutionFacade.findById(5);
-		assertNull(actual);
+		try {
+			actual = institutionFacade.findById(5);
+			assertNull(actual);
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
+		
 	}
 }

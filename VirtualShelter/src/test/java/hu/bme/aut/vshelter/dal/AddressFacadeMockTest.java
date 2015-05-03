@@ -6,10 +6,12 @@ import static org.easymock.EasyMock.expectLastCall;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import hu.bme.aut.vshelter.api.VirtualShelterException;
 import hu.bme.aut.vshelter.dal.impl.AddressFacadeJPAImpl;
 import hu.bme.aut.vshelter.entity.Address;
 
@@ -50,8 +52,20 @@ public class AddressFacadeMockTest {
 
 		replay(mockEm);
 
-		addressFacade.create(address);
-		assertEquals(address, addressFacade.findById(address.getId()));
+		try {
+			addressFacade.create(address);
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
+		try {
+			assertEquals(address, addressFacade.findById(address.getId()));
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
 
 		verify(mockEm);
 	}
@@ -62,7 +76,13 @@ public class AddressFacadeMockTest {
 
 		replay(mockEm);
 
-		assertEquals(null, addressFacade.findById((long) 1));
+		try {
+			assertEquals(null, addressFacade.findById((long) 1));
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
 
 		verify(mockEm);
 	}
@@ -86,8 +106,20 @@ public class AddressFacadeMockTest {
 		replay(mockEm);
 		replay(mockTypedQuery);
 
-		addressFacade.create(address);
-		assertEquals(addresses, addressFacade.findAll());
+		try {
+			addressFacade.create(address);
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
+		try {
+			assertEquals(addresses, addressFacade.findAll());
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
 
 		verify(mockEm);
 		verify(mockTypedQuery);
@@ -102,7 +134,13 @@ public class AddressFacadeMockTest {
 		replay(mockEm);
 		replay(mockTypedQuery);
 
-		assertEquals(null, addressFacade.findAll());
+		try {
+			assertEquals(null, addressFacade.findAll());
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
 
 		verify(mockEm);
 		verify(mockTypedQuery);
@@ -120,7 +158,13 @@ public class AddressFacadeMockTest {
 		expectLastCall();
 		replay(mockEm);
 
-		addressFacade.create(address);
+		try {
+			addressFacade.create(address);
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
 		verify(mockEm);
 	}
 
@@ -135,7 +179,13 @@ public class AddressFacadeMockTest {
 		expect(mockEm.merge(address)).andReturn(address);
 		replay(mockEm);
 
-		addressFacade.edit(address);
+		try {
+			addressFacade.edit(address);
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
 		verify(mockEm);
 	}
 
@@ -167,11 +217,29 @@ public class AddressFacadeMockTest {
 		replay(mockQuery);
 		replay(mockTypedQuery);
 
-		addressFacade.create(address);
+		try {
+			addressFacade.create(address);
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
 		
-		addressFacade.deleteById(address.getId());
+		try {
+			addressFacade.deleteById(address.getId());
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
 		
-		assertEquals(null, addressFacade.findAll());
+		try {
+			assertEquals(null, addressFacade.findAll());
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
 
 		verify(mockEm);
 		verify(mockQuery);
