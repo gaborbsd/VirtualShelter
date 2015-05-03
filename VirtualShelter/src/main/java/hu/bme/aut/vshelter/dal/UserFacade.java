@@ -10,13 +10,13 @@ public interface UserFacade extends AbstractFacade<User>{
 	 * Adds site-administrator role to the user with the given id
 	 * @param userId
 	 */
-	void promoteUserToSiteAdministrator(long userId);
+	void promoteUserToSiteAdministrator(long userId) throws VirtualShelterException;
 	
 	/**
 	 * Removes site-administrator role from user with the given id
 	 * @param userId
 	 */
-	void revokeUserFromSiteAdministrator(long userId);
+	void revokeUserFromSiteAdministrator(long userId) throws VirtualShelterException;
 	
 	/**
 	 * Returns the userId from the owner of the given email

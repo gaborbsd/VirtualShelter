@@ -31,12 +31,12 @@ public class SiteAdministrationOperationsImpl implements
 	}
 
 	@Override
-	public User findUserById(long userId) {
+	public User findUserById(long userId) throws VirtualShelterException {
 		return userFacade.findById(userId);
 	}
 	
 	@Override
-	public boolean isUserSiteAdministrator(long userId) {
+	public boolean isUserSiteAdministrator(long userId) throws VirtualShelterException {
 		User user = userFacade.findById(userId);
 		
 		String role = "site-administrator";
@@ -89,17 +89,17 @@ public class SiteAdministrationOperationsImpl implements
 	}
 
 	@Override
-	public List<Institution> listInstituitionsOwnedByUser(long userId) {
+	public List<Institution> listInstituitionsOwnedByUser(long userId) throws VirtualShelterException {
 		return institutionFacade.listInstituitionsOwnedByUser(userId);
 	}
 
 	@Override
-	public void updateBreed(Breed breed) {
+	public void updateBreed(Breed breed) throws VirtualShelterException {
 		breedFacade.edit(breed);
 	}
 
 	@Override
-	public User findOwnerOfInstitution(long institutionId) {
+	public User findOwnerOfInstitution(long institutionId) throws VirtualShelterException {
 		Institution institution = institutionFacade.findById(institutionId);
 		return institution.getOwner();
 	}

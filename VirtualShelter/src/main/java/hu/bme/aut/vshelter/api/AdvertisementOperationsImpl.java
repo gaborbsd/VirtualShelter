@@ -23,12 +23,8 @@ import java.util.Set;
 
 import javax.inject.Inject;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 public class AdvertisementOperationsImpl implements IAdvertisementOperations {
 	
-	@Inject
-	private AdvertisementFacade addressFacade;
 	@Inject
 	private UserFacade userFacade;
 	@Inject
@@ -41,8 +37,6 @@ public class AdvertisementOperationsImpl implements IAdvertisementOperations {
 	private BreedFacade breedFacade;
 	@Inject
 	private AnimalFacade animalFacade;
-	@Inject
-	private PictureFacade pictureFacade;
 	
 	@Override
 	public void advertise(long instituionId, long animalId)
@@ -144,7 +138,7 @@ public class AdvertisementOperationsImpl implements IAdvertisementOperations {
 	}
 	
 	@Override
-	public List<User> listInstitutionAdministrators(long institutionId) {
+	public List<User> listInstitutionAdministrators(long institutionId) throws VirtualShelterException {
 		Institution institution = institutionFacade.findById(institutionId);
 		return institution.getInstitutionAdministrators();
 	}
@@ -197,43 +191,43 @@ public class AdvertisementOperationsImpl implements IAdvertisementOperations {
 
 	@Override
 	public List<Advertisement> listAdvertisementsFromAdvertiser(
-			long advertiserId) {
+			long advertiserId) throws VirtualShelterException {
 		return advertismentFacade.listAdvertisementsFromAdvertiser(advertiserId);
 	}
 
 	@Override
-	public Species findSpeciesById(long speciesId) {
+	public Species findSpeciesById(long speciesId) throws VirtualShelterException {
 		return speciesFacade.findById(speciesId);
 	}
 
 	@Override
-	public void updateSpecies(Species species) {
+	public void updateSpecies(Species species) throws VirtualShelterException {
 		speciesFacade.edit(species);
 	}
 
 	@Override
-	public Set<Breed> listBreedsOfTheSpecies(long speciesId) {
+	public Set<Breed> listBreedsOfTheSpecies(long speciesId) throws VirtualShelterException {
 		Species species = speciesFacade.findById(speciesId);
 		return species.getBreeds();
 	}
 
 	@Override
-	public Animal findAnimalById(long animalId) {
+	public Animal findAnimalById(long animalId) throws VirtualShelterException {
 		return animalFacade.findById(animalId);
 	}
 
 	@Override
-	public void updateAnimal(Animal animal) {
+	public void updateAnimal(Animal animal) throws VirtualShelterException {
 		animalFacade.edit(animal);
 	}
 
 	@Override
-	public Advertiser getAdvertiserOfAnimal(long animalId) {
+	public Advertiser getAdvertiserOfAnimal(long animalId) throws VirtualShelterException {
 		return advertismentFacade.getAdvertiserOfAnimal(animalId);
 	}
 
 	@Override
-	public List<Animal> listAnimalsAdvertisedByAdvertiser(long advertiserId) {
+	public List<Animal> listAnimalsAdvertisedByAdvertiser(long advertiserId) throws VirtualShelterException {
 		return advertismentFacade.listAnimalsAdvertisedByAdvertiser(advertiserId);
 	}
 

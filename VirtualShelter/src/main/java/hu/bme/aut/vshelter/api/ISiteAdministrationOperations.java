@@ -20,13 +20,13 @@ public interface ISiteAdministrationOperations {
 	 * @param userId
 	 * @return
 	 */
-	public User findUserById(long userId);
+	public User findUserById(long userId) throws VirtualShelterException;
 	
 	/**
 	 * Returns whether the user is a site administrator or not
 	 * @return
 	 */
-	public boolean isUserSiteAdministrator(long userId);
+	public boolean isUserSiteAdministrator(long userId) throws VirtualShelterException;
 	
 	/**
 	 * Promotes a user to site administrator
@@ -76,19 +76,19 @@ public interface ISiteAdministrationOperations {
 	 * @param userId
 	 * @return
 	 */
-	public List<Institution> listInstituitionsOwnedByUser(long userId);
+	public List<Institution> listInstituitionsOwnedByUser(long userId) throws VirtualShelterException;
 	
 	/**
 	 * Updates the breed identified by the given breed's id
 	 * @param breed
 	 */
-	public void updateBreed(Breed breed);
+	public void updateBreed(Breed breed) throws VirtualShelterException;
 	
 	/**
 	 * Returns the owner of the given institution's id
 	 * @param institutionId
 	 * @return
 	 */
-	public User findOwnerOfInstitution(long institutionId);
+	public User findOwnerOfInstitution(long institutionId) throws VirtualShelterException;
 	
 }
