@@ -1,13 +1,17 @@
 package hu.bme.aut.vshelter.auth;
 
+import hu.bme.aut.vshelter.api.IAuthenticationAndPermissionOperations;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 
 /**
@@ -21,13 +25,22 @@ import org.springframework.stereotype.Component;
 @Component
 public class VirtualShelterAuthenticationProvider implements AuthenticationProvider {
 
+	@Autowired
+	private IAuthenticationAndPermissionOperations operations;
+	
 	@Override
 	public Authentication authenticate(Authentication authentication)
 			throws AuthenticationException {
 		String name = authentication.getName();
 		String password = authentication.getCredentials().toString();
-		List<GrantedAuthority> grantedAuths = new ArrayList<GrantedAuthority>();
-		return new UsernamePasswordAuthenticationToken(name, password, grantedAuths);
+		if (operations.authenticate(name, password)) {
+			List<GrantedAuthority> grantedAuths = new ArrayList<GrantedAuthority>();
+			grantedAuths.add(new SimpleGrantedAuthority("ROLE_USER"));
+			return new UsernamePasswordAuthenticationToken(name, password, grantedAuths);
+		} else {
+			throw new VirtualShelterAuthenticationException("Authentication unsuccessful");
+		}
+		
 	}
 
 	@Override
