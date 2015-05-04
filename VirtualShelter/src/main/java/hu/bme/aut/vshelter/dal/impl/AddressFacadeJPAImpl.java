@@ -7,6 +7,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TransactionRequiredException;
 import javax.transaction.Transactional;
+import javax.validation.ValidationException;
 import javax.persistence.TypedQuery;
 
 import hu.bme.aut.vshelter.api.VirtualShelterException;
@@ -35,7 +36,7 @@ public class AddressFacadeJPAImpl implements AddressFacade {
 			return em.find(Address.class, addressId);
 		} catch (IllegalArgumentException e) {
 			throw new VirtualShelterException(e);
-		}
+		} 
 	}
 
 	@Override
@@ -63,7 +64,9 @@ public class AddressFacadeJPAImpl implements AddressFacade {
 			throw new VirtualShelterException(e);
 		} catch (TransactionRequiredException e) {
 			throw new VirtualShelterException(e);
-		}
+		} catch (ValidationException e) {
+			throw new VirtualShelterException(e);
+		} 
 	}
 
 	@Override
@@ -75,7 +78,9 @@ public class AddressFacadeJPAImpl implements AddressFacade {
 			throw new VirtualShelterException(e);
 		} catch (TransactionRequiredException e) {
 			throw new VirtualShelterException(e);
-		}
+		} catch (ValidationException e) {
+			throw new VirtualShelterException(e);
+		} 
 	}
 
 	@Override

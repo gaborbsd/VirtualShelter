@@ -12,6 +12,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TransactionRequiredException;
 import javax.transaction.Transactional;
+import javax.validation.ValidationException;
 import javax.persistence.TypedQuery;
 
 public class BreedFacadeJPAImpl implements BreedFacade {
@@ -53,7 +54,9 @@ public class BreedFacadeJPAImpl implements BreedFacade {
 			throw new VirtualShelterException(e);
 		} catch (TransactionRequiredException e) {
 			throw new VirtualShelterException(e);
-		}
+		} catch (ValidationException e) {
+			throw new VirtualShelterException(e);
+		} 
 	}
 
 	@Override
@@ -65,7 +68,9 @@ public class BreedFacadeJPAImpl implements BreedFacade {
 			throw new VirtualShelterException(e);
 		} catch (TransactionRequiredException e) {
 			throw new VirtualShelterException(e);
-		}
+		} catch (ValidationException e) {
+			throw new VirtualShelterException(e);
+		} 
 	}
 
 	@Override

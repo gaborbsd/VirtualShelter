@@ -13,6 +13,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TransactionRequiredException;
 import javax.persistence.TypedQuery;
+import javax.validation.ValidationException;
 
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,7 +33,9 @@ public class AnimalFacadeJPAImpl implements AnimalFacade {
 			throw new VirtualShelterException(e);
 		} catch (TransactionRequiredException e) {
 			throw new VirtualShelterException(e);
-		}
+		} catch (ValidationException e) {
+			throw new VirtualShelterException(e);
+		} 
 	}
 
 	@Override
@@ -67,7 +70,9 @@ public class AnimalFacadeJPAImpl implements AnimalFacade {
 			throw new VirtualShelterException(e);
 		} catch (TransactionRequiredException e) {
 			throw new VirtualShelterException(e);
-		}
+		} catch (ValidationException e) {
+			throw new VirtualShelterException(e);
+		} 
 	}
 
 	@Override
