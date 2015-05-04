@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
 
 @Entity
 @Table(name = "address", catalog = "vshelter")
@@ -33,8 +35,12 @@ public class Address {
 	private String address;
 	
 	@Column(name = "latitude", unique = false, nullable = true)
+	@DecimalMin("-85.00")
+	@DecimalMax("85.00")
 	private double latitude;
 	
+	@DecimalMin("-180.00")
+	@DecimalMax("180.00")
 	@Column(name = "longitude", unique = false, nullable = true)
 	private double longitude;
 	
