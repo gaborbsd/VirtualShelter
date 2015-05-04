@@ -67,6 +67,7 @@
 	
 	<bean id="siteAdministrationOperations" class="hu.bme.aut.vshelter.api.SiteAdministrationOperationsImpl" />
 	<bean id="advertisementOperations" class="hu.bme.aut.vshelter.api.AdvertisementOperationsImpl" />
+	<bean id="authenticationAndPermissionOperations" class="hu.bme.aut.vshelter.api.AuthenticationAndPermissionOperationsImpl" />
 
 	<bean id="addressFacade" class="hu.bme.aut.vshelter.dal.impl.AddressFacadeJPAImpl" />
 	<bean id="advertisementFacade" class="hu.bme.aut.vshelter.dal.impl.AdvertisementFacadeJPAImpl" />
