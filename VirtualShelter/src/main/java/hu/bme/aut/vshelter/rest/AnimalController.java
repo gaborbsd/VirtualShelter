@@ -3,7 +3,6 @@ package hu.bme.aut.vshelter.rest;
 import hu.bme.aut.vshelter.api.IAdvertisementOperations;
 import hu.bme.aut.vshelter.api.ISiteAdministrationOperations;
 import hu.bme.aut.vshelter.api.VirtualShelterException;
-import hu.bme.aut.vshelter.dal.AnimalFacade;
 import hu.bme.aut.vshelter.entity.Advertisement;
 import hu.bme.aut.vshelter.entity.Animal;
 import hu.bme.aut.vshelter.entity.Picture;
@@ -34,9 +33,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/animal")
 public class AnimalController {
 	
-	@Autowired
-	private AnimalFacade animalFacade;
-
 	@Autowired
 	private ISiteAdministrationOperations siteAdministrationOperations;
 	

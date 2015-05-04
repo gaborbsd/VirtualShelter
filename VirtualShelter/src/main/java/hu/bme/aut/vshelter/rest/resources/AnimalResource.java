@@ -1,6 +1,5 @@
 package hu.bme.aut.vshelter.rest.resources;
 
-import java.util.Calendar;
 import java.util.List;
 
 import hu.bme.aut.vshelter.entity.Address;
