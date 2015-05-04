@@ -15,7 +15,7 @@ public class UserFacadeInMemoryImpl implements UserFacade {
 	private List<User> users = new ArrayList<User>();
 
 	@Override
-	public User findUserById(long userId) {
+	public User findById(long userId) {
 		try {
 			return users.stream()
 					.filter(a -> a.getId() == userId).findFirst()
@@ -42,8 +42,8 @@ public class UserFacadeInMemoryImpl implements UserFacade {
 	}
 
 	@Override
-	public void deleteUserById(long userId) {
-		User deleteUser = findUserById(userId);
+	public void deleteById(long userId) {
+		User deleteUser = findById(userId);
 
 		if (deleteUser != null)
 			users.remove(deleteUser);
@@ -53,7 +53,7 @@ public class UserFacadeInMemoryImpl implements UserFacade {
 	public void promoteUserToSiteAdministrator(long userId) {
 		
 		String role = "site-administrator";
-		User user = findUserById(userId);
+		User user = findById(userId);
 		
 		if( !user.getRoles().contains(role)) {
 			user.getRoles().add(role);
@@ -63,7 +63,7 @@ public class UserFacadeInMemoryImpl implements UserFacade {
 	@Override
 	public void revokeUserFromSiteAdministrator(long userId) {
 		String role = "site-administrator";
-		User user = findUserById(userId);
+		User user = findById(userId);
 		
 		if( user.getRoles().contains(role)) {
 			user.getRoles().remove(role);

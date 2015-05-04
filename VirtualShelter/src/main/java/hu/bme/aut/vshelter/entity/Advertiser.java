@@ -14,6 +14,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.Pattern;
 
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED)
@@ -30,6 +31,8 @@ public abstract class Advertiser {
 	private String name;
 	
 	@Column(name = "email", unique = true, nullable = false)
+	@Pattern(regexp="^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$",
+	             message="Invalid email format")
 	private String email;
 	
 	@ManyToOne

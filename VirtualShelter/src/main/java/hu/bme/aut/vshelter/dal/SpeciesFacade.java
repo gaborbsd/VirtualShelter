@@ -5,17 +5,7 @@ import hu.bme.aut.vshelter.entity.Species;
 
 import java.util.List;
 
-public interface SpeciesFacade {
-	
-	Species findSpeciesById(long speciesId);
-	
-	List<Species> findAll();
-	
-	void create(Species species);
-	
-	void edit(Species species);
-	
-	void deleteSpeciesById(long speciesId);
+public interface SpeciesFacade extends AbstractFacade<Species>{
 	
 	/**
 	 * Returns the speciesID from the owner of the given species name

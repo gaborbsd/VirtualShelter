@@ -14,7 +14,7 @@ public class SpeciesFacadeInMemoryImpl implements SpeciesFacade {
 	private List<Species> specieses = new ArrayList<Species>();
 
 	@Override
-	public Species findSpeciesById(long speciesId) {
+	public Species findById(long speciesId) {
 		try {
 			return specieses.stream().filter(a -> a.getId() == speciesId)
 					.findFirst().get();
@@ -39,8 +39,8 @@ public class SpeciesFacadeInMemoryImpl implements SpeciesFacade {
 	}
 
 	@Override
-	public void deleteSpeciesById(long speciesId) {
-		Species deleteSpecies = findSpeciesById(speciesId);
+	public void deleteById(long speciesId) {
+		Species deleteSpecies = findById(speciesId);
 
 		if (deleteSpecies != null)
 			specieses.remove(deleteSpecies);

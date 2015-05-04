@@ -1,6 +1,7 @@
 package hu.bme.aut.vshelter.dal;
 
 import static org.junit.Assert.*;
+import hu.bme.aut.vshelter.api.VirtualShelterException;
 import hu.bme.aut.vshelter.entity.Handicap;
 
 import java.util.List;
@@ -24,9 +25,22 @@ public class HandicapFacadeTest {
 		handicap.setId(1);
 
 		
-		handicapFacade.create(handicap);
-		List<Handicap> handicaps = handicapFacade.findAll();
-		assertTrue(handicaps.contains(handicap));
+		try {
+			handicapFacade.create(handicap);
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
+		List<Handicap> handicaps;
+		try {
+			handicaps = handicapFacade.findAll();
+			assertTrue(handicaps.contains(handicap));
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
 	}
 	
 	@Test
@@ -35,8 +49,16 @@ public class HandicapFacadeTest {
 		handicap.setHandicapName("vak");
 		handicap.setId(2);
 		
-		List<Handicap> handicaps = handicapFacade.findAll();
-		assertFalse(handicaps.contains(handicap));
+		List<Handicap> handicaps;
+		try {
+			handicaps = handicapFacade.findAll();
+			assertFalse(handicaps.contains(handicap));
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
+		
 	}
 	
 	@Test
@@ -46,19 +68,39 @@ public class HandicapFacadeTest {
 		handicap.setHandicapName("amputált lábú");
 		handicap.setId(3);
 		
-		handicapFacade.create(handicap);
+		try {
+			handicapFacade.create(handicap);
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
 		
-		actual = handicapFacade.findHandicapById(3);
-		assertEquals(handicap, actual);
-		assertEquals(handicap.getHandicapName(), actual.getHandicapName());
-		assertEquals(handicap.getId(), actual.getId());
+		try {
+			actual = handicapFacade.findById(3);
+			assertEquals(handicap, actual);
+			assertEquals(handicap.getHandicapName(), actual.getHandicapName());
+			assertEquals(handicap.getId(), actual.getId());
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
+
 	}
 	
 	@Test
 	public void testNoFindHandicapByNotExistId(){
 		Handicap actual;
-		actual = handicapFacade.findHandicapById(4012);
-		assertNull(actual);
+		try {
+			actual = handicapFacade.findById(4012);
+			assertNull(actual);
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
+		
 	}
 	
 	@Test
@@ -67,19 +109,38 @@ public class HandicapFacadeTest {
 		handicap.setHandicapName("látás sérült");
 		handicap.setId(4);
 		
-		handicapFacade.create(handicap);
+		try {
+			handicapFacade.create(handicap);
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
 		
 		Handicap modified = new Handicap();
 		modified.setHandicapName("hallás sérült");
 		modified.setId(4);
 		
-		handicapFacade.edit(modified);
+		try {
+			handicapFacade.edit(modified);
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
 		
 		Handicap actual;
-		actual = handicapFacade.findHandicapById(4);
-		assertEquals(modified, actual);
-		assertEquals(modified.getHandicapName(), actual.getHandicapName());
-		assertEquals(handicap.getId(), actual.getId());
+		try {
+			actual = handicapFacade.findById(4);
+			assertEquals(modified, actual);
+			assertEquals(modified.getHandicapName(), actual.getHandicapName());
+			assertEquals(handicap.getId(), actual.getId());
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
+
 	}
 	
 	@Test
@@ -88,13 +149,32 @@ public class HandicapFacadeTest {
 		handicap.setHandicapName("süket");
 		handicap.setId(5);
 		
-		handicapFacade.create(handicap);
+		try {
+			handicapFacade.create(handicap);
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
 		
-		handicapFacade.deleteHandicapById(5);
+		try {
+			handicapFacade.deleteById(5);
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
 		
 		Handicap actual;
-		actual = handicapFacade.findHandicapById(5);
-		assertNull(actual);
+		try {
+			actual = handicapFacade.findById(5);
+			assertNull(actual);
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
+
 	}
 	
 	

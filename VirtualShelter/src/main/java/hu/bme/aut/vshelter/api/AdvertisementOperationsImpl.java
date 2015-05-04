@@ -23,12 +23,8 @@ import java.util.Set;
 
 import javax.inject.Inject;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 public class AdvertisementOperationsImpl implements IAdvertisementOperations {
 	
-	@Inject
-	private AdvertisementFacade addressFacade;
 	@Inject
 	private UserFacade userFacade;
 	@Inject
@@ -41,16 +37,14 @@ public class AdvertisementOperationsImpl implements IAdvertisementOperations {
 	private BreedFacade breedFacade;
 	@Inject
 	private AnimalFacade animalFacade;
-	@Inject
-	private PictureFacade pictureFacade;
 	
 	@Override
 	public void advertise(long instituionId, long animalId)
 			throws VirtualShelterException {
 		Advertisement advertisement = new Advertisement();
-		Institution institution = institutionFacade.findInstitutionById(instituionId);
+		Institution institution = institutionFacade.findById(instituionId);
 		advertisement.setAdvertiser(institution);
-		Animal animal = animalFacade.findAnimalById(animalId);
+		Animal animal = animalFacade.findById(animalId);
 		advertisement.setAnimal(animal);
 		advertisement.setDateOfAdvertisement(Calendar.getInstance());
 		advertismentFacade.create(advertisement);
@@ -61,9 +55,9 @@ public class AdvertisementOperationsImpl implements IAdvertisementOperations {
 	public void advertise(long animalId)
 			throws VirtualShelterException {
 		Advertisement advertisement = new Advertisement();
-		User user = userFacade.findUserById(1);
+		User user = userFacade.findById(1);
 		advertisement.setAdvertiser(user);
-		Animal animal = animalFacade.findAnimalById(animalId);
+		Animal animal = animalFacade.findById(animalId);
 		advertisement.setAnimal(animal);
 		advertisement.setDateOfAdvertisement(Calendar.getInstance());
 		advertismentFacade.create(advertisement);
@@ -77,7 +71,7 @@ public class AdvertisementOperationsImpl implements IAdvertisementOperations {
 
 	@Override
 	public void deleteUser(long userId) throws VirtualShelterException {
-		userFacade.deleteUserById(userId);
+		userFacade.deleteById(userId);
 	}
 
 	@Override
@@ -109,7 +103,7 @@ public class AdvertisementOperationsImpl implements IAdvertisementOperations {
 	@Override
 	public void deleteInstitution(long institutionId)
 			throws VirtualShelterException {
-		institutionFacade.deleteInstitutionById(institutionId);
+		institutionFacade.deleteById(institutionId);
 
 	}
 
@@ -123,8 +117,8 @@ public class AdvertisementOperationsImpl implements IAdvertisementOperations {
 	@Override
 	public void changeInstitutionOwner(long userId, long institutionId)
 			throws VirtualShelterException {
-		User owner = userFacade.findUserById(userId);
-		Institution institution = institutionFacade.findInstitutionById(institutionId);
+		User owner = userFacade.findById(userId);
+		Institution institution = institutionFacade.findById(institutionId);
 		institution.setOwner(owner);
 		institutionFacade.edit(institution);
 
@@ -144,8 +138,8 @@ public class AdvertisementOperationsImpl implements IAdvertisementOperations {
 	}
 	
 	@Override
-	public List<User> listInstitutionAdministrators(long institutionId) {
-		Institution institution = institutionFacade.findInstitutionById(institutionId);
+	public List<User> listInstitutionAdministrators(long institutionId) throws VirtualShelterException {
+		Institution institution = institutionFacade.findById(institutionId);
 		return institution.getInstitutionAdministrators();
 	}
 
@@ -159,7 +153,7 @@ public class AdvertisementOperationsImpl implements IAdvertisementOperations {
 	@Override
 	public void deleteAdvertisement(long advertisementId)
 			throws VirtualShelterException {
-		advertismentFacade.deleteAdvertisementById(advertisementId);
+		advertismentFacade.deleteById(advertisementId);
 	}
 
 	@Override
@@ -192,48 +186,48 @@ public class AdvertisementOperationsImpl implements IAdvertisementOperations {
 
 	@Override
 	public void deleteAnimal(long animalId) throws VirtualShelterException {
-		animalFacade.deleteAnimalById(animalId);
+		animalFacade.deleteById(animalId);
 	}
 
 	@Override
 	public List<Advertisement> listAdvertisementsFromAdvertiser(
-			long advertiserId) {
+			long advertiserId) throws VirtualShelterException {
 		return advertismentFacade.listAdvertisementsFromAdvertiser(advertiserId);
 	}
 
 	@Override
-	public Species findSpeciesById(long speciesId) {
-		return speciesFacade.findSpeciesById(speciesId);
+	public Species findSpeciesById(long speciesId) throws VirtualShelterException {
+		return speciesFacade.findById(speciesId);
 	}
 
 	@Override
-	public void updateSpecies(Species species) {
+	public void updateSpecies(Species species) throws VirtualShelterException {
 		speciesFacade.edit(species);
 	}
 
 	@Override
-	public Set<Breed> listBreedsOfTheSpecies(long speciesId) {
-		Species species = speciesFacade.findSpeciesById(speciesId);
+	public Set<Breed> listBreedsOfTheSpecies(long speciesId) throws VirtualShelterException {
+		Species species = speciesFacade.findById(speciesId);
 		return species.getBreeds();
 	}
 
 	@Override
-	public Animal findAnimalById(long animalId) {
-		return animalFacade.findAnimalById(animalId);
+	public Animal findAnimalById(long animalId) throws VirtualShelterException {
+		return animalFacade.findById(animalId);
 	}
 
 	@Override
-	public void updateAnimal(Animal animal) {
+	public void updateAnimal(Animal animal) throws VirtualShelterException {
 		animalFacade.edit(animal);
 	}
 
 	@Override
-	public Advertiser getAdvertiserOfAnimal(long animalId) {
+	public Advertiser getAdvertiserOfAnimal(long animalId) throws VirtualShelterException {
 		return advertismentFacade.getAdvertiserOfAnimal(animalId);
 	}
 
 	@Override
-	public List<Animal> listAnimalsAdvertisedByAdvertiser(long advertiserId) {
+	public List<Animal> listAnimalsAdvertisedByAdvertiser(long advertiserId) throws VirtualShelterException {
 		return advertismentFacade.listAnimalsAdvertisedByAdvertiser(advertiserId);
 	}
 

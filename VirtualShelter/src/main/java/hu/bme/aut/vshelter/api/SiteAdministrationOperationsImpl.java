@@ -31,13 +31,13 @@ public class SiteAdministrationOperationsImpl implements
 	}
 
 	@Override
-	public User findUserById(long userId) {
-		return userFacade.findUserById(userId);
+	public User findUserById(long userId) throws VirtualShelterException {
+		return userFacade.findById(userId);
 	}
 	
 	@Override
-	public boolean isUserSiteAdministrator(long userId) {
-		User user = userFacade.findUserById(userId);
+	public boolean isUserSiteAdministrator(long userId) throws VirtualShelterException {
+		User user = userFacade.findById(userId);
 		
 		String role = "site-administrator";
 
@@ -71,36 +71,36 @@ public class SiteAdministrationOperationsImpl implements
 
 	@Override
 	public void deleteSpecies(long speciesId) throws VirtualShelterException {
-		speciesFacade.deleteSpeciesById(speciesId);
+		speciesFacade.deleteById(speciesId);
 	}
 
 	@Override
 	public void addBreed(String breedName, long speciesId) throws VirtualShelterException {
 		Breed breed = new Breed();
 		breed.setBreedName(breedName);
-		Species species = speciesFacade.findSpeciesById(speciesId);
+		Species species = speciesFacade.findById(speciesId);
 		breed.setSpecies(species);
 		breedFacade.create(breed);
 	}
 
 	@Override
 	public void deleteBreed(long breedId) throws VirtualShelterException {
-		breedFacade.deleteBreedById(breedId);
+		breedFacade.deleteById(breedId);
 	}
 
 	@Override
-	public List<Institution> listInstituitionsOwnedByUser(long userId) {
+	public List<Institution> listInstituitionsOwnedByUser(long userId) throws VirtualShelterException {
 		return institutionFacade.listInstituitionsOwnedByUser(userId);
 	}
 
 	@Override
-	public void updateBreed(Breed breed) {
+	public void updateBreed(Breed breed) throws VirtualShelterException {
 		breedFacade.edit(breed);
 	}
 
 	@Override
-	public User findOwnerOfInstitution(long institutionId) {
-		Institution institution = institutionFacade.findInstitutionById(institutionId);
+	public User findOwnerOfInstitution(long institutionId) throws VirtualShelterException {
+		Institution institution = institutionFacade.findById(institutionId);
 		return institution.getOwner();
 	}
 

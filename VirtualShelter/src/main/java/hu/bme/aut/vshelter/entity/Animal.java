@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Past;
 
 @Entity
 @Table(name = "animal", catalog = "vshelter")
@@ -40,6 +41,7 @@ public class Animal {
 	private int weight;
 	
 	@Column(name = "age", unique = false, nullable = true)
+	@Past
 	private Calendar age;
 	
 	@Enumerated(EnumType.STRING)

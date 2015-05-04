@@ -13,7 +13,7 @@ public class PictureFacadeInMemoryImpl implements PictureFacade {
 	private List<Picture> pictures = new ArrayList<Picture>();
 
 	@Override
-	public Picture findPictureById(long pictureId) {
+	public Picture findById(long pictureId) {
 		try {
 			return pictures.stream()
 					.filter(a -> a.getId() == pictureId).findFirst()
@@ -40,8 +40,8 @@ public class PictureFacadeInMemoryImpl implements PictureFacade {
 	}
 
 	@Override
-	public void deletePictureById(long pictureId) {
-		Picture deletePicture = findPictureById(pictureId);
+	public void deleteById(long pictureId) {
+		Picture deletePicture = findById(pictureId);
 
 		if (deletePicture != null)
 			pictures.remove(deletePicture);

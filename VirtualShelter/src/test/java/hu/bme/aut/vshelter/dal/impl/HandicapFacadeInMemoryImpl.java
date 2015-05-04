@@ -13,7 +13,7 @@ public class HandicapFacadeInMemoryImpl implements HandicapFacade {
 	private List<Handicap> handicaps = new ArrayList<Handicap>();
 
 	@Override
-	public Handicap findHandicapById(long handicapId) {
+	public Handicap findById(long handicapId) {
 		try {
 			return handicaps.stream()
 					.filter(a -> a.getId() == handicapId).findFirst()
@@ -40,8 +40,8 @@ public class HandicapFacadeInMemoryImpl implements HandicapFacade {
 	}
 
 	@Override
-	public void deleteHandicapById(long handicapId) {
-		Handicap deleteHandicap = findHandicapById(handicapId);
+	public void deleteById(long handicapId) {
+		Handicap deleteHandicap = findById(handicapId);
 
 		if (deleteHandicap != null)
 			handicaps.remove(deleteHandicap);

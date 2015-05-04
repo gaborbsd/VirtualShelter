@@ -111,7 +111,7 @@ public interface IAdvertisementOperations {
 	 * @param institutionId
 	 * @return
 	 */
-	public List<User> listInstitutionAdministrators(long institutionId);
+	public List<User> listInstitutionAdministrators(long institutionId) throws VirtualShelterException;
 	
 	/**
 	 * Creates an advertisement
@@ -165,51 +165,51 @@ public interface IAdvertisementOperations {
 	 * @param advertiserId
 	 * @return
 	 */
-	public List<Advertisement> listAdvertisementsFromAdvertiser(long advertiserId);
+	public List<Advertisement> listAdvertisementsFromAdvertiser(long advertiserId) throws VirtualShelterException;
 	
 	/**
 	 * Returns the species by the given speciesId
 	 * @param speciesId
 	 * @return
 	 */
-	public Species findSpeciesById(long speciesId);
+	public Species findSpeciesById(long speciesId) throws VirtualShelterException;
 	
 	/**
 	 * Updates the species identified by given species' id
 	 * @param species
 	 */
-	public void updateSpecies(Species species);
+	public void updateSpecies(Species species) throws VirtualShelterException;
 	
 	/**
 	 * list all breeds of the given speciesId
 	 * @param speciesId
 	 */
-	public Set<Breed> listBreedsOfTheSpecies(long speciesId);
+	public Set<Breed> listBreedsOfTheSpecies(long speciesId) throws VirtualShelterException;
 	
 	/**
 	 * Returns the animal identified by the given animalId
 	 * @param animalID
 	 * @return
 	 */
-	public Animal findAnimalById(long animalId);
+	public Animal findAnimalById(long animalId) throws VirtualShelterException;
 	
 	/**
 	 * Updates the animal identified by the given animal's id
 	 * @param animal
 	 */
-	public void updateAnimal(Animal animal);
+	public void updateAnimal(Animal animal) throws VirtualShelterException;
 	
 	/**
 	 * Returns the Advertiser of the Animal with the given animalId
 	 * @param animalId
 	 * @return
 	 */
-	public Advertiser getAdvertiserOfAnimal(long animalId);
+	public Advertiser getAdvertiserOfAnimal(long animalId) throws VirtualShelterException;
 	
 	/**
 	 * Lists the animals advertised by the advertiser with the given advertiserId: 
 	 * @param advertiserId
 	 * @return
 	 */
-	public List<Animal> listAnimalsAdvertisedByAdvertiser(long advertiserId);
+	public List<Animal> listAnimalsAdvertisedByAdvertiser(long advertiserId) throws VirtualShelterException;
 }

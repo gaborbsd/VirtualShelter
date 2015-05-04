@@ -3,31 +3,20 @@ package hu.bme.aut.vshelter.dal;
 import hu.bme.aut.vshelter.api.VirtualShelterException;
 import hu.bme.aut.vshelter.entity.User;
 
-import java.util.List;
 
-public interface UserFacade {
-	
-	User findUserById(long userId);
-	
-	List<User> findAll();
-	
-	void create(User user);
-	
-	void edit(User user);
-	
-	void deleteUserById(long userId);
+public interface UserFacade extends AbstractFacade<User>{
 	
 	/**
 	 * Adds site-administrator role to the user with the given id
 	 * @param userId
 	 */
-	void promoteUserToSiteAdministrator(long userId);
+	void promoteUserToSiteAdministrator(long userId) throws VirtualShelterException;
 	
 	/**
 	 * Removes site-administrator role from user with the given id
 	 * @param userId
 	 */
-	void revokeUserFromSiteAdministrator(long userId);
+	void revokeUserFromSiteAdministrator(long userId) throws VirtualShelterException;
 	
 	/**
 	 * Returns the userId from the owner of the given email

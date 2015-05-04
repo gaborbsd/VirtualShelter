@@ -1,6 +1,7 @@
 package hu.bme.aut.vshelter.dal;
 
 import static org.junit.Assert.*;
+import hu.bme.aut.vshelter.api.VirtualShelterException;
 import hu.bme.aut.vshelter.entity.Picture;
 
 import java.util.List;
@@ -22,9 +23,23 @@ public class PictureFacadeTest {
 		Picture picture = new Picture();
 		picture.setId(1);
 
-		pictureFacade.create(picture);
-		List<Picture> pictures = pictureFacade.findAll();
-		assertTrue(pictures.contains(picture));
+		try {
+			pictureFacade.create(picture);
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
+		List<Picture> pictures;
+		try {
+			pictures = pictureFacade.findAll();
+			assertTrue(pictures.contains(picture));
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
+
 	}
 	
 	@Test
@@ -32,8 +47,16 @@ public class PictureFacadeTest {
 		Picture picture = new Picture();
 		picture.setId(2);
 		
-		List<Picture> pictures = pictureFacade.findAll();
-		assertFalse(pictures.contains(picture));
+		List<Picture> pictures;
+		try {
+			pictures = pictureFacade.findAll();
+			assertFalse(pictures.contains(picture));
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
+
 	}
 	
 	@Test
@@ -43,18 +66,37 @@ public class PictureFacadeTest {
 		
 		picture.setId(3);
 		
-		pictureFacade.create(picture);
+		try {
+			pictureFacade.create(picture);
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
 		
-		actual = pictureFacade.findPictureById(3);
-		assertEquals(picture, actual);
-		assertEquals(picture.getId(), actual.getId());
+		try {
+			actual = pictureFacade.findById(3);
+			assertEquals(picture, actual);
+			assertEquals(picture.getId(), actual.getId());
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
+
 	}
 	
 	@Test
 	public void testNoFindPictureByNotExistId(){
 		Picture actual;
-		actual = pictureFacade.findPictureById(4012);
-		assertNull(actual);
+		try {
+			actual = pictureFacade.findById(4012);
+			assertNull(actual);
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
 	}
 	
 	@Test
@@ -63,19 +105,37 @@ public class PictureFacadeTest {
 
 		picture.setId(4);
 		
-		pictureFacade.create(picture);
+		try {
+			pictureFacade.create(picture);
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
 		
 		Picture modified = new Picture();
 
 		modified.setId(4);
 		
-		pictureFacade.edit(modified);
+		try {
+			pictureFacade.edit(modified);
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
 		
 		Picture actual;
-		actual = pictureFacade.findPictureById(4);
-		assertEquals(modified, actual);
+		try {
+			actual = pictureFacade.findById(4);
+			assertEquals(modified, actual);
+			assertEquals(picture.getId(), actual.getId());
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
 
-		assertEquals(picture.getId(), actual.getId());
 	}
 	
 	@Test
@@ -84,12 +144,31 @@ public class PictureFacadeTest {
 
 		picture.setId(5);
 		
-		pictureFacade.create(picture);
+		try {
+			pictureFacade.create(picture);
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
 		
-		pictureFacade.deletePictureById(5);
+		try {
+			pictureFacade.deleteById(5);
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
 		
 		Picture actual;
-		actual = pictureFacade.findPictureById(5);
-		assertNull(actual);
+		try {
+			actual = pictureFacade.findById(5);
+			assertNull(actual);
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
+
 	}
 }

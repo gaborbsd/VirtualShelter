@@ -1,6 +1,7 @@
 package hu.bme.aut.vshelter.dal;
 
 import static org.junit.Assert.*;
+import hu.bme.aut.vshelter.api.VirtualShelterException;
 import hu.bme.aut.vshelter.entity.Species;
 
 import java.util.List;
@@ -23,9 +24,23 @@ public class SpeciesFacadeTest {
 		species.setSpeciesName("kutya");
 		species.setId(1);
 
-		speciesFacade.create(species);
-		List<Species> specieses = speciesFacade.findAll();
-		assertTrue(specieses.contains(species));
+		try {
+			speciesFacade.create(species);
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
+		List<Species> specieses;
+		try {
+			specieses = speciesFacade.findAll();
+			assertTrue(specieses.contains(species));
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
+
 	}
 	
 	@Test
@@ -34,8 +49,16 @@ public class SpeciesFacadeTest {
 		species.setSpeciesName("macska");
 		species.setId(2);
 		
-		List<Species> specieses = speciesFacade.findAll();
-		assertFalse(specieses.contains(species));
+		List<Species> specieses;
+		try {
+			specieses = speciesFacade.findAll();
+			assertFalse(specieses.contains(species));
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
+
 	}
 	
 	@Test
@@ -45,19 +68,39 @@ public class SpeciesFacadeTest {
 		species.setSpeciesName("leopárd");
 		species.setId(3);
 		
-		speciesFacade.create(species);
+		try {
+			speciesFacade.create(species);
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
 		
-		actual = speciesFacade.findSpeciesById(3);
-		assertEquals(species, actual);
-		assertEquals(species.getSpeciesName(), actual.getSpeciesName());
-		assertEquals(species.getId(), actual.getId());
+		try {
+			actual = speciesFacade.findById(3);
+			assertEquals(species, actual);
+			assertEquals(species.getSpeciesName(), actual.getSpeciesName());
+			assertEquals(species.getId(), actual.getId());
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
+
 	}
 	
 	@Test
 	public void testNoFindSpeciesByNotExistId(){
 		Species actual;
-		actual = speciesFacade.findSpeciesById(4012);
-		assertNull(actual);
+		try {
+			actual = speciesFacade.findById(4012);
+			assertNull(actual);
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
+
 	}
 	
 	@Test
@@ -66,19 +109,38 @@ public class SpeciesFacadeTest {
 		species.setSpeciesName("tigris");
 		species.setId(4);
 		
-		speciesFacade.create(species);
+		try {
+			speciesFacade.create(species);
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
 		
 		Species modified = new Species();
 		modified.setSpeciesName("majom");
 		modified.setId(4);
 		
-		speciesFacade.edit(modified);
+		try {
+			speciesFacade.edit(modified);
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
 		
 		Species actual;
-		actual = speciesFacade.findSpeciesById(4);
-		assertEquals(modified, actual);
-		assertEquals(modified.getSpeciesName(), actual.getSpeciesName());
-		assertEquals(species.getId(), actual.getId());
+		try {
+			actual = speciesFacade.findById(4);
+			assertEquals(modified, actual);
+			assertEquals(modified.getSpeciesName(), actual.getSpeciesName());
+			assertEquals(species.getId(), actual.getId());
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
+
 	}
 	
 	@Test
@@ -87,12 +149,31 @@ public class SpeciesFacadeTest {
 		species.setSpeciesName("aligátor");
 		species.setId(5);
 		
-		speciesFacade.create(species);
+		try {
+			speciesFacade.create(species);
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
 		
-		speciesFacade.deleteSpeciesById(5);
+		try {
+			speciesFacade.deleteById(5);
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
 		
 		Species actual;
-		actual = speciesFacade.findSpeciesById(5);
-		assertNull(actual);
+		try {
+			actual = speciesFacade.findById(5);
+			assertNull(actual);
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
+	
 	}
 }

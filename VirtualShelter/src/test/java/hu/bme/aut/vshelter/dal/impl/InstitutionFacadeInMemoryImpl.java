@@ -13,7 +13,7 @@ public class InstitutionFacadeInMemoryImpl implements InstitutionFacade {
 	private List<Institution> institutions = new ArrayList<Institution>();
 
 	@Override
-	public Institution findInstitutionById(long institutionId) {
+	public Institution findById(long institutionId) {
 		try {
 			return institutions.stream()
 					.filter(a -> a.getId() == institutionId).findFirst()
@@ -41,8 +41,8 @@ public class InstitutionFacadeInMemoryImpl implements InstitutionFacade {
 	}
 
 	@Override
-	public void deleteInstitutionById(long institutionId) {
-		Institution deleteInstitution = findInstitutionById(institutionId);
+	public void deleteById(long institutionId) {
+		Institution deleteInstitution = findById(institutionId);
 
 		if (deleteInstitution != null)
 			institutions.remove(deleteInstitution);

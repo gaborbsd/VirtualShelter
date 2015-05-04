@@ -1,19 +1,8 @@
 package hu.bme.aut.vshelter.dal;
 
+
 import hu.bme.aut.vshelter.entity.Address;
 
-import java.util.List;
-
-public interface AddressFacade {
+public interface AddressFacade extends AbstractFacade<Address>{
 	
-	Address findAddressById(long addressId);
-	
-	List<Address> findAll();
-	
-	void create(Address address);
-	
-	void edit(Address address);
-	
-	void deleteAddressById(long addressId);
-
 }

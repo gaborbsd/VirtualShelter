@@ -23,7 +23,7 @@ public class AnimalFacadeInMemoryImpl implements AnimalFacade {
 	}
 
 	@Override
-	public Animal findAnimalById(long animalId) {
+	public Animal findById(long animalId) {
 		try {
 			return animals.stream()
 					.filter(a -> a.getId() == animalId).findFirst()
@@ -41,8 +41,8 @@ public class AnimalFacadeInMemoryImpl implements AnimalFacade {
 	}
 
 	@Override
-	public void deleteAnimalById(long animalId) {
-		Animal deleteAnimal = findAnimalById(animalId);
+	public void deleteById(long animalId) {
+		Animal deleteAnimal = findById(animalId);
 
 		if (deleteAnimal != null)
 			animals.remove(deleteAnimal);

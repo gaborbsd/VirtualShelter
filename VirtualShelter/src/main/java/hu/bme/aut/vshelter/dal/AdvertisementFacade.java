@@ -1,27 +1,18 @@
 package hu.bme.aut.vshelter.dal;
 
+import hu.bme.aut.vshelter.api.VirtualShelterException;
 import hu.bme.aut.vshelter.entity.Advertisement;
 import hu.bme.aut.vshelter.entity.Advertiser;
 import hu.bme.aut.vshelter.entity.Animal;
 
 import java.util.List;
 
-public interface AdvertisementFacade {
+public interface AdvertisementFacade extends AbstractFacade<Advertisement> {
 	
-	Advertisement findAdvertisementById(long advertisementId);
+	public List<Advertisement> listAdvertisementsFromAdvertiser(long advertiserId) throws VirtualShelterException;
 	
-	List<Advertisement> findAll();
+	public Advertiser getAdvertiserOfAnimal(long animalId) throws VirtualShelterException;
 	
-	void create(Advertisement advertisement);
-	
-	void edit(Advertisement advertisement);
-	
-	void deleteAdvertisementById(long advertisementId);
-	
-	public List<Advertisement> listAdvertisementsFromAdvertiser(long advertiserId);
-	
-	public Advertiser getAdvertiserOfAnimal(long animalId);
-	
-	public List<Animal> listAnimalsAdvertisedByAdvertiser(long advertiserId);
+	public List<Animal> listAnimalsAdvertisedByAdvertiser(long advertiserId) throws VirtualShelterException;
 
 }

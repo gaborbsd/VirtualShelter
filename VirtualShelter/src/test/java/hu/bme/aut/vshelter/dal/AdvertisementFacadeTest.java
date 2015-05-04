@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.util.List;
 
+import hu.bme.aut.vshelter.api.VirtualShelterException;
 import hu.bme.aut.vshelter.entity.Advertisement;
 import hu.bme.aut.vshelter.entity.Advertiser;
 import hu.bme.aut.vshelter.entity.Animal;
@@ -32,10 +33,24 @@ public class AdvertisementFacadeTest {
 		advertisement.setAdvertiser(advertiser);
 		advertisement.setId(1);
 
-		advertisementFacade.create(advertisement);
+		try {
+			advertisementFacade.create(advertisement);
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
 
-		List<Advertisement> advertisements = advertisementFacade.findAll();
-		assertTrue(advertisements.contains(advertisement));
+		List<Advertisement> advertisements;
+		try {
+			advertisements = advertisementFacade.findAll();
+			assertTrue(advertisements.contains(advertisement));
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
+		
 	}
 	
 	@Test
@@ -48,8 +63,16 @@ public class AdvertisementFacadeTest {
 		advertisement.setAdvertiser(advertiser);
 		advertisement.setId(2);
 		
-		List<Advertisement> advertisements = advertisementFacade.findAll();
-		assertFalse(advertisements.contains(advertisement));
+		List<Advertisement> advertisements;
+		try {
+			advertisements = advertisementFacade.findAll();
+			assertFalse(advertisements.contains(advertisement));
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
+		
 	}
 	
 	@Test
@@ -63,20 +86,40 @@ public class AdvertisementFacadeTest {
 		advertisement.setAdvertiser(advertiser);
 		advertisement.setId(3);
 
-		advertisementFacade.create(advertisement);
+		try {
+			advertisementFacade.create(advertisement);
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
 		
-		actual = advertisementFacade.findAdvertisementById(3);
-		assertEquals(advertisement, actual);
-		assertEquals(advertisement.getAnimal(), actual.getAnimal());
-		assertEquals(advertisement.getAdvertiser(), actual.getAdvertiser());
-		assertEquals(advertisement.getId(), actual.getId());
+		try {
+			actual = advertisementFacade.findById(3);
+			assertEquals(advertisement, actual);
+			assertEquals(advertisement.getAnimal(), actual.getAnimal());
+			assertEquals(advertisement.getAdvertiser(), actual.getAdvertiser());
+			assertEquals(advertisement.getId(), actual.getId());
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
+
 	}
 	
 	@Test
 	public void testNoFindAdvertisementByNotExistId(){
 		Advertisement actual;
-		actual = advertisementFacade.findAdvertisementById(3301);
-		assertNull(actual);
+		try {
+			actual = advertisementFacade.findById(3301);
+			assertNull(actual);
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
+
 	}
 	
 	@Test
@@ -88,7 +131,13 @@ public class AdvertisementFacadeTest {
 		advertisement.setAdvertiser(advertiser);
 		advertisement.setId(5);
 
-		advertisementFacade.create(advertisement);
+		try {
+			advertisementFacade.create(advertisement);
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
 		
 		Advertisement modified = new Advertisement();
 		Advertiser advertiser2 = new User();
@@ -97,14 +146,27 @@ public class AdvertisementFacadeTest {
 		modified.setAnimal(animal2);
 		modified.setId(5);
 		
-		advertisementFacade.edit(modified);
+		try {
+			advertisementFacade.edit(modified);
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
 		
 		Advertisement actual;
-		actual = advertisementFacade.findAdvertisementById(5);
-		assertEquals(modified, actual);
-		assertEquals(modified.getAnimal(), actual.getAnimal());
-		assertEquals(modified.getAdvertiser(), actual.getAdvertiser());
-		assertEquals(modified.getId(), actual.getId());
+		try {
+			actual = advertisementFacade.findById(5);
+			assertEquals(modified, actual);
+			assertEquals(modified.getAnimal(), actual.getAnimal());
+			assertEquals(modified.getAdvertiser(), actual.getAdvertiser());
+			assertEquals(modified.getId(), actual.getId());
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
+
 	}
 	
 	@Test
@@ -116,13 +178,31 @@ public class AdvertisementFacadeTest {
 		advertisement.setAdvertiser(advertiser);
 		advertisement.setId(6);
 
-		advertisementFacade.create(advertisement);
+		try {
+			advertisementFacade.create(advertisement);
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
 		
-		advertisementFacade.deleteAdvertisementById(6);
+		try {
+			advertisementFacade.deleteById(6);
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		Advertisement actual;
-		actual = advertisementFacade.findAdvertisementById(6);
-		assertNull(actual);
+		try {
+			actual = advertisementFacade.findById(6);
+			assertNull(actual);
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("VirtualShelterException dobódott"+ e.getMessage());
+		}
+		
 	}
 
 }
