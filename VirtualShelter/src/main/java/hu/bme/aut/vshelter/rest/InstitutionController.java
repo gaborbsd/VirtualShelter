@@ -9,12 +9,18 @@ import hu.bme.aut.vshelter.entity.Institution;
 import hu.bme.aut.vshelter.entity.Picture;
 import hu.bme.aut.vshelter.entity.User;
 import hu.bme.aut.vshelter.rest.resources.AnimalResource;
+import hu.bme.aut.vshelter.rest.resources.AnimalResourceAssembler;
 import hu.bme.aut.vshelter.rest.resources.InstitutionResource;
 import hu.bme.aut.vshelter.rest.resources.InstitutionResourceAssembler;
 import hu.bme.aut.vshelter.rest.resources.PictureResource;
+import hu.bme.aut.vshelter.rest.resources.PictureResourceAssembler;
 import hu.bme.aut.vshelter.rest.resources.UserResource;
+import hu.bme.aut.vshelter.rest.resources.UserResourceAssembler;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.jws.soap.SOAPBinding.Use;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -44,6 +50,17 @@ public class InstitutionController {
 	@Autowired
 	private IAdvertisementOperations advertisementOperations;
 	
+	@Autowired
+	private UserResourceAssembler userResourceAssembler;
+	
+	@Autowired
+	private AnimalResourceAssembler animalResourceAssembler;
+	
+	@Autowired
+	private PictureResourceAssembler pictureResourceAssembler;
+	
+	private VirtualShelterExceptionToHttpStatusConverter converter = new VirtualShelterExceptionToHttpStatusConverter();
+	
 	/**
 	 * Create new institution
 	 * 
@@ -52,14 +69,13 @@ public class InstitutionController {
 	 */
 	@RequestMapping(method=RequestMethod.POST)
 	ResponseEntity<InstitutionResource> addInstitution(@RequestBody Institution institution) {
-
-		InstitutionResource resource = this.institutionResourceAssembler.toResource(institution);
 		HttpStatus responseStatus = HttpStatus.CREATED;
 		try {
 			this.advertisementOperations.registerInstitution(institution);
 		} catch (VirtualShelterException e) {
-			responseStatus = HttpStatus.INTERNAL_SERVER_ERROR;
+			responseStatus = converter.convert(e);
 		}
+		InstitutionResource resource = this.institutionResourceAssembler.toResource(institution);
 		return new ResponseEntity<InstitutionResource>(resource, responseStatus);
 	}
 	
@@ -100,7 +116,7 @@ public class InstitutionController {
 		try {
 			this.advertisementOperations.updateInstitution(institution);
 		} catch (VirtualShelterException e) {
-			// TODO Auto-generated catch block
+			responseStatus = converter.convert(e);
 		}
 		
 		return new ResponseEntity<InstitutionResource>(resource, responseStatus);
@@ -112,12 +128,14 @@ public class InstitutionController {
 	 * @param id
 	 */
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
-	void deleteInstitution(@PathVariable Long id) {
+	ResponseEntity<InstitutionResource> deleteInstitution(@PathVariable Long id) {
+		HttpStatus responseStatus = HttpStatus.OK;
 		try {
 			this.advertisementOperations.deleteInstitution(id);
 		} catch (VirtualShelterException e) {
-			// TODO Auto-generated catch block
+			responseStatus = converter.convert(e);
 		}
+		return new ResponseEntity<InstitutionResource>(responseStatus);
 	}
 	
 	/**
@@ -128,8 +146,15 @@ public class InstitutionController {
 	 */
 	@RequestMapping(value="/{id}/admin", method=RequestMethod.GET)
 	ResponseEntity<List<UserResource>> getAdmins(@PathVariable Long id) {
-		//TODO
-		return null;
+		List<UserResource> resources = new ArrayList<UserResource>();
+		HttpStatus responseStatus = HttpStatus.OK;
+		try {
+			List<User> userList = this.advertisementOperations.listInstitutionAdministrators(id);
+			resources.addAll(this.userResourceAssembler.toResources(userList));
+		} catch (VirtualShelterException e) {
+			responseStatus = converter.convert(e);
+		}
+		return new ResponseEntity<List<UserResource>>(resources, responseStatus);
 	}
 	
 	/**
@@ -139,14 +164,14 @@ public class InstitutionController {
 	 * @param user
 	 */
 	@RequestMapping(value="/{id}/admin", method=RequestMethod.POST)
-	void postAdmin(@PathVariable Long id, @RequestBody User user) {
-
+	ResponseEntity<InstitutionResource> postAdmin(@PathVariable Long id, @RequestBody User user) {
+		HttpStatus responseStatus = HttpStatus.OK;
 		try {
 			this.advertisementOperations.addInstitutionAdministrator(user.getId(), id);
 		} catch (VirtualShelterException e) {
-			// TODO Auto-generated catch block
+			responseStatus = converter.convert(e);
 		}
-		
+		return new ResponseEntity<InstitutionResource>(responseStatus);
 	}
 	
 	/**
@@ -156,12 +181,14 @@ public class InstitutionController {
 	 * @param user
 	 */
 	@RequestMapping(value="/{id}/admin", method=RequestMethod.PUT)
-	void deleteAdmin(@PathVariable Long id, @RequestBody User user) {
+	ResponseEntity<InstitutionResource> deleteAdmin(@PathVariable Long id, @RequestBody User user) {
+		HttpStatus responseStatus = HttpStatus.OK;
 		try {
 			this.advertisementOperations.deleteInstitutionAdministrator(user.getId(), id);
 		} catch (VirtualShelterException e) {
-			// TODO Auto-generated catch block
+			responseStatus = converter.convert(e);
 		}
+		return new ResponseEntity<InstitutionResource>(responseStatus);
 	}
 	
 	/**
@@ -172,8 +199,15 @@ public class InstitutionController {
 	 */
 	@RequestMapping(value="/{id}/advertisement", method=RequestMethod.GET)
 	ResponseEntity<List<AnimalResource>> getInstitutionsAdvertisements(@PathVariable Long id) {
-		//TODO
-		return null;
+		HttpStatus responseStatus = HttpStatus.OK;
+		List<AnimalResource> resources = new ArrayList<AnimalResource>();
+		try {
+			List<Animal> animalList = this.advertisementOperations.listAnimalsAdvertisedByAdvertiser(id);
+			resources.addAll(this.animalResourceAssembler.toResources(animalList));
+		} catch (VirtualShelterException e) {
+			responseStatus = converter.convert(e);
+		}
+		return new ResponseEntity<List<AnimalResource>>(resources, responseStatus);
 	}
 	
 	/**
@@ -187,7 +221,7 @@ public class InstitutionController {
 	ResponseEntity<AnimalResource> createNewAdvertisement(@PathVariable Long id, @RequestBody Animal animal) {
 		Advertisement advertisement = new Advertisement();
 		advertisement.setAnimal(animal);
-		//Get institution by id
+		//TODO Get institution by id
 		return null;
 	}
 	
@@ -212,13 +246,14 @@ public class InstitutionController {
 	 */
 	@RequestMapping(value="/{id}/pictures", method=RequestMethod.POST)
 	ResponseEntity<PictureResource> createInstitutionsPicture(@PathVariable Long id, @RequestBody Picture picture) {
-		
+		HttpStatus responseStatus = HttpStatus.CREATED;
 		try {
 			this.advertisementOperations.uploadPicture(picture, id);
 		} catch (VirtualShelterException e) {
-			// TODO Auto-generated catch block
+			responseStatus = converter.convert(e);
 		}
-		return null;
+		PictureResource resource = this.pictureResourceAssembler.toResource(picture);
+		return new ResponseEntity<PictureResource>(resource, responseStatus);
 	}
 	
 	/**
@@ -264,7 +299,14 @@ public class InstitutionController {
 	 */
 	@RequestMapping(value="/{id}/owner", method=RequestMethod.GET)
 	ResponseEntity<UserResource> getOwner(@PathVariable Long id) {
-		//TODO
-		return null;
+		HttpStatus responseStatus = HttpStatus.OK;
+		UserResource resource = null;
+		try {
+			User user = this.siteAdministationOperations.findOwnerOfInstitution(id);
+			resource = this.userResourceAssembler.toResource(user);
+		} catch (VirtualShelterException e) {
+			responseStatus = converter.convert(e);
+		}
+		return new ResponseEntity<UserResource>(resource, responseStatus);
 	}
 }
