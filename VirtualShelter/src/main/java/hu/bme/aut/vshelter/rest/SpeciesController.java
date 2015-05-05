@@ -2,6 +2,7 @@ package hu.bme.aut.vshelter.rest;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import hu.bme.aut.vshelter.api.IAdvertisementOperations;
 import hu.bme.aut.vshelter.api.ISiteAdministrationOperations;
@@ -57,11 +58,7 @@ public class SpeciesController {
 		HttpStatus responseStatus = HttpStatus.OK;
 		try {
 			speciesList = this.advertisementOperations.listAllSpecies();
-			for (Species species : speciesList) {
-				SpeciesResource resource = this.speciesResourceAssembler.toResource(species);
-				resource.add(linkTo(SpeciesController.class).slash(species.getId()).slash("breed").withRel("Breed"));
-				resources.add(resource);
-			}
+			resources.addAll(this.speciesResourceAssembler.toResources(speciesList));
 		} catch (VirtualShelterException e) {
 			responseStatus = HttpStatus.INTERNAL_SERVER_ERROR;
 		}
@@ -76,13 +73,13 @@ public class SpeciesController {
 	 */
 	@RequestMapping(method=RequestMethod.POST)
 	ResponseEntity<SpeciesResource> addSpecies(@RequestBody Species species) {
-		SpeciesResource resource = this.speciesResourceAssembler.toResource(species);
 		HttpStatus responseStatus = HttpStatus.CREATED;
 		try {
 			this.siteAdministrationOperations.addSpecies(species.getSpeciesName());
 		} catch (VirtualShelterException e) {
 			responseStatus = HttpStatus.INTERNAL_SERVER_ERROR;
 		}
+		SpeciesResource resource = this.speciesResourceAssembler.toResource(species);
 		return new ResponseEntity<SpeciesResource>(resource, responseStatus);
 	}
 	
@@ -94,8 +91,16 @@ public class SpeciesController {
 	 */
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	ResponseEntity<SpeciesResource> getSpecies(@PathVariable Long id) {
-		//TODO
-		return null;
+		SpeciesResource resource = null;
+		HttpStatus responseStatus = HttpStatus.OK;
+		try {
+			Species species = this.advertisementOperations.findSpeciesById(id);
+			resource = this.speciesResourceAssembler.toResource(species);
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return new ResponseEntity<SpeciesResource>(resource, responseStatus);
 	}
 	
 	/**
@@ -105,9 +110,17 @@ public class SpeciesController {
 	 * @return
 	 */
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
-	ResponseEntity<SpeciesResource> updateSpecies(@PathVariable Long id) {
-		//TODO
-		return null;
+	ResponseEntity<SpeciesResource> updateSpecies(@PathVariable Long id, @RequestBody Species species) {
+		HttpStatus responseStatus = HttpStatus.OK;
+		species.setId(id);
+		try {
+			this.advertisementOperations.updateSpecies(species);
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		SpeciesResource resource = this.speciesResourceAssembler.toResource(species);
+		return new ResponseEntity<SpeciesResource>(resource, responseStatus);
 	}
 	
 	/**
@@ -116,14 +129,14 @@ public class SpeciesController {
 	 * @param id
 	 */
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
-	void deleteSpecies(@PathVariable Long id) {
-
+	ResponseEntity<SpeciesResource> deleteSpecies(@PathVariable Long id) {
+		HttpStatus responseStatus = HttpStatus.OK;
 		try {
 			this.siteAdministrationOperations.deleteSpecies(id);
 		} catch (VirtualShelterException e) {
 			// TODO Auto-generated catch block
 		}
-	
+		return new ResponseEntity<SpeciesResource>(responseStatus);
 	}
 	
 	/**
@@ -134,26 +147,33 @@ public class SpeciesController {
 	 */
 	@RequestMapping(value="/{id}/breed", method=RequestMethod.GET)
 	ResponseEntity<List<BreedResource>> findAllBreedOfSpecies(@PathVariable Long id) {
-		//TODO
-		return null;
+		HttpStatus responseStatus = HttpStatus.OK;
+		List<BreedResource> resources = new ArrayList<BreedResource>();
+		try {
+			Set<Breed> breedList = this.advertisementOperations.listBreedsOfTheSpecies(id);
+			resources.addAll(this.breedResourceAssembler.toResources(breedList));
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return new ResponseEntity<List<BreedResource>>(resources, responseStatus);
 	}
 	
 	/**
-	 * Post new breed of the specied
+	 * Post new breed of the species
 	 * 
 	 * @param id
 	 * @return
 	 */
 	@RequestMapping(value="/{id}/breed", method=RequestMethod.POST)
 	ResponseEntity<BreedResource> createNewBreed(@PathVariable Long id, @RequestBody Breed breed) {
-
-		BreedResource breedResource = this.breedResourceAssembler.toResource(breed);
+		HttpStatus responseStatus = HttpStatus.CREATED;
 		try {
 			this.siteAdministrationOperations.addBreed(breed.getBreedName(), id);
 		} catch (VirtualShelterException e) {
 			// TODO Auto-generated catch block
 		}
-		
-		return null;
+		BreedResource breedResource = this.breedResourceAssembler.toResource(breed);
+		return new ResponseEntity<BreedResource>(breedResource, responseStatus);
 	}
 }
