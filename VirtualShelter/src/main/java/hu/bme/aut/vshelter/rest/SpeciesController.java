@@ -13,7 +13,6 @@ import hu.bme.aut.vshelter.rest.resources.BreedResource;
 import hu.bme.aut.vshelter.rest.resources.BreedResourceAssembler;
 import hu.bme.aut.vshelter.rest.resources.SpeciesResource;
 import hu.bme.aut.vshelter.rest.resources.SpeciesResourceAssembler;
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -46,6 +45,8 @@ public class SpeciesController {
 	@Autowired
 	private IAdvertisementOperations advertisementOperations;
 	
+	private VirtualShelterExceptionToHttpStatusConverter converter = new VirtualShelterExceptionToHttpStatusConverter();
+	
 	/**
 	 * List all species
 	 * 
@@ -60,7 +61,7 @@ public class SpeciesController {
 			speciesList = this.advertisementOperations.listAllSpecies();
 			resources.addAll(this.speciesResourceAssembler.toResources(speciesList));
 		} catch (VirtualShelterException e) {
-			responseStatus = HttpStatus.INTERNAL_SERVER_ERROR;
+			responseStatus = converter.convert(e);
 		}
 		return new ResponseEntity<List<SpeciesResource>>(resources, responseStatus);
 	}
@@ -77,7 +78,7 @@ public class SpeciesController {
 		try {
 			this.siteAdministrationOperations.addSpecies(species.getSpeciesName());
 		} catch (VirtualShelterException e) {
-			responseStatus = HttpStatus.INTERNAL_SERVER_ERROR;
+			responseStatus = converter.convert(e);
 		}
 		SpeciesResource resource = this.speciesResourceAssembler.toResource(species);
 		return new ResponseEntity<SpeciesResource>(resource, responseStatus);
@@ -97,8 +98,7 @@ public class SpeciesController {
 			Species species = this.advertisementOperations.findSpeciesById(id);
 			resource = this.speciesResourceAssembler.toResource(species);
 		} catch (VirtualShelterException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			responseStatus = converter.convert(e);
 		}
 		return new ResponseEntity<SpeciesResource>(resource, responseStatus);
 	}
@@ -116,8 +116,7 @@ public class SpeciesController {
 		try {
 			this.advertisementOperations.updateSpecies(species);
 		} catch (VirtualShelterException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			responseStatus = converter.convert(e);
 		}
 		SpeciesResource resource = this.speciesResourceAssembler.toResource(species);
 		return new ResponseEntity<SpeciesResource>(resource, responseStatus);
@@ -134,7 +133,7 @@ public class SpeciesController {
 		try {
 			this.siteAdministrationOperations.deleteSpecies(id);
 		} catch (VirtualShelterException e) {
-			// TODO Auto-generated catch block
+			responseStatus = converter.convert(e);
 		}
 		return new ResponseEntity<SpeciesResource>(responseStatus);
 	}
@@ -153,8 +152,7 @@ public class SpeciesController {
 			Set<Breed> breedList = this.advertisementOperations.listBreedsOfTheSpecies(id);
 			resources.addAll(this.breedResourceAssembler.toResources(breedList));
 		} catch (VirtualShelterException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			responseStatus = converter.convert(e);
 		}
 		return new ResponseEntity<List<BreedResource>>(resources, responseStatus);
 	}
@@ -171,7 +169,7 @@ public class SpeciesController {
 		try {
 			this.siteAdministrationOperations.addBreed(breed.getBreedName(), id);
 		} catch (VirtualShelterException e) {
-			// TODO Auto-generated catch block
+			responseStatus = converter.convert(e);
 		}
 		BreedResource breedResource = this.breedResourceAssembler.toResource(breed);
 		return new ResponseEntity<BreedResource>(breedResource, responseStatus);
