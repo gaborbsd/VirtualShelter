@@ -212,4 +212,18 @@ public interface IAdvertisementOperations {
 	 * @return
 	 */
 	public List<Animal> listAnimalsAdvertisedByAdvertiser(long advertiserId) throws VirtualShelterException;
+	
+	/**
+	 * Returns the Institutions
+	 * @return
+	 */
+	public List<Institution> listInstitutions() throws VirtualShelterException;
+	
+	/**
+	 * Returns the Institution with the given ID.
+	 * @param institutionId
+	 * @return
+	 * @throws VirtualShelterException
+	 */
+	public Institution getInstitutionById(long institutionId) throws VirtualShelterException;
 }

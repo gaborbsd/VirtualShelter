@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Pattern;
 
 @Entity
 @Table(name = "institution", catalog = "vshelter")
@@ -16,9 +17,14 @@ public class Institution extends Advertiser {
 	private String taxNumber;
 	
 	@Column(name = "bankAccount", unique = false, nullable = true)
+	@Pattern(regexp="([A-Z]{2}\\d{2} )?(\\d{4} ){5}\\d{4}",
+				message="The correct format: [LLdd ]dddd dddd dddd dddd dddd dddd,"
+						+ " where d is a digit L is an uppercase letter ([] means optional)")
 	private String bankAccount;
 	
 	@Column(name = "PayPal", unique = false, nullable = true)
+	@Pattern(regexp="(\\d{4} ){5}\\d{4}",
+				message="The correct format: dddd dddd dddd dddd dddd dddd, where d is a digit")			
 	private String PayPal;
 	
 	@ManyToOne

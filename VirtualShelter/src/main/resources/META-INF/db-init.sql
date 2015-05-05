@@ -28,12 +28,12 @@ INSERT INTO address VALUES (4, 'Pacsirta utca 15', 'Debrecen', 'Magyarorszag', 4
 INSERT INTO address VALUES (5, 'Türk Frigyes utca 43', 'Eger', 'Magyarorszag', 48.369624, 21.427563, 'Heves', '-', 3300);
 INSERT INTO address VALUES (6, 'Izsáki út 60', 'Kecskemét', 'Magyarorszag', 46.233586, 19.346723, 'Bács-Kiskun', '-', 6000);
 
-INSERT INTO advertiser VALUES (1, 'Tothek62@hotmail.com', '70/543 1223', 'Istvan Toth', null, 1);
+INSERT INTO advertiser VALUES (1, 'Tothek62@hotmail.com', '+365431223', 'Istvan Toth', null, 1);
 INSERT INTO advertiser VALUES (2, 'Arpad.Hodasz@gmail.com', '+36201234567', 'Hodász Árpád', null, 2);
-INSERT INTO advertiser VALUES (3, 'Tunde.Manfai@gmail.com', '06305533228', 'Mánfai Tünde', '0682552992', 3);
+INSERT INTO advertiser VALUES (3, 'Tunde.Manfai@gmail.com', '+36305533228', 'Mánfai Tünde', '003682552992', 3);
 INSERT INTO advertiser VALUES (4, 'hajduuzem@bihar.hu', null, 'Hajdu Favágó Zrt.', null, 4);
-INSERT INTO advertiser VALUES (5, 'bikaver@egri.hu', '30/1454321', 'Legjobb Egri Borok Kft.', null, 5);
-INSERT INTO advertiser VALUES (6, 'kecsegemet@kecske.com', '709933987', 'Kecskeleg Kft.', null, 6);
+INSERT INTO advertiser VALUES (5, 'bikaver@egri.hu', '0036301454321', 'Legjobb Egri Borok Kft.', null, 5);
+INSERT INTO advertiser VALUES (6, 'kecsegemet@kecske.com', '0036709933987', 'Kecskeleg Kft.', null, 6);
 
 INSERT INTO user VALUES ('Kedves idős házaspár nagy kertes ház', 'csipella96', 1); 
 INSERT INTO user VALUES ('Szeretek vadászni vadászkutyát keresek', 'asd123', 2);

@@ -7,6 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Pattern;
 
 @Entity
 @Table(name = "address", catalog = "vshelter")
@@ -29,6 +30,8 @@ public class Address {
 	private String city;
 	
 	@Column(name = "zipCode", unique = false, nullable = false)
+	@Pattern(regexp="\\d{4,6}", 
+				message="Invalid zipcode format")
 	private int zipCode;
 	
 	@Column(name = "address", unique = false, nullable = false)
