@@ -231,4 +231,15 @@ public class AdvertisementOperationsImpl implements IAdvertisementOperations {
 		return advertismentFacade.listAnimalsAdvertisedByAdvertiser(advertiserId);
 	}
 
+	@Override
+	public List<Institution> listInstitutions() throws VirtualShelterException {
+		return institutionFacade.findAll();
+	}
+
+	@Override
+	public Institution getInstitutionById(long institutionId)
+			throws VirtualShelterException {
+		return institutionFacade.findById(institutionId);
+	}
+
 }
