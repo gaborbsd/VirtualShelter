@@ -12,9 +12,11 @@ import hu.bme.aut.vshelter.entity.Institution;
 import hu.bme.aut.vshelter.entity.Picture;
 import hu.bme.aut.vshelter.entity.User;
 import hu.bme.aut.vshelter.rest.resources.AnimalResource;
+import hu.bme.aut.vshelter.rest.resources.AnimalResourceAssembler;
 import hu.bme.aut.vshelter.rest.resources.InstitutionResource;
 import hu.bme.aut.vshelter.rest.resources.InstitutionResourceAssembler;
 import hu.bme.aut.vshelter.rest.resources.PictureResource;
+import hu.bme.aut.vshelter.rest.resources.PictureResourceAssembler;
 import hu.bme.aut.vshelter.rest.resources.UserResource;
 import hu.bme.aut.vshelter.rest.resources.UserResourceAssembler;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
@@ -50,6 +52,11 @@ public class UserController {
 	@Autowired
 	private IAdvertisementOperations advertisementOperations;
 	
+	@Autowired
+	private AnimalResourceAssembler animalResourceAssembler;
+	
+	@Autowired
+	private PictureResourceAssembler pictureResourceAssembler;
 	
 	/**
 	 * Register new user.
@@ -59,17 +66,13 @@ public class UserController {
 	 */
 	@RequestMapping(method=RequestMethod.POST)
 	ResponseEntity<UserResource> addUser(@RequestBody User user) {
-		
-		UserResource resource = userResourceAssembler.toResource(user);
-		
-		
 		HttpStatus responseStatus = HttpStatus.CREATED;
 		try {
 			this.advertisementOperations.registerUser(user);
 		} catch (VirtualShelterException e) {
 			responseStatus = HttpStatus.INTERNAL_SERVER_ERROR;
 		}
-		
+		UserResource resource = userResourceAssembler.toResource(user);
 		return new ResponseEntity<UserResource>(resource, responseStatus);
 	}
 	
@@ -84,16 +87,7 @@ public class UserController {
 		HttpStatus responseStatus = HttpStatus.OK;
 		try {
 			List<User> users = this.siteAdministrationOperations.listAllUsers();
-			for (User user : users) {
-				UserResource newResource = this.userResourceAssembler.toResource(user);
-				newResource.add(linkTo(UserController.class).slash(user.getId()).withSelfRel());
-				newResource.add(linkTo(UserController.class).slash(user.getId()).slash("institution").withRel("institution"));
-				newResource.add(linkTo(UserController.class).slash(user.getId()).slash("advertisement").withRel("advertisement"));
-				newResource.add(linkTo(UserController.class).slash(user.getId()).slash("picture").withRel("picture"));
-				newResource.add(linkTo(UserController.class).slash(user.getId()).slash("admin").withRel("admin"));
-				newResource.add(linkTo(UserController.class).slash(user.getId()).slash("profile").withRel("profile"));
-				resources.add(newResource);
-			}
+			resources.addAll(this.userResourceAssembler.toResources(users));
 		} catch (VirtualShelterException e) {
 			responseStatus = HttpStatus.INTERNAL_SERVER_ERROR;
 		}
@@ -108,8 +102,18 @@ public class UserController {
 	 */
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	ResponseEntity<UserResource> getUser(@PathVariable Long id) {
-		//TODO
-		return null;
+		UserResource resource = null;
+		HttpStatus responseStatus = HttpStatus.OK;
+		try {
+			User user = this.siteAdministrationOperations.findUserById(id);
+			if (user!=null) {
+				resource = this.userResourceAssembler.toResource(user);
+			}
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return new ResponseEntity<UserResource>(resource,responseStatus);
 	}
 	
 	/**
@@ -122,13 +126,13 @@ public class UserController {
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
 	ResponseEntity<UserResource> setUser(@PathVariable Long id, @RequestBody User user) {
 		user.setId(id.intValue());
-		UserResource resource = this.userResourceAssembler.toResource(user);
 		HttpStatus responseStatus = HttpStatus.OK;
 		try {
 			this.advertisementOperations.updateUser(user);
 		} catch (VirtualShelterException e) {
 			// TODO Auto-generated catch block
 		}
+		UserResource resource = this.userResourceAssembler.toResource(user);
 		return new ResponseEntity<UserResource>(resource, responseStatus);
 	}
 	
@@ -138,12 +142,15 @@ public class UserController {
 	 * @param id
 	 */
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
-	void deleteUser(@PathVariable Long id) {
+	ResponseEntity<UserResource> deleteUser(@PathVariable Long id) {
+		HttpStatus response = HttpStatus.OK;
 		try {
 			this.advertisementOperations.deleteUser(id);
 		} catch (VirtualShelterException e) {
 			// TODO
 		}
+		
+		return new ResponseEntity<UserResource>(response);
 	}
 	
 	/**
@@ -153,9 +160,17 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping(value="/{id}/institution", method=RequestMethod.GET)
-	ResponseEntity<InstitutionResource> getUsersInstitution(@PathVariable Long id) {
-		//TODO
-		return null;
+	ResponseEntity<List<InstitutionResource>> getUsersInstitution(@PathVariable Long id) {
+		List<InstitutionResource> resources = new ArrayList<InstitutionResource>();
+		HttpStatus response = HttpStatus.OK;
+		try {
+			List<Institution> institutionList = this.siteAdministrationOperations.listInstituitionsOwnedByUser(id);
+			resources.addAll(this.institutionResourceAssembler.toResources(institutionList));
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return new ResponseEntity<List<InstitutionResource>>(resources, response);
 	}
 	
 	/**
@@ -169,15 +184,16 @@ public class UserController {
 	@RequestMapping(value="/{id}/institution", method=RequestMethod.POST)
 	ResponseEntity<InstitutionResource> createNewInstitution(@PathVariable Long id, @RequestBody Institution institution) {
 		
-		InstitutionResource resource = this.institutionResourceAssembler.toResource(institution);
+		
 		HttpStatus responseStatus = HttpStatus.CREATED;
 		try {
+			User user = this.siteAdministrationOperations.findUserById(id);
+			institution.setOwner(user);
 			this.advertisementOperations.registerInstitution(institution);
-			//TODO make {id} user the owner
 		} catch (VirtualShelterException e) {
 			responseStatus = HttpStatus.INTERNAL_SERVER_ERROR;
 		}
-		
+		InstitutionResource resource = this.institutionResourceAssembler.toResource(institution);
 		return new ResponseEntity<InstitutionResource>(resource, responseStatus);
 	}
 	
@@ -217,8 +233,18 @@ public class UserController {
 	 */
 	@RequestMapping(value="/{id}/advertisement", method=RequestMethod.GET)
 	ResponseEntity<List<AnimalResource>> getUsersAdvertisements(@PathVariable Long id) {
-		//TODO
-		return null;
+		List<AnimalResource> resources = new ArrayList<AnimalResource>();
+		HttpStatus responseStatus = HttpStatus.OK;
+		try {
+			List<Advertisement> advertisementList = this.advertisementOperations.listAdvertisementsFromAdvertiser(id);
+			for (Advertisement advertisement : advertisementList) {
+				resources.add(this.animalResourceAssembler.toResource(advertisement.getAnimal()));
+			}
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return new ResponseEntity<List<AnimalResource>>(resources,responseStatus);
 	}
 	
 	/**
@@ -231,23 +257,20 @@ public class UserController {
 	 */
 	@RequestMapping(value="/{id}/advertisement", method=RequestMethod.POST)
 	ResponseEntity<AnimalResource> createNewAdvertisement(@PathVariable Long id, @RequestBody Animal animal) {
+		HttpStatus responseStatus = HttpStatus.OK;
 		Advertisement advertisement = new Advertisement();
 		advertisement.setAnimal(animal);
 		try {
 			this.advertisementOperations.createAdvertisement(advertisement);
-		} catch (VirtualShelterException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		try {
+			User user = this.siteAdministrationOperations.findUserById(id);
+			advertisement.setAdvertiser(user);
 			this.advertisementOperations.advertise(advertisement.getId());
 		} catch (VirtualShelterException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		return null;
+		AnimalResource resource = this.animalResourceAssembler.toResource(advertisement.getAnimal());
+		return new ResponseEntity<AnimalResource>(resource, responseStatus);
 	}
 	
 	/**
@@ -271,16 +294,17 @@ public class UserController {
 	 */
 	@RequestMapping(value="/{id}/pictures", method=RequestMethod.POST)
 	ResponseEntity<PictureResource> createUsersPicture(@PathVariable Long id, @RequestBody Picture picture) {
-		
+		HttpStatus responseStatus = HttpStatus.CREATED;
 		try {
-			//Visszatérési értékben picutre kéne
 			this.advertisementOperations.uploadPicture(picture, id);
 		} catch (VirtualShelterException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		return null;
+		PictureResource resource = this.pictureResourceAssembler.toResource(picture);
+		
+		return new ResponseEntity<PictureResource>(resource, responseStatus);
 	}
 	
 	/**
@@ -291,8 +315,15 @@ public class UserController {
 	 */
 	@RequestMapping(value="/{id}/admin", method=RequestMethod.GET)
 	ResponseEntity<Boolean> isUserSiteAdmin(@PathVariable Long id) {
-		//TODO 
-		return null;
+		Boolean responseValue = Boolean.FALSE;
+		HttpStatus responseStatus = HttpStatus.OK;
+		try {
+			responseValue = this.siteAdministrationOperations.isUserSiteAdministrator(id);
+		} catch (VirtualShelterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return new ResponseEntity<Boolean>(responseValue, responseStatus);
 	}
 	
 	/**
@@ -301,14 +332,14 @@ public class UserController {
 	 * @param id
 	 */
 	@RequestMapping(value="/{id}/admin", method=RequestMethod.POST)
-	void setUserSiteAdmin(@PathVariable Long id) {
-		
+	ResponseEntity<UserResource> setUserSiteAdmin(@PathVariable Long id) {
+		HttpStatus responseStatus = HttpStatus.OK;
 		try {
 			this.siteAdministrationOperations.promoteSiteAdministrator(id);
 		} catch (VirtualShelterException e) {
 			// TODO Auto-generated catch block
 		}
-	
+		return new ResponseEntity<UserResource>(responseStatus);
 	}
 	
 	/**
@@ -317,14 +348,14 @@ public class UserController {
 	 * @param id
 	 */
 	@RequestMapping(value="/{id}/admin", method=RequestMethod.DELETE)
-	void deleteUserSiteAdmin(@PathVariable Long id) {
-
+	ResponseEntity<UserResource> deleteUserSiteAdmin(@PathVariable Long id) {
+		HttpStatus responseStatus = HttpStatus.OK;
 		try {
 			this.siteAdministrationOperations.revokeSiteAdministrator(id);
 		} catch (VirtualShelterException e) {
 			// TODO Auto-generated catch block
 		}
-		
+		return new ResponseEntity<UserResource>(responseStatus);
 	}
 	
 	/**
