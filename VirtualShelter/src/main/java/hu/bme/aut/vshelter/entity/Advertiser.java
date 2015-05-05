@@ -42,9 +42,13 @@ public abstract class Advertiser {
 	private List<Picture> picturesList;
 	
 	@Column(name = "phoneNumber", unique = false, nullable = true)
+	@Pattern(regexp="([+]|[0][0])[0-9]{8,11}",
+    message="Invalid phoneNumber format, valid: + or 00 then 8-11 numbers")
 	private String phoneNumber;
-	
+
 	@Column(name = "mobilePhoneNumber", unique = false, nullable = true)
+	@Pattern(regexp="([+]|[0][0])[0-9]{8,11}",
+            message="Invalid mobilePhoneNumber format, valid: + or 00 then 8-11 numbers")
 	private String mobilePhoneNumber;
 	
 	public long getId() {
