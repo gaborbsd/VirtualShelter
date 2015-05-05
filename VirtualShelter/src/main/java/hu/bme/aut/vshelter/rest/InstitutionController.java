@@ -20,7 +20,6 @@ import hu.bme.aut.vshelter.rest.resources.UserResourceAssembler;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.jws.soap.SOAPBinding.Use;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -86,8 +85,15 @@ public class InstitutionController {
 	 */
 	@RequestMapping(method=RequestMethod.GET)
 	ResponseEntity<List<InstitutionResource>> getAllInstitutions() {
-		//TODO
-		return null;
+		HttpStatus responseStatus = HttpStatus.OK;
+		List<InstitutionResource> resources = new ArrayList<InstitutionResource>();
+		try {
+			List<Institution> institutionList = this.advertisementOperations.listInstitutions();
+			resources = this.institutionResourceAssembler.toResources(institutionList);
+		} catch (VirtualShelterException e) {
+			responseStatus = this.converter.convert(e);
+		}
+		return new ResponseEntity<List<InstitutionResource>>(resources, responseStatus);
 	}
 	
 	/**
@@ -98,8 +104,15 @@ public class InstitutionController {
 	 */
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	ResponseEntity<InstitutionResource> getInstitution(@PathVariable Long id) {
-		//TODO
-		return null;
+		InstitutionResource resource = null;
+		HttpStatus responseStatus = HttpStatus.OK;
+		try {
+			Institution institution = this.advertisementOperations.getInstitutionById(id);
+			resource = this.institutionResourceAssembler.toResource(institution);
+		} catch (VirtualShelterException e) {
+			responseStatus = this.converter.convert(e);
+		}
+		return new ResponseEntity<InstitutionResource>(resource, responseStatus);
 	}
 	
 	/**
@@ -221,8 +234,17 @@ public class InstitutionController {
 	ResponseEntity<AnimalResource> createNewAdvertisement(@PathVariable Long id, @RequestBody Animal animal) {
 		Advertisement advertisement = new Advertisement();
 		advertisement.setAnimal(animal);
-		//TODO Get institution by id
-		return null;
+		HttpStatus responseStatus = HttpStatus.CREATED;
+		try {
+			Institution institution = this.advertisementOperations.getInstitutionById(id);
+			advertisement.setAdvertiser(institution);
+			this.advertisementOperations.createAdvertisement(advertisement);
+			this.advertisementOperations.advertise(advertisement.getId());
+		} catch (VirtualShelterException e) {
+			responseStatus = this.converter.convert(e);
+		}
+		AnimalResource resource = this.animalResourceAssembler.toResource(advertisement.getAnimal());
+		return new ResponseEntity<AnimalResource>(resource, responseStatus);
 	}
 	
 	/**

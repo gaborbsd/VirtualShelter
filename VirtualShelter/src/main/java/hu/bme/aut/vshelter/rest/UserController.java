@@ -259,9 +259,9 @@ public class UserController {
 		Advertisement advertisement = new Advertisement();
 		advertisement.setAnimal(animal);
 		try {
-			this.advertisementOperations.createAdvertisement(advertisement);
 			User user = this.siteAdministrationOperations.findUserById(id);
 			advertisement.setAdvertiser(user);
+			this.advertisementOperations.createAdvertisement(advertisement);
 			this.advertisementOperations.advertise(advertisement.getId());
 		} catch (VirtualShelterException e) {
 			responseStatus = converter.convert(e);
