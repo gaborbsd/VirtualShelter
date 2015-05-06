@@ -38,6 +38,9 @@ public abstract class Advertiser {
 	@ManyToOne
 	private Address address;
 	
+	@Column(name = "profilePicture", unique = false, nullable = true)
+	private Picture profilePicture;
+	
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Picture> picturesList;
 	
@@ -83,6 +86,14 @@ public abstract class Advertiser {
 		this.address = address;
 	}
 	
+	public Picture getProfilePicture() {
+		return profilePicture;
+	}
+
+	public void setProfilePicture(Picture profilePicture) {
+		this.profilePicture = profilePicture;
+	}
+
 	public List<Picture> getPicturesList() {
 		return picturesList;
 	}

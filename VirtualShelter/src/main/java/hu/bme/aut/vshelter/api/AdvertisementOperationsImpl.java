@@ -242,4 +242,51 @@ public class AdvertisementOperationsImpl implements IAdvertisementOperations {
 		return institutionFacade.findById(institutionId);
 	}
 
+	@Override
+	public List<Picture> listInstitutionPictures(long institutionId)
+			throws VirtualShelterException {
+		Institution institution = institutionFacade.findById(institutionId);		
+		return institution.getPicturesList();
+	}
+
+	@Override
+	public Picture getInstitutionProfilePictures(long institutionId)
+			throws VirtualShelterException {
+		Institution institution = institutionFacade.findById(institutionId);
+		return institution.getProfilePicture();
+	}
+
+	@Override
+	public void postNewProfilePictureForInstitution(long institutionId, Picture profilePicture)
+			throws VirtualShelterException {
+		Institution institution = institutionFacade.findById(institutionId);
+		institution.setProfilePicture(profilePicture);
+	}
+
+	@Override
+	public void deletePictureForInstitution(long institutionId)
+			throws VirtualShelterException {
+		Institution institution = institutionFacade.findById(institutionId);
+		institution.setProfilePicture(null);
+	}
+
+	@Override
+	public void postNewPictureForInstitution(long institutionId,
+			Picture profilePicture) throws VirtualShelterException {
+		Institution institution = institutionFacade.findById(institutionId);
+		List<Picture> pictureList = institution.getPicturesList();
+		pictureList.add(profilePicture);
+		institution.setPicturesList(pictureList);	
+	}
+
+	@Override
+	public void deletePictureForInstitution(long institutionId,
+			Picture picture) throws VirtualShelterException {
+		Institution institution = institutionFacade.findById(institutionId);
+		List<Picture> pictureList = institution.getPicturesList();
+		pictureList.remove(picture);
+		institution.setPicturesList(pictureList);	
+		
+	}
+
 }

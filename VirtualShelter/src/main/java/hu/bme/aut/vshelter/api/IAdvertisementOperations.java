@@ -226,4 +226,48 @@ public interface IAdvertisementOperations {
 	 * @throws VirtualShelterException
 	 */
 	public Institution getInstitutionById(long institutionId) throws VirtualShelterException;
+	
+	/**
+	 * Returns the pictures of the institution with the given institutionId
+	 * @param institutionId
+	 * @return
+	 */
+	public List<Picture> listInstitutionPictures(long institutionId) throws VirtualShelterException;
+	
+	/**
+	 * Returns the profile picture of the institution with the given institutionId
+	 * @return
+	 * @throws VirtualShelterException
+	 */
+	public Picture getInstitutionProfilePictures(long institutionId) throws VirtualShelterException;
+	
+	/**
+	 * Posts a new profile picture for institution with the given institutionId
+	 * @param institutionId
+	 * @throws VirtualShelterException
+	 */
+	public void postNewProfilePictureForInstitution(long institutionId, Picture profilePicture) throws VirtualShelterException;
+	
+	/**
+	 * Deletes the profilePicture for the institution with the given institutionId
+	 * @param institutionId
+	 * @throws VirtualShelterException
+	 */
+	public void deletePictureForInstitution(long institutionId) throws VirtualShelterException;
+	
+	/**
+	 * Posts a new picture for institution with the given institutionId
+	 * @param institutionId
+	 * @param profilePicture
+	 * @throws VirtualShelterException
+	 */
+	public void postNewPictureForInstitution(long institutionId, Picture profilePicture) throws VirtualShelterException;
+	
+	/**
+	 * Deletes the given Picture for the institution with the given institutionId
+	 * @param institutionId
+	 * @param profilePicture
+	 * @throws VirtualShelterException
+	 */
+	public void deletePictureForInstitution(long institutionId, Picture picture) throws VirtualShelterException;
 }
