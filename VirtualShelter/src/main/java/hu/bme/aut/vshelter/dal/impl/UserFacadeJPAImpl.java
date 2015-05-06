@@ -118,4 +118,18 @@ public class UserFacadeJPAImpl implements UserFacade {
 		return query.getSingleResult();
 	}
 
+	@Override
+	@Transactional
+	public User getUserByEmail(String email) throws VirtualShelterException {
+		try {
+			TypedQuery<User> query = em.createQuery(
+					"SELECT u FROM User u WHERE u.email = ?1", User.class)
+					.setParameter(1, email);
+			return query.getSingleResult();
+		} catch (Exception e) {
+			throw new VirtualShelterException(e);
+		}
+		
+	}
+
 }
