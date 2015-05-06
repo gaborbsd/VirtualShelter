@@ -283,6 +283,18 @@ public interface IAdvertisementOperations {
 	
 	public void deletePictureForUser(long userId, Picture picture) throws VirtualShelterException;
 	
+	public List<Picture> listAnimalPictures(long animalId) throws VirtualShelterException;
+	
+	public void postNewPictureForAnimal(long animalId, Picture picture) throws VirtualShelterException;
+	
+	public Picture getAnimalProfilePicture(long animalId) throws VirtualShelterException;
+	
+	public void postNewProfilePictureForAnimal(long animalId, Picture profilePicture) throws VirtualShelterException;
+	
+	public void deleteProfilePictureForAnimal(long animalId) throws VirtualShelterException;
+	
+	public void deletePictureForAnimal(long animalId, Picture picture) throws VirtualShelterException;
+	
 	
 	
 }

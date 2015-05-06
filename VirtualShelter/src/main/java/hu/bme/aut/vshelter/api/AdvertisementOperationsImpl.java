@@ -336,4 +336,51 @@ public class AdvertisementOperationsImpl implements IAdvertisementOperations {
 		user.setPicturesList(pictures);
 	}
 
+	@Override
+	public List<Picture> listAnimalPictures(long animalId)
+			throws VirtualShelterException {
+		Animal animal = animalFacade.findById(animalId);
+		return animal.getPicturesList();
+	}
+
+	@Override
+	public void postNewPictureForAnimal(long animalId, Picture picture)
+			throws VirtualShelterException {
+		Animal animal = animalFacade.findById(animalId);
+		List<Picture> pictures = animal.getPicturesList();
+		pictures.add(picture);
+		animal.setPictureList(pictures);		
+	}
+
+	@Override
+	public Picture getAnimalProfilePicture(long animalId)
+			throws VirtualShelterException {
+		Animal animal = animalFacade.findById(animalId);
+		return animal.getProfilePicture();
+	}
+
+	@Override
+	public void postNewProfilePictureForAnimal(long animalId,
+			Picture profilePicture) throws VirtualShelterException {
+		Animal animal = animalFacade.findById(animalId);
+		animal.setProfilePicture(profilePicture);	
+	}
+
+	@Override
+	public void deleteProfilePictureForAnimal(long animalId)
+			throws VirtualShelterException {
+		Animal animal = animalFacade.findById(animalId);
+		animal.setProfilePicture(null);	
+		
+	}
+
+	@Override
+	public void deletePictureForAnimal(long animalId, Picture picture)
+			throws VirtualShelterException {
+		Animal animal = animalFacade.findById(animalId);
+		List<Picture> pictures = animal.getPicturesList();
+		pictures.remove(picture);
+		animal.setPictureList(pictures);
+	}
+
 }

@@ -80,4 +80,10 @@ public class UserFacadeInMemoryImpl implements UserFacade {
 		}
 	}
 
+	@Override
+	public User getUserByEmail(String email) throws VirtualShelterException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
