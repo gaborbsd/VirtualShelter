@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import hu.bme.aut.vshelter.api.VirtualShelterException;
 import hu.bme.aut.vshelter.dal.InstitutionFacade;
 import hu.bme.aut.vshelter.entity.Institution;
 
@@ -13,7 +14,7 @@ public class InstitutionFacadeInMemoryImpl implements InstitutionFacade {
 	private List<Institution> institutions = new ArrayList<Institution>();
 
 	@Override
-	public Institution findById(long institutionId) {
+	public Institution findById(long institutionId) throws VirtualShelterException {
 		try {
 			return institutions.stream()
 					.filter(a -> a.getId() == institutionId).findFirst()
@@ -24,24 +25,24 @@ public class InstitutionFacadeInMemoryImpl implements InstitutionFacade {
 	}
 
 	@Override
-	public List<Institution> findAll() {
+	public List<Institution> findAll() throws VirtualShelterException {
 		return Collections.unmodifiableList(institutions);
 	}
 
 	@Override
-	public void create(Institution institution) {
+	public void create(Institution institution) throws VirtualShelterException {
 		institutions.add(institution);
 		
 	}
 
 	@Override
-	public void edit(Institution institution) {
+	public void edit(Institution institution) throws VirtualShelterException {
 		institutions
 		.set(institutions.indexOf(institution), institution);
 	}
 
 	@Override
-	public void deleteById(long institutionId) {
+	public void deleteById(long institutionId) throws VirtualShelterException {
 		Institution deleteInstitution = findById(institutionId);
 
 		if (deleteInstitution != null)
@@ -49,7 +50,7 @@ public class InstitutionFacadeInMemoryImpl implements InstitutionFacade {
 	}
 
 	@Override
-	public List<Institution> listInstituitionsOwnedByUser(long userId) {
+	public List<Institution> listInstituitionsOwnedByUser(long userId) throws VirtualShelterException {
 		// TODO Auto-generated method stub
 		return null;
 	}

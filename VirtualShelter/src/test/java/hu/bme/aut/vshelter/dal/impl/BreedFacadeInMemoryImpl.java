@@ -25,23 +25,23 @@ public class BreedFacadeInMemoryImpl implements BreedFacade {
 	}
 
 	@Override
-	public List<Breed> findAll() {
+	public List<Breed> findAll() throws VirtualShelterException {
 		return Collections.unmodifiableList(breeds);
 	}
 
 	@Override
-	public void create(Breed breed) {
+	public void create(Breed breed) throws VirtualShelterException {
 		breeds.add(breed);
 	}
 
 	@Override
-	public void edit(Breed breed) {
+	public void edit(Breed breed) throws VirtualShelterException {
 		breeds
 			.set(breeds.indexOf(breed), breed);
 	}
 
 	@Override
-	public void deleteById(long breedId) {
+	public void deleteById(long breedId) throws VirtualShelterException {
 		Breed deleteBreed = findById(breedId);
 
 		if (deleteBreed != null)

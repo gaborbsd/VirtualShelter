@@ -1,5 +1,6 @@
 package hu.bme.aut.vshelter.dal.impl;
 
+import hu.bme.aut.vshelter.api.VirtualShelterException;
 import hu.bme.aut.vshelter.dal.DiseaseFacade;
 import hu.bme.aut.vshelter.entity.Disease;
 
@@ -13,7 +14,7 @@ public class DiseaseFacadeInMemoryImpl implements DiseaseFacade {
 	private List<Disease> diseases = new ArrayList<Disease>();
 
 	@Override
-	public Disease findById(long diseaseId) {
+	public Disease findById(long diseaseId) throws VirtualShelterException {
 		try {
 			return diseases.stream()
 					.filter(a -> a.getId() == diseaseId).findFirst()
@@ -24,23 +25,23 @@ public class DiseaseFacadeInMemoryImpl implements DiseaseFacade {
 	}
 
 	@Override
-	public List<Disease> findAll() {
+	public List<Disease> findAll() throws VirtualShelterException {
 		return Collections.unmodifiableList(diseases);
 	}
 
 	@Override
-	public void create(Disease disease) {
+	public void create(Disease disease) throws VirtualShelterException {
 		diseases.add(disease);
 	}
 
 	@Override
-	public void edit(Disease disease) {
+	public void edit(Disease disease) throws VirtualShelterException {
 		diseases
 		.set(diseases.indexOf(disease), disease);
 	}
 
 	@Override
-	public void deleteById(long diseaseId) {
+	public void deleteById(long diseaseId) throws VirtualShelterException {
 		Disease deleteDisease = findById(diseaseId);
 
 		if (deleteDisease != null)

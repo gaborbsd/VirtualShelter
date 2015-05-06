@@ -14,7 +14,7 @@ public class SpeciesFacadeInMemoryImpl implements SpeciesFacade {
 	private List<Species> specieses = new ArrayList<Species>();
 
 	@Override
-	public Species findById(long speciesId) {
+	public Species findById(long speciesId) throws VirtualShelterException {
 		try {
 			return specieses.stream().filter(a -> a.getId() == speciesId)
 					.findFirst().get();
@@ -24,22 +24,22 @@ public class SpeciesFacadeInMemoryImpl implements SpeciesFacade {
 	}
 
 	@Override
-	public List<Species> findAll() {
+	public List<Species> findAll() throws VirtualShelterException {
 		return Collections.unmodifiableList(specieses);
 	}
 
 	@Override
-	public void create(Species species) {
+	public void create(Species species) throws VirtualShelterException {
 		specieses.add(species);
 	}
 
 	@Override
-	public void edit(Species species) {
+	public void edit(Species species) throws VirtualShelterException {
 		specieses.set(specieses.indexOf(species), species);
 	}
 
 	@Override
-	public void deleteById(long speciesId) {
+	public void deleteById(long speciesId) throws VirtualShelterException {
 		Species deleteSpecies = findById(speciesId);
 
 		if (deleteSpecies != null)
