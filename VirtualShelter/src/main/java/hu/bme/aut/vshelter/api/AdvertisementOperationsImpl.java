@@ -250,7 +250,7 @@ public class AdvertisementOperationsImpl implements IAdvertisementOperations {
 	}
 
 	@Override
-	public Picture getInstitutionProfilePictures(long institutionId)
+	public Picture getInstitutionProfilePicture(long institutionId)
 			throws VirtualShelterException {
 		Institution institution = institutionFacade.findById(institutionId);
 		return institution.getProfilePicture();
@@ -264,7 +264,7 @@ public class AdvertisementOperationsImpl implements IAdvertisementOperations {
 	}
 
 	@Override
-	public void deletePictureForInstitution(long institutionId)
+	public void deleteProfilePictureForInstitution(long institutionId)
 			throws VirtualShelterException {
 		Institution institution = institutionFacade.findById(institutionId);
 		institution.setProfilePicture(null);
@@ -287,6 +287,53 @@ public class AdvertisementOperationsImpl implements IAdvertisementOperations {
 		pictureList.remove(picture);
 		institution.setPicturesList(pictureList);	
 		
+	}
+
+	@Override
+	public List<Picture> listUserPictures(long userId)
+			throws VirtualShelterException {
+		User user = userFacade.findById(userId);
+		return user.getPicturesList();
+	}
+
+	@Override
+	public Picture getUserProfilePicture(long userId)
+			throws VirtualShelterException {
+		User user = userFacade.findById(userId);
+		return user.getProfilePicture();
+	}
+
+	@Override
+	public void postNewProfilePictureForUser(long userId, Picture profilePicture)
+			throws VirtualShelterException {
+		User user = userFacade.findById(userId);
+		user.setProfilePicture(profilePicture);	
+	}
+
+	@Override
+	public void deleteProfilePictureForUser(long userId)
+			throws VirtualShelterException {
+		User user = userFacade.findById(userId);
+		user.setProfilePicture(null);	
+		
+	}
+
+	@Override
+	public void postNewPictureForUser(long userId, Picture picture)
+			throws VirtualShelterException {
+		User user = userFacade.findById(userId);
+		List<Picture> pictures = user.getPicturesList();
+		pictures.add(picture);
+		user.setPicturesList(pictures);	
+	}
+
+	@Override
+	public void deletePictureForUser(long userId, Picture picture)
+			throws VirtualShelterException {
+		User user = userFacade.findById(userId);
+		List<Picture> pictures = user.getPicturesList();
+		pictures.remove(picture);
+		user.setPicturesList(pictures);
 	}
 
 }

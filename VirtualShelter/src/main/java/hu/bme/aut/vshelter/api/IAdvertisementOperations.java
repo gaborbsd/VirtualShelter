@@ -239,7 +239,7 @@ public interface IAdvertisementOperations {
 	 * @return
 	 * @throws VirtualShelterException
 	 */
-	public Picture getInstitutionProfilePictures(long institutionId) throws VirtualShelterException;
+	public Picture getInstitutionProfilePicture(long institutionId) throws VirtualShelterException;
 	
 	/**
 	 * Posts a new profile picture for institution with the given institutionId
@@ -253,7 +253,7 @@ public interface IAdvertisementOperations {
 	 * @param institutionId
 	 * @throws VirtualShelterException
 	 */
-	public void deletePictureForInstitution(long institutionId) throws VirtualShelterException;
+	public void deleteProfilePictureForInstitution(long institutionId) throws VirtualShelterException;
 	
 	/**
 	 * Posts a new picture for institution with the given institutionId
@@ -270,4 +270,19 @@ public interface IAdvertisementOperations {
 	 * @throws VirtualShelterException
 	 */
 	public void deletePictureForInstitution(long institutionId, Picture picture) throws VirtualShelterException;
+	
+	public List<Picture> listUserPictures(long userId) throws VirtualShelterException;
+	
+	public Picture getUserProfilePicture(long userId) throws VirtualShelterException;
+	
+	public void postNewProfilePictureForUser(long userId, Picture profilePicture) throws VirtualShelterException;
+	
+	public void deleteProfilePictureForUser(long userId) throws VirtualShelterException;
+	
+	public void postNewPictureForUser(long userId, Picture picture) throws VirtualShelterException;
+	
+	public void deletePictureForUser(long userId, Picture picture) throws VirtualShelterException;
+	
+	
+	
 }
