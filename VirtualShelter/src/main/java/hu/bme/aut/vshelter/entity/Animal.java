@@ -67,6 +67,9 @@ public class Animal {
 	@ManyToOne
 	private Address address;
 	
+	@Column(name = "profilePicture", unique = false, nullable = true)
+	private Picture profilePicture;
+	
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Picture> picturesList;
 	
@@ -189,11 +192,19 @@ public class Animal {
 		this.address = address;
 	}
 	
-	public List<Picture> getPicture() {
+	public Picture getProfilePicture() {
+		return profilePicture;
+	}
+
+	public void setProfilePicture(Picture profilePicture) {
+		this.profilePicture = profilePicture;
+	}
+
+	public List<Picture> getPicturesList() {
 		return picturesList;
 	}
 	
-	public void setPicture(List<Picture> picturesList) {
+	public void setPictureList(List<Picture> picturesList) {
 		this.picturesList = picturesList;
 	}
 	

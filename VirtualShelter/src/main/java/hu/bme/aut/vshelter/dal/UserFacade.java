@@ -25,5 +25,7 @@ public interface UserFacade extends AbstractFacade<User>{
 	 */
 	public long getUserIdfromEmail(String email) throws VirtualShelterException;
 	
+	public User getUserByEmail(String email) throws VirtualShelterException;
+	
 
 }

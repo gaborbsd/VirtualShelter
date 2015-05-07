@@ -4,17 +4,24 @@ import hu.bme.aut.vshelter.api.IAdvertisementOperations;
 import hu.bme.aut.vshelter.api.ISiteAdministrationOperations;
 import hu.bme.aut.vshelter.api.VirtualShelterException;
 import hu.bme.aut.vshelter.entity.Advertisement;
+import hu.bme.aut.vshelter.entity.Advertiser;
 import hu.bme.aut.vshelter.entity.Animal;
+import hu.bme.aut.vshelter.entity.Institution;
 import hu.bme.aut.vshelter.entity.Picture;
+import hu.bme.aut.vshelter.entity.User;
 import hu.bme.aut.vshelter.rest.resources.AnimalResource;
 import hu.bme.aut.vshelter.rest.resources.AnimalResourceAssembler;
+import hu.bme.aut.vshelter.rest.resources.InstitutionResource;
+import hu.bme.aut.vshelter.rest.resources.InstitutionResourceAssembler;
 import hu.bme.aut.vshelter.rest.resources.PictureResource;
 import hu.bme.aut.vshelter.rest.resources.UserResource;
+import hu.bme.aut.vshelter.rest.resources.UserResourceAssembler;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.ResourceSupport;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -42,6 +49,15 @@ public class AnimalController {
 	@Autowired
 	private AnimalResourceAssembler animalResourceAssembler;
 
+	@Autowired
+	private UserResourceAssembler userResourceAssembler;
+	
+	@Autowired
+	private InstitutionResourceAssembler institutionResourceAssembler;
+	
+	private VirtualShelterExceptionToHttpStatusConverter converter = new VirtualShelterExceptionToHttpStatusConverter();
+	 
+	
 	/**
 	 * Register new animal
 	 * 
@@ -50,15 +66,15 @@ public class AnimalController {
 	 */
 	@RequestMapping(method = RequestMethod.POST)
 	ResponseEntity<AnimalResource> addAnimal(@RequestBody Animal animal) {
-		
+		HttpStatus responseStatus = HttpStatus.CREATED;
 		try {
 			this.advertisementOperations.addAnimal(animal);
 		} catch (VirtualShelterException e) {
-			// TODO Auto-generated catch block
+			responseStatus = this.converter.convert(e);
 		}
 		
 		AnimalResource resource = animalResourceAssembler.toResource(animal);
-		return new ResponseEntity<AnimalResource>(resource, HttpStatus.CREATED);
+		return new ResponseEntity<AnimalResource>(resource, responseStatus);
 	}
 
 	/**
@@ -77,7 +93,7 @@ public class AnimalController {
 				resourceList.add(this.animalResourceAssembler.toResource(advertisement.getAnimal()));
 			}
 		} catch (VirtualShelterException e) {
-			responseStatus = HttpStatus.INTERNAL_SERVER_ERROR;
+			responseStatus = this.converter.convert(e);
 		}
 		
 		return new ResponseEntity<List<AnimalResource>>(resourceList,
@@ -92,8 +108,15 @@ public class AnimalController {
 	 */
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	ResponseEntity<AnimalResource> getAnimal(@PathVariable Long id) {
-		//TODO
-		return null;
+		HttpStatus responseStatus = HttpStatus.OK;
+		AnimalResource resource = null;
+		try {
+			Animal animal = this.advertisementOperations.findAnimalById(id);
+			resource = this.animalResourceAssembler.toResource(animal);
+			} catch (VirtualShelterException e) {
+				responseStatus = this.converter.convert(e);
+			}
+		return new ResponseEntity<AnimalResource>(resource, responseStatus);
 	}
 	
 	/**
@@ -105,8 +128,15 @@ public class AnimalController {
 	 */
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
 	ResponseEntity<AnimalResource> updateAnimal(@PathVariable Long id, @RequestBody Animal animal) {
-		//TODO
-		return null;
+		HttpStatus responseStatus = HttpStatus.OK;
+		animal.setId(id);
+		try {
+			this.advertisementOperations.updateAnimal(animal);
+		} catch (VirtualShelterException e) {
+			responseStatus = this.converter.convert(e);
+		}
+		AnimalResource resource = this.animalResourceAssembler.toResource(animal);
+		return new ResponseEntity<AnimalResource>(resource, responseStatus);
 	}
 	
 	/**
@@ -115,14 +145,14 @@ public class AnimalController {
 	 * @param id
 	 */
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
-	void deleteAnimal(@PathVariable Long id) {
-
+	ResponseEntity<AnimalResource> deleteAnimal(@PathVariable Long id) {
+		HttpStatus responseStatus = HttpStatus.OK;
 		try {
 			this.advertisementOperations.deleteAnimal(id);
 		} catch (VirtualShelterException e) {
-			// TODO Auto-generated catch block
+			responseStatus = this.converter.convert(e);
 		}
-		
+		return new ResponseEntity<AnimalResource>(responseStatus);
 	}
 	
 	/**
@@ -193,9 +223,24 @@ public class AnimalController {
 	 * @return
 	 */
 	@RequestMapping(value="/{id}/advertiser", method=RequestMethod.GET)
-	ResponseEntity<UserResource> getAdvertiser(@PathVariable Long id) {
-		//TODO
-		return null;
+	ResponseEntity<ResourceSupport> getAdvertiser(@PathVariable Long id) {
+		HttpStatus responseStatus = HttpStatus.OK;
+		UserResource userResource = null;
+		InstitutionResource institutionResource = null;
+		boolean isUser = false;
+		try {
+			Advertiser advertiser = this.advertisementOperations.getAdvertiserOfAnimal(id);
+			if (advertiser instanceof User) {
+				userResource = this.userResourceAssembler.toResource((User)advertiser);
+				isUser = true;
+			} else {
+				institutionResource = this.institutionResourceAssembler.toResource((Institution) advertiser);
+			}
+		} catch (VirtualShelterException e) {
+			responseStatus = this.converter.convert(e);
+		}
+		return new ResponseEntity<ResourceSupport>(isUser?userResource:institutionResource, responseStatus);
+		 	
 	}
 	
 }

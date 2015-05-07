@@ -226,4 +226,75 @@ public interface IAdvertisementOperations {
 	 * @throws VirtualShelterException
 	 */
 	public Institution getInstitutionById(long institutionId) throws VirtualShelterException;
+	
+	/**
+	 * Returns the pictures of the institution with the given institutionId
+	 * @param institutionId
+	 * @return
+	 */
+	public List<Picture> listInstitutionPictures(long institutionId) throws VirtualShelterException;
+	
+	/**
+	 * Returns the profile picture of the institution with the given institutionId
+	 * @return
+	 * @throws VirtualShelterException
+	 */
+	public Picture getInstitutionProfilePicture(long institutionId) throws VirtualShelterException;
+	
+	/**
+	 * Posts a new profile picture for institution with the given institutionId
+	 * @param institutionId
+	 * @throws VirtualShelterException
+	 */
+	public void postNewProfilePictureForInstitution(long institutionId, Picture profilePicture) throws VirtualShelterException;
+	
+	/**
+	 * Deletes the profilePicture for the institution with the given institutionId
+	 * @param institutionId
+	 * @throws VirtualShelterException
+	 */
+	public void deleteProfilePictureForInstitution(long institutionId) throws VirtualShelterException;
+	
+	/**
+	 * Posts a new picture for institution with the given institutionId
+	 * @param institutionId
+	 * @param profilePicture
+	 * @throws VirtualShelterException
+	 */
+	public void postNewPictureForInstitution(long institutionId, Picture profilePicture) throws VirtualShelterException;
+	
+	/**
+	 * Deletes the given Picture for the institution with the given institutionId
+	 * @param institutionId
+	 * @param profilePicture
+	 * @throws VirtualShelterException
+	 */
+	public void deletePictureForInstitution(long institutionId, Picture picture) throws VirtualShelterException;
+	
+	public List<Picture> listUserPictures(long userId) throws VirtualShelterException;
+	
+	public Picture getUserProfilePicture(long userId) throws VirtualShelterException;
+	
+	public void postNewProfilePictureForUser(long userId, Picture profilePicture) throws VirtualShelterException;
+	
+	public void deleteProfilePictureForUser(long userId) throws VirtualShelterException;
+	
+	public void postNewPictureForUser(long userId, Picture picture) throws VirtualShelterException;
+	
+	public void deletePictureForUser(long userId, Picture picture) throws VirtualShelterException;
+	
+	public List<Picture> listAnimalPictures(long animalId) throws VirtualShelterException;
+	
+	public void postNewPictureForAnimal(long animalId, Picture picture) throws VirtualShelterException;
+	
+	public Picture getAnimalProfilePicture(long animalId) throws VirtualShelterException;
+	
+	public void postNewProfilePictureForAnimal(long animalId, Picture profilePicture) throws VirtualShelterException;
+	
+	public void deleteProfilePictureForAnimal(long animalId) throws VirtualShelterException;
+	
+	public void deletePictureForAnimal(long animalId, Picture picture) throws VirtualShelterException;
+	
+	
+	
 }

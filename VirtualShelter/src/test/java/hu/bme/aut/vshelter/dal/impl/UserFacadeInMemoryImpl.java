@@ -7,7 +7,6 @@ import java.util.NoSuchElementException;
 
 import hu.bme.aut.vshelter.api.VirtualShelterException;
 import hu.bme.aut.vshelter.dal.UserFacade;
-import hu.bme.aut.vshelter.entity.Breed;
 import hu.bme.aut.vshelter.entity.User;
 
 public class UserFacadeInMemoryImpl implements UserFacade {
@@ -15,7 +14,7 @@ public class UserFacadeInMemoryImpl implements UserFacade {
 	private List<User> users = new ArrayList<User>();
 
 	@Override
-	public User findById(long userId) {
+	public User findById(long userId) throws VirtualShelterException {
 		try {
 			return users.stream()
 					.filter(a -> a.getId() == userId).findFirst()
@@ -26,23 +25,23 @@ public class UserFacadeInMemoryImpl implements UserFacade {
 	}
 
 	@Override
-	public List<User> findAll() {
+	public List<User> findAll() throws VirtualShelterException {
 		return Collections.unmodifiableList(users);
 	}
 
 	@Override
-	public void create(User user) {
+	public void create(User user) throws VirtualShelterException {
 		users.add(user);
 	}
 
 	@Override
-	public void edit(User user) {
+	public void edit(User user) throws VirtualShelterException {
 		users
 		.set(users.indexOf(user), user);
 	}
 
 	@Override
-	public void deleteById(long userId) {
+	public void deleteById(long userId) throws VirtualShelterException {
 		User deleteUser = findById(userId);
 
 		if (deleteUser != null)
@@ -50,7 +49,7 @@ public class UserFacadeInMemoryImpl implements UserFacade {
 	}
 
 	@Override
-	public void promoteUserToSiteAdministrator(long userId) {
+	public void promoteUserToSiteAdministrator(long userId) throws VirtualShelterException {
 		
 		String role = "site-administrator";
 		User user = findById(userId);
@@ -61,7 +60,7 @@ public class UserFacadeInMemoryImpl implements UserFacade {
 	}
 
 	@Override
-	public void revokeUserFromSiteAdministrator(long userId) {
+	public void revokeUserFromSiteAdministrator(long userId) throws VirtualShelterException {
 		String role = "site-administrator";
 		User user = findById(userId);
 		
@@ -79,6 +78,12 @@ public class UserFacadeInMemoryImpl implements UserFacade {
 		} catch (NoSuchElementException e) {
 			return 0;
 		}
+	}
+
+	@Override
+	public User getUserByEmail(String email) throws VirtualShelterException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

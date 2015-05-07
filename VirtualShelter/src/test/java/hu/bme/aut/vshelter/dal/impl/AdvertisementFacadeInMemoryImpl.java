@@ -1,5 +1,6 @@
 package hu.bme.aut.vshelter.dal.impl;
 
+import hu.bme.aut.vshelter.api.VirtualShelterException;
 import hu.bme.aut.vshelter.dal.AdvertisementFacade;
 import hu.bme.aut.vshelter.entity.Advertisement;
 import hu.bme.aut.vshelter.entity.Advertiser;
@@ -27,23 +28,23 @@ public class AdvertisementFacadeInMemoryImpl implements AdvertisementFacade {
 	}
 
 	@Override
-	public List<Advertisement> findAll() {
+	public List<Advertisement> findAll() throws VirtualShelterException {
 		return Collections.unmodifiableList(advertisements);
 	}
 
 	@Override
-	public void create(Advertisement advertisement) {
+	public void create(Advertisement advertisement) throws VirtualShelterException {
 		advertisements.add(advertisement);
 	}
 
 	@Override
-	public void edit(Advertisement advertisement) {
+	public void edit(Advertisement advertisement) throws VirtualShelterException {
 		advertisements
 				.set(advertisements.indexOf(advertisement), advertisement);
 	}
 
 	@Override
-	public void deleteById(long advertisementId) {
+	public void deleteById(long advertisementId) throws VirtualShelterException {
 		Advertisement deleteAdvertisement = findById(advertisementId);
 
 		if (deleteAdvertisement != null)
@@ -51,20 +52,20 @@ public class AdvertisementFacadeInMemoryImpl implements AdvertisementFacade {
 	}
 
 	@Override
-	public List<Advertisement> listAdvertisementsFromAdvertiser(
-			long advertiserId) {
+	public List<Advertisement> listAdvertisementsFromAdvertiser (
+			long advertiserId) throws VirtualShelterException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Advertiser getAdvertiserOfAnimal(long animalId) {
+	public Advertiser getAdvertiserOfAnimal(long animalId) throws VirtualShelterException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Animal> listAnimalsAdvertisedByAdvertiser(long advertiserId) {
+	public List<Animal> listAnimalsAdvertisedByAdvertiser(long advertiserId)  throws VirtualShelterException{
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -8,5 +8,5 @@ public interface IAuthenticationAndPermissionOperations {
 	 * @param password
 	 * @return
 	 */
-	boolean authenticate(String email, String password);
+	boolean authenticate(String email, String password) throws VirtualShelterException;
 }
