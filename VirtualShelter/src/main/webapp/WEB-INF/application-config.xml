@@ -8,8 +8,6 @@
 	http://www.springframework.org/schema/beans/spring-beans.xsd
 	http://www.springframework.org/schema/context
 	http://www.springframework.org/schema/context/spring-context.xsd
-	http://www.springframework.org/schema/security
-	http://www.springframework.org/schema/security/spring-security-4.0.xsd
 	http://www.springframework.org/schema/jee
 	http://www.springframework.org/schema/jee/spring-jee.xsd
 	http://www.springframework.org/schema/tx
@@ -52,10 +50,7 @@
 			</list>
 		</property>
 	</bean>
-	
-	<!-- Spring Security -->
-	<import resource="spring-security.xml"/>
-	
+
 	<bean id="jacksonObjectMapper" class="com.fasterxml.jackson.databind.ObjectMapper" />
 	
 	<bean id="animalResourceAssembler" class="hu.bme.aut.vshelter.rest.resources.AnimalResourceAssembler" />
@@ -67,7 +62,6 @@
 	
 	<bean id="siteAdministrationOperations" class="hu.bme.aut.vshelter.api.SiteAdministrationOperationsImpl" />
 	<bean id="advertisementOperations" class="hu.bme.aut.vshelter.api.AdvertisementOperationsImpl" />
-	<bean id="authenticationAndPermissionOperations" class="hu.bme.aut.vshelter.api.AuthenticationAndPermissionOperationsImpl" />
 
 	<bean id="addressFacade" class="hu.bme.aut.vshelter.dal.impl.AddressFacadeJPAImpl" />
 	<bean id="advertisementFacade" class="hu.bme.aut.vshelter.dal.impl.AdvertisementFacadeJPAImpl" />
