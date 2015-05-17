@@ -38,7 +38,7 @@ public abstract class Advertiser {
 	@ManyToOne
 	private Address address;
 	
-	@Column(name = "profilePicture", unique = false, nullable = true)
+	@ManyToOne
 	private Picture profilePicture;
 	
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)

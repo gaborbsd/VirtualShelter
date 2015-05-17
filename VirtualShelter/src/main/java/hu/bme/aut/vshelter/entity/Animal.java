@@ -67,10 +67,10 @@ public class Animal {
 	@ManyToOne
 	private Address address;
 	
-	@Column(name = "profilePicture", unique = false, nullable = true)
-	private Picture profilePicture;
+	@ManyToOne
+	private Picture profilePicture;	
 	
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToMany(fetch =	 FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Picture> picturesList;
 	
 	@Enumerated(EnumType.STRING)
