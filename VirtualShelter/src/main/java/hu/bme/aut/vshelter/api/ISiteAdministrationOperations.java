@@ -17,7 +17,7 @@ public interface ISiteAdministrationOperations {
 	
 	/**
 	 * Returns user with the give id
-	 * @param userId
+	 * @param userId the user with that userId will be returned
 	 * @return
 	 */
 	public User findUserById(long userId) throws VirtualShelterException;
@@ -37,7 +37,7 @@ public interface ISiteAdministrationOperations {
 	
 	/**
 	 * Revokes a user from site administrator
-	 * @param userId
+	 * @param userId user to be revoked from site administrator
 	 * @throws VirtualShelterException
 	 */
 	public void revokeSiteAdministrator(long userId) throws VirtualShelterException;
@@ -72,21 +72,21 @@ public interface ISiteAdministrationOperations {
 	public void deleteBreed(long breedId) throws VirtualShelterException;
 	
 	/**
-	 * Returns the Institution(s) owned by the user with the given userId
-	 * @param userId
+	 * Returns the owned Institution(s) by the user with the given userId
+	 * @param userId identifies the user
 	 * @return
 	 */
 	public List<Institution> listInstituitionsOwnedByUser(long userId) throws VirtualShelterException;
 	
 	/**
 	 * Updates the breed identified by the given breed's id
-	 * @param breed
+	 * @param breed identifies the breed
 	 */
 	public void updateBreed(Breed breed) throws VirtualShelterException;
 	
 	/**
 	 * Returns the owner of the given institution's id
-	 * @param institutionId
+	 * @param institutionId the owner for the institution identified with that id will be returned 
 	 * @return
 	 */
 	public User findOwnerOfInstitution(long institutionId) throws VirtualShelterException;
