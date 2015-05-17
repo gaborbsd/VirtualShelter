@@ -4,15 +4,14 @@ SearchService.$inject = ['$http', '$q'];
 function SearchService($http, $q){
 	
 	var service = {
-		get: getFinalizedRFxListFormHeaderData
+		getAnimals: getAnimals
 	};
 	
 	return service;
 		
-	function getFinalizedRFxListFormHeaderData() {
+	function getAnimals() {
 		var deferred = $q.defer();
-		var uri = jsRoutes.controllers.FinalizedRFxCtrl.getFinalizedRFxListFormHeaderData();
-		$http.get(uri.url)
+		$http.get("api/animal")
 			.success(function(data, status) {
 				deferred.resolve(data);
 			})

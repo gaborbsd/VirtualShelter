@@ -47,8 +47,7 @@ app.config(function ($httpProvider) {
     })
 
     var controllers = {};
-controllers.AnimalController=function($scope, $http) {
-	$scope.getAnimals = getAnimals;
+controllers.AnimalController=function($scope, $http,SearchService) {
 	$scope.postAnimal = postAnimal;
 
 	function postAnimal() {
@@ -60,8 +59,6 @@ controllers.AnimalController=function($scope, $http) {
 					});
 		}
 	};
-
-	vm.getAnimals();
 };
 
 controllers.HeaderController=function($scope, $http) {
@@ -75,6 +72,14 @@ controllers.HeaderController=function($scope, $http) {
 };
 
 controllers.SearchController = function($scope, $http){
+	$scope.clientLimit;
+	$scope.animals;
+	$scope.page;
+	$scope.perPage
+	$scope.url='api/animal'
+	$scope.urlParams;
+	$scope.passive=true;
+	
 	$scope.detailed = false;
 	function getAnimals() {
 		$http.get('api/animal').success(function(data) {
