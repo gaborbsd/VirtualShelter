@@ -156,8 +156,18 @@ public interface IAdvertisementOperations {
 	 */
 	public List<Breed> listAllBreeds() throws VirtualShelterException;
 	
+	/**
+	 * Add the given animal to the database
+	 * @param Animal object with the attributes of the animal 
+	 * @throws VirtualShelterException
+	 */
 	public void addAnimal(Animal animal) throws VirtualShelterException;
-	
+		
+	/**
+	 * Deletes the animal from the database with the given animalId
+	 * @param animalId the animal with that id will be deleted from the database
+	 * @throws VirtualShelterException
+	 */
 	public void deleteAnimal(long animalId) throws VirtualShelterException;
 	
 	/**
@@ -271,28 +281,100 @@ public interface IAdvertisementOperations {
 	 */
 	public void deletePictureForInstitution(long institutionId, Picture picture) throws VirtualShelterException;
 	
+	/** 
+	 * List all pictures that belongs to the user identified by the given id
+	 * @param userId
+	 * @return
+	 * @throws VirtualShelterException
+	 */
 	public List<Picture> listUserPictures(long userId) throws VirtualShelterException;
 	
+	/**
+	 * Returns the profile picture of the user identified by the given id
+	 * @param userId
+	 * @return
+	 * @throws VirtualShelterException
+	 */
 	public Picture getUserProfilePicture(long userId) throws VirtualShelterException;
 	
+	/**
+	 * Change the profile picture of the user identified by the given id.
+	 * The previous profile picture will be deleted.
+	 * @param userId
+	 * @param profilePicture
+	 * @throws VirtualShelterException
+	 */
 	public void postNewProfilePictureForUser(long userId, Picture profilePicture) throws VirtualShelterException;
 	
+	/**
+	 * Delete the profile picture of the user identified by the given id.
+	 * @param userId
+	 * @throws VirtualShelterException
+	 */
 	public void deleteProfilePictureForUser(long userId) throws VirtualShelterException;
 	
+	/**
+	 * Add a new picture to the picture list of the user identified by the given id.
+	 * @param userId
+	 * @param picture
+	 * @throws VirtualShelterException
+	 */
 	public void postNewPictureForUser(long userId, Picture picture) throws VirtualShelterException;
 	
+	/**
+	 * Delete the picture with the given picture id from the picture list of the user identified by the given user id.
+	 * @param userId
+	 * @param picture
+	 * @throws VirtualShelterException
+	 */
 	public void deletePictureForUser(long userId, Picture picture) throws VirtualShelterException;
 	
+	/**
+	 * List all pictures that belongs to the animal identified by the given id
+	 * @param animalId
+	 * @return
+	 * @throws VirtualShelterException
+	 */
 	public List<Picture> listAnimalPictures(long animalId) throws VirtualShelterException;
 	
+	/**
+	 * Add a new picture to the picture list of the animal identified by the given id.
+	 * @param animalId
+	 * @param picture
+	 * @throws VirtualShelterException
+	 */
 	public void postNewPictureForAnimal(long animalId, Picture picture) throws VirtualShelterException;
 	
+	/**
+	 * Return the profile picture of the animal identified by the given id
+	 * @param animalId
+	 * @return
+	 * @throws VirtualShelterException
+	 */
 	public Picture getAnimalProfilePicture(long animalId) throws VirtualShelterException;
 	
+	/**
+	 * Change the profile picture of the user identified by the given id.
+	 * The previous profile picture will be deleted.
+	 * @param animalId
+	 * @param profilePicture
+	 * @throws VirtualShelterException
+	 */
 	public void postNewProfilePictureForAnimal(long animalId, Picture profilePicture) throws VirtualShelterException;
 	
+	/**
+	 * Delete the profile picture of the animal identified by the given id.
+	 * @param animalId
+	 * @throws VirtualShelterException
+	 */
 	public void deleteProfilePictureForAnimal(long animalId) throws VirtualShelterException;
 	
+	/**
+	 * Delete the picture with the given picture id from the picture list of the animal identified by the given animal id.
+	 * @param animalId
+	 * @param picture
+	 * @throws VirtualShelterException
+	 */
 	public void deletePictureForAnimal(long animalId, Picture picture) throws VirtualShelterException;
 	
 	
