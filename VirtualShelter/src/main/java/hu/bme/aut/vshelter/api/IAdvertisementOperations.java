@@ -9,15 +9,15 @@ public interface IAdvertisementOperations {
 	
 	/**
 	 * Advertises the given advertisement in the name of the given institution
-	 * @param instituionID the creator of the advertisement
-	 * @param advertisementID contains the advertisement's data
+	 * @param instituionID the creator's id of the advertisement
+	 * @param advertisementID the id of the advertisement to advertise, which includes the detail of the advertisement
 	 * @throws VirtualShelterException
 	 */
 	public void advertise(long instituionID, long advertisementID) throws VirtualShelterException;
 	
 	/**
 	 * Advertises the given advertisement in the name of the logged in user
-	 * @param advertisementId contains the advertisement's data
+	 * @param advertisementId the id of the advertisement to advertise, which includes the detail of the advertisement
 	 * @throws VirtualShelterException
 	 */
 	public void advertise(long advertisementId) throws VirtualShelterException;
@@ -46,15 +46,15 @@ public interface IAdvertisementOperations {
 	/**
 	 * Uploads a picture to a user account (for the given advertiser)
 	 * @param picture picture to be uploaded
-	 * @param advertiserId for this user (advertiser) will be the picture uploaded
+	 * @param advertiserId for this user/institution (advertiser) will be the picture uploaded
 	 * @throws VirtualShelterException
 	 */
 	public void uploadPicture(Picture picture, long advertiserId) throws VirtualShelterException;
 	
 	/**
-	 * Deletes a picture from a user account (from the given advertiser)
-	 * @param pictureId
-	 * @param advertiserId
+	 * Deletes a picture from a user/institution account (from the given advertiser)
+	 * @param pictureId picture's id to be deleted
+	 * @param advertiserId for this user/institution (advertiser) will be the picture deleted
 	 * @throws VirtualShelterException
 	 */
 	public void deletePicture(long pictureId, long advertiserId) throws VirtualShelterException; 
@@ -75,7 +75,7 @@ public interface IAdvertisementOperations {
 	public void deleteInstitution(long institutionId) throws VirtualShelterException;
 	
 	/**
-	 * Updates the institution in the database with the given Instituiton's data 
+	 * Updates the institution in the database with the given instituiton's data 
 	 * @param institution contains the institution's data to be updated
 	 * @throws VirtualShelterException
 	 */
