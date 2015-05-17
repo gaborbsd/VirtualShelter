@@ -1,0 +1,120 @@
+<h1>Animal form</h1>
+<hr />
+<form ng-submit="postAnimal()">
+	<div class="panel-body">
+		<div class="form-group row">
+			<label class="control-label col-md-3">Name:</label>
+			<div class="col-sm-6">
+				<input ng-model="vm.animal.name" />
+			</div>
+		</div>
+		<div class="form-group row">
+			<label class="control-label col-md-3">Breed:</label>
+			<div class="col-md-3">
+				<select ng-model="vm.animal.breed"
+					ng-options="breed.name as breed.name for breed in animalCoreData.breeds">
+					<option>Choose breed</option>
+				</select>
+			</div>
+			<label class="control-label col-md-3">Species:</label>
+			<div class="col-md-3">
+				<select ng-model="vm.animal.species"
+					ng-options="species.name as species.name for species in animalCoreData.species">
+					<option>Choose species</option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group row">
+				<label class="control-label col-md-3">Height(m):</label>
+				<div class="col-md-3">
+					<input type="number" vm.animal.height" placeholder="1.5" />
+				</div>
+				<label class="control-label col-md-3">Weight(kg):</label>
+				<div class="col-md-3">
+					<input type="number" ng-model="vm.animal.weight" placeholder="1.5" />
+				</div>
+		</div>
+		<div class="form-group row">
+			<label class="control-label col-md-3">Age(years):</label>
+			<div class="col-md-3">
+				<input type="number" ng-model="vm.animal.age" placeholder="1.5" />
+			</div>
+		</div>
+		<div class="form-group row">
+			<label class="control-label col-md-3">Sex:</label>
+			<div class="col-md-3">
+				<select ng-model="vm.animal.sex">
+					<option value="" disabled>Choose sex</option>
+					<option value="male">male</option>
+					<option value="female">female</option>
+					<option value="both">both</option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group row">
+			<label class="control-label col-md-3">Castrated:</label>
+			<div class="col-md-3">
+				<input type="radio" name="castrated" ng-model="animal.castrated"
+					value="true" />Yes <input type="radio" name="castrated"
+					ng-model="animal.castrated" value="false" />No
+			</div>
+		</div>
+		<div class="form-group row">
+			<label class="control-label col-md-3">Vaccinated:</label>
+			<div class="col-md-3">
+				<select ng-model="animal.vaccinated">
+					<option value="" disabled>Choose</option>
+					<option value="male">yes</option>
+					<option value="female">no</option>
+					<option value="both">partially</option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group row">
+			<label class="control-label col-md-3">Description:</label>
+			<div class="col-md-3">
+				<textarea rows="7" cols="70" ng-model="animal.description"></textarea>
+			</div>
+		</div>
+		<div class="form-group row">
+			<label class="control-label col-md-3">Castrated:</label>
+			<div class="col-md-2">
+				<input type="radio" name="diseases" ng-model="animal.diseases" />No
+			</div>
+			<div class="col-md-2">
+				<input type="radio" name="diseases" ng-model="animal.diseases" />Yes
+			</div>
+			<div class="col-md-5">
+				<input type="text" ng-model="animal.diseases">
+			</div>
+		</div>
+		<div class="form-group row">
+			<label class="control-label col-md-3">Disabilities:</label>
+			<div class="col-md-2">
+				<input type="radio" name="disabilities" ng-model="animal.disabilities" />No
+			</div>
+			<div class="col-md-2">
+				<input type="radio" name="disabilities" ng-model="animal.disabilities" />Yes
+			</div>
+			<div class="col-md-5">
+				<input type="text" ng-model="animal.disabilities">
+			</div>
+		</div>
+		<div class="form-group row">
+			<label class="control-label col-md-3">Other costs:</label>
+			<div class="col-md-2">
+				<input type="radio" name="otherCosts" ng-model="animal.otherCosts" />No
+			</div>
+			<div class="col-md-2">
+				<input type="radio" name="otherCosts" ng-model="animal.otherCosts" />Yes
+			</div>
+			<div class="col-md-5">
+				<input type="text" ng-model="animal.otherCosts">
+			</div>
+			</div>
+		</div>
+	</div>
+	<div class="panel-footer text-center">
+        <button class="btn btn-primary" >Save</button>
+    </div>
+</form>

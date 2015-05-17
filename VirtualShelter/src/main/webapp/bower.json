@@ -1,0 +1,32 @@
+{
+  "name": "vshelter",
+  "version": "0.0.0",
+  "authors": [
+    "Barnabás Oláh <stsatlantis@gmail.com>"
+  ],
+  "description": "Virtual Shelter",
+  "moduleType": [
+    "amd",
+    "es6",
+    "globals",
+    "node",
+    "yui"
+  ],
+  "keywords": [
+    "vshelter"
+  ],
+  "license": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "vendor",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-paginate-anything": "~4.1.1",
+    "bootstrap": "~3.3.4",
+    "ui-select": "*"
+  }
+}
