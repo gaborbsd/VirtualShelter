@@ -6,52 +6,59 @@
 				collection="animals"
 				page="page"
 				per-page="perPage"
-				template-url="/assets/tpl/paginate-anything.html"
+				template-url="/html/paginate-anything.html"
 				url="url"
 				url-params="urlParams"
 				passive="passive">
 			</bgf-pagination>
 		</div>
 	</div>
-	<div class="col-md-9 col-md-offset-3">
-		<form class="form" name="searchForm" novalidate method="post"
-			autocomplete="off" ng-model="searchForm"
-			ng-controller="SearchController as vm">
+	</div>
+	<div class="row">
+	<div class="col-md-9 col-md-offset-1">
+		<form class="form-inline" name="searchForm" novalidate ng-submit="search()"
+			autocomplete="off" ng-model="searchForm">
 			<div class="panel-body">
 				<div class="row">
 					<div class="col-md-12">
-						<input type="text" name="serch.name" placeholder="name"
-							ng-model="search.name"> <select name="search.breed"
-							ng-model="search.breed"
-							ng-options="breed.id as breed.name for breed in vm.searchFields.coreData.breeds">
+						<input type="text" class="form-control" name="search.name" placeholder="name" ng-model="search.name">
+						 <select class="form-control" name="search.breed" ng-model="search.breed" 
+						 ng-options="breed.id as breed.name for breed in vm.searchFields.coreData.breeds">
 							<option value="" disabled selected>breed</option>
-						</select> <select name="search.species
-							ng-model="
-							search.species"
+						</select>
+						 <select class="form-control" name="search.species
+							ng-model="search.species"
 							ng-options="species.id as species.name for species in vm.searchFields.coreData.species">
 							<option value="" disabled selected>species</option>
-						</select> <select name="search.sex" ng-model="search.sex"
-							ng-options="sex.id as sex.name for sex in vm.searchFields.coreData.sexes">
+						</select>
+						
+						
+						<select class="form-control" name="search.sex" ng-model="search.sex"
+							ng-options="sex.id as sex.name for sex in vm.searchFields.coreData.sexes | orderBy:'name'">
 							<option value="" disabled selected>sex</option>
-						</select> <select name="search.adoptionType" ng-model="search.adoptionType"
+						</select>
+						
+						
+						
+						 <select class="form-control" name="search.adoptionType" ng-model="search.adoptionType"
 							ng-options="adoptionType.id as adoptionType.name for adoptionType in vm.searchFields.coreData.adoptionTypes">
 							<option value="" disabled selected>adaptation type</option>
-						</select> <input type="checkbox" ng-model="vm.detailed"><label>Detailed</label>
+						</select> <input type="checkbox" class="form-control" ng-model="vm.detailed"><label>Detailed</label>
 					</div>
 				</div>
 				<div class="row" ng-show="vm.detailed">
 					<div class="col-md-12">
 						<div class="row">
 							<div class="col-md-3">
-								<input type="text" name="serch.age" placeholder="age"
+								<input class="form-control" type="text" name="serch.age" placeholder="age"
 									ng-model="search.age">
 							</div>
 							<div class="col-md-3">
-								<input type="text" name="serch.weight" placeholder="weight"
+								<input class="form-control" type="text" name="serch.weight" placeholder="weight"
 									ng-model="search.weight">
 							</div>
 							<div class="col-md-3">
-								<input type="text" name="serch.height" placeholder="height"
+								<input class="form-control" type="text" name="serch.height" placeholder="height"
 									ng-model="search.height">
 							</div>
 						</div>

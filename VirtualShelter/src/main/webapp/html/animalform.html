@@ -1,24 +1,29 @@
 <h1>Animal form</h1>
 <hr />
-<form ng-submit="postAnimal()">
+		<div class="row-fluid" ng-hide='error==""'>
+            <div class="col-md-12">
+                <div class="alert alert-danger" role="alert">{{error}}</div>
+            </div>
+        </div>
+<form ng-submit="saveAnimal()">
 	<div class="panel-body">
 		<div class="form-group row">
 			<label class="control-label col-md-3">Name:</label>
 			<div class="col-sm-6">
-				<input ng-model="vm.animal.name" />
+				<input class="form-control" ng-model="animal.name" />
 			</div>
 		</div>
 		<div class="form-group row">
 			<label class="control-label col-md-3">Breed:</label>
 			<div class="col-md-3">
-				<select ng-model="vm.animal.breed"
+				<select class="form-control" ng-model="animal.breed"
 					ng-options="breed.name as breed.name for breed in animalCoreData.breeds">
 					<option>Choose breed</option>
 				</select>
 			</div>
 			<label class="control-label col-md-3">Species:</label>
 			<div class="col-md-3">
-				<select ng-model="vm.animal.species"
+				<select class="form-control" ng-model="animal.species"
 					ng-options="species.name as species.name for species in animalCoreData.species">
 					<option>Choose species</option>
 				</select>
@@ -27,23 +32,23 @@
 		<div class="form-group row">
 				<label class="control-label col-md-3">Height(m):</label>
 				<div class="col-md-3">
-					<input type="number" vm.animal.height" placeholder="1.5" />
+					<input class="form-control" type="number" animal.height" placeholder="1.5" />
 				</div>
 				<label class="control-label col-md-3">Weight(kg):</label>
 				<div class="col-md-3">
-					<input type="number" ng-model="vm.animal.weight" placeholder="1.5" />
+					<input class="form-control" type="number" ng-model="animal.weight" placeholder="1.5" />
 				</div>
 		</div>
 		<div class="form-group row">
 			<label class="control-label col-md-3">Age(years):</label>
 			<div class="col-md-3">
-				<input type="number" ng-model="vm.animal.age" placeholder="1.5" />
+				<input class="form-control" type="number" ng-model="animal.age" placeholder="1.5" />
 			</div>
 		</div>
 		<div class="form-group row">
 			<label class="control-label col-md-3">Sex:</label>
 			<div class="col-md-3">
-				<select ng-model="vm.animal.sex">
+				<select class="form-control" ng-model="animal.sex">
 					<option value="" disabled>Choose sex</option>
 					<option value="male">male</option>
 					<option value="female">female</option>
@@ -62,7 +67,7 @@
 		<div class="form-group row">
 			<label class="control-label col-md-3">Vaccinated:</label>
 			<div class="col-md-3">
-				<select ng-model="animal.vaccinated">
+				<select class="form-control" ng-model="animal.vaccinated">
 					<option value="" disabled>Choose</option>
 					<option value="male">yes</option>
 					<option value="female">no</option>
@@ -73,43 +78,43 @@
 		<div class="form-group row">
 			<label class="control-label col-md-3">Description:</label>
 			<div class="col-md-3">
-				<textarea rows="7" cols="70" ng-model="animal.description"></textarea>
+				<textarea class="form-control" rows="7" cols="70" ng-model="animal.description"></textarea>
 			</div>
 		</div>
 		<div class="form-group row">
-			<label class="control-label col-md-3">Castrated:</label>
+			<label class="control-label col-md-3">Diseases:</label>
 			<div class="col-md-2">
-				<input type="radio" name="diseases" ng-model="animal.diseases" />No
+				<input type="radio" name="diseases" ng-model="animal.diseases" ng-value=false />No
 			</div>
 			<div class="col-md-2">
-				<input type="radio" name="diseases" ng-model="animal.diseases" />Yes
+				<input type="radio" name="diseases" ng-model="animal.diseases" ng-value=true />Yes
 			</div>
-			<div class="col-md-5">
-				<input type="text" ng-model="animal.diseases">
+			<div class="col-md-5" ng-show="animal.diseases">
+				<input class="form-control" type="text" ng-model="animal.diseasesDesc">
 			</div>
 		</div>
 		<div class="form-group row">
 			<label class="control-label col-md-3">Disabilities:</label>
 			<div class="col-md-2">
-				<input type="radio" name="disabilities" ng-model="animal.disabilities" />No
+				<input type="radio" name="disabilities" ng-model="animal.disabilities" ng-value=false />No
 			</div>
 			<div class="col-md-2">
-				<input type="radio" name="disabilities" ng-model="animal.disabilities" />Yes
+				<input type="radio" name="disabilities" ng-model="animal.disabilities" ng-value=true />Yes
 			</div>
-			<div class="col-md-5">
-				<input type="text" ng-model="animal.disabilities">
+			<div class="col-md-5" ng-show="animal.disabilities">
+				<input class="form-control" type="text" ng-model="animal.disabilitiesDesc">
 			</div>
 		</div>
 		<div class="form-group row">
 			<label class="control-label col-md-3">Other costs:</label>
 			<div class="col-md-2">
-				<input type="radio" name="otherCosts" ng-model="animal.otherCosts" />No
+				<input type="radio" name="otherCosts" ng-model="animal.otherCosts" ng-value=false />No
 			</div>
 			<div class="col-md-2">
-				<input type="radio" name="otherCosts" ng-model="animal.otherCosts" />Yes
+				<input type="radio" name="otherCosts" ng-model="animal.otherCosts" ng-value=true />Yes
 			</div>
-			<div class="col-md-5">
-				<input type="text" ng-model="animal.otherCosts">
+			<div class="col-md-5" ng-show="animal.otherCosts">
+				<input class="form-control" type="text" ng-model="animal.otherCostsDesc">
 			</div>
 			</div>
 		</div>

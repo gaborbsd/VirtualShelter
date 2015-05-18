@@ -1,66 +1,72 @@
 <h1>Shelter form</h1>
 <hr />
-<from class="form">
+<from class="form"  ng-submit="saveAnimal()">
 	<div class="panel-body">
 		<div class="form-group row">
 			<label  class="control-label col-sm-4">Name</label>
             <div class="col-sm-5">
-				<input type="text" name="name" placeholder="Name">
+				<input type="text" class="form-control" name="name" placeholder="Name" ng-model="shelter.name">
 			</div>
 		</div>
 		<div class="form-group row">
 			<label class="control-label col-sm-4">Email</label>
 			<div class="col-sm-5">
-				<input type="text" name="emial" placeholder="Email">
+				<input type="text" class="form-control" name="emial" placeholder="Email" ng-model="shelter.email">
 			</div>
 		</div>
 		<div class="form-group row">
 			<label class="control-label col-sm-4">Phone</label>
 			<div class="col-sm-5">
-				<input type="file" name="photo" placeholder="Photo">
+				<input type="text" class="form-control" name="photo" placeholder="phone" ng-model="shelter.phone">
 			</div>
 		</div>
 		<div class="form-group row">
 			<label class="control-label col-sm-4">City</label>
 			<div class="col-sm-5">
-				<input type="text" name="city" placeholder="City">
+				<input type="text" class="form-control" name="city" placeholder="City" ng-model="shelter.city">
 			</div>
 		</div>
 		<div class="form-group row">
 			<label class="control-label col-sm-4">Street</label>
 			<div class="col-sm-5">
-				<input type="text" name="street" placeholder="Street">
+				<input type="text" class="form-control" name="street" placeholder="Street" ng-model="shelter.street">
 			</div>
 		</div>
 		<div class="form-group row">
 			<label class="control-label col-sm-4">Tax code</label>
 			<div class="col-sm-5">
-				<input type="text" name="taxCode" placeholder="tax code">
+				<input type="text" class="form-control" name="taxCode" placeholder="tax code" ng-model="shelter.tax">
 			</div>
 		</div>
 		<div class="form-group row">
 			<label class="control-label col-sm-4">Bank account number</label>
 			<div class="col-sm-5">
-				<input type="text" name="ban" placeholder="bank account number">
+				<input type="text" class="form-control" name="ban" placeholder="bank account number" ng-model="shelter.bankaccount">
 			</div>
 		</div>
 		<div class="form-group row">
 			<label class="control-label col-sm-4">PayPal account</label>
 			<div class="col-sm-5">
-				<input type="text" name="ppAcc" placeholder="PP account">
+				<input type="text" class="form-control" name="ppAcc" placeholder="PP account" ng-model="shelter.paypal">
 			</div>
 		</div>
 		<div class="form-group row">
 			<label class="control-label col-sm-4">Password</label>
 			<div class="col-sm-5">
-				<input type="password" name="emial" name="pw">
+				<input type="password" class="form-control" name="pw" name="pw" ng-model="shelter.pw">
 			</div>
 		</div>
 		<div class="form-group row">
 			<label class="control-label col-sm-4">Password again:</label>
 			<div class="col-sm-5">
-				<input type="password" name="emial" name="pwre">
+				<input type="password" class="form-control" name="pwre" name="pwre" ng-model="shelter.pwre">
 			</div>
 		</div>
+		<div class="form-group row" ng-show="shelter.pwre != shelter.pw">
+			<div class="alert alert-danger" role="alert">Passwords are not matching</div>
+		</div>
 	</div>
+		<div class="panel-footer text-center">
+	        <button class="btn btn-primary" >Save</button>
+	    </div>
 </from>

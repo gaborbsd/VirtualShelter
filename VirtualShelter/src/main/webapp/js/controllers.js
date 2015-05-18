@@ -1,107 +1,231 @@
-var app = angular.module('vshelterApp', ['ngRoute','bgf.paginateAnything','']);
+var app = angular.module('vshelterApp', [ 'ngRoute', 'bgf.paginateAnything' ]);
 
 app.config(function($routeProvider) {
-	$routeProvider.when('/editor/user',{
-		controller: 'UserEditorController',
-		templateUrl: '/html/userform.html'
-	}).when('/editor/user/:id',{
-		controller: 'UserEditorController',
-		templateUrl: '/html/userform.html'
-	}).when('/editor/animal/:id',{
-		controller: 'AnimalEditorController',
-		templateUrl: '/html/animalform.html'
-	}).when('/editor/animal',{
-		controller: 'AnimalEditorController',
-		templateUrl: '/html/animalform.html'
-	}).when('/editor/shelter',{
-		controller: 'ShelterEditorController',
-		templateUrl: '/html/shelterform.html'
-	}).when('/editor/shelter/:id',{
-		controller: 'ShelterEditorController',
-		templateUrl: '/html/shelterform.html'
-	}).when('/search/',{
-		controller: 'SearchController',
-		templateUrl: '/html/search.html'
-	}).otherwise({ redirectTo: '/search/'	})
+	$routeProvider.when('/editor/user', {
+		controller : 'UserEditorController',
+		templateUrl : '/html/userform.html'
+	}).when('/editor/user/:id', {
+		controller : 'UserEditorController',
+		templateUrl : '/html/userform.html'
+	}).when('/editor/animal/:id', {
+		controller : 'AnimalEditorController',
+		templateUrl : '/html/animalform.html'
+	}).when('/editor/animal', {
+		controller : 'AnimalEditorController',
+		templateUrl : '/html/animalform.html'
+	}).when('/editor/shelter', {
+		controller : 'ShelterEditorController',
+		templateUrl : '/html/shelterform.html'
+	}).when('/editor/shelter/:id', {
+		controller : 'ShelterEditorController',
+		templateUrl : '/html/shelterform.html'
+	}).when('/search', {
+		controller : 'SearchController',
+		templateUrl : '/html/search.html'
+	}).otherwise({
+		redirectTo : '/search'
+	})
 })
 
-app.config(function ($httpProvider) {
-        var httpInterceptor = ['$rootScope', '$q', function (scope, $q) {
-            function success(response) {
-                return response;
-            }
+app.factory('SearchService', SearchService)
+app.factory('AnimalService', AnimalService)
+app.factory('ShelterService', ShelterService)
 
-            function error(response) {
-                var status = response.status;
-                if (status == 401) {
-                    location.href = jsRoutes.controllers.BaseCtrl.sessionExpired().url;
-                }
-                return $q.reject(response);
-            }
+AnimalService.$inject = [ '$http', '$q' ];
+function AnimalService($http, $q) {
 
-            return function (promise) {
-                return promise.then(success, error);
-            }
-        }];
-        $httpProvider.responseInterceptors.push(httpInterceptor);
-    })
-
-    var controllers = {};
-controllers.AnimalController=function($scope, $http,SearchService) {
-	$scope.postAnimal = postAnimal;
-
-	function postAnimal() {
-		if ($scope.animal) {
-			$http.post('api/animal', vm.animal)
-					.success(function() {
-						$scope.getAnimals();
-						$scope.animal = null;
-					});
-		}
+	var service = {
+		getSpecies : getSpecies,
+		saveAnimal : saveAnimal,
+		getAnimal : getAnimal
 	};
-};
 
-controllers.HeaderController=function($scope, $http) {
+	return service;
+
+	function saveAnimal(animal) {
+		var deferred = $q.defer();
+		$http.post("api/animal", animal).success(function(data, status) {
+			deferred.resolve(data);
+		}).error(function(reason) {
+			deferred.reject(reason);
+		});
+		return deferred.promise;
+	}
+
+	function getSpecies() {
+		var deferred = $q.defer();
+		$http.get("api/species").success(function(data, status) {
+			deferred.resolve(data);
+		}).error(function(data, status) {
+			deferred.reject(status);
+		});
+		return deferred.promise;
+	}
+	
+	function getAnimal(id) {
+		var deferred = $q.defer();
+		$http.get("api/animal/"+id).success(function(data, status) {
+			deferred.resolve(data);
+		}).error(function(data, status) {
+			deferred.reject(status);
+		});
+		return deferred.promise;
+	}
+}
+
+SearchService.$inject = [ '$http', '$q' ];
+function SearchService($http, $q) {
+
+	var service = {
+		getAnimals : getAnimals
+	};
+
+	return service;
+
+	function getAnimals() {
+		var deferred = $q.defer();
+		$http.get("api/animal").success(function(data, status) {
+			deferred.resolve(data);
+		}).error(function(data, status) {
+			deferred.reject(status);
+		});
+		return deferred.promise;
+	}
+}
+
+ShelterService.$inject = [ '$http', '$q' ];
+function ShelterService($http, $q) {
+
+	var service = {
+		saveShelter : saveShelter
+	};
+
+	return service;
+
+	function saveShelter(shelter) {
+		var deferred = $q.defer();
+		$http.post("api/shelter", shelter).success(function(data, status) {
+			deferred.resolve(data);
+		}).error(function(reason) {
+			deferred.reject(reason);
+		});
+		return deferred.promise;
+	}
+
+}
+
+var controllers = {};
+
+controllers.HeaderController = function($scope, $http) {
 	$scope.loginForm = {}
 	$scope.login = login;
-	
-	function login(){}
-	
-	function register(){}
-	
+	$scope.loginForm.email = "sajt";
+	function login() {
+
+	}
+
+	function register() {
+		location.href = "#/editor/user"
+	}
+
 };
 
-controllers.SearchController = function($scope, $http){
+controllers.SearchController = function($scope, $http, SearchService) {
 	$scope.clientLimit;
 	$scope.animals;
 	$scope.page;
 	$scope.perPage
-	$scope.url='api/animal'
+	$scope.url = 'api/animal'
 	$scope.urlParams;
-	$scope.passive=true;
-	
+
 	$scope.detailed = false;
-	function getAnimals() {
+	$scope.getAnimals = function getAnimals() {
 		$http.get('api/animal').success(function(data) {
 			$scope.animals = data;
 		});
 	};
-	
+
 };
 
-controllers.UserEditorController = function($scope, $http){
-	
+controllers.UserEditorController = function($scope, $http, $routeParams) {
+
 };
 
-controllers.AnimalEditorController = function($scope, $http){
+controllers.AnimalEditorController = function($scope, $http, AnimalService,
+		$routeParams) {
 	$scope.animal = {};
 	$scope.animal.disabilities = false;
 	$scope.animal.diseases = false;
 	$scope.animal.otherCosts = false;
+	$scope.error = "";
+	$scope.animalCoreData = {};
+
+	$scope.saveAnimal = function() {
+		if ($scope.animal.disabilities) {
+			$scope.animal.disabilities = $scope.animal.disabilitiesDesc;
+		}
+		if ($scope.animal.diseases) {
+			$scope.animal.diseases = $scope.animal.diseasesDesc;
+		}
+		if ($scope.animal.otherCosts) {
+			$scope.animal.otherCosts = $scope.animal.otherCostsDesc;
+		}
+		AnimalService.saveAnimal($scope.animal).then(function() {
+			location.href = "/";
+		}, function(response) {
+			$scope.error = response;
+		})
+	}
+
+	$scope.getSpecies = function() {
+		AnimalService.getSpecies().then(function(data) {
+			$scope.animalCoreData.species = data;
+		}, function(response) {
+			$scope.error = response;
+		})
+	}
+
+	if ($scope.animal.id) {
+		AnimalService.getAnimal($scope.animal.id).then(function(data) {
+			$scope.animal.species = data;
+		}, function(response) {
+			$scope.error = response;
+		})
+	}
+
+	$scope.getSpecies();
 };
 
-controllers.ShelterEditorController = function($scope, $http){
-	
+controllers.ShelterEditorController = function($scope, $http) {
+	$scope.shelter = {};
+
+	$scope.saveShelter = function() {
+
+		ShelterService.saveShelter($scope.shelter).then(function() {
+			location.href = "/";
+		}, function(response) {
+			$scope.error = response;
+		})
+	}
 };
 
 app.controller(controllers)
+
+app.directive('fileUpload', FileUploadDirective)
+
+function FileUploadDirective() {
+	return {
+		restrict : 'A',
+		scope : true,
+		link : function(scope, el, attrs) {
+			el.bind('change', function(event) {
+				var files = event.target.files;
+				for (var i = 0; i < files.length; i++) {
+					scope.$emit("fileSelected", {
+						file : files[i]
+					});
+				}
+			});
+		}
+	};
+}

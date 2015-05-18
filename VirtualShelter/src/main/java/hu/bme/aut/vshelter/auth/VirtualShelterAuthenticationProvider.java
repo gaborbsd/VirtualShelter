@@ -1,6 +1,7 @@
 package hu.bme.aut.vshelter.auth;
 
 import hu.bme.aut.vshelter.api.IAuthenticationAndPermissionOperations;
+import hu.bme.aut.vshelter.api.VirtualShelterException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +32,7 @@ public class VirtualShelterAuthenticationProvider implements AuthenticationProvi
 	@Override
 	public Authentication authenticate(Authentication authentication)
 			throws AuthenticationException {
+		try{
 		String name = authentication.getName();
 		String password = authentication.getCredentials().toString();
 		if (operations.authenticate(name, password)) {
@@ -38,6 +40,9 @@ public class VirtualShelterAuthenticationProvider implements AuthenticationProvi
 			grantedAuths.add(new SimpleGrantedAuthority("ROLE_USER"));
 			return new UsernamePasswordAuthenticationToken(name, password, grantedAuths);
 		} else {
+			throw new VirtualShelterAuthenticationException("Authentication unsuccessful");
+		}
+		}catch(VirtualShelterException e){
 			throw new VirtualShelterAuthenticationException("Authentication unsuccessful");
 		}
 		

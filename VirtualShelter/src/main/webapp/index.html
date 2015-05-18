@@ -1,60 +1,78 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<title>Virtual Shelter</title>
-	
-	<script type="text/javascript" src="vendor/jquery/dist/jquery.js"></script>
-	<script	type="text/javascript" src="vendor/angular/angular.js"></script>
-	<script	type="text/javascript" src="vendor/angular-ui/build/angular-ui.js"></script>
-	<script	type="text/javascript" src="vendor/angular-paginate-anything/dist/paginate-anything.js"></script>
-	<script	type="text/javascript" src="vendor/angular-route/angular-route.js"></script>
-	<script	type="text/javascript" src="vendor/select2/select2.js"></script>
-	<script type="text/javascript" src="vendor/bootstrap/dist/js/bootstrap.min.js"></script>
-	
-	<script src="js/controllers.js"></script>
-	<script src="js/services.js"></script>
-	<link rel="stylesheet" href="css/main.css">
-	<link rel="stylesheet" href="vendor/angular-ui/build/angular-ui.css">
-	<link rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap.css">
+<meta charset="UTF-8">
+<title>Virtual Shelter</title>
+
+<script type="text/javascript" src="vendor/jquery/dist/jquery.js"></script>
+<script type="text/javascript" src="vendor/angular/angular.js"></script>
+<script type="text/javascript"
+	src="vendor/angular-ui/build/angular-ui.js"></script>
+<script type="text/javascript"
+	src="vendor/angular-paginate-anything/dist/paginate-anything.js"></script>
+<script type="text/javascript"
+	src="vendor/angular-route/angular-route.js"></script>
+<script type="text/javascript" src="vendor/select2/select2.js"></script>
+<script type="text/javascript"
+	src="vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+
+<script src="js/controllers.js"></script>
+<script src="js/services.js"></script>
+<link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="vendor/angular-ui/build/angular-ui.css">
+<link rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap.css">
 
 </head>
 <body ng-app="vshelterApp">
 	<div class="row">
-		<div class="col-md-6 col-md-offset-6">
-			<form class="form" name="loginForm" novalidate method="post" autocomplete="off" ng-model=loginForm ng-controller="HeaderController as vm">
-				<div class="input-group">
-					<input type="text" name="email" placeholder="Email">
-					<input type="password" name="password" placeholder="Password">
-					<button type="button" ng-click="vm.register()">Register</button>
-					<button type="button" ng-click="vm.login()">Login</button>
+		<div class="col-md-4 col-md-offset-6">
+			<form class="form-inline" name="loginForm" novalidate method="post"
+				autocomplete="off" ng-controller="HeaderController">
+				<div class="">
+					<input class="form-control" type="text" name="email" placeholder="Email">
+					<input class="form-control"	type="password" name="password" placeholder="Password">
+					<a class="btn" type="button" href='#/editor/user'>Register</a>
+					<button class="btn" type="button" ng-click="login()">Login</button>
 				</div>
 			</form>
+		</div>
+		<div class="col-md-2">
+			<div class="dropdown">
+				<button class="btn btn-default dropdown-toggle" type="button"
+					id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+					Dropdown <span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu" role="menu"
+					aria-labelledby="dropdownMenu1">
+					<li role="presentation"><a role="menuitem" tabindex="-1"
+						href="#/editor/user">UserEditor</a></li>
+					<li role="presentation"><a role="menuitem" tabindex="-1"
+						href="#/editor/animal">AnimalEditor</a></li>
+					<li role="presentation"><a role="menuitem" tabindex="-1"
+						href="#/editor/shelter">ShelterEditor</a></li>
+				</ul>
+			</div>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-md-3">
 			<article>
 				<img src="" title="Kep1" />
-				<details>
-					Bla-blablaBla-blablaBla-blabla
+				<details> Bla-blablaBla-blablaBla-blabla
 				</details>
 			</article>
 			<article>
 				<img src="" title="Kep2" />
-				<details>
-					Bla-blablaBla-blablaBla-blabla
+				<details> Bla-blablaBla-blablaBla-blabla
 				</details>
 			</article>
 			<article>
 				<img src="" title="Kep3" />
-				<details>
-					Bla-blablaBla-blablaBla-blabla
+				<details> Bla-blablaBla-blablaBla-blabla
 				</details>
 			</article>
 		</div>
-		<div class="col-md-9" ng-view>
-		</div>
+		<div class="col-md-9" ng-view></div>
 	</div>
 </body>
 </html>
