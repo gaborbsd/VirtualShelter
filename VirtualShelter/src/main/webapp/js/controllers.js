@@ -47,8 +47,8 @@ function AnimalService($http, $q) {
 		var deferred = $q.defer();
 		$http.post("api/animal", animal).success(function(data, status) {
 			deferred.resolve(data);
-		}).error(function(reason) {
-			deferred.reject(reason);
+		}).error(function(data,status) {
+			deferred.reject(status);
 		});
 		return deferred.promise;
 	}
@@ -98,14 +98,15 @@ ShelterService.$inject = [ '$http', '$q' ];
 function ShelterService($http, $q) {
 
 	var service = {
-		saveShelter : saveShelter
+		saveShelter : saveShelter,
+		getShelter : getShelter
 	};
 
 	return service;
 
 	function saveShelter(shelter) {
 		var deferred = $q.defer();
-		$http.post("api/shelter", shelter).success(function(data, status) {
+		$http.post("api/institution", shelter).success(function(data, status) {
 			deferred.resolve(data);
 		}).error(function(reason) {
 			deferred.reject(reason);
@@ -113,6 +114,18 @@ function ShelterService($http, $q) {
 		return deferred.promise;
 	}
 
+
+	function getShelter(id) {
+		var deferred = $q.defer();
+		$http.get("api/institution/"+id).success(function(data, status) {
+			deferred.resolve(data);
+		}).error(function(data, status) {
+			deferred.reject(status);
+		});
+		return deferred.promise;
+	}
+
+	
 }
 
 UserService.$inject = [ '$http', '$q' ];
@@ -127,10 +140,10 @@ function UserService($http, $q) {
 
 	function saveUser(user) {
 		var deferred = $q.defer();
-		$http.post("api/user", shelter).success(function(data, status) {
+		$http.post("api/user", user).success(function(data, status) {
 			deferred.resolve(data);
-		}).error(function(reason) {
-			deferred.reject(reason);
+		}).error(function(status) {
+			deferred.reject(status);
 		});
 		return deferred.promise;
 	}
@@ -152,9 +165,6 @@ function UserService($http, $q) {
 var controllers = {};
 
 controllers.HeaderController = function($scope, $http) {
-	$scope.loginForm = {}
-	$scope.login = login;
-	$scope.loginForm.email = "sajt";
 	function login() {
 
 	}
@@ -177,14 +187,16 @@ controllers.SearchController = function($scope, $http, SearchService) {
 	$scope.getAnimals = function getAnimals() {
 		$http.get('api/animal').success(function(data) {
 			$scope.animals = data;
+		}).error(function(response){
+			$scope.error = response.status;
 		});
 	};
 
 };
 
 controllers.UserEditorController = function($scope, $http, $routeParams, UserService) {
-	$scope.user = {}
-
+	$scope.user = {};
+	$scope.error = "";
 	$scope.user.id = $routeParams.id ? $routeParams.id : -1;
 	$scope.saveUser = function(){
 		UserService.saveUser($scope.animal).then(function() {
@@ -249,13 +261,23 @@ controllers.AnimalEditorController = function($scope, $http, AnimalService,	$rou
 	$scope.getSpecies();
 };
 
-controllers.ShelterEditorController = function($scope, $http) {
+controllers.ShelterEditorController = function($scope, $http,ShelterService, $routeParams) {
 	$scope.shelter = {};
+	$scope.error = "";
+	$scope.shelter.id = $routeParams.id ? $routeParams.id : -1;
 
 	$scope.saveShelter = function() {
 
 		ShelterService.saveShelter($scope.shelter).then(function() {
 			location.href = "/";
+		}, function(response) {
+			$scope.error = response;
+		})
+	}
+	
+	if ($scope.shelter.id > 0) {
+		ShelterService.getShelter($scope.shelter.id).then(function(data) {
+			$scope.shelter = data;
 		}, function(response) {
 			$scope.error = response;
 		})

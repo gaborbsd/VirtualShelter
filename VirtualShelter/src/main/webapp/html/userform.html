@@ -1,58 +1,65 @@
 <h1>User form</h1>
 <hr />
+<div class="row-fluid" ng-hide='error==""'>
+	<div class="col-md-12">
+		<div class="alert alert-danger" role="alert">{{error}}</div>
+	</div>
+</div>
 <from class="form">
 <div class="panel-body">
 	<div class="form-group row">
 		<label class="control-label col-sm-4">Name</label>
 		<div class="col-sm-5">
-			<input class="form-control" type="text" name="name" ng-model="user.name"
-				placeholder="Name">
+			<input class="form-control" type="text" name="name"
+				ng-model="user.name" placeholder="Name">
 		</div>
 	</div>
 	<div class="form-group row">
 		<label class="control-label col-sm-4">Email</label>
 		<div class="col-sm-5">
-			<input class="form-control" type="text" name="emial" ng-model="user.email"
-				placeholder="Email">
+			<input class="form-control" type="text" name="email"
+				ng-model="user.email" placeholder="Email">
 		</div>
 	</div>
 	<div class="form-group row">
 		<label class="control-label col-sm-4">Photo</label>
 		<div class="col-sm-5">
-			<input type="file" name="photo" ng-model="user.phto"
+			<input type="file" name="photo" ng-model="user.photo"
 				placeholder="Photo">
 		</div>
 	</div>
 	<div class="form-group row">
 		<label class="control-label col-sm-4">City</label>
 		<div class="col-sm-5">
-			<input class="form-control" type="text" name="street" placeholder="City"
-				ng-model="user.city">
+			<input class="form-control" type="text" name="street"
+				placeholder="City" ng-model="user.address.city">
 		</div>
 	</div>
 	<div class="form-group row">
 		<label class="control-label col-sm-4">Street</label>
 		<div class="col-sm-5">
-			<input class="form-control" type="text" name="street" placeholder="Street"
-				ng-model="user.street">
+			<input class="form-control" type="text" name="street"
+				placeholder="Street" ng-model="user.address.address">
 		</div>
 	</div>
 	<div class="form-group row">
 		<label class="control-label col-sm-4">About me</label>
 		<div class="col-sm-5">
-			<textarea class="form-control" rows="5" ng-model="user.description"></textarea>
+			<textarea class="form-control" rows="5" ng-model="user.introduction"></textarea>
 		</div>
 	</div>
 	<div class="form-group row">
 		<label class="control-label col-sm-4">Password</label>
 		<div class="col-sm-5">
-			<input class="form-control" type="password" name="pw" ng-model="user.pw">
+			<input class="form-control" type="password" name="pw"
+				ng-model="user.pw">
 		</div>
 	</div>
 	<div class="form-group row">
 		<label class="control-label col-sm-4">Password again:</label>
 		<div class="col-sm-5">
-			<input class="form-control" type="password" name="pw-re" ng-model="user.pwre">
+			<input class="form-control" type="password" name="pw-re"
+				ng-model="user.pwre">
 		</div>
 	</div>
 </div>
