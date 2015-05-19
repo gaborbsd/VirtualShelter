@@ -30,6 +30,7 @@ app.config(function($routeProvider) {
 app.factory('SearchService', SearchService)
 app.factory('AnimalService', AnimalService)
 app.factory('ShelterService', ShelterService)
+app.factory('UserService', UserService)
 
 AnimalService.$inject = [ '$http', '$q' ];
 function AnimalService($http, $q) {
@@ -114,6 +115,40 @@ function ShelterService($http, $q) {
 
 }
 
+UserService.$inject = [ '$http', '$q' ];
+function UserService($http, $q) {
+
+	var service = {
+		saveUser : saveUser,
+		getUser : getUser
+	};
+
+	return service;
+
+	function saveUser(user) {
+		var deferred = $q.defer();
+		$http.post("api/user", shelter).success(function(data, status) {
+			deferred.resolve(data);
+		}).error(function(reason) {
+			deferred.reject(reason);
+		});
+		return deferred.promise;
+	}
+	
+	function getUser(id) {
+		var deferred = $q.defer();
+		$http.get("api/user/"+id).success(function(data, status) {
+			deferred.resolve(data);
+		}).error(function(data, status) {
+			deferred.reject(status);
+		});
+		return deferred.promise;
+	}
+
+}
+
+
+
 var controllers = {};
 
 controllers.HeaderController = function($scope, $http) {
@@ -147,19 +182,37 @@ controllers.SearchController = function($scope, $http, SearchService) {
 
 };
 
-controllers.UserEditorController = function($scope, $http, $routeParams) {
+controllers.UserEditorController = function($scope, $http, $routeParams, UserService) {
+	$scope.user = {}
 
+	$scope.user.id = $routeParams.id ? $routeParams.id : -1;
+	$scope.saveUser = function(){
+		UserService.saveUser($scope.animal).then(function() {
+			location.href = "/";
+		}, function(response) {
+			$scope.error = response;
+		})
+	}
+	
+	if ($scope.user.id > 0) {
+		UserService.getUser($scope.user.id).then(function(data) {
+			$scope.user = data;
+		}, function(response) {
+			$scope.error = response;
+		})
+	}
 };
 
-controllers.AnimalEditorController = function($scope, $http, AnimalService,
-		$routeParams) {
+controllers.AnimalEditorController = function($scope, $http, AnimalService,	$routeParams) {
 	$scope.animal = {};
 	$scope.animal.disabilities = false;
 	$scope.animal.diseases = false;
 	$scope.animal.otherCosts = false;
 	$scope.error = "";
 	$scope.animalCoreData = {};
-
+	$scope.animal.id = $routeParams.id ? $routeParams.id : -1;
+	
+	
 	$scope.saveAnimal = function() {
 		if ($scope.animal.disabilities) {
 			$scope.animal.disabilities = $scope.animal.disabilitiesDesc;
@@ -185,9 +238,9 @@ controllers.AnimalEditorController = function($scope, $http, AnimalService,
 		})
 	}
 
-	if ($scope.animal.id) {
+	if ($scope.animal.id > 0) {
 		AnimalService.getAnimal($scope.animal.id).then(function(data) {
-			$scope.animal.species = data;
+			$scope.animal = data;
 		}, function(response) {
 			$scope.error = response;
 		})
