@@ -22,6 +22,9 @@ app.config(function($routeProvider) {
 	}).when('/search', {
 		controller : 'SearchController',
 		templateUrl : '/html/search.html'
+	}).when('/users', {
+		controller : 'UsersController',
+		templateUrl : '/html/users.html'
 	}).otherwise({
 		redirectTo : '/search'
 	})
@@ -133,7 +136,8 @@ function UserService($http, $q) {
 
 	var service = {
 		saveUser : saveUser,
-		getUser : getUser
+		getUser : getUser,
+		getUsers : getUsers
 	};
 
 	return service;
@@ -156,6 +160,16 @@ function UserService($http, $q) {
 			deferred.reject(status);
 		});
 		return deferred.promise;
+	}
+	
+	function getUsers(){
+		var deferred = $q.defer();
+		$http.get("api/user").success(function(data, status) {
+			deferred.resolve(data);
+		}).error(function(data, status) {
+			deferred.reject(status);
+		});
+		return deferred.promise;		
 	}
 
 }
@@ -194,12 +208,24 @@ controllers.SearchController = function($scope, $http, SearchService) {
 
 };
 
+controllers.UsersController = function($scope, $http, UserService) {
+	$scope.users = {};
+	$scope.error = "";
+	$scope.getUsers = function(){
+		UserService.getUsers($scope.use).then(function(data) {
+			$scope.users=data;
+		}, function(response) {
+			$scope.error = response;
+		})
+	}()
+};
+
 controllers.UserEditorController = function($scope, $http, $routeParams, UserService) {
 	$scope.user = {};
 	$scope.error = "";
 	$scope.user.id = $routeParams.id ? $routeParams.id : -1;
 	$scope.saveUser = function(){
-		UserService.saveUser($scope.animal).then(function() {
+		UserService.saveUser($scope.user).then(function() {
 			location.href = "/";
 		}, function(response) {
 			$scope.error = response;

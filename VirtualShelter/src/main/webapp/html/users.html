@@ -1,0 +1,29 @@
+<h1>User form</h1>
+<hr />
+<div class="row-fluid" ng-hide='error==""'>
+	<div class="col-md-12">
+		<div class="alert alert-danger" role="alert">{{error}}</div>
+	</div>
+</div>
+<div class="panel-body">
+	<table class="table table-bordered table-hover" id="table1">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Email</th>
+				<th>Introduction</th>
+				<th>City</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="user in users">
+				<td>{{user.name}}</td>
+				<td>{{user.email}}</td>
+				<td>{{user.introduction}}</td>
+				<td>{{user.address.city}}</td>
+				<td><a href="#/editor/user/{{$index+1}}">Edit</a></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
