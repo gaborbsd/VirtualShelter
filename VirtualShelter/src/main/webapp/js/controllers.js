@@ -1,5 +1,8 @@
+//ngRoute for the routing in the config
+//bgf.paginateAnything for the PaginateAnything in the code more details : https://github.com/begriffs/angular-paginate-anything
+//	server side must be prepared for handling further get parameters
 var app = angular.module('vshelterApp', [ 'ngRoute', 'bgf.paginateAnything' ]);
-
+//routeProvider for the ng-view tag check index.html
 app.config(function($routeProvider) {
 	$routeProvider.when('/editor/user', {
 		controller : 'UserEditorController',
@@ -30,14 +33,21 @@ app.config(function($routeProvider) {
 	})
 })
 
+//To keep the MVC - MVVM you will need services like this 
+//The first parameter is the name of the Service the second is a function which implements all the required functions
 app.factory('SearchService', SearchService)
 app.factory('AnimalService', AnimalService)
 app.factory('ShelterService', ShelterService)
 app.factory('UserService', UserService)
 
+//$inject is neccessary with this concept of service handling
+//$http does the communication
+//$q future-promice "architecture" for the async datahandling
 AnimalService.$inject = [ '$http', '$q' ];
 function AnimalService($http, $q) {
 
+//Here you must provide the method you can use from this service/factory
+//The field name of the json is the method you call from the controller, the value is the name of the function which implements the required functionality
 	var service = {
 		getSpecies : getSpecies,
 		saveAnimal : saveAnimal,
@@ -311,6 +321,10 @@ controllers.ShelterEditorController = function($scope, $http,ShelterService, $ro
 };
 
 app.controller(controllers)
+
+//Async file upload you can use it on any file input and this will emit a fileSelected event when a file is need to be uploaded
+//You should listen for this event in the controller where you need this kinda action
+//Will provice a tutorial how to handle 
 
 app.directive('fileUpload', FileUploadDirective)
 
