@@ -22,13 +22,6 @@
 		</div>
 	</div>
 	<div class="form-group row">
-		<label class="control-label col-sm-4">Photo</label>
-		<div class="col-sm-5">
-			<input type="file" name="photo" ng-model="user.photo"
-				placeholder="Photo">
-		</div>
-	</div>
-	<div class="form-group row">
 		<label class="control-label col-sm-4">City</label>
 		<div class="col-sm-5">
 			<input class="form-control" type="text" name="street"
@@ -43,23 +36,37 @@
 		</div>
 	</div>
 	<div class="form-group row">
+		<label class="control-label col-sm-4">zipCode</label>
+		<div class="col-sm-5">
+			<input class="form-control" type="number" name="zipCode"
+				placeholder="zipCode" ng-model="user.address.zipCode">
+		</div>
+	</div>
+	<div class="form-group row">
+		<label class="control-label col-sm-4">country</label>
+		<div class="col-sm-5">
+			<input class="form-control" type="text" name="country"
+				placeholder="country" ng-model="user.address.country">
+		</div>
+	</div>
+	<div class="form-group row">
 		<label class="control-label col-sm-4">About me</label>
 		<div class="col-sm-5">
-			<textarea class="form-control" rows="5" ng-model="user.introduction"></textarea>
+			<textarea class="form-control" rows="5" ng-model="user.introductionText"></textarea>
 		</div>
 	</div>
 	<div class="form-group row">
 		<label class="control-label col-sm-4">Password</label>
 		<div class="col-sm-5">
-			<input class="form-control" type="password" name="pw"
-				ng-model="user.pw">
+			<input class="form-control" type="password" name="password"
+				ng-model="user.password">
 		</div>
 	</div>
 	<div class="form-group row">
 		<label class="control-label col-sm-4">Password again:</label>
 		<div class="col-sm-5">
 			<input class="form-control" type="password" name="pw-re"
-				ng-model="user.pwre">
+				>
 		</div>
 	</div>
 </div>

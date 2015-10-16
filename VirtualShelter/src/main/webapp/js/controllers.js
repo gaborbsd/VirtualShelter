@@ -233,7 +233,8 @@ controllers.UsersController = function($scope, $http, UserService) {
 controllers.UserEditorController = function($scope, $http, $routeParams, UserService) {
 	$scope.user = {};
 	$scope.error = "";
-	$scope.user.id = $routeParams.id ? $routeParams.id : -1;
+	
+	$scope.user.id = null;// $routeParams.id ? $routeParams.id : -1;
 	$scope.saveUser = function(){
 		UserService.saveUser($scope.user).then(function() {
 			location.href = "/";

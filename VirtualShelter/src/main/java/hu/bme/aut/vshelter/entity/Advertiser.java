@@ -35,7 +35,7 @@ public abstract class Advertiser {
 	             message="Invalid email format")
 	private String email;
 	
-	@ManyToOne
+	@ManyToOne(cascade = {CascadeType.ALL})
 	private Address address;
 	
 	@ManyToOne
