@@ -73,4 +73,5 @@
 	<bean id="pictureFacade" class="hu.bme.aut.vshelter.dal.impl.PictureFacadeJPAImpl" />
 	<bean id="speciesFacade" class="hu.bme.aut.vshelter.dal.impl.SpeciesFacadeJPAImpl" />
 	<bean id="userFacade" class="hu.bme.aut.vshelter.dal.impl.UserFacadeJPAImpl" />
+	<bean id="authenticationAndPermissionOperations" class="hu.bme.aut.vshelter.api.AuthenticationAndPermissionOperationsImpl" />
 </beans>
