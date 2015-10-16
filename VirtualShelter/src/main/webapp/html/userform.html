@@ -8,45 +8,59 @@
 <from class="form">
 <div class="panel-body">
 	<div class="form-group row">
-		<label class="control-label col-sm-4">Name</label>
+		<label class="control-label col-sm-4">Name*</label>
 		<div class="col-sm-5">
 			<input class="form-control" type="text" name="name"
 				ng-model="user.name" placeholder="Name">
 		</div>
 	</div>
 	<div class="form-group row">
-		<label class="control-label col-sm-4">Email</label>
+		<label class="control-label col-sm-4">Email*</label>
 		<div class="col-sm-5">
 			<input class="form-control" type="text" name="email"
 				ng-model="user.email" placeholder="Email">
 		</div>
 	</div>
 	<div class="form-group row">
-		<label class="control-label col-sm-4">City</label>
+		<label class="control-label col-sm-4">Country*</label>
+		<div class="col-sm-5">
+			<input class="form-control" type="text" name="country"
+				placeholder="Country" ng-model="user.address.country">
+		</div>
+	</div>
+	<div class="form-group row">
+		<label class="control-label col-sm-4">ZIP Code*</label>
+		<div class="col-sm-5">
+			<input class="form-control" type="number" name="zipCode"
+				placeholder="1000" ng-model="user.address.zipCode">
+		</div>
+	</div>
+	<div class="form-group row">
+		<label class="control-label col-sm-4">City*</label>
 		<div class="col-sm-5">
 			<input class="form-control" type="text" name="street"
 				placeholder="City" ng-model="user.address.city">
 		</div>
 	</div>
 	<div class="form-group row">
-		<label class="control-label col-sm-4">Street</label>
+		<label class="control-label col-sm-4">Street*</label>
 		<div class="col-sm-5">
 			<input class="form-control" type="text" name="street"
 				placeholder="Street" ng-model="user.address.address">
 		</div>
 	</div>
 	<div class="form-group row">
-		<label class="control-label col-sm-4">zipCode</label>
+		<label class="control-label col-sm-4">Phone number</label>
 		<div class="col-sm-5">
-			<input class="form-control" type="number" name="zipCode"
-				placeholder="zipCode" ng-model="user.address.zipCode">
+			<input class="form-control" type="text" name="phoneNumber"
+				placeholder="Phone number" ng-model="user.phoneNumber">
 		</div>
 	</div>
 	<div class="form-group row">
-		<label class="control-label col-sm-4">country</label>
+		<label class="control-label col-sm-4">Mobile phone</label>
 		<div class="col-sm-5">
-			<input class="form-control" type="text" name="country"
-				placeholder="country" ng-model="user.address.country">
+			<input class="form-control" type="text" name="mobilePhoneNumber"
+				placeholder="Mobile phone" ng-model="user.mobilePhoneNumber">
 		</div>
 	</div>
 	<div class="form-group row">
@@ -56,17 +70,17 @@
 		</div>
 	</div>
 	<div class="form-group row">
-		<label class="control-label col-sm-4">Password</label>
+		<label class="control-label col-sm-4">Password*</label>
 		<div class="col-sm-5">
-			<input class="form-control" type="password" name="password"
+			<input class="form-control" type="password" name="password" id="password"
 				ng-model="user.password">
 		</div>
 	</div>
 	<div class="form-group row">
-		<label class="control-label col-sm-4">Password again:</label>
+		<label class="control-label col-sm-4">Password again*</label>
 		<div class="col-sm-5">
-			<input class="form-control" type="password" name="pw-re"
-				>
+			<input class="form-control" type="password" name="password-re" id="password-re"
+				password-match="password">
 		</div>
 	</div>
 </div>
