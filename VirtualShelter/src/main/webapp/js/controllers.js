@@ -222,7 +222,7 @@ controllers.UsersController = function($scope, $http, UserService) {
 	$scope.users = {};
 	$scope.error = "";
 	$scope.getUsers = function(){
-		UserService.getUsers($scope.use).then(function(data) {
+		UserService.getUsers($scope.user).then(function(data) {
 			$scope.users=data;
 		}, function(response) {
 			$scope.error = response;
@@ -234,7 +234,7 @@ controllers.UserEditorController = function($scope, $http, $routeParams, UserSer
 	$scope.user = {};
 	$scope.error = "";
 	
-	$scope.user.id = null;// $routeParams.id ? $routeParams.id : -1;
+	$scope.user.id = $routeParams.id ? $routeParams.id : null;
 	$scope.saveUser = function(){
 		UserService.saveUser($scope.user).then(function() {
 			location.href = "/";

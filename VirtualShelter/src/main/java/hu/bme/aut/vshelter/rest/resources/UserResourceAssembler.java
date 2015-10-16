@@ -39,13 +39,20 @@ public class UserResourceAssembler extends ResourceAssemblerSupport<User, UserRe
 		resource.setName(entity.getName());
 		resource.setEmail(entity.getEmail());
 		resource.setAddress(entity.getAddress());
-		resource.setIntroduction(entity.getIntroductionText());
+		resource.setIntroductionText(entity.getIntroductionText());
+		resource.setUserId(entity.getId());
+		resource.setMobilePhoneNumber(entity.getMobilePhoneNumber());
+		resource.setPhoneNumber(entity.getPhoneNumber());
 		
 		resource.add(linkTo(UserController.class).slash(entity.getId()).slash("institution").withRel("institution"));
 		resource.add(linkTo(UserController.class).slash(entity.getId()).slash("advertisement").withRel("advertisement"));
 		resource.add(linkTo(UserController.class).slash(entity.getId()).slash("picture").withRel("picture"));
 		resource.add(linkTo(UserController.class).slash(entity.getId()).slash("admin").withRel("admin"));
 		resource.add(linkTo(UserController.class).slash(entity.getId()).slash("profile").withRel("profile"));
+		resource.add(linkTo(UserController.class).slash(entity.getId()).slash("userId").withRel("userId"));
+		resource.add(linkTo(UserController.class).slash(entity.getId()).slash("mobilePhoneNumber").withRel("mobilePhoneNumber"));
+		resource.add(linkTo(UserController.class).slash(entity.getId()).slash("phoneNumber").withRel("phoneNumber"));
+		resource.add(linkTo(UserController.class).slash(entity.getId()).slash("introductionText").withRel("introductionText"));
 		
 		return resource;
 	}

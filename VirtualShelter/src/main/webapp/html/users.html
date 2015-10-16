@@ -20,9 +20,9 @@
 			<tr ng-repeat="user in users">
 				<td>{{user.name}}</td>
 				<td>{{user.email}}</td>
-				<td>{{user.introduction}}</td>
+				<td>{{user.introductionText}}</td>
 				<td>{{user.address.city}}</td>
-				<td><a href="#/editor/user/{{$index+1}}">Edit</a></td>
+				<td><a href="#/editor/user/{{user.userId}}">Edit</a></td>
 			</tr>
 		</tbody>
 	</table>
