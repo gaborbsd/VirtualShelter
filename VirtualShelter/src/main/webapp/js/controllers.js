@@ -32,7 +32,7 @@ app.config(function($routeProvider) {
 		controller : 'UpdateUserEditorController',
 		templateUrl : '/html/updateuserform.html'
 	}).otherwise({
-		redirectTo : '/search'
+		redirectTo : '/editor/user'
 	})
 })
 
