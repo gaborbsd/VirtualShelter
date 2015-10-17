@@ -28,6 +28,9 @@ app.config(function($routeProvider) {
 	}).when('/users', {
 		controller : 'UsersController',
 		templateUrl : '/html/users.html'
+	}).when('/update/user/:id', {
+		controller : 'UpdateUserEditorController',
+		templateUrl : '/html/updateuserform.html'
 	}).otherwise({
 		redirectTo : '/search'
 	})
@@ -147,7 +150,8 @@ function UserService($http, $q) {
 	var service = {
 		saveUser : saveUser,
 		getUser : getUser,
-		getUsers : getUsers
+		getUsers : getUsers,
+		updateUser : updateUser
 	};
 
 	return service;
@@ -180,6 +184,21 @@ function UserService($http, $q) {
 			deferred.reject(status);
 		});
 		return deferred.promise;		
+	}
+	
+	function updateUser(user) {
+		user.id = user.userId;
+		//must delete, because the PUT would not work
+		delete user['links'];
+		delete user['userId'];
+		var deferred = $q.defer();
+		$http.put("api/user/"+user.id, user).success(function(data, status) {
+			deferred.resolve(data);
+		}).error(function(data, status) {
+			deferred.reject(status);
+		});
+		return deferred.promise;
+		
 	}
 
 }
@@ -237,6 +256,28 @@ controllers.UserEditorController = function($scope, $http, $routeParams, UserSer
 	$scope.user.id = $routeParams.id ? $routeParams.id : null;
 	$scope.saveUser = function(){
 		UserService.saveUser($scope.user).then(function() {
+			location.href = "/";
+		}, function(response) {
+			$scope.error = response;
+		})
+	}
+	
+	if ($scope.user.id > 0) {
+		UserService.getUser($scope.user.id).then(function(data) {
+			$scope.user = data;
+		}, function(response) {
+			$scope.error = response;
+		})
+	}
+};
+
+controllers.UpdateUserEditorController = function($scope, $http, $routeParams, UserService) {
+	$scope.user = {};
+	$scope.error = "";
+	
+	$scope.user.id = $routeParams.id ? $routeParams.id : null;
+	$scope.updateUser = function(){
+		UserService.updateUser($scope.user).then(function() {
 			location.href = "/";
 		}, function(response) {
 			$scope.error = response;
