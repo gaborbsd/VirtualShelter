@@ -1,0 +1,20 @@
+body {
+    padding: 70px;
+}
+
+.view {
+    left: 70px;
+    position: relative;
+    opacity: 0.0;
+}
+
+/* Bootstrap overrides */
+.navbar-inner {
+    -webkit-border-radius: 0px;
+    border-radius: 0px;
+}
+
+.navbar .nav {
+    margin-left:55px;
+    margin-top:20px;
+}
