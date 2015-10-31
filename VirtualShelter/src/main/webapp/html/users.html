@@ -6,24 +6,14 @@
 	</div>
 </div>
 <div class="panel-body">
-	<table class="table table-bordered table-hover" id="table1">
-		<thead>
-			<tr>
-				<th>Name</th>
-				<th>Email</th>
-				<th>Introduction</th>
-				<th>City</th>
-				<th>Actions</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr ng-repeat="user in users">
-				<td>{{user.name}}</td>
-				<td>{{user.email}}</td>
-				<td>{{user.introductionText}}</td>
-				<td>{{user.address.city}}</td>
-				<td><a href="#/update/user/{{user.userId}}">Edit</a></td>
-			</tr>
-		</tbody>
-	</table>
+	<div>
+         <div class="row cardContainer">
+             <div class="span3 card" ng-repeat="user in users | orderBy:'name'">
+                 <button class="btn close cardClose" >&times;</button>
+                 <div class="cardHeader">{{user.name}}</div>
+                 <div class="cardBody">{{user.email}}</div>
+                 <a href="#/update/user/{{user.userId}}">Edit</a>
+             </div>
+         </div>
+     </div>
 </div>
