@@ -34,6 +34,9 @@ app.config(function($routeProvider) {
 	}).when('/shelters', {
 		controller : 'SheltersController',
 		templateUrl : '/html/shelters.html'
+	}).when('/update/shelter/:id', {
+		controller : 'UpdateShelterEditorController',
+		templateUrl : '/html/updateshelterform.html'
 	}).otherwise({
 		redirectTo : '/editor/user'
 	})
@@ -119,14 +122,15 @@ function ShelterService($http, $q) {
 	var service = {
 		saveShelter : saveShelter,
 		getShelter : getShelter,
-		getShelters : getShelters
+		getShelters : getShelters,
+		updateShelter : updateShelter
 	};
 
 	return service;
 
 	function saveShelter(shelter) {
 		var deferred = $q.defer();
-		$http.post("api/institution", shelter).success(function(data, status) {
+		$http.post("api/shelter", shelter).success(function(data, status) {
 			deferred.resolve(data);
 		}).error(function(reason) {
 			deferred.reject(reason);
@@ -137,7 +141,7 @@ function ShelterService($http, $q) {
 
 	function getShelter(id) {
 		var deferred = $q.defer();
-		$http.get("api/institution/"+id).success(function(data, status) {
+		$http.get("api/shelter/"+id).success(function(data, status) {
 			deferred.resolve(data);
 		}).error(function(data, status) {
 			deferred.reject(status);
@@ -153,6 +157,21 @@ function ShelterService($http, $q) {
 			deferred.reject(status);
 		});
 		return deferred.promise;		
+	}
+	
+	function updateShelter(shelter) {
+		shelter.id = shelter.institutionId;
+		//must delete, because the PUT would not work
+		delete shelter['links'];
+		delete shelter['institutionId'];
+		var deferred = $q.defer();
+		$http.put("api/shelter/"+shelter.id, shelter).success(function(data, status) {
+			deferred.resolve(data);
+		}).error(function(data, status) {
+			deferred.reject(status);
+		});
+		return deferred.promise;
+		
 	}
 
 	
@@ -205,6 +224,7 @@ function UserService($http, $q) {
 		//must delete, because the PUT would not work
 		delete user['links'];
 		delete user['userId'];
+		delete user['password-re'];
 		var deferred = $q.defer();
 		$http.put("api/user/"+user.id, user).success(function(data, status) {
 			deferred.resolve(data);
@@ -386,6 +406,28 @@ controllers.SheltersController = function($scope, $http, ShelterService) {
 			$scope.error = response;
 		})
 	}()
+};
+
+controllers.UpdateShelterEditorController = function($scope, $http, $routeParams, ShelterService) {
+	$scope.shelter = {};
+	$scope.error = "";
+	
+	$scope.shelter.id = $routeParams.id ? $routeParams.id : null;
+	$scope.updateShelter = function(){
+		ShelterService.updateShelter($scope.shelter).then(function() {
+			location.href = "/";
+		}, function(response) {
+			$scope.error = response;
+		})
+	}
+	
+	if ($scope.shelter.id > 0) {
+		ShelterService.getShelter($scope.shelter.id).then(function(data) {
+			$scope.shelter = data;
+		}, function(response) {
+			$scope.error = response;
+		})
+	}
 };
 
 app.controller(controllers)

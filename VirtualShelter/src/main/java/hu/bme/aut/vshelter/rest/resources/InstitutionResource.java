@@ -12,7 +12,9 @@ public class InstitutionResource extends ResourceSupport {
 	private Address address;
 	private String taxNumber;
 	private String bankAccount;
-	private String PayPal;
+	private String payPal;
+	private String phoneNumber;
+	private String mobilePhoneNumber;
 	
 	public long getInstitutionId() {
 		return institutionId;
@@ -51,9 +53,23 @@ public class InstitutionResource extends ResourceSupport {
 		this.bankAccount = bankAccount;
 	}
 	public String getPayPal() {
-		return PayPal;
+		return payPal;
 	}
 	public void setPayPal(String payPal) {
-		PayPal = payPal;
+		payPal = payPal;
 	}
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+	public String getMobilePhoneNumber() {
+		return mobilePhoneNumber;
+	}
+	public void setMobilePhoneNumber(String mobilePhoneNumber) {
+		this.mobilePhoneNumber = mobilePhoneNumber;
+	}
+	
+	
 }

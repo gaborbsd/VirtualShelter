@@ -44,6 +44,8 @@ public class InstitutionResourceAssembler extends ResourceAssemblerSupport<Insti
 		resource.setTaxNumber(entity.getTaxNumber());
 		resource.setBankAccount(entity.getBankAccount());
 		resource.setPayPal(entity.getPayPal());
+		resource.setMobilePhoneNumber(entity.getMobilePhoneNumber());
+		resource.setPhoneNumber(entity.getPhoneNumber());
 		
 		resource.add(linkTo(InstitutionController.class).slash(entity.getId()).slash("admin").withRel("admin"));
 		resource.add(linkTo(InstitutionController.class).slash(entity.getId()).slash("advertisement").withRel("advertisement"));
