@@ -31,6 +31,9 @@ app.config(function($routeProvider) {
 	}).when('/update/user/:id', {
 		controller : 'UpdateUserEditorController',
 		templateUrl : '/html/updateuserform.html'
+	}).when('/shelters', {
+		controller : 'SheltersController',
+		templateUrl : '/html/shelters.html'
 	}).otherwise({
 		redirectTo : '/editor/user'
 	})
@@ -115,7 +118,8 @@ function ShelterService($http, $q) {
 
 	var service = {
 		saveShelter : saveShelter,
-		getShelter : getShelter
+		getShelter : getShelter,
+		getShelters : getShelters
 	};
 
 	return service;
@@ -139,6 +143,16 @@ function ShelterService($http, $q) {
 			deferred.reject(status);
 		});
 		return deferred.promise;
+	}
+	
+	function getShelters(){
+		var deferred = $q.defer();
+		$http.get("api/shelter").success(function(data, status) {
+			deferred.resolve(data);
+		}).error(function(data, status) {
+			deferred.reject(status);
+		});
+		return deferred.promise;		
 	}
 
 	
@@ -360,6 +374,18 @@ controllers.ShelterEditorController = function($scope, $http,ShelterService, $ro
 			$scope.error = response;
 		})
 	}
+};
+
+controllers.SheltersController = function($scope, $http, ShelterService) {
+	$scope.shelters = {};
+	$scope.error = "";
+	$scope.getShelters = function(){
+		ShelterService.getShelters($scope.shelter).then(function(data) {
+			$scope.shelters=data;
+		}, function(response) {
+			$scope.error = response;
+		})
+	}()
 };
 
 app.controller(controllers)

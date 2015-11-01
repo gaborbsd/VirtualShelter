@@ -1,0 +1,19 @@
+<h1>Institutions List</h1>
+<hr />
+<div class="row-fluid" ng-hide='error==""'>
+	<div class="col-md-12">
+		<div class="alert alert-danger" role="alert">{{error}}</div>
+	</div>
+</div>
+<div class="panel-body">
+	<div>
+         <div class="row cardContainer">
+             <div class="span3 card" ng-repeat="shelter in shelters">
+                 <button class="btn close cardClose" >&times;</button>
+                 <div class="cardHeader">{{shelter.name}}</div>
+                 <div class="cardBody">{{shelter.email}}</div>
+                 <a href="#/update/user/{{shelter.shelterId}}">Edit</a>
+             </div>
+         </div>
+     </div>
+</div>

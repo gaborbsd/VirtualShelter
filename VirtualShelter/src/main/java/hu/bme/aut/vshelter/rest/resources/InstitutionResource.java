@@ -5,12 +5,27 @@ import hu.bme.aut.vshelter.entity.Address;
 import org.springframework.hateoas.ResourceSupport;
 
 public class InstitutionResource extends ResourceSupport {
+
+	private long institutionId;
+	private String email;
 	private String name;
 	private Address address;
 	private String taxNumber;
 	private String bankAccount;
 	private String PayPal;
 	
+	public long getInstitutionId() {
+		return institutionId;
+	}
+	public void setInstitutionId(long institutionId) {
+		this.institutionId = institutionId;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
 	public String getName() {
 		return name;
 	}

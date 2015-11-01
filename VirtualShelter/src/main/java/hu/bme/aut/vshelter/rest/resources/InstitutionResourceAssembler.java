@@ -37,6 +37,8 @@ public class InstitutionResourceAssembler extends ResourceAssemblerSupport<Insti
 	@Override
 	protected InstitutionResource instantiateResource(Institution entity) {
 		InstitutionResource resource = new InstitutionResource();
+		resource.setInstitutionId(entity.getId());
+		resource.setEmail(entity.getEmail());
 		resource.setName(entity.getName());
 		resource.setAddress(entity.getAddress());
 		resource.setTaxNumber(entity.getTaxNumber());

@@ -37,7 +37,7 @@ import org.springframework.web.bind.annotation.RestController;
  *
  */
 @RestController
-@RequestMapping(value = "/institution")
+@RequestMapping(value = "/shelter")
 public class InstitutionController {
 
 	@Autowired
