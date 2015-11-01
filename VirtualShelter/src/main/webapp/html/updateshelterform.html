@@ -22,20 +22,6 @@
 		</div>
 	</div>
 	<div class="form-group row">
-		<label class="control-label col-sm-4">Password*</label>
-		<div class="col-sm-5">
-			<input type="password" class="form-control" name="password" name="password"
-				ng-model="shelter.password">
-		</div>
-	</div>
-	<div class="form-group row">
-		<label class="control-label col-sm-4">Password again*</label>
-		<div class="col-sm-5">
-			<input class="form-control" type="password" name="password-re" id="password-re"
-				password-match="password">
-		</div>
-	</div>
-	<div class="form-group row">
 		<label class="control-label col-sm-4">Country*</label>
 		<div class="col-sm-5">
 			<input type="text" class="form-control" name="country"
@@ -126,10 +112,6 @@
 			<input type="text" class="form-control" name="ppAcc"
 				placeholder="PP account" ng-model="shelter.paypal">
 		</div>
-	</div>
-	<div class="form-group row" ng-show="shelter.password-re != shelter.password">
-		<div class="alert alert-danger" role="alert">Passwords are not
-			matching</div>
 	</div>
 </div>
 <div class="panel-footer text-center">

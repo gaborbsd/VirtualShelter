@@ -129,6 +129,7 @@ function ShelterService($http, $q) {
 	return service;
 
 	function saveShelter(shelter) {
+		delete shelter['id'];
 		var deferred = $q.defer();
 		$http.post("api/shelter", shelter).success(function(data, status) {
 			deferred.resolve(data);

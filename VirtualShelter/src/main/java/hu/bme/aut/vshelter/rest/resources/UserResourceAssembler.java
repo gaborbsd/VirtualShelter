@@ -49,10 +49,6 @@ public class UserResourceAssembler extends ResourceAssemblerSupport<User, UserRe
 		resource.add(linkTo(UserController.class).slash(entity.getId()).slash("picture").withRel("picture"));
 		resource.add(linkTo(UserController.class).slash(entity.getId()).slash("admin").withRel("admin"));
 		resource.add(linkTo(UserController.class).slash(entity.getId()).slash("profile").withRel("profile"));
-		resource.add(linkTo(UserController.class).slash(entity.getId()).slash("userId").withRel("userId"));
-		resource.add(linkTo(UserController.class).slash(entity.getId()).slash("mobilePhoneNumber").withRel("mobilePhoneNumber"));
-		resource.add(linkTo(UserController.class).slash(entity.getId()).slash("phoneNumber").withRel("phoneNumber"));
-		resource.add(linkTo(UserController.class).slash(entity.getId()).slash("introductionText").withRel("introductionText"));
 		
 		return resource;
 	}

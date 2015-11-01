@@ -112,6 +112,10 @@
 			<textarea class="form-control" rows="5" ng-model="user.introductionText"></textarea>
 		</div>
 	</div>
+	<div class="form-group row" ng-show="shelter.password-re != shelter.password">
+		<div class="alert alert-danger" role="alert">Passwords are not
+			matching</div>
+	</div>
 </div>
 <div class="panel-footer text-center">
 	<button class="btn btn-primary" ng-click="updateUser()">Update</button>
