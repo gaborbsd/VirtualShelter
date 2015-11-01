@@ -185,7 +185,8 @@ function UserService($http, $q) {
 		saveUser : saveUser,
 		getUser : getUser,
 		getUsers : getUsers,
-		updateUser : updateUser
+		updateUser : updateUser,
+		deleteUser: deleteUser
 	};
 
 	return service;
@@ -235,6 +236,16 @@ function UserService($http, $q) {
 		return deferred.promise;
 		
 	}
+	
+	function deleteUser(id) {
+		var deferred = $q.defer();
+		$http.delete("api/user/"+id).success(function(data, status) {
+			deferred.resolve(data);
+		}).error(function(status) {
+			deferred.reject(status);
+		});
+		return deferred.promise;
+	}
 
 }
 
@@ -282,6 +293,15 @@ controllers.UsersController = function($scope, $http, UserService) {
 			$scope.error = response;
 		})
 	}()
+	
+	$scope.deleteUser = function(id) {
+		$scope.id=id;
+		UserService.deleteUser($scope.id).then(function() {
+			location.href = "/";
+		}, function(response) {
+			$scope.error = response;
+		});
+	}
 };
 
 controllers.UserEditorController = function($scope, $http, $routeParams, UserService) {
