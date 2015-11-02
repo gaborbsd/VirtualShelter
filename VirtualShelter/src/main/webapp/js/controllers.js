@@ -326,7 +326,7 @@ controllers.UserEditorController = function($scope, $http, $routeParams, UserSer
 		}, function(response) {
 			$scope.error = response;
 		})
-	}
+	};
 	
 	if ($scope.user.id > 0) {
 		UserService.getUser($scope.user.id).then(function(data) {
@@ -348,7 +348,7 @@ controllers.UpdateUserEditorController = function($scope, $http, $routeParams, U
 		}, function(response) {
 			$scope.error = response;
 		})
-	}
+	};
 	
 	if ($scope.user.id > 0) {
 		UserService.getUser($scope.user.id).then(function(data) {
@@ -384,7 +384,7 @@ controllers.AnimalEditorController = function($scope, $http, AnimalService,	$rou
 		}, function(response) {
 			$scope.error = response;
 		})
-	}
+	};
 
 	$scope.getSpecies = function() {
 		AnimalService.getSpecies().then(function(data) {
@@ -392,7 +392,7 @@ controllers.AnimalEditorController = function($scope, $http, AnimalService,	$rou
 		}, function(response) {
 			$scope.error = response;
 		})
-	}
+	};
 
 	if ($scope.animal.id > 0) {
 		AnimalService.getAnimal($scope.animal.id).then(function(data) {
@@ -417,7 +417,7 @@ controllers.ShelterEditorController = function($scope, $http,ShelterService, $ro
 		}, function(response) {
 			$scope.error = response;
 		})
-	}
+	};
 	
 	if ($scope.shelter.id > 0) {
 		ShelterService.getShelter($scope.shelter.id).then(function(data) {
@@ -460,7 +460,7 @@ controllers.UpdateShelterEditorController = function($scope, $http, $routeParams
 		}, function(response) {
 			$scope.error = response;
 		})
-	}
+	};
 	
 	if ($scope.shelter.id > 0) {
 		ShelterService.getShelter($scope.shelter.id).then(function(data) {
