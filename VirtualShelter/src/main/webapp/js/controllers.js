@@ -123,7 +123,8 @@ function ShelterService($http, $q) {
 		saveShelter : saveShelter,
 		getShelter : getShelter,
 		getShelters : getShelters,
-		updateShelter : updateShelter
+		updateShelter : updateShelter,
+		deleteShelter : deleteShelter
 	};
 
 	return service;
@@ -174,8 +175,18 @@ function ShelterService($http, $q) {
 		return deferred.promise;
 		
 	}
-
 	
+	
+	function deleteShelter(id) {
+		var deferred = $q.defer();
+		$http.delete("api/shelter/"+id).success(function(data, status) {
+			deferred.resolve(data);
+		}).error(function(status) {
+			deferred.reject(status);
+		});
+		return deferred.promise;
+	}
+
 }
 
 UserService.$inject = [ '$http', '$q' ];
@@ -427,6 +438,15 @@ controllers.SheltersController = function($scope, $http, ShelterService) {
 			$scope.error = response;
 		})
 	}()
+	
+	$scope.deleteShelter = function(id) {
+		$scope.id=id;
+		ShelterService.deleteShelter($scope.id).then(function() {
+			location.href = "/";
+		}, function(response) {
+			$scope.error = response;
+		});
+	}
 };
 
 controllers.UpdateShelterEditorController = function($scope, $http, $routeParams, ShelterService) {

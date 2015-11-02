@@ -9,7 +9,7 @@
 	<div>
          <div class="row cardContainer">
              <div class="span3 card" ng-repeat="shelter in shelters">
-                 <button class="btn close cardClose" >&times;</button>
+                 <button class="btn close cardClose" ng-click="deleteShelter(shelter.institutionId)">&times;</button>
                  <div class="cardHeader">{{shelter.name}}</div>
                  <div class="cardBody">{{shelter.email}}</div>
                  <a href="#/update/shelter/{{shelter.institutionId}}">Edit</a>
