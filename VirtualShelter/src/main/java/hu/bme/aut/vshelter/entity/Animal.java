@@ -31,7 +31,7 @@ public class Animal {
 	@Column(name = "adoptionType", unique = false, nullable = true)
 	private AdoptionType adoptionType;
 	
-	@ManyToOne
+	@ManyToOne(cascade = {CascadeType.ALL})
 	private Breed breed;
 	
 	@Column(name = "height", unique = false, nullable = true)
@@ -58,19 +58,19 @@ public class Animal {
 	@Column(name = "description", unique = false, nullable = true)
 	private String description;
 	
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<Disease> knownDiseases;
 	
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<Handicap> knownHandicaps;
 	
-	@ManyToOne
+	@ManyToOne(cascade = {CascadeType.ALL})
 	private Address address;
 	
-	@ManyToOne
+	@ManyToOne(cascade = {CascadeType.ALL})
 	private Picture profilePicture;	
 	
-	@ManyToMany(fetch =	 FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToMany(fetch =	 FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<Picture> picturesList;
 	
 	@Enumerated(EnumType.STRING)

@@ -71,15 +71,17 @@
 								<th>Name</th>
 								<th>Adaption type</th>
 								<th>Breed</th>
+								<th>Species</th>
 								<th>Height</th>
 								<th>Weight</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr	ng-repeat="animal in animals track by animal.id">
+							<tr	ng-repeat="animal in animals">
 								<td>{{animal.name}}</td>
 								<td>{{animal.adoptionType}}</td>
-								<td>{{animal.breed}}</td>
+								<td>{{animal.breed.breedName}}</td>
+								<td>{{animal.breed.species.speciesName}}</td>
 								<td>{{animal.height}}</td>
 								<td>{{animal.weight}}</td>
 							</tr>

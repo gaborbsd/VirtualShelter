@@ -9,9 +9,9 @@ INSERT INTO breed VALUES (1, 'labrador', 1);
 INSERT INTO breed VALUES (2, 'hócipős', 2);
 INSERT INTO breed VALUES (3, 'mormogó', 3);
 
-INSERT INTO species_breed VALUES (1, 1);
-INSERT INTO species_breed VALUES (2, 2);
-INSERT INTO species_breed VALUES (3, 3);
+--INSERT INTO species_breed VALUES (1, 1);
+--INSERT INTO species_breed VALUES (2, 2);
+--INSERT INTO species_breed VALUES (3, 3);
 
 INSERT INTO handicap VALUES (1, 'vak');
 INSERT INTO handicap VALUES (2, 'sánta');
