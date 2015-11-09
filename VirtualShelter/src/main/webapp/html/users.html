@@ -11,7 +11,7 @@
          	<h3>Filter:</h3>
 		    <input type="text" ng-model="nameText" />
 		    <br /><br />
-             <div class="span3 card" ng-repeat="user in users | filter:nameText | orderBy:'name'">
+             <div class="span3 card" ng-repeat="user in users | filter:{name:nameText} | orderBy:'name'">
                  <button  class="btn close cardClose" ng-click="deleteUser(user.userId)" >&times;</button>
                  <div class="cardHeader">{{user.name}}</div>
                  <div class="cardBody">{{user.email}}</div>
