@@ -37,6 +37,9 @@ app.config(function($routeProvider) {
 	}).when('/update/shelter/:id', {
 		controller : 'UpdateShelterEditorController',
 		templateUrl : '/html/updateshelterform.html'
+	}).when('/speciesandbreeds', {
+		controller : 'SpeciesAndBreedsController',
+		templateUrl : '/html/speciesandbreeds.html'
 	}).otherwise({
 		redirectTo : '/editor/user'
 	})
@@ -48,6 +51,7 @@ app.factory('SearchService', SearchService)
 app.factory('AnimalService', AnimalService)
 app.factory('ShelterService', ShelterService)
 app.factory('UserService', UserService)
+app.factory('SpeciesAndBreedsService', SpeciesAndBreedsService)
 
 //$inject is neccessary with this concept of service handling
 //$http does the communication
@@ -260,6 +264,28 @@ function UserService($http, $q) {
 
 }
 
+UserService.$inject = [ '$http', '$q' ];
+function SpeciesAndBreedsService($http, $q) {
+
+	var service = {
+			getSpecies : getSpecies,
+	};
+
+	return service;
+	
+	function getSpecies() {
+		var deferred = $q.defer();
+		$http.get("api/species").success(function(data, status) {
+			deferred.resolve(data);
+		}).error(function(data, status) {
+			deferred.reject(status);
+		});
+		return deferred.promise;
+	}
+
+	
+}
+
 
 
 var controllers = {};
@@ -469,6 +495,20 @@ controllers.UpdateShelterEditorController = function($scope, $http, $routeParams
 			$scope.error = response;
 		})
 	}
+};
+
+controllers.SpeciesAndBreedsController = function($scope, $http, $routeParams, SpeciesAndBreedsService) {
+	$scope.species = {};
+	$scope.error = "";
+	
+	$scope.getSpecies = function() {
+		SpeciesAndBreedsService.getSpecies().then(function(data) {
+			$scope.species = data;
+		}, function(response) {
+			$scope.error = response;
+		})
+	}();
+	
 };
 
 app.controller(controllers)
