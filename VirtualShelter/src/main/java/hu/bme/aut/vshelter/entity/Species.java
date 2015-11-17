@@ -1,5 +1,6 @@
 package hu.bme.aut.vshelter.entity;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -25,8 +26,8 @@ public class Species {
 	@Column(name = "speciesName", unique = true, nullable = false)
 	private String speciesName;
 	
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	private Set<Breed> breeds;
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	private List<Breed> breeds;
 	
 	public long getId() {
 		return id;
@@ -44,11 +45,11 @@ public class Species {
 		this.speciesName = speciesName;
 	}
 	
-	public Set<Breed> getBreeds() {
+	public List<Breed> getBreeds() {
 		return breeds;
 	}
 	
-	public void setBreeds(Set<Breed> breeds) {
+	public void setBreeds(List<Breed> breeds) {
 		this.breeds = breeds;
 	}
 	

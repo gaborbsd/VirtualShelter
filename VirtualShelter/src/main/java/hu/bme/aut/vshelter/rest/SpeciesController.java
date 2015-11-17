@@ -149,7 +149,7 @@ public class SpeciesController {
 		HttpStatus responseStatus = HttpStatus.OK;
 		List<BreedResource> resources = new ArrayList<BreedResource>();
 		try {
-			Set<Breed> breedList = this.advertisementOperations.listBreedsOfTheSpecies(id);
+			List<Breed> breedList = this.advertisementOperations.listBreedsOfTheSpecies(id);
 			resources.addAll(this.breedResourceAssembler.toResources(breedList));
 		} catch (VirtualShelterException e) {
 			responseStatus = converter.convert(e);

@@ -37,8 +37,9 @@ public class SpeciesResourceAssembler extends ResourceAssemblerSupport<Species, 
 	protected SpeciesResource instantiateResource(Species entity) {
 		SpeciesResource resource = new SpeciesResource();
 		resource.setName(entity.getSpeciesName());
+		resource.setBreeds(entity.getBreeds());
 		
-		resource.add(linkTo(SpeciesController.class).slash(entity.getId()).slash("breed").withRel("breed"));
+		//resource.add(linkTo(SpeciesController.class).slash(entity.getId()).slash("breed").withRel("breed"));
 		
 		return resource;
 	}

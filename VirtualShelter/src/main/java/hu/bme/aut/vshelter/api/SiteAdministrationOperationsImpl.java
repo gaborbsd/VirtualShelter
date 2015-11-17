@@ -94,7 +94,6 @@ public class SiteAdministrationOperationsImpl implements
 		Breed breed = new Breed();
 		breed.setBreedName(breedName);
 		Species species = speciesRepository.findOne(Long.valueOf(speciesId));
-		breed.setSpecies(species);
 		breedRepository.save(breed);
 	}
 

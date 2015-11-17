@@ -194,7 +194,7 @@ public interface IAdvertisementOperations {
 	 * list all breeds of the given speciesId
 	 * @param speciesId
 	 */
-	public Set<Breed> listBreedsOfTheSpecies(long speciesId) throws VirtualShelterException;
+	public List<Breed> listBreedsOfTheSpecies(long speciesId) throws VirtualShelterException;
 	
 	/**
 	 * Returns the animal identified by the given animalId

@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -30,7 +31,7 @@ public class Institution extends Advertiser {
 	@ManyToOne
 	private User owner;
 
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	private List<User> institutionAdministrators;
 
 	public String getTaxNumber() {

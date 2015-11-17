@@ -41,7 +41,7 @@ public abstract class Advertiser {
 	@ManyToOne(cascade = {CascadeType.ALL})
 	private Picture profilePicture;
 	
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<Picture> picturesList;
 	
 	@Column(name = "phoneNumber", unique = false, nullable = true)

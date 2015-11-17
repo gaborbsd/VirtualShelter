@@ -1,6 +1,9 @@
 package hu.bme.aut.vshelter.rest.resources;
 
 import hu.bme.aut.vshelter.entity.Address;
+import hu.bme.aut.vshelter.entity.User;
+
+import java.util.List;
 
 import org.springframework.hateoas.ResourceSupport;
 
@@ -15,6 +18,7 @@ public class InstitutionResource extends ResourceSupport {
 	private String payPal;
 	private String phoneNumber;
 	private String mobilePhoneNumber;
+	private List<User> institutionAdministrators;
 	
 	public long getInstitutionId() {
 		return institutionId;
@@ -70,6 +74,14 @@ public class InstitutionResource extends ResourceSupport {
 	public void setMobilePhoneNumber(String mobilePhoneNumber) {
 		this.mobilePhoneNumber = mobilePhoneNumber;
 	}
+	public List<User> getInstitutionAdministrators() {
+		return institutionAdministrators;
+	}
+	public void setInstitutionAdministrators(List<User> institutionAdministrators) {
+		this.institutionAdministrators = institutionAdministrators;
+	}
+	
+	
 	
 	
 }

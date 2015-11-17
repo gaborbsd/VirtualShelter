@@ -3,15 +3,27 @@ SET FOREIGN_KEY_CHECKS=0;
 
 INSERT INTO species VALUES (1, 'kutya');
 INSERT INTO species VALUES (2, 'cica');
-INSERT INTO species VALUES (3, 'maci');
+INSERT INTO species VALUES (3, 'medve');
 
-INSERT INTO breed VALUES (1, 'labrador', 1);
-INSERT INTO breed VALUES (2, 'hócipős', 2);
-INSERT INTO breed VALUES (3, 'mormogó', 3);
+INSERT INTO breed VALUES (1, 'labrador');
+INSERT INTO breed VALUES (2, 'német juhász');
+INSERT INTO breed VALUES (3, 'vizsla');
+INSERT INTO breed VALUES (4, 'boxer');
+INSERT INTO breed VALUES (5, 'hócipős');
+INSERT INTO breed VALUES (6, 'sziámi');
+INSERT INTO breed VALUES (7, 'mormogó');
+INSERT INTO breed VALUES (8, 'barna');
 
---INSERT INTO species_breed VALUES (1, 1);
---INSERT INTO species_breed VALUES (2, 2);
---INSERT INTO species_breed VALUES (3, 3);
+
+
+INSERT INTO species_breed VALUES (1, 1);
+INSERT INTO species_breed VALUES (1, 2);
+INSERT INTO species_breed VALUES (1, 3);
+INSERT INTO species_breed VALUES (1, 4);
+INSERT INTO species_breed VALUES (2, 5);
+INSERT INTO species_breed VALUES (2, 6);
+INSERT INTO species_breed VALUES (3, 7);
+INSERT INTO species_breed VALUES (3, 8);
 
 INSERT INTO handicap VALUES (1, 'vak');
 INSERT INTO handicap VALUES (2, 'sánta');

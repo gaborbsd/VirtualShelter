@@ -6,6 +6,7 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Table;
 
 @Entity
@@ -18,7 +19,7 @@ public class User extends Advertiser {
 	@Column(name = "introductionText", unique = false, nullable = true)
 	private String introductionText;
 
-	@ElementCollection
+	@ElementCollection(fetch = FetchType.EAGER)
 	private Set<String> roles;
 
 	public String getPassword() {

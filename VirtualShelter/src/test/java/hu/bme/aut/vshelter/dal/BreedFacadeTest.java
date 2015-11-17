@@ -25,7 +25,6 @@ public class BreedFacadeTest {
 		Species species = new Species();
 		breed.setBreedName("kutya");
 		breed.setId(1);
-		breed.setSpecies(species);
 		
 		try {
 			breedFacade.create(breed);

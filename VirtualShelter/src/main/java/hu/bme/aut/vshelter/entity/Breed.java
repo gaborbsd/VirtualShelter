@@ -20,9 +20,6 @@ public class Breed {
 	@Column(name = "breedName", unique = true, nullable = false)
 	private String breedName;
 	
-	@ManyToOne
-	private Species species;
-	
 	public long getId() {
 		return id;
 	}
@@ -37,14 +34,6 @@ public class Breed {
 	
 	public void setBreedName(String breedName) {
 		this.breedName = breedName;
-	}
-	
-	public Species getSpecies() {
-		return species;
-	}
-	
-	public void setSpecies(Species species) {
-		this.species = species;
 	}
 	
 	@Override

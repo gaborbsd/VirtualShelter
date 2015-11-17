@@ -226,7 +226,7 @@ public class AdvertisementOperationsImpl implements IAdvertisementOperations {
 	}
 
 	@Override
-	public Set<Breed> listBreedsOfTheSpecies(long speciesId) throws VirtualShelterException {
+	public List<Breed> listBreedsOfTheSpecies(long speciesId) throws VirtualShelterException {
 		Species species = speciesRepository.findOne(Long.valueOf(speciesId));
 		return species.getBreeds();
 	}
