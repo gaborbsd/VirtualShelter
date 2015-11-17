@@ -1,9 +1,13 @@
 package hu.bme.aut.vshelter.api;
 
 import hu.bme.aut.vshelter.dal.BreedFacade;
+import hu.bme.aut.vshelter.dal.BreedRepository;
 import hu.bme.aut.vshelter.dal.InstitutionFacade;
+import hu.bme.aut.vshelter.dal.InstitutionRepository;
 import hu.bme.aut.vshelter.dal.SpeciesFacade;
+import hu.bme.aut.vshelter.dal.SpeciesRepository;
 import hu.bme.aut.vshelter.dal.UserFacade;
+import hu.bme.aut.vshelter.dal.UserRepository;
 import hu.bme.aut.vshelter.entity.Breed;
 import hu.bme.aut.vshelter.entity.Institution;
 import hu.bme.aut.vshelter.entity.Species;
@@ -13,31 +17,42 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 public class SiteAdministrationOperationsImpl implements
 		ISiteAdministrationOperations {
-	
-	@Inject
-	UserFacade userFacade;
-	@Inject
-	SpeciesFacade speciesFacade;
-	@Inject
-	BreedFacade breedFacade;
-	@Inject
-	private InstitutionFacade institutionFacade;
+
+// Before Spring Data we used these Facades
+//	@Inject
+//	UserFacade userFacade;
+//	@Inject
+//	SpeciesFacade speciesFacade;
+//	@Inject
+//	BreedFacade breedFacade;
+//	@Inject
+//	private InstitutionFacade institutionFacade;
+	@Autowired
+	private UserRepository userRepository;
+	@Autowired
+	private SpeciesRepository speciesRepository;
+	@Autowired
+	private BreedRepository breedRepository;
+	@Autowired
+	private InstitutionRepository institutionRepository;
 
 	@Override
 	public List<User> listAllUsers() throws VirtualShelterException {
-		return userFacade.findAll();
+		return userRepository.findAll();
 	}
 
 	@Override
 	public User findUserById(long userId) throws VirtualShelterException {
-		return userFacade.findById(userId);
+		return userRepository.findById(userId);
 	}
 	
 	@Override
 	public boolean isUserSiteAdministrator(long userId) throws VirtualShelterException {
-		User user = userFacade.findById(userId);
+		User user = userRepository.findById(userId);
 		
 		String role = "site-administrator";
 
@@ -52,55 +67,55 @@ public class SiteAdministrationOperationsImpl implements
 	@Override
 	public void promoteSiteAdministrator(long userId)
 			throws VirtualShelterException {
-		userFacade.promoteUserToSiteAdministrator(userId);
+		userRepository.promoteUserToSiteAdministrator(userId);
 	}
 
 	@Override
 	public void revokeSiteAdministrator(long userId)
 			throws VirtualShelterException {
-		userFacade.revokeUserFromSiteAdministrator(userId);
+		userRepository.revokeUserFromSiteAdministrator(userId);
 	}
 
 	@Override
 	public void addSpecies(String speciesName) throws VirtualShelterException {
 		Species species = new Species();
 		species.setSpeciesName(speciesName);
-		speciesFacade.create(species);
+		speciesRepository.save(species);
 
 	}
 
 	@Override
 	public void deleteSpecies(long speciesId) throws VirtualShelterException {
-		speciesFacade.deleteById(speciesId);
+		speciesRepository.delete(Long.valueOf(speciesId));
 	}
 
 	@Override
 	public void addBreed(String breedName, long speciesId) throws VirtualShelterException {
 		Breed breed = new Breed();
 		breed.setBreedName(breedName);
-		Species species = speciesFacade.findById(speciesId);
+		Species species = speciesRepository.findOne(Long.valueOf(speciesId));
 		breed.setSpecies(species);
-		breedFacade.create(breed);
+		breedRepository.save(breed);
 	}
 
 	@Override
 	public void deleteBreed(long breedId) throws VirtualShelterException {
-		breedFacade.deleteById(breedId);
+		breedRepository.delete(Long.valueOf(breedId));
 	}
 
 	@Override
 	public List<Institution> listInstituitionsOwnedByUser(long userId) throws VirtualShelterException {
-		return institutionFacade.listInstituitionsOwnedByUser(userId);
+		return institutionRepository.listInstituitionsOwnedByUser(userId);
 	}
 
 	@Override
 	public void updateBreed(Breed breed) throws VirtualShelterException {
-		breedFacade.edit(breed);
+		breedRepository.edit(breed);
 	}
 
 	@Override
 	public User findOwnerOfInstitution(long institutionId) throws VirtualShelterException {
-		Institution institution = institutionFacade.findById(institutionId);
+		Institution institution = institutionRepository.findOne(Long.valueOf(institutionId));
 		return institution.getOwner();
 	}
 

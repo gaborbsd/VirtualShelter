@@ -2,8 +2,8 @@
 
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
-	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx" 
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:jpa="http://www.springframework.org/schema/data/jpa" 
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans.xsd
 	http://www.springframework.org/schema/context
@@ -13,11 +13,16 @@
 	http://www.springframework.org/schema/tx
 	http://www.springframework.org/schema/tx/spring-tx.xsd
 	http://www.springframework.org/schema/aop
-	http://www.springframework.org/schema/aop/spring-aop.xsd">
+	http://www.springframework.org/schema/aop/spring-aop.xsd
+	http://www.springframework.org/schema/data/jpa
+	http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
 
 	<context:spring-configured />
 	<context:annotation-config />
-
+	<jpa:repositories base-package="hu.bme.aut.vshelter.dal"
+		entity-manager-factory-ref="entityManagerFactory"
+		transaction-manager-ref="txManager" />
+	
 	<jee:jndi-lookup id="dataSource" jndi-name="jdbc/VShelterPU" />
 
 	<bean id="entityManagerFactory"
@@ -74,4 +79,7 @@
 	<bean id="speciesFacade" class="hu.bme.aut.vshelter.dal.impl.SpeciesFacadeJPAImpl" />
 	<bean id="userFacade" class="hu.bme.aut.vshelter.dal.impl.UserFacadeJPAImpl" />
 	<bean id="authenticationAndPermissionOperations" class="hu.bme.aut.vshelter.api.AuthenticationAndPermissionOperationsImpl" />
+	
+	
+	
 </beans>
