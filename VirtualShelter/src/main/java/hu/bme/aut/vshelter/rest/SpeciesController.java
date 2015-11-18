@@ -174,4 +174,22 @@ public class SpeciesController {
 		BreedResource breedResource = this.breedResourceAssembler.toResource(breed);
 		return new ResponseEntity<BreedResource>(breedResource, responseStatus);
 	}
+	
+	/**
+	 * Delete breed of the species
+	 * 
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value="/{id}/breed", method=RequestMethod.DELETE)
+	ResponseEntity<BreedResource> deleteBreed(@PathVariable Long id, @RequestBody Breed breed) {
+		HttpStatus responseStatus = HttpStatus.CREATED;
+		try {
+			this.siteAdministrationOperations.deleteBreed(breed.getId(), id);
+		} catch (VirtualShelterException e) {
+			responseStatus = converter.convert(e);
+		}
+		BreedResource breedResource = this.breedResourceAssembler.toResource(breed);
+		return new ResponseEntity<BreedResource>(breedResource, responseStatus);
+	}
 }

@@ -331,9 +331,9 @@ function SpeciesAndBreedsService($http, $q) {
 		return deferred.promise;
 	}
 	
-	function deleteBreed(id, species) {
+	function deleteBreed(breed, species) {
 		var deferred = $q.defer();
-		$http.delete("api/breed/"+id, species.speciesId).success(function(data, status) {
+		$http.delete("api/species/" + species.speciesId+"/breed", breed).success(function(data, status) {
 			deferred.resolve(data);
 		}).error(function(status) {
 			deferred.reject(status);
@@ -644,7 +644,8 @@ controllers.BreedsController = function($scope, $http, $routeParams, SpeciesAndB
 	
 	$scope.deleteBreed = function(id) {
 		$scope.id=id;
-		SpeciesAndBreedsService.deleteBreed($scope.id, $scope.species).then(function() {
+		$scope.breed.id = id;
+		SpeciesAndBreedsService.deleteBreed($scope.breed, $scope.species).then(function() {
 			SpeciesAndBreedsService.getSpecies().then(function(data) {
 				SpeciesAndBreedsService.getSpeciesId($routeParams.id).then(function(data) {
 					$scope.species = data;

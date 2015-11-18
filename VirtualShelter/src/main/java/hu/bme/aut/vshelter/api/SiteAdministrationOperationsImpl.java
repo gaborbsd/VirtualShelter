@@ -100,7 +100,11 @@ public class SiteAdministrationOperationsImpl implements
 	}
 
 	@Override
-	public void deleteBreed(long breedId) throws VirtualShelterException {
+	public void deleteBreed(long breedId, long speciesId) throws VirtualShelterException {
+		Species species = speciesRepository.findOne(Long.valueOf(speciesId));
+		Breed breed = breedRepository.findOne(breedId);
+		species.getBreeds().remove(breed);
+		speciesRepository.edit(species);
 		breedRepository.delete(Long.valueOf(breedId));
 	}
 

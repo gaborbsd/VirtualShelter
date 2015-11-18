@@ -67,9 +67,10 @@ public interface ISiteAdministrationOperations {
 	/**
 	 * Deletes a breed from the database
 	 * @param breedId name of the breed to be deleted
+	 * @param speciesId species id of the breed
 	 * @throws VirtualShelterException
 	 */
-	public void deleteBreed(long breedId) throws VirtualShelterException;
+	public void deleteBreed(long breedId, long speciesid) throws VirtualShelterException;
 	
 	/**
 	 * Returns the owned Institution(s) by the user with the given userId

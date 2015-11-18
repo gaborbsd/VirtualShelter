@@ -52,19 +52,19 @@ public class BreedController {
 		return new ResponseEntity<BreedResource>(resource, responseStatus);
 	}
 	
-	/**
-	 * Delete the breed
-	 * 
-	 * @param id
-	 */
-	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
-	ResponseEntity<BreedResource> deleteBreed(@PathVariable Long id) {
-		HttpStatus responseStatus = HttpStatus.OK;
-		try {
-			this.siteAdministrationOperations.deleteBreed(id);
-		} catch (VirtualShelterException e) {
-			responseStatus = this.converter.convert(e);
-		}
-		return new ResponseEntity<BreedResource>(responseStatus);
-	}
+//	/**
+//	 * Delete the breed
+//	 * 
+//	 * @param id
+//	 */
+//	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
+//	ResponseEntity<BreedResource> deleteBreed(@PathVariable Long id) {
+//		HttpStatus responseStatus = HttpStatus.OK;
+//		try {
+//			this.siteAdministrationOperations.deleteBreed(id);
+//		} catch (VirtualShelterException e) {
+//			responseStatus = this.converter.convert(e);
+//		}
+//		return new ResponseEntity<BreedResource>(responseStatus);
+//	}
 }
