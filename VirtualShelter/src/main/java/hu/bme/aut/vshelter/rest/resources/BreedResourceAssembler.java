@@ -35,6 +35,7 @@ public class BreedResourceAssembler extends ResourceAssemblerSupport<Breed, Bree
 	@Override
 	public BreedResource instantiateResource(Breed entity) {
 		BreedResource resource = new BreedResource();
+		resource.setBreedId(entity.getId());
 		resource.setName(entity.getBreedName());
 		return resource;
 	}

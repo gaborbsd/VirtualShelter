@@ -274,7 +274,9 @@ function SpeciesAndBreedsService($http, $q) {
 			getSpecies : getSpecies,
 			getSpeciesId: getSpeciesId,
 			saveSpecies : saveSpecies,
-			deleteSpecies: deleteSpecies
+			deleteSpecies: deleteSpecies,
+			saveBreed : saveBreed,
+			deleteBreed : deleteBreed
 	};
 
 	return service;
@@ -312,6 +314,26 @@ function SpeciesAndBreedsService($http, $q) {
 	function deleteSpecies(id) {
 		var deferred = $q.defer();
 		$http.delete("api/species/"+id).success(function(data, status) {
+			deferred.resolve(data);
+		}).error(function(status) {
+			deferred.reject(status);
+		});
+		return deferred.promise;
+	}
+	
+	function saveBreed(breed, species) {
+		var deferred = $q.defer();
+		$http.post("api/species/" + species.speciesId+"/breed", breed).success(function(data, status) {
+			deferred.resolve(data);
+		}).error(function(status) {
+			deferred.reject(status);
+		});
+		return deferred.promise;
+	}
+	
+	function deleteBreed(id, species) {
+		var deferred = $q.defer();
+		$http.delete("api/breed/"+id, species.speciesId).success(function(data, status) {
 			deferred.resolve(data);
 		}).error(function(status) {
 			deferred.reject(status);
@@ -589,6 +611,7 @@ controllers.BreedsController = function($scope, $http, $routeParams, SpeciesAndB
 	$scope.species = {};
 	$scope.error = "";
 	$scope.breeds = {};
+	$scope.breed = {};
 	
 	if ($routeParams.id > 0) {
 		SpeciesAndBreedsService.getSpeciesId($routeParams.id).then(function(data) {
@@ -598,6 +621,45 @@ controllers.BreedsController = function($scope, $http, $routeParams, SpeciesAndB
 		}, function(response) {
 			$scope.error = response;
 		})
+	}
+	
+	$scope.saveBreed = function(){
+		SpeciesAndBreedsService.saveBreed($scope.breed, $scope.species).then(function() {
+			SpeciesAndBreedsService.getSpecies().then(function(data) {
+				SpeciesAndBreedsService.getSpeciesId($routeParams.id).then(function(data) {
+					$scope.species = data;
+					$scope.breeds = $scope.species.breeds;
+					
+				}, function(response) {
+					$scope.error = response;
+				})
+			}, function(response) {
+				$scope.error = response;
+			});
+			location.href = "#/update/species/" + $scope.species.speciesId;
+		}, function(response) {
+			$scope.error = response;
+		})
+	};
+	
+	$scope.deleteBreed = function(id) {
+		$scope.id=id;
+		SpeciesAndBreedsService.deleteBreed($scope.id, $scope.species).then(function() {
+			SpeciesAndBreedsService.getSpecies().then(function(data) {
+				SpeciesAndBreedsService.getSpeciesId($routeParams.id).then(function(data) {
+					$scope.species = data;
+					$scope.breeds = $scope.species.breeds;
+					
+				}, function(response) {
+					$scope.error = response;
+				})
+			}, function(response) {
+				$scope.error = response;
+			});
+			location.href = "#/update/species/" + $scope.species.speciesId;
+		}, function(response) {
+			$scope.error = response;
+		});
 	}
 	
 };
