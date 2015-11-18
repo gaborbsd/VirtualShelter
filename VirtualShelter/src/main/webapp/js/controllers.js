@@ -272,7 +272,8 @@ function SpeciesAndBreedsService($http, $q) {
 
 	var service = {
 			getSpecies : getSpecies,
-			getSpeciesId: getSpeciesId
+			getSpeciesId: getSpeciesId,
+			saveSpecies : saveSpecies,
 	};
 
 	return service;
@@ -292,6 +293,16 @@ function SpeciesAndBreedsService($http, $q) {
 		$http.get("api/species/"+id).success(function(data, status) {
 			deferred.resolve(data);
 		}).error(function(data, status) {
+			deferred.reject(status);
+		});
+		return deferred.promise;
+	}
+	
+	function saveSpecies(species) {
+		var deferred = $q.defer();
+		$http.post("api/species", species).success(function(data, status) {
+			deferred.resolve(data);
+		}).error(function(status) {
 			deferred.reject(status);
 		});
 		return deferred.promise;
@@ -348,7 +359,14 @@ controllers.UsersController = function($scope, $http, UserService) {
 	$scope.deleteUser = function(id) {
 		$scope.id=id;
 		UserService.deleteUser($scope.id).then(function() {
-			location.href = "/";
+			$scope.getUsers = function(){
+				UserService.getUsers($scope.user).then(function(data) {
+					$scope.users=data;
+				}, function(response) {
+					$scope.error = response;
+				})
+			}();
+			location.href = "/#/shelters";
 		}, function(response) {
 			$scope.error = response;
 		});
@@ -482,7 +500,14 @@ controllers.SheltersController = function($scope, $http, ShelterService) {
 	$scope.deleteShelter = function(id) {
 		$scope.id=id;
 		ShelterService.deleteShelter($scope.id).then(function() {
-			location.href = "/";
+			$scope.getShelters = function(){
+				ShelterService.getShelters($scope.shelter).then(function(data) {
+					$scope.shelters=data;
+				}, function(response) {
+					$scope.error = response;
+				})
+			}();
+			location.href = "/#/shelters";
 		}, function(response) {
 			$scope.error = response;
 		});
@@ -512,16 +537,30 @@ controllers.UpdateShelterEditorController = function($scope, $http, $routeParams
 };
 
 controllers.SpeciesAndBreedsController = function($scope, $http, $routeParams, SpeciesAndBreedsService) {
-	$scope.species = {};
+	$scope.speciesList = {};
 	$scope.error = "";
+	$scope.species = {breeds: null};
 	
 	$scope.getSpecies = function() {
 		SpeciesAndBreedsService.getSpecies().then(function(data) {
-			$scope.species = data;
+			$scope.speciesList = data;
 		}, function(response) {
 			$scope.error = response;
 		})
 	}();
+	
+	$scope.saveSpecies = function(){
+		SpeciesAndBreedsService.saveSpecies($scope.species).then(function() {
+			SpeciesAndBreedsService.getSpecies().then(function(data) {
+				$scope.speciesList = data;
+			}, function(response) {
+				$scope.error = response;
+			});
+			location.href = "/#/speciesandbreeds";
+		}, function(response) {
+			$scope.error = response;
+		})
+	};
 	
 };
 
