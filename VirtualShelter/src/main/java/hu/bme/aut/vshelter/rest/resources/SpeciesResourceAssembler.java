@@ -36,6 +36,7 @@ public class SpeciesResourceAssembler extends ResourceAssemblerSupport<Species, 
 	@Override
 	protected SpeciesResource instantiateResource(Species entity) {
 		SpeciesResource resource = new SpeciesResource();
+		resource.setSpeciesId(entity.getId());
 		resource.setName(entity.getSpeciesName());
 		resource.setBreeds(entity.getBreeds());
 		

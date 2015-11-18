@@ -1,0 +1,29 @@
+<h1>Breeds List for {{species.name}} Species</h1>
+<hr />
+<div class="row-fluid" ng-hide='error==""'>
+	<div class="col-md-12">
+		<div class="alert alert-danger" role="alert">{{error}}</div>
+	</div>
+</div>
+<div class="panel-body">
+	<div>
+         <div class="row cardContainer">
+         	<h3>Filter:</h3>
+		    <input type="text" ng-model="nameText" />
+		    <br /><br />
+		    <h3>Species: {{species.name}}</h3>
+             <table class="table table-bordered table-hover" id="table1">
+				<thead>
+					<tr>
+						<th>Breed</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr	ng-repeat="breed in breeds | filter:{breedName:nameText} | orderBy:'breedName'">
+						<td>{{breed.breedName}}</td>
+					</tr>
+				</tbody>
+			</table>
+       </div>
+     </div>
+</div>

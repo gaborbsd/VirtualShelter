@@ -40,6 +40,9 @@ app.config(function($routeProvider) {
 	}).when('/speciesandbreeds', {
 		controller : 'SpeciesAndBreedsController',
 		templateUrl : '/html/speciesandbreeds.html'
+	}).when('/update/species/:id', {
+		controller : 'BreedsController',
+		templateUrl : '/html/breeds.html'
 	}).otherwise({
 		redirectTo : '/editor/user'
 	})
@@ -264,11 +267,12 @@ function UserService($http, $q) {
 
 }
 
-UserService.$inject = [ '$http', '$q' ];
+SpeciesAndBreedsService.$inject = [ '$http', '$q' ];
 function SpeciesAndBreedsService($http, $q) {
 
 	var service = {
 			getSpecies : getSpecies,
+			getSpeciesId: getSpeciesId
 	};
 
 	return service;
@@ -276,6 +280,16 @@ function SpeciesAndBreedsService($http, $q) {
 	function getSpecies() {
 		var deferred = $q.defer();
 		$http.get("api/species").success(function(data, status) {
+			deferred.resolve(data);
+		}).error(function(data, status) {
+			deferred.reject(status);
+		});
+		return deferred.promise;
+	}
+	
+	function getSpeciesId(id) {
+		var deferred = $q.defer();
+		$http.get("api/species/"+id).success(function(data, status) {
 			deferred.resolve(data);
 		}).error(function(data, status) {
 			deferred.reject(status);
@@ -508,6 +522,23 @@ controllers.SpeciesAndBreedsController = function($scope, $http, $routeParams, S
 			$scope.error = response;
 		})
 	}();
+	
+};
+
+controllers.BreedsController = function($scope, $http, $routeParams, SpeciesAndBreedsService) {
+	$scope.species = {};
+	$scope.error = "";
+	$scope.breeds = {};
+	
+	if ($routeParams.id > 0) {
+		SpeciesAndBreedsService.getSpeciesId($routeParams.id).then(function(data) {
+			$scope.species = data;
+			$scope.breeds = $scope.species.breeds;
+			
+		}, function(response) {
+			$scope.error = response;
+		})
+	}
 	
 };
 
