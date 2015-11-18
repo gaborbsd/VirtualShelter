@@ -274,6 +274,7 @@ function SpeciesAndBreedsService($http, $q) {
 			getSpecies : getSpecies,
 			getSpeciesId: getSpeciesId,
 			saveSpecies : saveSpecies,
+			deleteSpecies: deleteSpecies
 	};
 
 	return service;
@@ -307,11 +308,17 @@ function SpeciesAndBreedsService($http, $q) {
 		});
 		return deferred.promise;
 	}
-
 	
+	function deleteSpecies(id) {
+		var deferred = $q.defer();
+		$http.delete("api/species/"+id).success(function(data, status) {
+			deferred.resolve(data);
+		}).error(function(status) {
+			deferred.reject(status);
+		});
+		return deferred.promise;
+	}
 }
-
-
 
 var controllers = {};
 
@@ -561,6 +568,20 @@ controllers.SpeciesAndBreedsController = function($scope, $http, $routeParams, S
 			$scope.error = response;
 		})
 	};
+	
+	$scope.deleteSpecies = function(id) {
+		$scope.id=id;
+		SpeciesAndBreedsService.deleteSpecies($scope.id).then(function() {
+			SpeciesAndBreedsService.getSpecies().then(function(data) {
+				$scope.speciesList = data;
+			}, function(response) {
+				$scope.error = response;
+			});
+			location.href = "/#/speciesandbreeds";
+		}, function(response) {
+			$scope.error = response;
+		});
+	}
 	
 };
 

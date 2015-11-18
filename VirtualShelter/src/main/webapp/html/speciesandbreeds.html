@@ -12,6 +12,7 @@
 		    <input type="text" ng-model="nameText" />
 		    <br /><br />
              <div class="span3 card" ng-repeat="species in speciesList | filter:{name:nameText} | orderBy:'name'">
+             	 <button  class="btn close cardClose" ng-click="deleteSpecies(species.speciesId)" >&times;</button>
                  <div class="cardHeader">{{species.name}}</div>
                  <a href="#/update/species/{{species.speciesId}}">Manage breeds</a>
              </div>
@@ -24,6 +25,7 @@
 		<div class="alert alert-danger" role="alert">{{error}}</div>
 	</div>
 </div>
+<h3>Add new Species:</h3>
 <from class="form">
 <div class="panel-body">
 	<div class="form-group row">
