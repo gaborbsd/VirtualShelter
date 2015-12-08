@@ -41,6 +41,7 @@ public class AnimalResourceAssembler extends
 		resource.setName(entity.getName());
 		resource.setAdoptionType(entity.getAdoptionType());
 		resource.setBreed(entity.getBreed());
+		resource.setSpecies(entity.getSpecies());
 		resource.setHeight(entity.getHeight());
 		resource.setWeight(entity.getWeight());
 		resource.setAge(entity.getAge()!=null?entity.getAge().getTime().toString():null);

@@ -8,6 +8,7 @@ import hu.bme.aut.vshelter.entity.Breed;
 import hu.bme.aut.vshelter.entity.Disease;
 import hu.bme.aut.vshelter.entity.Handicap;
 import hu.bme.aut.vshelter.entity.Sex;
+import hu.bme.aut.vshelter.entity.Species;
 import hu.bme.aut.vshelter.entity.VaccinationStatus;
 
 import org.springframework.hateoas.ResourceSupport;
@@ -16,6 +17,7 @@ public class AnimalResource extends ResourceSupport {
 	private String name;
 	private AdoptionType adoptionType;
 	private Breed breed;
+	private Species species;
 	private int height;
 	private int weight;
 	private String age;
@@ -57,6 +59,14 @@ public class AnimalResource extends ResourceSupport {
 
 	public void setBreed(Breed breed) {
 		this.breed = breed;
+	}
+
+	public Species getSpecies() {
+		return species;
+	}
+
+	public void setSpecies(Species species) {
+		this.species = species;
 	}
 
 	public int getHeight() {

@@ -34,6 +34,9 @@ public class Animal {
 	@ManyToOne(cascade = {CascadeType.ALL})
 	private Breed breed;
 	
+	@ManyToOne(cascade = {CascadeType.ALL})
+	private Species species;
+	
 	@Column(name = "height", unique = false, nullable = true)
 	private int height;
 	
@@ -104,6 +107,14 @@ public class Animal {
 		this.adoptionType = adoptionType;
 	}
 	
+	public Species getSpecies() {
+		return species;
+	}
+
+	public void setSpecies(Species species) {
+		this.species = species;
+	}
+
 	public Breed getBreed() {
 		return breed;
 	}

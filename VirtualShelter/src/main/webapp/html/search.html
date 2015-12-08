@@ -72,8 +72,8 @@
 			            <div class="span3 card" ng-repeat="animal in animals | filter:{name:nameText} | orderBy:'name'">
 			                <button  class="btn close cardClose" ng-click="deleteUser(user.userId)" >&times;</button>
 			                <div class="cardHeader">{{animal.name}}</div>
-			                <div class="cardBody">{{animal.breed.breedName}}</div>
-			                <div class="cardBody">{{animal.breed.species.speciesName}}</div>
+			                <div class="cardBody">Species: {{animal.species.speciesName}}</div>
+			                <div class="cardBody">Breed: {{animal.breed.breedName}}</div>
 			            </div>
 			        </div>
 			    </div>
@@ -94,7 +94,7 @@
 								<td>{{animal.name}}</td>
 								<td>{{animal.adoptionType}}</td>
 								<td>{{animal.breed.breedName}}</td>
-								<td>{{animal.breed.species.speciesName}}</td>
+								<td>{{animal.species.speciesName}}</td>
 								<td>{{animal.height}}</td>
 								<td>{{animal.weight}}</td>
 							</tr>
