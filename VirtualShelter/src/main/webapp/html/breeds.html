@@ -8,22 +8,25 @@
 <div class="panel-body">
 	<div>
          <div class="row cardContainer">
-         	<h3>Filter:</h3>
-		    <input type="text" ng-model="nameText" />
-		    <br /><br />
-		    <h3>Species: {{species.name}}</h3>
-             <table class="table table-bordered table-hover" id="table1">
-				<thead>
-					<tr>
-						<th>Breed</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr	ng-repeat="breed in breeds | filter:{breedName:nameText} | orderBy:'breedName'">
-						<td>{{breed.breedName}}<button  class="btn close cardClose" ng-click="deleteBreed(breed.id)" >&times;</button></td>
-					</tr>
-				</tbody>
-			</table>
+         	<div class="col-md-9 col-md-offset-1">
+	         	<h3>Filter:</h3>
+			    <input type="text" ng-model="nameText" />
+			
+			    <br /><br />
+			    <h3>Species: {{species.name}}</h3>
+	             <table class="table table-bordered table-hover" id="table1">
+					<thead>
+						<tr>
+							<th>Breed</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr	ng-repeat="breed in breeds | filter:{breedName:nameText} | orderBy:'breedName'">
+							<td>{{breed.breedName}}<button  class="btn close cardClose" ng-click="deleteBreed(breed.id)" >&times;</button></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
        </div>
      </div>
 </div>

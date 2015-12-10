@@ -23,7 +23,7 @@
 <link rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap.css">
 <link href="css/bootstrap-responsive.min.css" rel="stylesheet" />
 </head>
-<body ng-app="vshelterApp">
+<body ng-app="vshelterApp" style="background:#E0E0E0" >
 	<div class="navbar navbar-fixed-top">
         <div class="navbar-inner">
             <div class="container">
@@ -61,18 +61,54 @@
             </div>
         </div>
     </div>
-    
+    <div id='cssmenu'>
+	<ul>
+	   <li class='active'><a href="#/search"><span>Search</span></a></li>
+	   <li><a href='#/search'><span>Search</span></a></li>
+	   <li><a href="#/users"><span>Users</span></a></li>
+	   <li><a href="#/editor/user"><span>User Registration</span></a></li>
+	   <li><a href="#/editor/animal"><span>Animal Registration</span></a></li>
+	   <li><a href="#/editor/shelter"><span>Institution Registration</span></a></li>
+	   <li><a href="#/shelters"><span>Institutions</span></a></li>
+	   <li class='last'><a href="#/speciesandbreeds"><span>Species and Breeds</span></a></li>
+	</ul>
+	</div>
+	    
     <div class="span4 section">
-          <h3><a href="#/search">Search</a></h3><br/>
-          <h3><a href="#/users">Users</a></h3><br/>
-          <h3><a href="#/editor/user">User Registration</a></h3><br/>
-          <h3><a href="#/editor/animal">Animal Registration</a></h3><br/>
-          <h3><a href="#/editor/shelter">Institution Registration</a></h3><br/>
-          <h3><a href="#/shelters">Institutions</a></h3><br/>
-          <h3><a href="#/speciesandbreeds">Species and Breeds</a></h3><br/>
+        <div id='cssmenu2'>
+		<ul>
+		   <li><a href='#'><span>Home</span></a></li>
+		   <li class='active has-sub'><a href='#/search'><span>Animals</span></a>
+		      <ul>
+		         <li class='last'><a href='#/search'><span>Animal Search</span></a>
+		         </li>
+		         <li class='last'><a href="#/editor/animal"><span>Animal Registration</span></a>
+		         </li>
+		      </ul>
+		   </li>
+		   <li class='active has-sub'><a href="#/users"><span>Users</span></a>
+		      <ul>
+		         <li class='last'><a href="#/users"><span>User Management</span></a>
+		         </li>
+		         <li class='last'><a href="#/editor/user"><span>User Registration</span></a>
+		         </li>
+		      </ul>
+		   </li>
+		   <li class='active has-sub'><a href="#/shelters"><span>Institutions</span></a>
+		      <ul>
+		         <li class='last'><a href="#/shelters"><span>Institutions Management</span></a>
+		         </li>
+		         <li class='last'><a href="#/editor/shelter"><span>Institutions Registration</span></a>
+		         </li>
+		      </ul>
+		   </li>
+		   <li><a href="#/speciesandbreeds"><span>Species and Breeds</span></a></li>
+		   <li class='last'><a href='#'><span>Contact</span></a></li>
+		</ul>
+		</div>
 
      </div>
-     <div class="span8" ng-view>
+     <div class="span8" ng-view style="background:#FFFFCC">
          
      </div>
 
