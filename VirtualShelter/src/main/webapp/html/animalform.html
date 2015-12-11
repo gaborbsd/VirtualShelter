@@ -5,7 +5,7 @@
                 <div class="alert alert-danger" role="alert">{{error}}</div>
             </div>
         </div>
-<form ng-submit="saveAnimal()">
+<form class="form">
 	<div class="panel-body">
 		<div class="form-group row">
 			<label class="control-label col-md-3">Name:</label>
@@ -13,22 +13,28 @@
 				<input class="form-control" ng-model="animal.name" />
 			</div>
 		</div>
+		
 		<div class="form-group row">
 			<label class="control-label col-md-3">Breed:</label>
 			<div class="col-md-3">
 				<select class="form-control" ng-model="animal.breed"
-					ng-options="breed.name as breed.name for breed in animalCoreData.breeds">
+					ng-options="breed.name as breed.name for breed in animal.species.breeds">
 					<option>Choose breed</option>
 				</select>
 			</div>
 			<label class="control-label col-md-3">Species:</label>
 			<div class="col-md-3">
 				<select class="form-control" ng-model="animal.species"
-					ng-options="species.name as species.name for species in animalCoreData.species">
-					<option>Choose species</option>
+					ng-options="species.name as species.name for species in animalCoreData.species"
+					>					
 				</select>
+				{{animal.species}}
+				<ul >
+					<li ng-repeat="b in animal.species.breeds"> {{b.breedName}} </li>
+				</ul>
 			</div>
 		</div>
+		
 		<div class="form-group row">
 				<label class="control-label col-md-3">Height(m):</label>
 				<div class="col-md-3">
@@ -50,28 +56,27 @@
 			<div class="col-md-3">
 				<select class="form-control" ng-model="animal.sex">
 					<option value="" disabled>Choose sex</option>
-					<option value="male">male</option>
-					<option value="female">female</option>
-					<option value="both">both</option>
+					<option value="MALE">male</option>
+					<option value="FEMALE">female</option>
 				</select>
 			</div>
 		</div>
 		<div class="form-group row">
-			<label class="control-label col-md-3">Castrated:</label>
+			<label class="control-label col-md-3">Spayed:</label>
 			<div class="col-md-3">
-				<input type="radio" name="castrated" ng-model="animal.castrated"
-					value="true" />Yes <input type="radio" name="castrated"
-					ng-model="animal.castrated" value="false" />No
+				<input type="radio" name="spayed" ng-model="animal.spayed"
+					value="true" />Yes <input type="radio" name="spayed"
+					ng-model="animal.spayed" value="false" />No
 			</div>
 		</div>
 		<div class="form-group row">
 			<label class="control-label col-md-3">Vaccinated:</label>
 			<div class="col-md-3">
-				<select class="form-control" ng-model="animal.vaccinated">
+				<select class="form-control" ng-model="animal.vaccinationStatus">
 					<option value="" disabled>Choose</option>
-					<option value="male">yes</option>
-					<option value="female">no</option>
-					<option value="both">partially</option>
+					<option value="YES">yes</option>
+					<option value="NO">no</option>
+					<option value="PARTLY">partially</option>
 				</select>
 			</div>
 		</div>
@@ -81,6 +86,7 @@
 				<textarea class="form-control" rows="7" cols="70" ng-model="animal.description"></textarea>
 			</div>
 		</div>
+		<!--  
 		<div class="form-group row">
 			<label class="control-label col-md-3">Diseases:</label>
 			<div class="col-md-2">
@@ -119,7 +125,8 @@
 			</div>
 		</div>
 	</div>
+	-->
 	<div class="panel-footer text-center">
-        <button class="btn btn-primary" >Save</button>
+        <button class="btn btn-primary" ng-click="saveAnimal()">Save</button>
     </div>
 </form>

@@ -448,16 +448,16 @@ controllers.UpdateUserEditorController = function($scope, $http, $routeParams, U
 
 controllers.AnimalEditorController = function($scope, $http, AnimalService,	$routeParams) {
 	$scope.animal = {};
-	$scope.animal.disabilities = false;
-	$scope.animal.diseases = false;
-	$scope.animal.otherCosts = false;
+	//$scope.animal.disabilities = false;
+	//$scope.animal.diseases = false;
+	//$scope.animal.otherCosts = false;
 	$scope.error = "";
 	$scope.animalCoreData = {};
 	$scope.animal.id = $routeParams.id ? $routeParams.id : -1;
 	
 	
 	$scope.saveAnimal = function() {
-		if ($scope.animal.disabilities) {
+		/*if ($scope.animal.disabilities) {
 			$scope.animal.disabilities = $scope.animal.disabilitiesDesc;
 		}
 		if ($scope.animal.diseases) {
@@ -465,7 +465,7 @@ controllers.AnimalEditorController = function($scope, $http, AnimalService,	$rou
 		}
 		if ($scope.animal.otherCosts) {
 			$scope.animal.otherCosts = $scope.animal.otherCostsDesc;
-		}
+		}*/
 		AnimalService.saveAnimal($scope.animal).then(function() {
 			location.href = "/";
 		}, function(response) {
@@ -480,6 +480,7 @@ controllers.AnimalEditorController = function($scope, $http, AnimalService,	$rou
 			$scope.error = response;
 		})
 	};
+	
 
 	if ($scope.animal.id > 0) {
 		AnimalService.getAnimal($scope.animal.id).then(function(data) {
