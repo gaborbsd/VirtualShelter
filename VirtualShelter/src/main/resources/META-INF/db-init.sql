@@ -59,9 +59,9 @@ INSERT INTO animal VALUES (1, 'PERMANENT',DATE_SUB(NOW(), INTERVAL 2 YEAR), 'ADO
 INSERT INTO animal VALUES (2, 'BOTH', DATE_SUB(NOW(), INTERVAL 43 DAY), 'ADVERTISER', 'rossz alvo', 50, 'Cirmi', 'nincs', 'FEMALE', false, 'NO',52, 2, 6, null,2);
 INSERT INTO animal VALUES (3, 'PERMANENT', DATE_SUB(NOW(), INTERVAL 17 MONTH), 'ADVERTISER',  'jo alvo', 45, 'Bundas', 'feregtelenito', 'MALE', true, 'YES',45, 5, 8, null,3);
 
-INSERT INTO advertisement VALUES (1 , NOW(), 1, 1); 
-INSERT INTO advertisement VALUES (2 , DATE_SUB(NOW(), INTERVAL 30 DAY), 2, 2);
-INSERT INTO advertisement VALUES (3 , DATE_SUB(NOW(), INTERVAL 13 DAY), 5, 3);
+INSERT INTO advertisement VALUES (1 , NOW(), 'ez az 1. hirdetes', 1, 1); 
+INSERT INTO advertisement VALUES (2 ,  DATE_SUB(NOW(), INTERVAL 30 DAY), 'ez a 2. hirdetes', 2, 2);
+INSERT INTO advertisement VALUES (3 ,  DATE_SUB(NOW(), INTERVAL 13 DAY), 'ez a 3. hirdetes', 5, 3);
 
 INSERT INTO animal_disease VALUES (1, 1);
 

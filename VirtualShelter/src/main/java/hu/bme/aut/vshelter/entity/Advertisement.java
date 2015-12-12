@@ -17,6 +17,9 @@ public class Advertisement {
 	@Column(name = "id", unique = true, nullable = false)
 	private long id;
 	
+	@Column(name = "description", unique = false, nullable = true)
+	private String description;
+
 	@ManyToOne
 	private Advertiser advertiser;
 	
@@ -44,6 +47,14 @@ public class Advertisement {
 	
 	public Animal getAnimal() {
 		return animal;
+	}
+	
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	
 	public void setAnimal(Animal animal) {
