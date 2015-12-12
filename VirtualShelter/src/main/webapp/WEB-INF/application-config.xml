@@ -59,6 +59,7 @@
 	<bean id="jacksonObjectMapper" class="com.fasterxml.jackson.databind.ObjectMapper" />
 	
 	<bean id="animalResourceAssembler" class="hu.bme.aut.vshelter.rest.resources.AnimalResourceAssembler" />
+	<bean id="advertisementResourceAssembler" class="hu.bme.aut.vshelter.rest.resources.AdvertisementResourceAssembler" />
 	<bean id="breedResourceAssembler" class="hu.bme.aut.vshelter.rest.resources.BreedResourceAssembler" />
 	<bean id="institutionResourceAssembler" class="hu.bme.aut.vshelter.rest.resources.InstitutionResourceAssembler" />
 	<bean id="pictureResourceAssembler" class="hu.bme.aut.vshelter.rest.resources.PictureResourceAssembler" />
