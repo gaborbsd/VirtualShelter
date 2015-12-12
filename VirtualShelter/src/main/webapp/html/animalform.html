@@ -15,6 +15,34 @@
 		</div>
 		
 		<div class="form-group row">
+			<label class="control-label col-md-3">Adoption:</label>
+			<div class="col-md-3">
+				<select class="form-control" ng-model="animal.adoptionType">
+					<option value="" disabled>Choose</option>
+					<option value="TEMPORARY">temporary</option>
+					<option value="PERMANENT">permanent</option>
+					<option value="BOTH">both</option>					
+				</select>
+			</div>
+			<label class="control-label col-md-3">Sex:</label>
+			<div class="col-md-3">
+				<select class="form-control" ng-model="animal.sex">
+					<option value="" disabled>Choose</option>
+					<option value="MALE">male</option>
+					<option value="FEMALE">female</option>
+				</select>
+			</div>
+		</div>
+		
+		<div class="form-group row">
+			<label class="control-label col-md-3">Species:</label>
+			<div class="col-md-3">
+				<select class="form-control" ng-model="animal.species"
+					ng-options="s as s.speciesName for s in species"
+					ng-change="getBreeds()">
+					<option value="" disabled>Choose</option>					
+				</select>
+			</div>
 			<label class="control-label col-md-3">Breed:</label>
 			<div class="col-md-3">
 				
@@ -22,16 +50,7 @@
 					ng-options="b as b.breedName for b in breeds">
 					<option value="" disabled>Choose</option>
 				</select>
-			</div>
-			<label class="control-label col-md-3">Species:</label>
-			<div class="col-md-3">
-				<select class="form-control" ng-model="animal.species"
-					ng-options="s as s.speciesName for s in species"
-					ng-change="getBreeds()"
-					>
-					<option value="" disabled>Choose</option>					
-				</select>
-			</div>
+			</div>			
 		</div>
 		
 		<div class="form-group row">
@@ -44,22 +63,14 @@
 					<input class="form-control" type="number" ng-model="animal.weight" placeholder="1.5" />
 				</div>
 		</div>
+		
 		<div class="form-group row">
 			<label class="control-label col-md-3">Age(years):</label>
 			<div class="col-md-3">
 				<input class="form-control" type="number" ng-model="animal.age" placeholder="1.5" />
 			</div>
 		</div>
-		<div class="form-group row">
-			<label class="control-label col-md-3">Sex:</label>
-			<div class="col-md-3">
-				<select class="form-control" ng-model="animal.sex">
-					<option value="" disabled>Choose</option>
-					<option value="MALE">male</option>
-					<option value="FEMALE">female</option>
-				</select>
-			</div>
-		</div>
+		
 		<div class="form-group row">
 			<label class="control-label col-md-3">Spayed:</label>
 			<div class="col-md-3">
