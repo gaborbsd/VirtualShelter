@@ -476,6 +476,9 @@ controllers.AnimalEditorController = function($scope, $http, AnimalService,	$rou
 	$scope.getSpecies = function() {
 		AnimalService.getSpecies().then(function(data) {
 			$scope.species = data;
+			$scope.species.forEach(function(entry) {
+				entry.speciesName = entry.name.slice();
+			})
 		}, function(response) {
 			$scope.error = response;
 		})
@@ -483,7 +486,7 @@ controllers.AnimalEditorController = function($scope, $http, AnimalService,	$rou
 	
 	$scope.getBreeds = function() {
 		var x = $scope.species.filter(function(value){
-			return value.name == $scope.animal.species.name;
+			return value.speciesName == $scope.animal.species.speciesName;
 		})
 		
 		$scope.animal.species.id = $scope.animal.species.speciesId;
