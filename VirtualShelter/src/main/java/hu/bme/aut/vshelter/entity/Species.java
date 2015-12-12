@@ -26,7 +26,7 @@ public class Species {
 	@Column(name = "speciesName", unique = true, nullable = false)
 	private String speciesName;
 	
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	private List<Breed> breeds;
 	
 	public long getId() {

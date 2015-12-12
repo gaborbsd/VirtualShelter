@@ -201,6 +201,7 @@ public class AdvertisementOperationsImpl implements IAdvertisementOperations {
 
 	@Override
 	public void addAnimal(Animal animal) throws VirtualShelterException {
+		System.out.println("FAAAASZ1");
 		animalRepository.save(animal);	
 	}
 

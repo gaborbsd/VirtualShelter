@@ -452,8 +452,8 @@ controllers.AnimalEditorController = function($scope, $http, AnimalService,	$rou
 	//$scope.animal.diseases = false;
 	//$scope.animal.otherCosts = false;
 	$scope.error = "";
-	$scope.animalCoreData = {};
-	$scope.animal.id = $routeParams.id ? $routeParams.id : -1;
+	$scope.species = [];
+	$scope.breeds = [];
 	
 	
 	$scope.saveAnimal = function() {
@@ -475,10 +475,23 @@ controllers.AnimalEditorController = function($scope, $http, AnimalService,	$rou
 
 	$scope.getSpecies = function() {
 		AnimalService.getSpecies().then(function(data) {
-			$scope.animalCoreData.species = data;
+			$scope.species = data;
 		}, function(response) {
 			$scope.error = response;
 		})
+	};
+	
+	$scope.getBreeds = function() {
+		var x = $scope.species.filter(function(value){
+			return value.name == $scope.animal.species.name;
+		})
+		
+		$scope.animal.species.id = $scope.animal.species.speciesId;
+		$scope.animal.species.speciesName = $scope.animal.species.name;
+		delete $scope.animal.species['name'];
+		delete $scope.animal.species['speciesId'];
+		delete $scope.animal.species['links'];
+		$scope.breeds = x[0].breeds;
 	};
 	
 

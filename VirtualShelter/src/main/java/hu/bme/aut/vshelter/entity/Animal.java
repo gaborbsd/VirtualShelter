@@ -31,10 +31,10 @@ public class Animal {
 	@Column(name = "adoptionType", unique = false, nullable = true)
 	private AdoptionType adoptionType;
 	
-	@ManyToOne(cascade = {CascadeType.ALL})
+	@ManyToOne(cascade = {CascadeType.MERGE})
 	private Breed breed;
 	
-	@ManyToOne(cascade = {CascadeType.ALL})
+	@ManyToOne(cascade = {CascadeType.MERGE})
 	private Species species;
 	
 	@Column(name = "height", unique = false, nullable = true)
