@@ -84,13 +84,13 @@ public class AnimalController {
 	 */
 	@RequestMapping(method = RequestMethod.GET)
 	ResponseEntity<List<AnimalResource>> findAllAnimals() {
-		List<Advertisement> advertisements ;
+		List<Animal> animals ;
 		List<AnimalResource> resourceList = new ArrayList<AnimalResource>();
 		HttpStatus responseStatus = HttpStatus.OK;
 		try {
-			advertisements = this.advertisementOperations.listAllAdvertisements();
-			for (Advertisement advertisement : advertisements) {
-				resourceList.add(this.animalResourceAssembler.toResource(advertisement.getAnimal()));
+			animals = this.advertisementOperations.getAnimals();
+			for (Animal animal : animals) {
+				resourceList.add(this.animalResourceAssembler.toResource(animal));
 			}
 		} catch (VirtualShelterException e) {
 			responseStatus = this.converter.convert(e);

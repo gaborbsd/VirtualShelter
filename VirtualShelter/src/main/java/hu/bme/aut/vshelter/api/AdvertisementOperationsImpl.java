@@ -201,7 +201,6 @@ public class AdvertisementOperationsImpl implements IAdvertisementOperations {
 
 	@Override
 	public void addAnimal(Animal animal) throws VirtualShelterException {
-		System.out.println("FAAAASZ1");
 		animalRepository.save(animal);	
 	}
 
@@ -402,6 +401,11 @@ public class AdvertisementOperationsImpl implements IAdvertisementOperations {
 		List<Picture> pictures = animal.getPicturesList();
 		pictures.remove(picture);
 		animal.setPictureList(pictures);
+	}
+
+	@Override
+	public List<Animal> getAnimals() throws VirtualShelterException {
+		return animalRepository.findAll();
 	}
 
 }

@@ -377,6 +377,10 @@ public interface IAdvertisementOperations {
 	 */
 	public void deletePictureForAnimal(long animalId, Picture picture) throws VirtualShelterException;
 	
-	
-	
+	/**
+	 * List all animal in the database
+	 * @return
+	 * @throws VirtualShelterException
+	 */
+	public List<Animal> getAnimals() throws VirtualShelterException;
 }
