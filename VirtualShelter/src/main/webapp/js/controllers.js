@@ -448,24 +448,12 @@ controllers.UpdateUserEditorController = function($scope, $http, $routeParams, U
 
 controllers.AnimalEditorController = function($scope, $http, AnimalService,	$routeParams) {
 	$scope.animal = {};
-	//$scope.animal.disabilities = false;
-	//$scope.animal.diseases = false;
-	//$scope.animal.otherCosts = false;
 	$scope.error = "";
 	$scope.species = [];
 	$scope.breeds = [];
 	
 	
 	$scope.saveAnimal = function() {
-		/*if ($scope.animal.disabilities) {
-			$scope.animal.disabilities = $scope.animal.disabilitiesDesc;
-		}
-		if ($scope.animal.diseases) {
-			$scope.animal.diseases = $scope.animal.diseasesDesc;
-		}
-		if ($scope.animal.otherCosts) {
-			$scope.animal.otherCosts = $scope.animal.otherCostsDesc;
-		}*/
 		AnimalService.saveAnimal($scope.animal).then(function() {
 			location.href = "/";
 		}, function(response) {
