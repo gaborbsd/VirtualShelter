@@ -17,6 +17,9 @@ public class Advertisement {
 	@Column(name = "id", unique = true, nullable = false)
 	private long id;
 	
+	@Column(name = "title", unique = true, nullable = false)
+	private String title;
+
 	@Column(name = "description", unique = false, nullable = true)
 	private String description;
 
@@ -35,6 +38,14 @@ public class Advertisement {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+		
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
 	
 	public Advertiser getAdvertiser() {

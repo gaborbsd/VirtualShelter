@@ -408,4 +408,10 @@ public class AdvertisementOperationsImpl implements IAdvertisementOperations {
 		return animalRepository.findAll();
 	}
 
+	@Override
+	public Advertisement getAdvertisement(long id)
+			throws VirtualShelterException {
+		return advertisementRepository.findById(id);
+	}
+
 }

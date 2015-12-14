@@ -9,18 +9,32 @@ import java.util.Calendar;
 import org.springframework.hateoas.ResourceSupport;
 
 public class AdvertisementResource extends ResourceSupport {
-	
+	private long advertisementId;	
+	private String title;	
 	private String description;
-
-
 	private Advertiser advertiser;
-	
-
 	private Animal animal;
-	
-
 	private Calendar dateOfAdvertisement;
 	
+		
+	public long getAdvertisementId() {
+		return advertisementId;
+	}
+
+
+	public void setAdvertisementId(long advertisementId) {
+		this.advertisementId = advertisementId;
+	}
+
+
+	public String getTitle() {
+		return title;
+	}
+
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
 	public String getDescription() {
 		return description;

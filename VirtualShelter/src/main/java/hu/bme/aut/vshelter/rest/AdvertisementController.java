@@ -9,6 +9,8 @@ import hu.bme.aut.vshelter.rest.resources.AdvertisementResourceAssembler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.ResourceUtils;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -52,5 +54,25 @@ public class AdvertisementController {
 			responseStatus = converter.convert(e);
 		}
 		return new ResponseEntity<List<AdvertisementResource>>(resourceList ,responseStatus);
+	}
+	
+	
+	/**
+	 * Find one advertisement by id
+	 * 
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value="/{id}", method = RequestMethod.GET)
+	ResponseEntity<AdvertisementResource> getAdvertisement(@PathVariable Long id) {
+		HttpStatus responseStatus = HttpStatus.OK;
+		AdvertisementResource resource = null;
+		try {
+			Advertisement a = advertisementOperations.getAdvertisement(id);
+			resource = advertisementResourceAssembler.toResource(a);
+		} catch (VirtualShelterException e) {
+			responseStatus = converter.convert(e);
+		}
+		return new ResponseEntity<AdvertisementResource>(resource, responseStatus);
 	}
 }

@@ -383,4 +383,12 @@ public interface IAdvertisementOperations {
 	 * @throws VirtualShelterException
 	 */
 	public List<Animal> getAnimals() throws VirtualShelterException;
+	
+	/**
+	 * Returns the advertisement identified by the given id
+	 * @param advertisementId
+	 * @return
+	 * @throws VirtualShelterException
+	 */
+	public Advertisement getAdvertisement(long id) throws VirtualShelterException;
 }

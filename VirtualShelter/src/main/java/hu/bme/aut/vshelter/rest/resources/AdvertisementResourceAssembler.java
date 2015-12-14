@@ -34,10 +34,12 @@ public class AdvertisementResourceAssembler extends ResourceAssemblerSupport<Adv
 	@Override
 	protected AdvertisementResource instantiateResource(Advertisement entity) {
 		AdvertisementResource resource = new AdvertisementResource();
+		resource.setAdvertisementId(entity.getId());
 		resource.setAdvertiser(entity.getAdvertiser());
 		resource.setAnimal(entity.getAnimal());
 		resource.setDateOfAdvertisement(entity.getDateOfAdvertisement());
 		resource.setDescription(entity.getDescription());
+		resource.setTitle(entity.getTitle());
 		
 		resource.add(linkTo(AdvertisementController.class).slash(entity.getId()).slash("animal").withRel("animal"));
 		resource.add(linkTo(AdvertisementController.class).slash(entity.getId()).slash("profile").withRel("profile"));
