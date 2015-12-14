@@ -13,6 +13,9 @@ app.config(function($routeProvider) {
 	}).when('/editor/animal/:id', {
 		controller : 'AnimalEditorController',
 		templateUrl : '/html/animalform.html'
+	}).when('/advertisements', {
+		controller : 'AdvertisementController',
+		templateUrl : '/html/advertisements.html'
 	}).when('/editor/animal', {
 		controller : 'AnimalEditorController',
 		templateUrl : '/html/animalform.html'
@@ -51,6 +54,7 @@ app.config(function($routeProvider) {
 //To keep the MVC - MVVM you will need services like this 
 //The first parameter is the name of the Service the second is a function which implements all the required functions
 app.factory('SearchService', SearchService)
+app.factory('AdvertisementService', AdvertisementService)
 app.factory('AnimalService', AnimalService)
 app.factory('ShelterService', ShelterService)
 app.factory('UserService', UserService)
@@ -102,6 +106,27 @@ function AnimalService($http, $q) {
 		return deferred.promise;
 	}
 }
+
+SearchService.$inject = [ '$http', '$q' ];
+function AdvertisementService($http, $q) {
+	
+	var service = {
+		getAdvertisements : getAdvertisements,
+	};
+	
+	return service;
+	 
+	function getAdvertisements() {
+		var deferred = $q.defer();
+		$http.get("api/advertisement").success(function(data, status) {
+			deferred.resolve(data);
+		}).error(function(data, status) {
+			deferred.reject(status);
+		});
+		return deferred.promise;
+	}
+}
+
 
 SearchService.$inject = [ '$http', '$q' ];
 function SearchService($http, $q) {
@@ -383,7 +408,7 @@ controllers.UsersController = function($scope, $http, UserService) {
 		}, function(response) {
 			$scope.error = response;
 		})
-	}()
+	}();
 	
 	$scope.deleteUser = function(id) {
 		$scope.id=id;
@@ -496,6 +521,18 @@ controllers.AnimalEditorController = function($scope, $http, AnimalService,	$rou
 
 	$scope.getSpecies();
 };
+
+controllers.AdvertisementController = function($scope, $http, AdvertisementService, $routeParams) {
+	$scope.advertisements = {};
+	$scope.error = "";
+	$scope.getAdvertisements = function(){
+		AdvertisementService.getAdvertisements().then(function(data) {
+			$scope.advertisements=data;
+		}, function(response) {
+			$scope.error = response;
+		})
+	}();
+}
 
 controllers.ShelterEditorController = function($scope, $http,ShelterService, $routeParams) {
 	$scope.shelter = {};
