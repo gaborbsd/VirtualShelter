@@ -112,6 +112,7 @@ function AdvertisementService($http, $q) {
 	
 	var service = {
 		getAdvertisements : getAdvertisements,
+		deleteAdvertisement : deleteAdvertisement
 	};
 	
 	return service;
@@ -121,6 +122,16 @@ function AdvertisementService($http, $q) {
 		$http.get("api/advertisement").success(function(data, status) {
 			deferred.resolve(data);
 		}).error(function(data, status) {
+			deferred.reject(status);
+		});
+		return deferred.promise;
+	}
+	
+	function deleteAdvertisement(id) {
+		var deferred = $q.defer();
+		$http.delete("api/advertisement/"+id).success(function(data, status) {
+			deferred.resolve(data);
+		}).error(function(status) {
 			deferred.reject(status);
 		});
 		return deferred.promise;
@@ -420,7 +431,6 @@ controllers.UsersController = function($scope, $http, UserService) {
 					$scope.error = response;
 				})
 			}();
-			location.href = "/#/shelters";
 		}, function(response) {
 			$scope.error = response;
 		});
@@ -532,6 +542,19 @@ controllers.AdvertisementController = function($scope, $http, AdvertisementServi
 			$scope.error = response;
 		})
 	}();
+	
+	
+	$scope.deleteAdvertisement = function(id) {
+		AdvertisementService.deleteAdvertisement(id).then(function(){
+			AdvertisementService.getAdvertisements().then(function(data) {
+				$scope.advertisements=data;
+			}, function(response) {
+				$scope.error = response;
+			})
+		},  function(response) {
+			$scope.error = response;
+		})
+	};
 }
 
 controllers.ShelterEditorController = function($scope, $http,ShelterService, $routeParams) {
