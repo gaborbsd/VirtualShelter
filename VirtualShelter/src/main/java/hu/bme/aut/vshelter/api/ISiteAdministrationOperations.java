@@ -92,4 +92,6 @@ public interface ISiteAdministrationOperations {
 	 */
 	public User findOwnerOfInstitution(long institutionId) throws VirtualShelterException;
 	
+	public void deleteAdvertisement(long advertisementId) throws VirtualShelterException;
+	
 }

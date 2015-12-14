@@ -1,6 +1,7 @@
 package hu.bme.aut.vshelter.rest;
 
 import hu.bme.aut.vshelter.api.IAdvertisementOperations;
+import hu.bme.aut.vshelter.api.ISiteAdministrationOperations;
 import hu.bme.aut.vshelter.api.VirtualShelterException;
 import hu.bme.aut.vshelter.entity.Advertisement;
 import hu.bme.aut.vshelter.rest.resources.AdvertisementResource;
@@ -34,6 +35,9 @@ public class AdvertisementController {
 	
 	@Autowired
 	private AdvertisementResourceAssembler advertisementResourceAssembler;
+	
+	@Autowired
+	private ISiteAdministrationOperations siteAdministrationOperations;
 	
 	private VirtualShelterExceptionToHttpStatusConverter converter = new VirtualShelterExceptionToHttpStatusConverter();
 
@@ -75,4 +79,16 @@ public class AdvertisementController {
 		}
 		return new ResponseEntity<AdvertisementResource>(resource, responseStatus);
 	}
+	
+	@RequestMapping(value="/{id}", method = RequestMethod.DELETE)
+	ResponseEntity<AdvertisementResource> deleteAdvertisement(@PathVariable Long id) {
+		HttpStatus responseStatus = HttpStatus.OK;
+		try {
+			siteAdministrationOperations.deleteAdvertisement(id);
+		} catch (VirtualShelterException e) {
+			responseStatus = converter.convert(e);
+		}
+		return new ResponseEntity<AdvertisementResource>(responseStatus);
+	}
+	
 }

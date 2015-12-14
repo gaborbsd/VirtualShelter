@@ -1,5 +1,6 @@
 package hu.bme.aut.vshelter.api;
 
+import hu.bme.aut.vshelter.dal.AdvertisementRepository;
 import hu.bme.aut.vshelter.dal.BreedFacade;
 import hu.bme.aut.vshelter.dal.BreedRepository;
 import hu.bme.aut.vshelter.dal.InstitutionFacade;
@@ -39,6 +40,8 @@ public class SiteAdministrationOperationsImpl implements
 	private BreedRepository breedRepository;
 	@Autowired
 	private InstitutionRepository institutionRepository;
+	@Autowired
+	private AdvertisementRepository advertisementRepository;
 
 	@Override
 	public List<User> listAllUsers() throws VirtualShelterException {
@@ -122,6 +125,12 @@ public class SiteAdministrationOperationsImpl implements
 	public User findOwnerOfInstitution(long institutionId) throws VirtualShelterException {
 		Institution institution = institutionRepository.findOne(Long.valueOf(institutionId));
 		return institution.getOwner();
+	}
+
+	@Override
+	public void deleteAdvertisement(long advertisementId)
+			throws VirtualShelterException {
+		advertisementRepository.delete(advertisementId);
 	}
 
 }
