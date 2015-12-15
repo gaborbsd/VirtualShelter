@@ -55,6 +55,8 @@
 			</list>
 		</property>
 	</bean>
+	
+	<import resource="spring-security.xml" />
 
 	<bean id="jacksonObjectMapper" class="com.fasterxml.jackson.databind.ObjectMapper" />
 	

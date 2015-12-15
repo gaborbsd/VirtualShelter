@@ -32,17 +32,18 @@ public class VirtualShelterAuthenticationProvider implements AuthenticationProvi
 	@Override
 	public Authentication authenticate(Authentication authentication)
 			throws AuthenticationException {
-		try{
 		String name = authentication.getName();
 		String password = authentication.getCredentials().toString();
-		if (operations.authenticate(name, password)) {
-			List<GrantedAuthority> grantedAuths = new ArrayList<GrantedAuthority>();
-			grantedAuths.add(new SimpleGrantedAuthority("ROLE_USER"));
-			return new UsernamePasswordAuthenticationToken(name, password, grantedAuths);
-		} else {
-			throw new VirtualShelterAuthenticationException("Authentication unsuccessful");
-		}
-		}catch(VirtualShelterException e){
+		
+		try {
+			if (operations.authenticate(name, password)) {
+				List<GrantedAuthority> grantedAuths = new ArrayList<GrantedAuthority>();
+				grantedAuths.add(new SimpleGrantedAuthority("ROLE_USER"));
+				return new UsernamePasswordAuthenticationToken(name, password, grantedAuths);
+			} else {
+				throw new VirtualShelterAuthenticationException("Authentication unsuccessful");
+			}
+		} catch(VirtualShelterException e) {
 			throw new VirtualShelterAuthenticationException("Authentication unsuccessful");
 		}
 		
