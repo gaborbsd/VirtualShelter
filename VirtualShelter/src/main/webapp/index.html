@@ -26,39 +26,7 @@
 <body ng-app="vshelterApp" style="background:#E0E0E0" >
 	<div class="navbar navbar-fixed-top">
         <div class="navbar-inner">
-            <!--  <div class="container">
-                <form class="form-inline" name="loginForm" novalidate method="post"
-					autocomplete="off" ng-model="HeaderController">
-					<div class="">
-						<button class="btn btn-primary dropdown-toggle" type="button"
-							id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-							Dropdown <span class="caret"></span>
-						</button>
-						<ul class="dropdown-menu" role="menu"
-							aria-labelledby="dropdownMenu1">
-							<li role="presentation"><a role="menuitem" tabindex="-1"
-								href="#/search">Search</a></li>
-							<li role="presentation"><a role="menuitem" tabindex="-1"
-								href="#/users">Users</a></li>
-							<li role="presentation"><a role="menuitem" tabindex="-1"
-								href="#/editor/user">User Registration</a></li>
-							<li role="presentation"><a role="menuitem" tabindex="-1"
-								href="#/editor/animal">Animal Registration</a></li>
-							<li role="presentation"><a role="menuitem" tabindex="-1"
-							href="#/editor/shelter">Institution Registration</a></li>
-							<li role="presentation"><a role="menuitem" tabindex="-1"
-							href="#/shelters">Institutions</a></li>
-							<li role="presentation"><a role="menuitem" tabindex="-1"
-							href="#/speciesandbreeds">Species and Breeds</a></li>
-						</ul>
-						<input class="form-control" type="text" name="email" placeholder="Email">
-						<input class="form-control"	type="password" name="password" placeholder="Password">
-						<button class="btn btn-primary" type="button" ng-click="login()">Login</button>
-						<a class="btn btn-primary" type="button" href='#/editor/user'>Register</a>
-					</div>
-				</form>
-                
-            </div>-->
+
         </div>
     </div>
     <div id='cssmenu'>
@@ -72,6 +40,7 @@
 	   <li><a href="#/shelters"><span>Institutions</span></a></li>
 	   <li><a href="#/advertisements"><span>Advertisements</span></a></li>
 	   <li class='last'><a href="#/speciesandbreeds"><span>Species and Breeds</span></a></li>
+	   <li><a href="logout"><span>Logout</span></a></li>	   
 	</ul>
 	</div>
 	    
@@ -92,6 +61,14 @@
 		         <li class='last'><a href="#/users"><span>User Management</span></a>
 		         </li>
 		         <li class='last'><a href="#/editor/user"><span>User Registration</span></a>
+		         </li>
+		      </ul>
+		   </li>
+		   <li class='active has-sub'><a href="#/advertisements"><span>Advertisements</span></a>
+		      <ul>
+		         <li class='last'><a href="#/advertisements"><span>Advertisement Management</span></a>
+		         </li>
+		         <li class='last'><a href="#/editor/advertisement"><span>Advertisement Registration</span></a>
 		         </li>
 		      </ul>
 		   </li>

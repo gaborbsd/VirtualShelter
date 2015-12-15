@@ -23,9 +23,16 @@ public interface ISiteAdministrationOperations {
 	public User findUserById(long userId) throws VirtualShelterException;
 	
 	/**
-	 * Returns whether the user is a site administrator or not
+	 * Returns user with the given email
+	 * @param email the user with that email will be returned
 	 * @return
 	 */
+	public User findUserByEmail(String email) throws VirtualShelterException;	
+
+	/**
+	 * Returns whether the user is a site administrator or not
+	 * @return
+	 */	
 	public boolean isUserSiteAdministrator(long userId) throws VirtualShelterException;
 	
 	/**

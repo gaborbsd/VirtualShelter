@@ -9,6 +9,7 @@ import hu.bme.aut.vshelter.dal.SpeciesFacade;
 import hu.bme.aut.vshelter.dal.SpeciesRepository;
 import hu.bme.aut.vshelter.dal.UserFacade;
 import hu.bme.aut.vshelter.dal.UserRepository;
+import hu.bme.aut.vshelter.dal.UserRepositoryCustom;
 import hu.bme.aut.vshelter.entity.Breed;
 import hu.bme.aut.vshelter.entity.Institution;
 import hu.bme.aut.vshelter.entity.Species;
@@ -132,5 +133,11 @@ public class SiteAdministrationOperationsImpl implements
 			throws VirtualShelterException {
 		advertisementRepository.delete(advertisementId);
 	}
+
+	@Override
+	public User findUserByEmail(String email) throws VirtualShelterException {
+		return userRepository.getUserByEmail(email);
+	}
+
 
 }

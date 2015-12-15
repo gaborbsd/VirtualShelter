@@ -17,6 +17,7 @@ import hu.bme.aut.vshelter.rest.resources.PictureResource;
 import hu.bme.aut.vshelter.rest.resources.UserResource;
 import hu.bme.aut.vshelter.rest.resources.UserResourceAssembler;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +25,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.ResourceSupport;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -67,12 +69,12 @@ public class AnimalController {
 	@RequestMapping(method = RequestMethod.POST)
 	ResponseEntity<AnimalResource> addAnimal(@RequestBody Animal animal) {
 		HttpStatus responseStatus = HttpStatus.CREATED;
+		
 		try {
 			this.advertisementOperations.addAnimal(animal);
 		} catch (VirtualShelterException e) {
 			responseStatus = this.converter.convert(e);
 		}
-		
 		AnimalResource resource = animalResourceAssembler.toResource(animal);
 		return new ResponseEntity<AnimalResource>(resource, responseStatus);
 	}
@@ -95,6 +97,7 @@ public class AnimalController {
 		} catch (VirtualShelterException e) {
 			responseStatus = this.converter.convert(e);
 		}
+		
 		
 		return new ResponseEntity<List<AnimalResource>>(resourceList,
 				responseStatus);

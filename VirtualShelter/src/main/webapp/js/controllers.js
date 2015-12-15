@@ -16,6 +16,9 @@ app.config(function($routeProvider) {
 	}).when('/advertisements', {
 		controller : 'AdvertisementController',
 		templateUrl : '/html/advertisements.html'
+	}).when('/editor/advertisement', {
+		controller : 'AdvertisementEditorController',
+		templateUrl : '/html/advertisementform.html'
 	}).when('/editor/animal', {
 		controller : 'AnimalEditorController',
 		templateUrl : '/html/animalform.html'
@@ -112,7 +115,9 @@ function AdvertisementService($http, $q) {
 	
 	var service = {
 		getAdvertisements : getAdvertisements,
-		deleteAdvertisement : deleteAdvertisement
+		deleteAdvertisement : deleteAdvertisement,
+		getAnimalsForCurrentUser : getAnimalsForCurrentUser,
+		saveAdvertisement : saveAdvertisement
 	};
 	
 	return service;
@@ -136,6 +141,27 @@ function AdvertisementService($http, $q) {
 		});
 		return deferred.promise;
 	}
+	
+	function getAnimalsForCurrentUser() {
+		var deferred = $q.defer();
+		$http.get("api/advertisement/animals").success(function(data, status) {
+			deferred.resolve(data);
+		}).error(function(data, status) {
+			deferred.reject(status);
+		});
+		return deferred.promise;
+	}
+	
+	function saveAdvertisement(adv) {
+		var deferred = $q.defer();
+		$http.post("api/advertisement", adv).success(function(data, status) {
+			deferred.resolve(data);
+		}).error(function(data,status) {
+			deferred.reject(status);
+		});
+		return deferred.promise;
+	}
+	
 }
 
 
@@ -240,7 +266,8 @@ function UserService($http, $q) {
 		getUser : getUser,
 		getUsers : getUsers,
 		updateUser : updateUser,
-		deleteUser: deleteUser
+		deleteUser: deleteUser,
+		getCurrentUser : getCurrentUser
 	};
 
 	return service;
@@ -289,6 +316,16 @@ function UserService($http, $q) {
 		});
 		return deferred.promise;
 		
+	}
+	
+	function getCurrentUser() {
+		var deferred = $q.defer();
+		$http.get("api/user/username").success(function(data, status) {
+			deferred.resolve(data);
+		}).error(function(status) {
+			deferred.reject(status);
+		});
+		return deferred.promise;
 	}
 	
 	function deleteUser(id) {
@@ -390,6 +427,27 @@ controllers.HeaderController = function($scope, $http) {
 	}
 
 };
+
+controllers.AdvertisementEditorController = function($scope, $http, AdvertisementService) {
+	$scope.advertisement = {};
+	$scope.animals = {};
+	
+	$scope.getAnimalsForCurrentUser = function() {
+		AdvertisementService.getAnimalsForCurrentUser().then(function(data) {
+			$scope.animals=data;
+		}, function(response) {
+			$scope.error = response;
+		})
+	}();
+	
+	$scope.saveAdvertisement = function() {
+		AdvertisementService.saveAdvertisement($scope.advertisement).then(function() {
+			location.href = "/";
+		}, function(response) {
+			$scope.error = response;
+		})
+	};
+}
 
 controllers.SearchController = function($scope, $http, SearchService) {
 	$scope.clientLimit;
