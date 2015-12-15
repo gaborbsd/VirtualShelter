@@ -4,6 +4,7 @@ import hu.bme.aut.vshelter.api.IAdvertisementOperations;
 import hu.bme.aut.vshelter.api.ISiteAdministrationOperations;
 import hu.bme.aut.vshelter.api.VirtualShelterException;
 import hu.bme.aut.vshelter.entity.Advertisement;
+import hu.bme.aut.vshelter.entity.Advertiser;
 import hu.bme.aut.vshelter.entity.Animal;
 import hu.bme.aut.vshelter.entity.User;
 import hu.bme.aut.vshelter.rest.resources.AdvertisementResource;
@@ -72,10 +73,13 @@ public class AdvertisementController {
 	
 	
 	@RequestMapping(method = RequestMethod.POST)
-	ResponseEntity<AdvertisementResource> addAdvertisement(@RequestBody Advertisement adv) {
+	ResponseEntity<AdvertisementResource> addAdvertisement(Principal principal, @RequestBody Advertisement adv) {
 			HttpStatus responseStatus = HttpStatus.CREATED;
-		
+			String userMail = principal.getName();
+			Advertiser adver = null;
 			try {
+				adver = siteAdministrationOperations.findUserByEmail(userMail);
+				adv.setAdvertiser(adver);
 				this.advertisementOperations.createAdvertisement(adv);;
 			} catch (VirtualShelterException e) {
 				responseStatus = this.converter.convert(e);

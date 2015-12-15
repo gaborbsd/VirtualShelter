@@ -2,6 +2,7 @@ package hu.bme.aut.vshelter.entity;
 
 import java.util.Calendar;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,10 +24,10 @@ public class Advertisement {
 	@Column(name = "description", unique = false, nullable = true)
 	private String description;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.MERGE)
 	private Advertiser advertiser;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	private Animal animal;
 	
 	@Column(name = "dateOfAdvertisement", unique = true, nullable = true)

@@ -68,9 +68,9 @@ public class AnimalController {
 	 */
 	@RequestMapping(method = RequestMethod.POST)
 	ResponseEntity<AnimalResource> addAnimal(@RequestBody Animal animal) {
-		HttpStatus responseStatus = HttpStatus.CREATED;
-		
+		HttpStatus responseStatus = HttpStatus.CREATED;		
 		try {
+			
 			this.advertisementOperations.addAnimal(animal);
 		} catch (VirtualShelterException e) {
 			responseStatus = this.converter.convert(e);

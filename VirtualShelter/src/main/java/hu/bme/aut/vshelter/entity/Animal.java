@@ -67,7 +67,7 @@ public class Animal {
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<Handicap> knownHandicaps;
 	
-	@ManyToOne(cascade = {CascadeType.ALL})
+	@ManyToOne(cascade = {CascadeType.MERGE})
 	private Address address;
 	
 	@ManyToOne(cascade = {CascadeType.ALL})

@@ -441,6 +441,11 @@ controllers.AdvertisementEditorController = function($scope, $http, Advertisemen
 	}();
 	
 	$scope.saveAdvertisement = function() {
+		delete $scope.advertisement.animal['links'];
+		delete $scope.advertisement.animal['species'];
+		delete $scope.advertisement.animal['knownDiseases'];
+		delete $scope.advertisement.animal['knownHandicaps'];
+		delete $scope.advertisement.animal['age'];
 		AdvertisementService.saveAdvertisement($scope.advertisement).then(function() {
 			location.href = "/";
 		}, function(response) {

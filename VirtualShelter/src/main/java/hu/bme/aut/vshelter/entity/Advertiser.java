@@ -35,13 +35,13 @@ public abstract class Advertiser {
 	             message="Invalid email format")
 	private String email;
 	
-	@ManyToOne(cascade = {CascadeType.ALL})
+	@ManyToOne(cascade = {CascadeType.MERGE})
 	private Address address;
 	
-	@ManyToOne(cascade = {CascadeType.ALL})
+	@ManyToOne(cascade = {CascadeType.MERGE})
 	private Picture profilePicture;
 	
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	private List<Picture> picturesList;
 	
 	@Column(name = "phoneNumber", unique = false, nullable = true)
