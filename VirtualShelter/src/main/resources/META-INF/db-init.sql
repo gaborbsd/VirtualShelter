@@ -46,10 +46,12 @@ INSERT INTO advertiser VALUES (3, 'Tunde.Manfai@gmail.com', '+36305533228', 'Man
 INSERT INTO advertiser VALUES (4, 'hajduuzem@bihar.hu', null, 'Hajdu Favago Zrt.', null, 4, null);
 INSERT INTO advertiser VALUES (5, 'bikaver@egri.hu', '0036301454321', 'Legjobb Egri Borok Kft.', null, 5, null);
 INSERT INTO advertiser VALUES (6, 'kecsegemet@kecske.com', '0036709933987', 'Kecskeleg Kft.', null, 6, null);
+INSERT INTO advertiser VALUES (7, 'user@user.com', '+365441223', 'User User', null, 1, null);
 
 INSERT INTO user VALUES ('Kedves idos hazaspar nagy kertes haz', 'csipella96', 1); 
 INSERT INTO user VALUES ('Szeretek vadaszni vadaszkutyat keresek', 'asd123', 2);
 INSERT INTO user VALUES ('Halakat tartok, toparti otthonomban', 'skywalker24', 3);
+INSERT INTO user VALUES ('user', 'user', 7); 
  
 INSERT INTO institution VALUES (null ,'17136433-44432345-00000000', '235732461', 4,1); 
 INSERT INTO institution VALUES (null ,'43422643-66356353-63452452', '562452348', 5,2);
