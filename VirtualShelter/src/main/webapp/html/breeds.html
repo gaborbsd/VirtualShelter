@@ -1,48 +1,51 @@
 <h1>Breeds List for {{species.name}} Species</h1>
-<hr />
+<hr/>
+
 <div class="row-fluid" ng-hide='error==""'>
-	<div class="col-md-12">
-		<div class="alert alert-danger" role="alert">{{error}}</div>
-	</div>
+    <div class="col-md-12">
+        <div class="alert alert-danger" role="alert">{{error}}</div>
+    </div>
 </div>
 <div class="panel-body">
-	<div>
-         <div class="row cardContainer">
-         	<div class="col-md-9 col-md-offset-1">
-	         	<h3>Filter:</h3>
-			    <input type="text" ng-model="nameText" />
-			
-			    <br /><br />
-			    <h3>Species: {{species.name}}</h3>
-	             <table class="table table-bordered table-hover" id="table1">
-					<thead>
-						<tr>
-							<th>Breed</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr	ng-repeat="breed in breeds | filter:{breedName:nameText} | orderBy:'breedName'">
-							<td>{{breed.breedName}}<button  class="btn close cardClose" ng-click="deleteBreed(breed.id)" >&times;</button></td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-       </div>
-     </div>
+    <div>
+        <div class="row cardContainer">
+            <div class="col-md-9 col-md-offset-1">
+                <h3>Filter:</h3>
+                <input type="text" ng-model="nameText"/>
+
+                <br/><br/>
+                <h3>Species: {{species.name}}</h3>
+                <table class="table table-bordered table-hover" id="table1">
+                    <thead>
+                    <tr>
+                        <th>Breed</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="breed in breeds | filter:{breedName:nameText} | orderBy:'breedName'">
+                        <td>{{breed.breedName}}
+                            <button class="btn close cardClose" ng-click="deleteBreed(breed.id)">&times;</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
 
 <h3>Add new Breed:</h3>
-<from class="form">
-<div class="panel-body">
-	<div class="form-group row">
-		<label class="control-label col-sm-4">Name*</label>
-		<div class="col-sm-5">
-			<input class="form-control" type="text" name="name"
-				ng-model="breed.breedName" placeholder="Name">
-		</div>
-	</div>
-</div>
-<div class="panel-footer text-center">
-	<button class="btn btn-primary" ng-click="saveBreed()">Save</button>
-</div>
-</from>
+<form class="form">
+    <div class="panel-body">
+        <div class="form-group row">
+            <label class="control-label col-sm-4">Name*</label>
+            <div class="col-sm-5">
+                <input class="form-control" type="text" name="name"
+                       ng-model="breed.breedName" placeholder="Name">
+            </div>
+        </div>
+    </div>
+    <div class="panel-footer text-center">
+        <button class="btn btn-primary" ng-click="saveBreed()">Save</button>
+    </div>
+</form>

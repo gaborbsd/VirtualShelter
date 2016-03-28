@@ -4,6 +4,6 @@ import org.springframework.hateoas.ResourceSupport;
 
 public class PictureResource extends ResourceSupport {
 
-	//TODO
-	
+    //TODO
+
 }

@@ -1,94 +1,82 @@
-	<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Virtual Shelter</title>
+    <meta charset="UTF-8">
+    <title>Virtual Shelter</title>
 
-<script type="text/javascript" src="vendor/jquery/dist/jquery.js"></script>
-<script type="text/javascript" src="vendor/angular/angular.js"></script>
-<script type="text/javascript"
-	src="vendor/angular-ui/build/angular-ui.js"></script>
-<script type="text/javascript"
-	src="vendor/angular-paginate-anything/dist/paginate-anything.js"></script>
-<script type="text/javascript"
-	src="vendor/angular-route/angular-route.js"></script>
-<script type="text/javascript" src="vendor/select2/select2.js"></script>
-<script type="text/javascript"
-	src="vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="vendor/jquery/dist/jquery.js"></script>
+    <script type="text/javascript" src="vendor/angular/angular.js"></script>
+    <script type="text/javascript" src="vendor/angular-ui/build/angular-ui.js"></script>
+    <script type="text/javascript" src="vendor/angular-paginate-anything/dist/paginate-anything.js"></script>
+    <script type="text/javascript" src="vendor/angular-route/angular-route.js"></script>
+    <script type="text/javascript" src="vendor/select2/select2.js"></script>
+    <script type="text/javascript" src="vendor/bootstrap/dist/js/bootstrap.min.js"></script>
 
-<script src="js/controllers.js"></script>
-<script src="js/services.js"></script>
-<link rel="stylesheet" href="css/main.css">
-<link rel="stylesheet" href="vendor/angular-ui/build/angular-ui.css">
-<link rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap.css">
-<link href="css/bootstrap-responsive.min.css" rel="stylesheet" />
+    <script src="js/controllers.js"></script>
+    <script src="js/services.js"></script>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="vendor/angular-ui/build/angular-ui.css">
+    <link rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap.css">
+    <link href="css/bootstrap-responsive.min.css" rel="stylesheet"/>
 </head>
-<body ng-app="vshelterApp" style="background:#E0E0E0" >
-	<div class="navbar navbar-fixed-top">
-        <div class="navbar-inner">
+<body ng-app="vshelterApp" style="background:#E0E0E0">
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
 
-        </div>
     </div>
-    <div id='cssmenu'>
-	<ul>
-	   <li class='active'><a href="#/search"><span>Search</span></a></li>
-	   <li><a href='#/search'><span>Search</span></a></li>
-	   <li><a href="#/users"><span>Users</span></a></li>
-	   <li><a href="#/editor/user"><span>User Registration</span></a></li>
-	   <li><a href="#/editor/animal"><span>Animal Registration</span></a></li>
-	   <li><a href="#/editor/shelter"><span>Institution Registration</span></a></li>
-	   <li><a href="#/shelters"><span>Institutions</span></a></li>
-	   <li><a href="#/advertisements"><span>Advertisements</span></a></li>
-	   <li class='last'><a href="#/speciesandbreeds"><span>Species and Breeds</span></a></li>
-	   <li><a href="logout"><span>Logout</span></a></li>	   
-	</ul>
-	</div>
-	    
-    <div class="span4 section">
-        <div id='cssmenu2'>
-		<ul>
-		   <li><a href='#'><span>Home</span></a></li>
-		   <li class='active has-sub'><a href='#/search'><span>Animals</span></a>
-		      <ul>
-		         <li class='last'><a href='#/search'><span>Animal Search</span></a>
-		         </li>
-		         <li class='last'><a href="#/editor/animal"><span>Animal Registration</span></a>
-		         </li>
-		      </ul>
-		   </li>
-		   <li class='active has-sub'><a href="#/users"><span>Users</span></a>
-		      <ul>
-		         <li class='last'><a href="#/users"><span>User Management</span></a>
-		         </li>
-		         <li class='last'><a href="#/editor/user"><span>User Registration</span></a>
-		         </li>
-		      </ul>
-		   </li>
-		   <li class='active has-sub'><a href="#/advertisements"><span>Advertisements</span></a>
-		      <ul>
-		         <li class='last'><a href="#/advertisements"><span>Advertisement Management</span></a>
-		         </li>
-		         <li class='last'><a href="#/editor/advertisement"><span>Advertisement Registration</span></a>
-		         </li>
-		      </ul>
-		   </li>
-		   <li class='active has-sub'><a href="#/shelters"><span>Institutions</span></a>
-		      <ul>
-		         <li class='last'><a href="#/shelters"><span>Institutions Management</span></a>
-		         </li>
-		         <li class='last'><a href="#/editor/shelter"><span>Institutions Registration</span></a>
-		         </li>
-		      </ul>
-		   </li>
-		   <li><a href="#/speciesandbreeds"><span>Species and Breeds</span></a></li>
-		   <li class='last'><a href='#'><span>Contact</span></a></li>
-		</ul>
-		</div>
+</div>
+<div id='cssmenu'>
+    <ul>
+        <li class='active'><a href="#/search"><span>Search</span></a></li>
+        <li><a href='#/search'><span>Search</span></a></li>
+        <li><a href="#/users"><span>Users</span></a></li>
+        <li><a href="#/editor/user"><span>User Registration</span></a></li>
+        <li><a href="#/editor/animal"><span>Animal Registration</span></a></li>
+        <li><a href="#/editor/shelter"><span>Institution Registration</span></a></li>
+        <li><a href="#/shelters"><span>Institutions</span></a></li>
+        <li><a href="#/advertisements"><span>Advertisements</span></a></li>
+        <li class='last'><a href="#/speciesandbreeds"><span>Species and Breeds</span></a></li>
+        <li><a href="logout"><span>Logout</span></a></li>
+    </ul>
+</div>
 
-     </div>
-     <div class="span8" ng-view style="background:#FFFFCC">
-         
-     </div>
+<div class="span4 section">
+    <div id='cssmenu2'>
+        <ul>
+            <li><a href='#'><span>Home</span></a></li>
+            <li class='active has-sub'><a href='#/search'><span>Animals</span></a>
+                <ul>
+                    <li class='last'><a href='#/search'><span>Animal Search</span></a></li>
+                    <li class='last'><a href="#/editor/animal"><span>Animal Registration</span></a></li>
+                </ul>
+            </li>
+            <li class='active has-sub'><a href="#/users"><span>Users</span></a>
+                <ul>
+                    <li class='last'><a href="#/users"><span>User Management</span></a></li>
+                    <li class='last'><a href="#/editor/user"><span>User Registration</span></a></li>
+                </ul>
+            </li>
+            <li class='active has-sub'><a href="#/advertisements"><span>Advertisements</span></a>
+                <ul>
+                    <li class='last'><a href="#/advertisements"><span>Advertisement Management</span></a></li>
+                    <li class='last'><a href="#/editor/advertisement"><span>Advertisement Registration</span></a></li>
+                </ul>
+            </li>
+            <li class='active has-sub'><a href="#/shelters"><span>Institutions</span></a>
+                <ul>
+                    <li class='last'><a href="#/shelters"><span>Institutions Management</span></a></li>
+                    <li class='last'><a href="#/editor/shelter"><span>Institutions Registration</span></a></li>
+                </ul>
+            </li>
+            <li><a href="#/speciesandbreeds"><span>Species and Breeds</span></a></li>
+            <li class='last'><a href='#'><span>Contact</span></a></li>
+        </ul>
+    </div>
+
+</div>
+<div class="span8" ng-view style="background:#FFFFCC">
+
+</div>
 
 </body>
 </html>

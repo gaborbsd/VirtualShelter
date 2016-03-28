@@ -1,52 +1,52 @@
 package hu.bme.aut.vshelter.dal.impl;
 
+import hu.bme.aut.vshelter.api.VirtualShelterException;
+import hu.bme.aut.vshelter.dal.HandicapFacade;
+import hu.bme.aut.vshelter.entity.Handicap;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-import hu.bme.aut.vshelter.api.VirtualShelterException;
-import hu.bme.aut.vshelter.dal.HandicapFacade;
-import hu.bme.aut.vshelter.entity.Handicap;
-
 public class HandicapFacadeInMemoryImpl implements HandicapFacade {
-	
-	private List<Handicap> handicaps = new ArrayList<Handicap>();
 
-	@Override
-	public Handicap findById(long handicapId) throws VirtualShelterException {
-		try {
-			return handicaps.stream()
-					.filter(a -> a.getId() == handicapId).findFirst()
-					.get();
-		} catch (NoSuchElementException e) {
-			return null;
-		}
-	}
+    private List<Handicap> handicaps = new ArrayList<Handicap>();
 
-	@Override
-	public List<Handicap> findAll() throws VirtualShelterException {
-		return Collections.unmodifiableList(handicaps);
-	}
+    @Override
+    public Handicap findById(long handicapId) throws VirtualShelterException {
+        try {
+            return handicaps.stream()
+                    .filter(a -> a.getId() == handicapId).findFirst()
+                    .get();
+        } catch (NoSuchElementException e) {
+            return null;
+        }
+    }
 
-	@Override
-	public void create(Handicap handicap) throws VirtualShelterException {
-		handicaps.add(handicap);
-	}
+    @Override
+    public List<Handicap> findAll() throws VirtualShelterException {
+        return Collections.unmodifiableList(handicaps);
+    }
 
-	@Override
-	public void edit(Handicap handicap) throws VirtualShelterException {
-		handicaps
-		.set(handicaps.indexOf(handicap), handicap);
-	}
+    @Override
+    public void create(Handicap handicap) throws VirtualShelterException {
+        handicaps.add(handicap);
+    }
 
-	@Override
-	public void deleteById(long handicapId) throws VirtualShelterException {
-		Handicap deleteHandicap = findById(handicapId);
+    @Override
+    public void edit(Handicap handicap) throws VirtualShelterException {
+        handicaps
+                .set(handicaps.indexOf(handicap), handicap);
+    }
 
-		if (deleteHandicap != null)
-			handicaps.remove(deleteHandicap);
-		
-	}
+    @Override
+    public void deleteById(long handicapId) throws VirtualShelterException {
+        Handicap deleteHandicap = findById(handicapId);
+
+        if (deleteHandicap != null)
+            handicaps.remove(deleteHandicap);
+
+    }
 
 }

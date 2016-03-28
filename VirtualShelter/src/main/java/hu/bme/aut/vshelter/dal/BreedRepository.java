@@ -1,8 +1,7 @@
 package hu.bme.aut.vshelter.dal;
 
-import org.springframework.stereotype.Repository;
-
 import hu.bme.aut.vshelter.entity.Breed;
+import org.springframework.stereotype.Repository;
 
 @Repository
 public interface BreedRepository extends AbstractRepository<Breed>, BreedRepositoryCustom {

@@ -1,4 +1,4 @@
-SET FOREIGN_KEY_CHECKS=0;
+SET FOREIGN_KEY_CHECKS = 0;
 
 
 INSERT INTO species VALUES (1, 'kutya');
@@ -13,7 +13,6 @@ INSERT INTO breed VALUES (5, 'hocipos');
 INSERT INTO breed VALUES (6, 'sziami');
 INSERT INTO breed VALUES (7, 'mormogo');
 INSERT INTO breed VALUES (8, 'barna');
-
 
 
 INSERT INTO species_breed VALUES (1, 1);
@@ -40,30 +39,30 @@ INSERT INTO address VALUES (4, 'Pacsirta utca 15', 'Debrecen', 'Magyarorszag', 4
 INSERT INTO address VALUES (5, 'Turk Frigyes utca 43', 'Eger', 'Magyarorszag', 48.369624, 21.427563, 'Heves', '-', 3300);
 INSERT INTO address VALUES (6, 'Izsaki út 60', 'Kecskemet', 'Magyarorszag', 46.233586, 19.346723, 'Bacs-Kiskun', '-', 6000);
 
-INSERT INTO advertiser VALUES (1, 'Tothek62@hotmail.com', '+365431223', 'Istvan Toth', null, 1, null);
-INSERT INTO advertiser VALUES (2, 'Arpad.Hodasz@gmail.com', '+36201234567', 'Hodasz arpad', null, 2, null);
-INSERT INTO advertiser VALUES (3, 'Tunde.Manfai@gmail.com', '+36305533228', 'Manfai Tunde', '003682552992', 3, null);
-INSERT INTO advertiser VALUES (4, 'hajduuzem@bihar.hu', null, 'Hajdu Favago Zrt.', null, 4, null);
-INSERT INTO advertiser VALUES (5, 'bikaver@egri.hu', '0036301454321', 'Legjobb Egri Borok Kft.', null, 5, null);
-INSERT INTO advertiser VALUES (6, 'kecsegemet@kecske.com', '0036709933987', 'Kecskeleg Kft.', null, 6, null);
-INSERT INTO advertiser VALUES (7, 'user@user.com', '+365441223', 'User User', null, 1, null);
+INSERT INTO advertiser VALUES (1, 'Tothek62@hotmail.com', '+365431223', 'Istvan Toth', NULL, 1, NULL);
+INSERT INTO advertiser VALUES (2, 'Arpad.Hodasz@gmail.com', '+36201234567', 'Hodasz arpad', NULL, 2, NULL);
+INSERT INTO advertiser VALUES (3, 'Tunde.Manfai@gmail.com', '+36305533228', 'Manfai Tunde', '003682552992', 3, NULL);
+INSERT INTO advertiser VALUES (4, 'hajduuzem@bihar.hu', NULL, 'Hajdu Favago Zrt.', NULL, 4, NULL);
+INSERT INTO advertiser VALUES (5, 'bikaver@egri.hu', '0036301454321', 'Legjobb Egri Borok Kft.', NULL, 5, NULL);
+INSERT INTO advertiser VALUES (6, 'kecsegemet@kecske.com', '0036709933987', 'Kecskeleg Kft.', NULL, 6, NULL);
+INSERT INTO advertiser VALUES (7, 'user@user.com', '+365441223', 'User User', NULL, 1, NULL);
 
-INSERT INTO user VALUES ('Kedves idos hazaspar nagy kertes haz', 'csipella96', 1); 
+INSERT INTO user VALUES ('Kedves idos hazaspar nagy kertes haz', 'csipella96', 1);
 INSERT INTO user VALUES ('Szeretek vadaszni vadaszkutyat keresek', 'asd123', 2);
 INSERT INTO user VALUES ('Halakat tartok, toparti otthonomban', 'skywalker24', 3);
-INSERT INTO user VALUES ('user', 'user', 7); 
- 
-INSERT INTO institution VALUES (null ,'17136433-44432345-00000000', '235732461', 4,1); 
-INSERT INTO institution VALUES (null ,'43422643-66356353-63452452', '562452348', 5,2);
-INSERT INTO institution VALUES (null ,'87654375-53453452-24563462', '54262452', 6,3);
+INSERT INTO user VALUES ('user', 'user', 7);
 
-INSERT INTO animal VALUES (1, 'PERMANENT',DATE_SUB(NOW(), INTERVAL 2 YEAR), 'ADOPTER', 'jo alvo', 20, 'Alfred', 'nincs', 'MALE', false, 'PARTLY',53, 1, 1, null,1);
-INSERT INTO animal VALUES (2, 'BOTH', DATE_SUB(NOW(), INTERVAL 43 DAY), 'ADVERTISER', 'rossz alvo', 50, 'Cirmi', 'nincs', 'FEMALE', false, 'NO',52, 2, 6, null,2);
-INSERT INTO animal VALUES (3, 'PERMANENT', DATE_SUB(NOW(), INTERVAL 17 MONTH), 'ADVERTISER',  'jo alvo', 45, 'Bundas', 'feregtelenito', 'MALE', true, 'YES',45, 5, 8, null,3);
+INSERT INTO institution VALUES (NULL, '17136433-44432345-00000000', '235732461', 4, 1);
+INSERT INTO institution VALUES (NULL, '43422643-66356353-63452452', '562452348', 5, 2);
+INSERT INTO institution VALUES (NULL, '87654375-53453452-24563462', '54262452', 6, 3);
 
-INSERT INTO advertisement VALUES (1 , NOW(), 'ez az 1. hirdetes', 'FIRST', 1, 1); 
-INSERT INTO advertisement VALUES (2 ,  DATE_SUB(NOW(), INTERVAL 30 DAY), 'ez a 2. hirdetes', 'SECOND', 2, 2);
-INSERT INTO advertisement VALUES (3 ,  DATE_SUB(NOW(), INTERVAL 13 DAY), 'ez a 3. hirdetes', 'THIRD', 5, 3);
+INSERT INTO animal VALUES (1, 'PERMANENT', DATE_SUB(NOW(), INTERVAL 2 YEAR), 'ADOPTER', 'jo alvo', 20, 'Alfred', 'nincs', 'MALE', FALSE, 'PARTLY', 53, 1, 1, NULL, 1);
+INSERT INTO animal VALUES (2, 'BOTH', DATE_SUB(NOW(), INTERVAL 43 DAY), 'ADVERTISER', 'rossz alvo', 50, 'Cirmi', 'nincs', 'FEMALE', FALSE, 'NO', 52, 2, 6, NULL, 2);
+INSERT INTO animal VALUES (3, 'PERMANENT', DATE_SUB(NOW(), INTERVAL 17 MONTH), 'ADVERTISER', 'jo alvo', 45, 'Bundas', 'feregtelenito', 'MALE', TRUE, 'YES', 45, 5, 8, NULL, 3);
+
+INSERT INTO advertisement VALUES (1, NOW(), 'ez az 1. hirdetes', 'FIRST', 1, 1);
+INSERT INTO advertisement VALUES (2, DATE_SUB(NOW(), INTERVAL 30 DAY), 'ez a 2. hirdetes', 'SECOND', 2, 2);
+INSERT INTO advertisement VALUES (3, DATE_SUB(NOW(), INTERVAL 13 DAY), 'ez a 3. hirdetes', 'THIRD', 5, 3);
 
 INSERT INTO animal_disease VALUES (1, 1);
 
@@ -71,9 +70,9 @@ INSERT INTO animal_handicap VALUES (2, 2);
 
 INSERT INTO user_roles VALUES (1, 'site-administrator');
 
-INSERT INTO institution_user VALUES (4,1);
-INSERT INTO institution_user VALUES (5,2);
-INSERT INTO institution_user VALUES (5,3);
+INSERT INTO institution_user VALUES (4, 1);
+INSERT INTO institution_user VALUES (5, 2);
+INSERT INTO institution_user VALUES (5, 3);
 
-SET FOREIGN_KEY_CHECKS=1;
+SET FOREIGN_KEY_CHECKS = 1;
 

@@ -11,41 +11,41 @@ import java.util.NoSuchElementException;
 
 public class DiseaseFacadeInMemoryImpl implements DiseaseFacade {
 
-	private List<Disease> diseases = new ArrayList<Disease>();
+    private List<Disease> diseases = new ArrayList<Disease>();
 
-	@Override
-	public Disease findById(long diseaseId) throws VirtualShelterException {
-		try {
-			return diseases.stream()
-					.filter(a -> a.getId() == diseaseId).findFirst()
-					.get();
-		} catch (NoSuchElementException e) {
-			return null;
-		}
-	}
+    @Override
+    public Disease findById(long diseaseId) throws VirtualShelterException {
+        try {
+            return diseases.stream()
+                    .filter(a -> a.getId() == diseaseId).findFirst()
+                    .get();
+        } catch (NoSuchElementException e) {
+            return null;
+        }
+    }
 
-	@Override
-	public List<Disease> findAll() throws VirtualShelterException {
-		return Collections.unmodifiableList(diseases);
-	}
+    @Override
+    public List<Disease> findAll() throws VirtualShelterException {
+        return Collections.unmodifiableList(diseases);
+    }
 
-	@Override
-	public void create(Disease disease) throws VirtualShelterException {
-		diseases.add(disease);
-	}
+    @Override
+    public void create(Disease disease) throws VirtualShelterException {
+        diseases.add(disease);
+    }
 
-	@Override
-	public void edit(Disease disease) throws VirtualShelterException {
-		diseases
-		.set(diseases.indexOf(disease), disease);
-	}
+    @Override
+    public void edit(Disease disease) throws VirtualShelterException {
+        diseases
+                .set(diseases.indexOf(disease), disease);
+    }
 
-	@Override
-	public void deleteById(long diseaseId) throws VirtualShelterException {
-		Disease deleteDisease = findById(diseaseId);
+    @Override
+    public void deleteById(long diseaseId) throws VirtualShelterException {
+        Disease deleteDisease = findById(diseaseId);
 
-		if (deleteDisease != null)
-			diseases.remove(deleteDisease);
-	}
-	
+        if (deleteDisease != null)
+            diseases.remove(deleteDisease);
+    }
+
 }

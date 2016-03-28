@@ -1,29 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
-	xmlns:aop="http://www.springframework.org/schema/aop"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans
-	http://www.springframework.org/schema/beans/spring-beans.xsd
-	http://www.springframework.org/schema/context
-	http://www.springframework.org/schema/context/spring-context.xsd
-	http://www.springframework.org/schema/jee
-	http://www.springframework.org/schema/jee/spring-jee.xsd
-	http://www.springframework.org/schema/tx
-	http://www.springframework.org/schema/tx/spring-tx.xsd
-	http://www.springframework.org/schema/aop
-	http://www.springframework.org/schema/aop/spring-aop.xsd">
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-	<bean id="addressFacade" class="hu.bme.aut.vshelter.dal.impl.AddressFacadeInMemoryImpl" />
-	<bean id="advertisementFacade" class="hu.bme.aut.vshelter.dal.impl.AdvertisementFacadeInMemoryImpl" />
-	<bean id="animalFacade" class="hu.bme.aut.vshelter.dal.impl.AnimalFacadeInMemoryImpl" />
-	<bean id="breedFacade" class="hu.bme.aut.vshelter.dal.impl.BreedFacadeInMemoryImpl" />
-	<bean id="diseaseFacade" class="hu.bme.aut.vshelter.dal.impl.DiseaseFacadeInMemoryImpl" />
-	<bean id="handicapFacade" class="hu.bme.aut.vshelter.dal.impl.HandicapFacadeInMemoryImpl" />
-	<bean id="institutionFacade" class="hu.bme.aut.vshelter.dal.impl.InstitutionFacadeInMemoryImpl" />
-	<bean id="pictureFacade" class="hu.bme.aut.vshelter.dal.impl.PictureFacadeInMemoryImpl" />
-	<bean id="speciesFacade" class="hu.bme.aut.vshelter.dal.impl.SpeciesFacadeInMemoryImpl" />
-	<bean id="userFacade" class="hu.bme.aut.vshelter.dal.impl.UserFacadeInMemoryImpl" />
-	
+    <bean id="addressFacade" class="hu.bme.aut.vshelter.dal.impl.AddressFacadeInMemoryImpl"/>
+    <bean id="advertisementFacade" class="hu.bme.aut.vshelter.dal.impl.AdvertisementFacadeInMemoryImpl"/>
+    <bean id="animalFacade" class="hu.bme.aut.vshelter.dal.impl.AnimalFacadeInMemoryImpl"/>
+    <bean id="breedFacade" class="hu.bme.aut.vshelter.dal.impl.BreedFacadeInMemoryImpl"/>
+    <bean id="diseaseFacade" class="hu.bme.aut.vshelter.dal.impl.DiseaseFacadeInMemoryImpl"/>
+    <bean id="handicapFacade" class="hu.bme.aut.vshelter.dal.impl.HandicapFacadeInMemoryImpl"/>
+    <bean id="institutionFacade" class="hu.bme.aut.vshelter.dal.impl.InstitutionFacadeInMemoryImpl"/>
+    <bean id="pictureFacade" class="hu.bme.aut.vshelter.dal.impl.PictureFacadeInMemoryImpl"/>
+    <bean id="speciesFacade" class="hu.bme.aut.vshelter.dal.impl.SpeciesFacadeInMemoryImpl"/>
+    <bean id="userFacade" class="hu.bme.aut.vshelter.dal.impl.UserFacadeInMemoryImpl"/>
+
 </beans>

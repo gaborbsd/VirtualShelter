@@ -1,24 +1,25 @@
 <h1>Institutions List</h1>
-<hr />
+
+<hr/>
 <div class="row-fluid" ng-hide='error==""'>
-	<div class="col-md-12">
-		<div class="alert alert-danger" role="alert">{{error}}</div>
-	</div>
+    <div class="col-md-12">
+        <div class="alert alert-danger" role="alert">{{error}}</div>
+    </div>
 </div>
 <div class="panel-body">
-	<div>
-         <div class="row cardContainer">
-         	<div class="col-md-9 col-md-offset-1">
-	         	<h3>Filter:</h3>
-			    <input type="text" ng-model="nameText" />
-			</div>
-		    <br /><br />
-             <div class="span3 card" ng-repeat="shelter in shelters | filter:nameText | orderBy:'name'">
-                 <button class="btn close cardClose" ng-click="deleteShelter(shelter.institutionId)">&times;</button>
-                 <div class="cardHeader">{{shelter.name}}</div>
-                 <div class="cardBody">{{shelter.email}}</div>
-                 <a href="#/update/shelter/{{shelter.institutionId}}">Edit</a>
-             </div>
-         </div>
-     </div>
+    <div>
+        <div class="row cardContainer">
+            <div class="col-md-9 col-md-offset-1">
+                <h3>Filter:</h3>
+                <input type="text" ng-model="nameText"/>
+            </div>
+            <br/><br/>
+            <div class="span3 card" ng-repeat="shelter in shelters | filter:nameText | orderBy:'name'">
+                <button class="btn close cardClose" ng-click="deleteShelter(shelter.institutionId)">&times;</button>
+                <div class="cardHeader">{{shelter.name}}</div>
+                <div class="cardBody">{{shelter.email}}</div>
+                <a href="#/update/shelter/{{shelter.institutionId}}">Edit</a>
+            </div>
+        </div>
+    </div>
 </div>

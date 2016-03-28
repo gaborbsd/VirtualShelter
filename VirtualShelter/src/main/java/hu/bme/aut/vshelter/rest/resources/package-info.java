@@ -1,5 +1,6 @@
 /**
- * 
+ * @author Gabor
+ * @author Gabor
  */
 /**
  * @author Gabor

@@ -1,26 +1,29 @@
-
 <h1>Advertisements List</h1>
-<hr />
+<hr/>
+
 <div class="row-fluid" ng-hide='error==""'>
-	<div class="col-md-12">
-		<div class="alert alert-danger" role="alert">{{error}}</div>
-	</div>
+    <div class="col-md-12">
+        <div class="alert alert-danger" role="alert">{{error}}</div>
+    </div>
 </div>
 <div class="panel-body">
-	<div>
-         <div class="row cardContainer">
-         	<div class="col-md-9 col-md-offset-1">
-	         	<h3>Filter:</h3>
-			    <input type="text" ng-model="nameText" />
-			</div>
-		    <br /><br />
-             <div class="span3 card" ng-repeat="advertisement in advertisements | filter:{name:nameText} | orderBy:'name'" style="height:110px">
-             	 <button  class="btn close cardClose" ng-click="deleteAdvertisement(advertisement.advertisementId)" >&times;</button>
-                 <div class="cardHeader">{{advertisement.title}}</div>
-                 <div class="cardBody">Advertiser: {{advertisement.advertiser.name}}</div>
-                 <div class="cardBody">Animal: {{advertisement.animal.name}}</div>
-                 <div class="cardBody">Description {{advertisement.description}}</div>
-             </div>
-         </div>
-     </div>
+    <div>
+        <div class="row cardContainer">
+            <div class="col-md-9 col-md-offset-1">
+                <h3>Filter:</h3>
+                <input type="text" ng-model="nameText"/>
+            </div>
+            <br/><br/>
+            <div class="span3 card"
+                 ng-repeat="advertisement in advertisements | filter:{name:nameText} | orderBy:'name'"
+                 style="height:110px">
+                <button class="btn close cardClose"
+                        ng-click="deleteAdvertisement(advertisement.advertisementId)">&times;</button>
+                <div class="cardHeader">{{advertisement.title}}</div>
+                <div class="cardBody">Advertiser: {{advertisement.advertiser.name}}</div>
+                <div class="cardBody">Animal: {{advertisement.animal.name}}</div>
+                <div class="cardBody">Description {{advertisement.description}}</div>
+            </div>
+        </div>
+    </div>
 </div>
