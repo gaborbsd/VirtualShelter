@@ -21,10 +21,13 @@ import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.ResourceSupport;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -41,6 +44,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(value = "/animal")
 public class AnimalController {
+	private final Logger logger = LoggerFactory.getLogger(getClass());
 	
 	@Autowired
 	private ISiteAdministrationOperations siteAdministrationOperations;
@@ -74,6 +78,9 @@ public class AnimalController {
 			this.advertisementOperations.addAnimal(animal);
 		} catch (VirtualShelterException e) {
 			responseStatus = this.converter.convert(e);
+		} catch (AccessDeniedException e) {
+			logger.info("No permission to add animal", e);
+			return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 		}
 		AnimalResource resource = animalResourceAssembler.toResource(animal);
 		return new ResponseEntity<AnimalResource>(resource, responseStatus);

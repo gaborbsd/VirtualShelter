@@ -1,9 +1,9 @@
 package hu.bme.aut.vshelter.api;
 
 import hu.bme.aut.vshelter.entity.*;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 import java.util.List;
-import java.util.Set;
 
 public interface IAdvertisementOperations {
 	
@@ -161,6 +161,7 @@ public interface IAdvertisementOperations {
 	 * @param Animal object with the attributes of the animal 
 	 * @throws VirtualShelterException
 	 */
+	@PreAuthorize("isAuthenticated()")
 	public void addAnimal(Animal animal) throws VirtualShelterException;
 		
 	/**

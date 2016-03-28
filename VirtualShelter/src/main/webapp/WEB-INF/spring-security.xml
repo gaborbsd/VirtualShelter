@@ -8,9 +8,13 @@
 	http://www.springframework.org/schema/security/spring-security-4.0.xsd">
 
 	<http pattern="/login.html" security="none" />
-	
+
+    <http auto-config="true" pattern="/api/**" use-expressions="true">
+        <csrf disabled="true"/>
+    </http>
+
 	<http auto-config="true" use-expressions="true">
-        <intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
+        <!--<intercept-url pattern="/**" access="hasRole('ROLE_USER')" />-->
         <logout logout-url="/logout" />
         <form-login
 		    login-page="/login.html"
@@ -18,9 +22,9 @@
 			password-parameter="password" />
         <csrf disabled="true"/>
     </http>
-    
-    
-	
+
+    <global-method-security pre-post-annotations="enabled"/>
+
 	<beans:bean id="authenticationProvider" class="hu.bme.aut.vshelter.auth.VirtualShelterAuthenticationProvider"/>
 	<authentication-manager alias="authenticationManager">
 		<authentication-provider ref="authenticationProvider"/>

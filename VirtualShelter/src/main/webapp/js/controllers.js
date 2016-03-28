@@ -3,65 +3,81 @@
 //	server side must be prepared for handling further get parameters
 var app = angular.module('vshelterApp', [ 'ngRoute', 'bgf.paginateAnything' ]);
 //routeProvider for the ng-view tag check index.html
-app.config(function($routeProvider) {
-	$routeProvider.when('/editor/user', {
-		controller : 'UserEditorController',
-		templateUrl : '/html/userform.html'
-	}).when('/editor/user/:id', {
-		controller : 'UserEditorController',
-		templateUrl : '/html/userform.html'
-	}).when('/editor/animal/:id', {
-		controller : 'AnimalEditorController',
-		templateUrl : '/html/animalform.html'
-	}).when('/advertisements', {
-		controller : 'AdvertisementController',
-		templateUrl : '/html/advertisements.html'
-	}).when('/editor/advertisement', {
-		controller : 'AdvertisementEditorController',
-		templateUrl : '/html/advertisementform.html'
-	}).when('/editor/animal', {
-		controller : 'AnimalEditorController',
-		templateUrl : '/html/animalform.html'
-	}).when('/editor/shelter', {
-		controller : 'ShelterEditorController',
-		templateUrl : '/html/shelterform.html'
-	}).when('/editor/shelter/:id', {
-		controller : 'ShelterEditorController',
-		templateUrl : '/html/shelterform.html'
-	}).when('/search', {
-		controller : 'SearchController',
-		templateUrl : '/html/search.html'
-	}).when('/users', {
-		controller : 'UsersController',
-		templateUrl : '/html/users.html'
-	}).when('/update/user/:id', {
-		controller : 'UpdateUserEditorController',
-		templateUrl : '/html/updateuserform.html'
-	}).when('/shelters', {
-		controller : 'SheltersController',
-		templateUrl : '/html/shelters.html'
-	}).when('/update/shelter/:id', {
-		controller : 'UpdateShelterEditorController',
-		templateUrl : '/html/updateshelterform.html'
-	}).when('/speciesandbreeds', {
-		controller : 'SpeciesAndBreedsController',
-		templateUrl : '/html/speciesandbreeds.html'
-	}).when('/update/species/:id', {
-		controller : 'BreedsController',
-		templateUrl : '/html/breeds.html'
-	}).otherwise({
-		redirectTo : '/editor/user'
-	})
-})
+app.config(function ($routeProvider) {
+    $routeProvider
+        .when('/editor/user', {
+            controller: 'UserEditorController',
+            templateUrl: '/html/userform.html'
+        })
+        .when('/editor/user/:id', {
+            controller: 'UserEditorController',
+            templateUrl: '/html/userform.html'
+        })
+        .when('/editor/animal/:id', {
+            controller: 'AnimalEditorController',
+            templateUrl: '/html/animalform.html'
+        })
+        .when('/advertisements', {
+            controller: 'AdvertisementController',
+            templateUrl: '/html/advertisements.html'
+        })
+        .when('/editor/advertisement', {
+            controller: 'AdvertisementEditorController',
+            templateUrl: '/html/advertisementform.html'
+        })
+        .when('/editor/animal', {
+            controller: 'AnimalEditorController',
+            templateUrl: '/html/animalform.html'
+        })
+        .when('/editor/shelter', {
+            controller: 'ShelterEditorController',
+            templateUrl: '/html/shelterform.html'
+        })
+        .when('/editor/shelter/:id', {
+            controller: 'ShelterEditorController',
+            templateUrl: '/html/shelterform.html'
+        })
+        .when('/search', {
+            controller: 'SearchController',
+            templateUrl: '/html/search.html'
+        })
+        .when('/users', {
+            controller: 'UsersController',
+            templateUrl: '/html/users.html'
+        })
+        .when('/update/user/:id', {
+            controller: 'UpdateUserEditorController',
+            templateUrl: '/html/updateuserform.html'
+        })
+        .when('/shelters', {
+            controller: 'SheltersController',
+            templateUrl: '/html/shelters.html'
+        })
+        .when('/update/shelter/:id', {
+            controller: 'UpdateShelterEditorController',
+            templateUrl: '/html/updateshelterform.html'
+        })
+        .when('/speciesandbreeds', {
+            controller: 'SpeciesAndBreedsController',
+            templateUrl: '/html/speciesandbreeds.html'
+        })
+        .when('/update/species/:id', {
+            controller: 'BreedsController',
+            templateUrl: '/html/breeds.html'
+        })
+        .otherwise({
+            redirectTo: '/editor/user'
+        })
+});
 
 //To keep the MVC - MVVM you will need services like this 
 //The first parameter is the name of the Service the second is a function which implements all the required functions
-app.factory('SearchService', SearchService)
-app.factory('AdvertisementService', AdvertisementService)
-app.factory('AnimalService', AnimalService)
-app.factory('ShelterService', ShelterService)
-app.factory('UserService', UserService)
-app.factory('SpeciesAndBreedsService', SpeciesAndBreedsService)
+app.factory('SearchService', SearchService);
+app.factory('AdvertisementService', AdvertisementService);
+app.factory('AnimalService', AnimalService);
+app.factory('ShelterService', ShelterService);
+app.factory('UserService', UserService);
+app.factory('SpeciesAndBreedsService', SpeciesAndBreedsService);
 
 //$inject is neccessary with this concept of service handling
 //$http does the communication
@@ -452,7 +468,7 @@ controllers.AdvertisementEditorController = function($scope, $http, Advertisemen
 			$scope.error = response;
 		})
 	};
-}
+};
 
 controllers.SearchController = function($scope, $http, SearchService) {
 	$scope.clientLimit;
