@@ -47,10 +47,10 @@ INSERT INTO advertiser VALUES (5, 'bikaver@egri.hu', '0036301454321', 'Legjobb E
 INSERT INTO advertiser VALUES (6, 'kecsegemet@kecske.com', '0036709933987', 'Kecskeleg Kft.', NULL, 6, NULL);
 INSERT INTO advertiser VALUES (7, 'user@user.com', '+365441223', 'User User', NULL, 1, NULL);
 
-INSERT INTO user VALUES ('Kedves idos hazaspar nagy kertes haz', 'csipella96', 1);
-INSERT INTO user VALUES ('Szeretek vadaszni vadaszkutyat keresek', 'asd123', 2);
-INSERT INTO user VALUES ('Halakat tartok, toparti otthonomban', 'skywalker24', 3);
-INSERT INTO user VALUES ('user', 'user', 7);
+INSERT INTO user VALUES ('Kedves idos hazaspar nagy kertes haz', '$2a$10$UWJlPFOqg8BrPWYvjFxaUOmHsv2FgBNdsN689eUGx8d4Ykst9D4p2', 1); -- password: csipella96
+INSERT INTO user VALUES ('Szeretek vadaszni vadaszkutyat keresek', '$2a$10$6QcM1PK/Ayv4x3CbngOYQ.ncZQ0euy1eI7LQq6dIryG0BOym3l2H6', 2); -- password: asd123
+INSERT INTO user VALUES ('Halakat tartok, toparti otthonomban', '$2a$10$xltIOZ.vMO0/zYqdiYljb.TwdzWwirEKou1QBZlYMuv/hyJ3I06sy', 3); -- password: skywalker24
+INSERT INTO user VALUES ('user', '$2a$10$OGAmcwSQdw3BfzwcAghdSujvb0FUd1C3tH/kXppUM4s9n29kKfaRu', 7); -- password: user
 
 INSERT INTO institution VALUES (NULL, '17136433-44432345-00000000', '235732461', 4, 1);
 INSERT INTO institution VALUES (NULL, '43422643-66356353-63452452', '562452348', 5, 2);
