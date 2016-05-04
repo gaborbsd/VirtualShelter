@@ -23,7 +23,7 @@ public abstract class Advertiser {
             message = "Invalid email format")
     private String email;
 
-    @ManyToOne(cascade = {CascadeType.MERGE})
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Address address;
 
     @ManyToOne(cascade = {CascadeType.MERGE})

@@ -17,10 +17,10 @@ public class Institution extends Advertiser {
                     + " where d is a digit L is an uppercase letter ([] means optional)")
     private String bankAccount;
 
-    @Column(name = "PayPal", unique = false, nullable = true)
+    @Column(name = "payPal", unique = false, nullable = true)
     @Pattern(regexp = "(\\d{4} ){5}\\d{4}",
             message = "The correct format: dddd dddd dddd dddd dddd dddd, where d is a digit")
-    private String PayPal;
+    private String payPal;
 
     @ManyToOne
     private User owner;
@@ -45,11 +45,11 @@ public class Institution extends Advertiser {
     }
 
     public String getPayPal() {
-        return PayPal;
+        return payPal;
     }
 
     public void setPayPal(String payPal) {
-        PayPal = payPal;
+        this.payPal = payPal;
     }
 
     public List<User> getInstitutionAdministrators() {
