@@ -101,7 +101,7 @@
                     <stopKey>foo</stopKey>
                     <scanIntervalSeconds>10</scanIntervalSeconds>
                     <webApp>
-                        <jettyEnvXml>src/main/resources/jetty-env.xml</jettyEnvXml>
+                        <jettyEnvXml>src/webapp/WEB-INF/jetty-env.xml</jettyEnvXml>
                     </webApp>
                 </configuration>
             </plugin>
