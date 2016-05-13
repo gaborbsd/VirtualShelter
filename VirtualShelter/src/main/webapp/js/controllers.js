@@ -578,25 +578,17 @@ controllers.AnimalEditorController = function ($scope, $http, AnimalService, $ro
     $scope.getSpecies = function () {
         AnimalService.getSpecies().then(function (data) {
             $scope.species = data;
-            $scope.species.forEach(function (entry) {
-                entry.speciesName = entry.name.slice();
-            })
         }, function (response) {
             $scope.error = response;
         })
     };
 
     $scope.getBreeds = function () {
-        var x = $scope.species.filter(function (value) {
-            return value.speciesName == $scope.animal.species.speciesName;
-        })
-
-        $scope.animal.species.id = $scope.animal.species.speciesId;
-        $scope.animal.species.speciesName = $scope.animal.species.name;
-        delete $scope.animal.species['name'];
-        delete $scope.animal.species['speciesId'];
-        delete $scope.animal.species['links'];
-        $scope.breeds = x[0].breeds;
+        var selectedSpecies = $scope.species.filter(function (value) {
+            return value.name == $scope.animal.species.speciesName;
+        });
+        $scope.animal.breed = null;
+        $scope.breeds = selectedSpecies[0].breeds;
     };
 
 

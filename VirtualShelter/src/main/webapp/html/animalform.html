@@ -39,7 +39,7 @@
             <label class="control-label col-md-3">Species:</label>
             <div class="col-md-3">
                 <select class="form-control" ng-model="animal.species"
-                        ng-options="s as s.speciesName for s in species"
+                        ng-options="{id: s.speciesId, speciesName: s.name} as s.name for s in species"
                         ng-change="getBreeds()">
                     <option value="" disabled>Choose</option>
                 </select>
