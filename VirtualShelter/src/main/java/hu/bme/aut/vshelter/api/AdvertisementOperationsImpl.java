@@ -142,6 +142,7 @@ public class AdvertisementOperationsImpl implements IAdvertisementOperations {
     @Override
     public void createAdvertisement(Advertisement advertisement)
             throws VirtualShelterException {
+        advertisement.setDateOfAdvertisement(Calendar.getInstance());
         advertisementRepository.save(advertisement);
 
     }

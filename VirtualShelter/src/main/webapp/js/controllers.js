@@ -2,73 +2,6 @@
 //bgf.paginateAnything for the PaginateAnything in the code more details : https://github.com/begriffs/angular-paginate-anything
 //	server side must be prepared for handling further get parameters
 var app = angular.module('vshelterApp', ['ngRoute', 'bgf.paginateAnything']);
-//routeProvider for the ng-view tag check index.html
-app.config(function ($routeProvider) {
-    $routeProvider
-        .when('/editor/user', {
-            controller: 'UserEditorController',
-            templateUrl: '/html/userform.html'
-        })
-        .when('/editor/user/:id', {
-            controller: 'UserEditorController',
-            templateUrl: '/html/userform.html'
-        })
-        .when('/editor/animal/:id', {
-            controller: 'AnimalEditorController',
-            templateUrl: '/html/animalform.html'
-        })
-        .when('/advertisements', {
-            controller: 'AdvertisementController',
-            templateUrl: '/html/advertisements.html'
-        })
-        .when('/editor/advertisement', {
-            controller: 'AdvertisementEditorController',
-            templateUrl: '/html/advertisementform.html'
-        })
-        .when('/editor/animal', {
-            controller: 'AnimalEditorController',
-            templateUrl: '/html/animalform.html'
-        })
-        .when('/editor/shelter', {
-            controller: 'ShelterEditorController',
-            templateUrl: '/html/shelterform.html'
-        })
-        .when('/editor/shelter/:id', {
-            controller: 'ShelterEditorController',
-            templateUrl: '/html/shelterform.html'
-        })
-        .when('/search', {
-            controller: 'SearchController',
-            templateUrl: '/html/search.html'
-        })
-        .when('/users', {
-            controller: 'UsersController',
-            templateUrl: '/html/users.html'
-        })
-        .when('/update/user/:id', {
-            controller: 'UpdateUserEditorController',
-            templateUrl: '/html/updateuserform.html'
-        })
-        .when('/shelters', {
-            controller: 'SheltersController',
-            templateUrl: '/html/shelters.html'
-        })
-        .when('/update/shelter/:id', {
-            controller: 'UpdateShelterEditorController',
-            templateUrl: '/html/updateshelterform.html'
-        })
-        .when('/speciesandbreeds', {
-            controller: 'SpeciesAndBreedsController',
-            templateUrl: '/html/speciesandbreeds.html'
-        })
-        .when('/update/species/:id', {
-            controller: 'BreedsController',
-            templateUrl: '/html/breeds.html'
-        })
-        .otherwise({
-            redirectTo: '/editor/user'
-        })
-});
 
 //To keep the MVC - MVVM you will need services like this 
 //The first parameter is the name of the Service the second is a function which implements all the required functions
@@ -444,21 +377,14 @@ controllers.HeaderController = function ($scope, $http) {
 
 };
 
-controllers.AdvertisementEditorController = function ($scope, $http, AdvertisementService) {
+controllers.AdvertisementEditorController = function ($scope, $http, AdvertisementService, AnimalService) {
     $scope.advertisement = {};
     $scope.animals = {};
-
-    $scope.getAnimalsForCurrentUser = function () {
-        AdvertisementService.getAnimalsForCurrentUser().then(function (data) {
-            $scope.animals = data;
-        }, function (response) {
-            $scope.error = response;
-        })
-    }();
-
+    $scope.species = [];
+    $scope.breeds = [];
+    
     $scope.saveAdvertisement = function () {
         delete $scope.advertisement.animal['links'];
-        delete $scope.advertisement.animal['species'];
         delete $scope.advertisement.animal['knownDiseases'];
         delete $scope.advertisement.animal['knownHandicaps'];
         delete $scope.advertisement.animal['age'];
@@ -468,6 +394,24 @@ controllers.AdvertisementEditorController = function ($scope, $http, Advertiseme
             $scope.error = response;
         })
     };
+
+    $scope.getSpecies = function () {
+        AnimalService.getSpecies().then(function (data) {
+            $scope.species = data;
+        }, function (response) {
+            $scope.error = response;
+        })
+    };
+
+    $scope.getBreeds = function () {
+        var selectedSpecies = $scope.species.filter(function (value) {
+            return value.name == $scope.advertisement.animal.species.speciesName;
+        });
+        $scope.advertisement.animal.breed = null;
+        $scope.breeds = selectedSpecies[0].breeds;
+    };
+
+    $scope.getSpecies();
 };
 
 controllers.SearchController = function ($scope, $http, SearchService) {
