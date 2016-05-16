@@ -3,6 +3,7 @@ package hu.bme.aut.vshelter.api;
 import hu.bme.aut.vshelter.dal.*;
 import hu.bme.aut.vshelter.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Calendar;
 import java.util.List;
@@ -34,6 +35,8 @@ public class AdvertisementOperationsImpl implements IAdvertisementOperations {
     private BreedRepository breedRepository;
     @Autowired
     private AnimalRepository animalRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public void advertise(long instituionId, long animalId)
@@ -62,6 +65,11 @@ public class AdvertisementOperationsImpl implements IAdvertisementOperations {
 
     @Override
     public void registerUser(User user) throws VirtualShelterException {
+        final String password = user.getPassword();
+        if (password != null) {
+            final String passwordHash = passwordEncoder.encode(password);
+            user.setPassword(passwordHash);
+        }
         userRepository.save(user);
     }
 
