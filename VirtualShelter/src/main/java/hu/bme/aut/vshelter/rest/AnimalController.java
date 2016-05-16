@@ -1,6 +1,6 @@
 package hu.bme.aut.vshelter.rest;
 
-import hu.bme.aut.vshelter.dal.AnimalFacade;
+import hu.bme.aut.vshelter.dal.AnimalRepository;
 import hu.bme.aut.vshelter.entity.Animal;
 
 import java.util.List;
@@ -17,14 +17,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/animal")
 public class AnimalController {
 	@Autowired
-	private AnimalFacade animalFacade;
+	private AnimalRepository animalFacade;
 
 	@Autowired
 	private AnimalResourceAssembler animalResourceAssembler;
 
 	@RequestMapping(method = RequestMethod.POST)
 	ResponseEntity<AnimalResource> addAnimal(@RequestBody Animal animal) {
-		animalFacade.create(animal);
+		//animalFacade.create(animal);
 		AnimalResource resource = animalResourceAssembler.toResource(animal);
 		return new ResponseEntity<AnimalResource>(resource, HttpStatus.CREATED);
 	}

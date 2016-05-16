@@ -1,6 +1,6 @@
-INSERT INTO animal VALUES (1, "Bundás");
+INSERT INTO animal VALUES (1, "Bundas");
 INSERT INTO animal VALUES (2, "Cirmi");
-INSERT INTO animal VALUES (3, "Artúr");
+INSERT INTO animal VALUES (3, "Artur");
 
 INSERT INTO user VALUES (1, 34, "Andras");
 INSERT INTO user VALUES (2, 23, "Bela");
