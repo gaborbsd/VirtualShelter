@@ -1,0 +1,33 @@
+<html>
+<head>
+<title>Login Page</title>
+<style>
+
+#login-box {
+	width: 350px;
+	padding: 30px;
+	margin: 100px auto;
+	background: #E0E0E0";
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border: 2px solid #000;
+}
+</style>
+</head>
+<body onload='document.loginForm.username.focus();'>
+
+	<div id="login-box" style="background:#FFFFCC">
+
+		<h2>Login with Email and Password</h2>
+
+		<h3>Please add your registered Email and Password!</h3><form name='f' action='/login' method='POST'>
+		<table>
+			<tr><td>Email:</td><td><input type='text' name='username' value=''></td></tr>
+			<tr><td>Password:</td><td><input type='password' name='password'/></td></tr>
+			<tr><td colspan='2'><input name="submit" type="submit" value="Login"/></td></tr>
+		</table>
+		</form>
+	</div>
+
+</body>
+</html>

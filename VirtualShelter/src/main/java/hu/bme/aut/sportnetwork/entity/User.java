@@ -18,6 +18,9 @@ public class User {
 	@Column(unique=true)
 	private String name;
 	
+	@Column(nullable = false)
+	private String password;
+	
 	@OneToMany(mappedBy="owner")
 	private List<SportEvent> events;
 	
@@ -37,6 +40,14 @@ public class User {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public List<SportEvent> getEvents() {
