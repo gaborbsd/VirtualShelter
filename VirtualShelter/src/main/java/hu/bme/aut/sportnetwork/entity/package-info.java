@@ -5,4 +5,4 @@
  * @author Gábor Kövesdán
  *
  */
-package hu.bme.aut.vshelter.entity;
+package hu.bme.aut.sportnetwork.entity;

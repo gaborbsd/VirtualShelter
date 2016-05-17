@@ -1,9 +1,9 @@
-package hu.bme.aut.vshelter.rest;
-
-import hu.bme.aut.vshelter.entity.Animal;
+package hu.bme.aut.sportnetwork.rest;
 
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 import org.springframework.stereotype.Component;
+
+import hu.bme.aut.sportnetwork.entity.Animal;
 
 @Component
 public class AnimalResourceAssembler extends

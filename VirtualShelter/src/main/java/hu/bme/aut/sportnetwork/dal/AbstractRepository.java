@@ -1,4 +1,4 @@
-package hu.bme.aut.vshelter.dal;
+package hu.bme.aut.sportnetwork.dal;
 
 import java.util.List;
 

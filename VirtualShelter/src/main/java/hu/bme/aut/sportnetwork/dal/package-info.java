@@ -4,4 +4,4 @@
  * @author Gábor Kövesdán
  *
  */
-package hu.bme.aut.vshelter.dal;
+package hu.bme.aut.sportnetwork.dal;

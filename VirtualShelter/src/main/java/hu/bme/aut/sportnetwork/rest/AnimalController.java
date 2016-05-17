@@ -1,7 +1,7 @@
-package hu.bme.aut.vshelter.rest;
+package hu.bme.aut.sportnetwork.rest;
 
-import hu.bme.aut.vshelter.dal.AnimalRepository;
-import hu.bme.aut.vshelter.entity.Animal;
+import hu.bme.aut.sportnetwork.dal.AnimalRepository;
+import hu.bme.aut.sportnetwork.entity.Animal;
 
 import java.util.List;
 

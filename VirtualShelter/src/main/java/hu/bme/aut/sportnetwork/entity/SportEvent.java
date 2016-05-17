@@ -1,4 +1,4 @@
-package hu.bme.aut.vshelter.entity;
+package hu.bme.aut.sportnetwork.entity;
 
 import java.util.Calendar;
 

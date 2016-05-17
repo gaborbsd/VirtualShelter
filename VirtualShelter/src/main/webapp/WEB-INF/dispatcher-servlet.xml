@@ -18,7 +18,7 @@
 	http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
 	<context:annotation-config />
-	<context:component-scan base-package="hu.bme.aut.vshelter.rest" />
+	<context:component-scan base-package="hu.bme.aut.sportnetwork.rest" />
 
 	<mvc:annotation-driven>
 		<mvc:message-converters register-defaults="false">

@@ -1,4 +1,4 @@
-package hu.bme.aut.vshelter.rest;
+package hu.bme.aut.sportnetwork.rest;
 
 import org.springframework.hateoas.ResourceSupport;
 
