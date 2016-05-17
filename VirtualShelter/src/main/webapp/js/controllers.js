@@ -1,21 +1,21 @@
 var app = angular.module('vshelterApp', []);
 
-app.controller('AnimalController', function($scope, $http) {
-	$scope.getAnimals = function() {
-		$http.get('api/animal').success(function(data) {
-			$scope.animals = data;
+app.controller('UserController', function($scope, $http) {
+	$scope.getUsers = function() {
+		$http.get('api/user').success(function(data) {
+			$scope.users = data;
 		});
 	};
 
-	$scope.postAnimal = function() {
-		if ($scope.animal) {
-			$http.post('api/animal', $scope.animal)
+	$scope.postUser = function() {
+		if ($scope.user) {
+			$http.post('api/user', $scope.user)
 					.success(function() {
-						$scope.getAnimals();
-						$scope.animal = null;
+						$scope.getUsers();
+						$scope.user = null;
 					});
 		}
 	};
 
-	$scope.getAnimals();
+	$scope.getUsers();
 });

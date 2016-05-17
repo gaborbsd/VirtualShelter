@@ -1,7 +1,3 @@
-INSERT INTO animal VALUES (1, "Bundas");
-INSERT INTO animal VALUES (2, "Cirmi");
-INSERT INTO animal VALUES (3, "Artur");
-
 INSERT INTO user VALUES (1, 34, "Andras");
 INSERT INTO user VALUES (2, 23, "Bela");
 INSERT INTO user VALUES (3, 27, "Cecil");
