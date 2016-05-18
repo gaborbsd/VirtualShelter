@@ -6,7 +6,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Pattern;
 
 @Entity
 public class User {
@@ -15,16 +17,26 @@ public class User {
 	@GeneratedValue
 	private long id;
 	
-	@Column(unique=true)
+	@Column(unique=true, nullable=false)
 	private String name;
+	
+	@Column(unique=true, nullable=false)
+	@Pattern(regexp="^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$",
+            message="Invalid email format")
+	private String email;
 	
 	@Column(nullable = false)
 	private String password;
 	
-	@OneToMany(mappedBy="owner")
-	private List<SportEvent> events;
+	@ManyToOne
+	private Address address;
+	
+	private String phoneNumber;
 	
 	private int age;
+	
+	@OneToMany(mappedBy="owner")
+	private List<SportEvent> events;
 
 	public long getId() {
 		return id;
@@ -48,6 +60,22 @@ public class User {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 
 	public List<SportEvent> getEvents() {
