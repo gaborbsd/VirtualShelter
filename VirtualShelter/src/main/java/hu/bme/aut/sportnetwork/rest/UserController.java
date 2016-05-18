@@ -35,8 +35,18 @@ public class UserController {
 		return new ResponseEntity<List<UserResource>>(resourceList, HttpStatus.OK);
 	}
 	
-	@RequestMapping(method=RequestMethod.POST)
+	@RequestMapping(value="/register", method=RequestMethod.POST)
 	ResponseEntity<UserResource> addUser(@RequestBody User user) {
+		/*Address a = new Address();
+		a.setCity("KAp");
+		a.setCountry("HUN");
+		a.setZipCode(7400);
+		a.setStreet("Honv");
+		User user = new User();
+		user.setEmail("denes4@gmail.com");
+		user.setName("Denes");
+		user.setPassword("d");
+		user.setAddress(a);*/
 		User created = userRepository.save(user);
 		UserResource resource = userResourceAssembler.toResource(created);
 		return new ResponseEntity<UserResource>(resource, HttpStatus.CREATED);

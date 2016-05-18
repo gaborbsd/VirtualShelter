@@ -26,7 +26,7 @@ public class Address {
 				message="Invalid zipcode format")
 	private int zipCode;
 	
-	private String address;
+	private String street;
 
 	public long getId() {
 		return id;
@@ -68,12 +68,12 @@ public class Address {
 		this.zipCode = zipCode;
 	}
 
-	public String getAddress() {
-		return address;
+	public String getStreet() {
+		return street;
 	}
 
-	public void setAddress(String address) {
-		this.address = address;
+	public void setStreet(String address) {
+		this.street = address;
 	}
 
 	@Override

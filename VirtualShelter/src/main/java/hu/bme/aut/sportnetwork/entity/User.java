@@ -2,6 +2,7 @@ package hu.bme.aut.sportnetwork.entity;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,7 +29,7 @@ public class User {
 	@Column(nullable = false)
 	private String password;
 	
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	private Address address;
 	
 	private String phoneNumber;
@@ -92,6 +93,14 @@ public class User {
 
 	public void setAge(int age) {
 		this.age = age;
+	}
+	
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
 	}
 
 	@Override

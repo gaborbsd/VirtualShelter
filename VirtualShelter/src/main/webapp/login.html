@@ -1,14 +1,33 @@
-<html>
-<head>
+<html ng-app="sportnetworkApp">
+<head >
 <title>Login Page</title>
 
+<script type="text/javascript" src="vendor/jquery/dist/jquery.js"></script>
+<script type="text/javascript" src="vendor/angular/angular.js"></script>
+<script type="text/javascript"
+	src="vendor/angular-ui/build/angular-ui.js"></script>
+<script type="text/javascript"
+	src="vendor/angular-paginate-anything/dist/paginate-anything.js"></script>
+<script type="text/javascript"
+	src="vendor/angular-route/angular-route.js"></script>
+<script type="text/javascript" src="vendor/select2/select2.js"></script>
+<script type="text/javascript"
+	src="vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+
+<script src="js/registrationcontroller.js"></script>
+<link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="vendor/angular-ui/build/angular-ui.css">
+<link rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap.css">
+<link href="css/bootstrap-responsive.min.css" rel="stylesheet" />
 </head>
-<body onload='document.loginForm.username.focus();'>
+<body ng-controller="RegistrationController">
 	
 	<div id="page">
+	
 	<div id="header" align="center">
-  		<img src="C:\Users\badam\Desktop\kesz\logo.png" alt="logo" />
+  		<img src="img/logo.png" alt="logo" />
 	</div>
+	
 
 	<div id="login-box" style="background:#A9D0F5">
 		
@@ -33,6 +52,10 @@
 			
 		
 			<from class="form">
+			
+			
+
+	
 		
 <div class="panel-body">
 	<div class="form-group row">
@@ -64,6 +87,13 @@
 		</div>
 	</div>
 	<div class="form-group row">
+		<label class="control-label col-sm-4">Age*</label>
+		<div class="col-sm-5">
+			<input class="form-control" type="number" name="age" 
+				ng-model="user.age">
+		</div>
+	</div>
+	<div class="form-group row">
 		<label class="control-label col-sm-4">Country*</label>
 		<div class="col-sm-5">
 			<input class="form-control" type="text" name="country"
@@ -88,14 +118,7 @@
 		<label class="control-label col-sm-4">Street*</label>
 		<div class="col-sm-5">
 			<input class="form-control" type="text" name="street"
-				placeholder="Street" ng-model="user.address.address">
-		</div>
-	</div>
-	<div class="form-group row">
-		<label class="control-label col-sm-4">State</label>
-		<div class="col-sm-5">
-			<input class="form-control" type="text" name="state"
-				placeholder="State" ng-model="user.address.state">
+				placeholder="Street" ng-model="user.address.street">
 		</div>
 	</div>
 	<div class="form-group row">
@@ -103,20 +126,6 @@
 		<div class="col-sm-5">
 			<input class="form-control" type="text" name="province"
 				placeholder="Province" ng-model="user.address.province">
-		</div>
-	</div>
-	<div class="form-group row">
-		<label class="control-label col-sm-4">Latitude</label>
-		<div class="col-sm-5">
-			<input class="form-control" type="number" step="0.000001" name="latitude"
-				placeholder="Latitude" ng-model="user.address.latitude">
-		</div>
-	</div>
-	<div class="form-group row">
-		<label class="control-label col-sm-4">Longitude</label>
-		<div class="col-sm-5">
-			<input class="form-control" type="number" step="0.000001" name="longitude"
-				placeholder="Longitude" ng-model="user.address.longitude">
 		</div>
 	</div>
 	
@@ -127,6 +136,7 @@
 				placeholder="Phone number" ng-model="user.phoneNumber">
 		</div>
 	</div>
+	<!--  
 	<div class="form-group row">
 		<label class="control-label col-sm-4">Mobile phone</label>
 		<div class="col-sm-5">
@@ -140,12 +150,15 @@
 			<textarea class="form-control" rows="5" ng-model="user.introductionText"></textarea>
 		</div>
 	</div>
+	-->
 </div>
 <div class="panel-footer text-center">
-	<button class="btn btn-primary" ng-click="saveUser()">Save</button>
+	<button class="btn btn-primary" ng-click="postUser()">Save</button>
 </div>
 </from>
 	</div>
+	
+	
 	</div>
 	
 
