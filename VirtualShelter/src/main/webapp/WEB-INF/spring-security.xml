@@ -8,6 +8,7 @@
 	http://www.springframework.org/schema/security/spring-security-4.0.xsd">
 
 	<http pattern="/login.html" security="none" />
+	<http pattern="/favicon.ico" security="none" />
 	<http pattern="/css/**" security='none' />
 	<http pattern="/img/**" security='none' />
 	<http pattern="/js/**" security='none' />
