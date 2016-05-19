@@ -1,0 +1,16 @@
+package hu.bme.aut.sportnetwork.entity;
+
+public enum Sports {
+	FOOTBALL,
+	BASKETBALL,
+	TENNIS,
+	VOLLEYBALL,
+	HANDBALL,
+	ICE_HOCKEY,
+	BADMINTON,
+	BASEBALL,
+	AMERICAN_FOOTBALL,
+	SNOOKER,
+	TABLE_TENNIS,
+	CHESS
+}

@@ -4,6 +4,8 @@ import java.util.Calendar;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -14,12 +16,18 @@ public class SportEvent {
 	@Id
 	@GeneratedValue
 	private long id;
+		
+	@ManyToOne
+	private User owner;
 	
 	@Column(nullable=false)
 	private Calendar date;
 	
-	@ManyToOne
-	private User owner;
+	@Enumerated(EnumType.STRING)
+	@Column(nullable=false)
+	private Sports type;
+	
+	private int maxSize;
 	
 	private String description;
 
@@ -29,6 +37,22 @@ public class SportEvent {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	public Sports getType() {
+		return type;
+	}
+
+	public void setType(Sports type) {
+		this.type = type;
+	}
+
+	public int getMaxSize() {
+		return maxSize;
+	}
+
+	public void setMaxSize(int maxSize) {
+		this.maxSize = maxSize;
 	}
 
 	public Calendar getDate() {
