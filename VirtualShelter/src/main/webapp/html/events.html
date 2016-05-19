@@ -1,0 +1,25 @@
+  
+ <h1>Event List</h1>
+<hr />
+<div class="row-fluid" ng-hide='error==""'>
+	<div class="col-md-12">
+		<div class="alert alert-danger" role="alert">{{error}}</div>
+	</div>
+</div>
+
+
+<div class="panel-body">
+	<div>
+         <div class="row cardContainer" ng-show="events.length > 0">
+		    <br /><br />
+             <div class="span3 card" ng-repeat="event in events | orderBy:'name'" style="height:150px">
+                 <button  class="btn close cardClose" ng-click="deleteUser(user.userId)" >&times;</button>
+                 <div class="cardHeader">{{event.type}}</div>
+                 <div class="cardBody">{{event.date}}</div>
+                 <div class="cardBody">{{event.maxSize}}</div>
+                 <div class="cardBody">{{event.description}}</div>
+                 <a href="#/user/{{event.owner.id}}">{{event.owner.name}}</a>
+             </div>
+         </div>
+     </div>
+</div>

@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -17,7 +18,7 @@ public class SportEvent {
 	@GeneratedValue
 	private long id;
 		
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	private User owner;
 	
 	@Column(nullable=false)

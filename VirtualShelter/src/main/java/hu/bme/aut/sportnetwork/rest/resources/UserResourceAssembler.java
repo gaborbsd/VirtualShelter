@@ -25,6 +25,8 @@ public class UserResourceAssembler extends
 		UserResource resource = new UserResource();
 		resource.setName(entity.getName());
 		resource.setAge(entity.getAge());
+		resource.setEmail(entity.getEmail());
+		resource.setPhoneNumber(entity.getPhoneNumber());
 		return resource;
 	}
 }

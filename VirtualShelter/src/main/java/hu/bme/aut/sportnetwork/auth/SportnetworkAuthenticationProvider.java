@@ -1,4 +1,4 @@
-package hu.bme.aut.sportnetwork.auth;
+/*package hu.bme.aut.sportnetwork.auth;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,3 +38,4 @@ public class SportnetworkAuthenticationProvider implements AuthenticationProvide
 	}
 
 }
+*/

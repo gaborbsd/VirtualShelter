@@ -1,16 +1,16 @@
 package hu.bme.aut.sportnetwork.rest;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import hu.bme.aut.sportnetwork.dal.UserRepository;
+import hu.bme.aut.sportnetwork.api.IRegistrationOperation;
+import hu.bme.aut.sportnetwork.api.IUserOperation;
 import hu.bme.aut.sportnetwork.entity.User;
 import hu.bme.aut.sportnetwork.rest.resources.UserResource;
 import hu.bme.aut.sportnetwork.rest.resources.UserResourceAssembler;
@@ -20,12 +20,15 @@ import hu.bme.aut.sportnetwork.rest.resources.UserResourceAssembler;
 public class UserController {
 
 	@Autowired
-	UserRepository userRepository;
+	IRegistrationOperation registrationOperation;
+	
+	@Autowired
+	IUserOperation userOperation; 
 	
 	@Autowired
 	UserResourceAssembler userResourceAssembler;
 	
-	@RequestMapping(method=RequestMethod.GET)
+	/*@RequestMapping(method=RequestMethod.GET)
 	ResponseEntity<List<UserResource>> findAllUsers() {
 		List<User> users = userRepository.findAll();
 		
@@ -33,6 +36,14 @@ public class UserController {
 				.toResources(users);
 		
 		return new ResponseEntity<List<UserResource>>(resourceList, HttpStatus.OK);
+	}
+	*/
+	
+	@RequestMapping(value="/{id}", method=RequestMethod.GET)
+	ResponseEntity<UserResource> getUser(@PathVariable Long id) {
+		User user = userOperation.findById(id);
+		UserResource resource = userResourceAssembler.toResource(user);
+		return new ResponseEntity<UserResource>(resource, HttpStatus.CREATED);
 	}
 	
 	@RequestMapping(value="/register", method=RequestMethod.POST)
@@ -47,7 +58,7 @@ public class UserController {
 		user.setName("Denes");
 		user.setPassword("d");
 		user.setAddress(a);*/
-		User created = userRepository.save(user);
+		User created = registrationOperation.registrate(user);
 		UserResource resource = userResourceAssembler.toResource(created);
 		return new ResponseEntity<UserResource>(resource, HttpStatus.CREATED);
 	}

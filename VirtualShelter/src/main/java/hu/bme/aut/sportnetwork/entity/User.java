@@ -1,14 +1,12 @@
 package hu.bme.aut.sportnetwork.entity;
 
-import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.validation.constraints.Pattern;
 
 @Entity
@@ -29,15 +27,12 @@ public class User {
 	@Column(nullable = false)
 	private String password;
 	
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	private Address address;
 	
 	private String phoneNumber;
 	
 	private int age;
-	
-	@OneToMany(mappedBy="owner")
-	private List<SportEvent> events;
 
 	public long getId() {
 		return id;
@@ -77,14 +72,6 @@ public class User {
 
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
-	}
-
-	public List<SportEvent> getEvents() {
-		return events;
-	}
-
-	public void setEvents(List<SportEvent> events) {
-		this.events = events;
 	}
 
 	public int getAge() {
