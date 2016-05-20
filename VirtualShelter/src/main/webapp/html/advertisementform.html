@@ -23,6 +23,20 @@
             </div>
         </div>
 
+        <fieldset ng-if="administeredShelters.length > 0">
+            <legend>Advertiser</legend>
+            <div class="form-group row">
+                <label class="control-label col-md-3" for="advertiseAs">Advertise as:</label>
+                <div class="col-sm-6">
+                    <select id="advertiseAs" class="form-control" ng-model="advertisement.advertiser"
+                            ng-options="{id: s.institutionId, type: 'shelter'} as s.name for s in administeredShelters">
+                        <option value="">Self</option>
+                    </select>
+                </div>
+            </div>
+
+        </fieldset>
+
         <fieldset>
             <legend>Animal details</legend>
             <div class="form-group row">

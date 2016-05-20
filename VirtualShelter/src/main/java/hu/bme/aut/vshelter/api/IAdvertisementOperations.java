@@ -72,6 +72,7 @@ public interface IAdvertisementOperations {
      * @param institution contains the institution's data to be registered
      * @throws VirtualShelterException
      */
+    @PreAuthorize("isAuthenticated()")
     public void registerInstitution(Institution institution) throws VirtualShelterException;
 
 

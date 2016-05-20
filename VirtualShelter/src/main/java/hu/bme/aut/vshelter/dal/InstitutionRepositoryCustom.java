@@ -9,4 +9,8 @@ public interface InstitutionRepositoryCustom extends AbstractRepositoryCustom<In
 
     public List<Institution> listInstituitionsOwnedByUser(long userId) throws VirtualShelterException;
 
+    public List<Institution> listInstituitionsAdministeredByUser(long userId) throws VirtualShelterException;
+
+    public Institution checkInstituitionAdministeredByUser(long id, long userId) throws VirtualShelterException;
+
 }

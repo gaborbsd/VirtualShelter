@@ -106,6 +106,16 @@ public class SiteAdministrationOperationsImpl implements
     }
 
     @Override
+    public List<Institution> listInstitutionsAdministeredByUser(long userId) throws VirtualShelterException {
+        return institutionRepository.listInstituitionsAdministeredByUser(userId);
+    }
+
+    @Override
+    public Institution checkInstitutionAdministeredByUser(long shelterId, long userId) throws VirtualShelterException {
+        return institutionRepository.checkInstituitionAdministeredByUser(shelterId, userId);
+    }
+
+    @Override
     public void updateBreed(Breed breed) throws VirtualShelterException {
         breedRepository.edit(breed);
     }

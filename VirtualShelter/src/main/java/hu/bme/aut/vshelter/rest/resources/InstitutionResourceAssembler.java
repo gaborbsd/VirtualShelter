@@ -2,8 +2,11 @@ package hu.bme.aut.vshelter.rest.resources;
 
 import hu.bme.aut.vshelter.entity.Institution;
 import hu.bme.aut.vshelter.rest.InstitutionController;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 import org.springframework.stereotype.Component;
+
+import java.util.stream.Collectors;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 
@@ -15,6 +18,9 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
  */
 @Component
 public class InstitutionResourceAssembler extends ResourceAssemblerSupport<Institution, InstitutionResource> {
+
+    @Autowired
+    private UserResourceAssembler userResourceAssembler;
 
     public InstitutionResourceAssembler() {
         super(InstitutionController.class, InstitutionResource.class);
@@ -44,7 +50,8 @@ public class InstitutionResourceAssembler extends ResourceAssemblerSupport<Insti
         resource.setPayPal(entity.getPayPal());
         resource.setMobilePhoneNumber(entity.getMobilePhoneNumber());
         resource.setPhoneNumber(entity.getPhoneNumber());
-        resource.setInstitutionAdministrators(entity.getInstitutionAdministrators());
+        resource.setInstitutionAdministrators(entity.getInstitutionAdministrators().stream()
+                .map(userResourceAssembler::instantiateResource).collect(Collectors.toList()));
 
         resource.add(linkTo(InstitutionController.class).slash(entity.getId()).slash("admin").withRel("admin"));
         resource.add(linkTo(InstitutionController.class).slash(entity.getId()).slash("advertisement").withRel("advertisement"));

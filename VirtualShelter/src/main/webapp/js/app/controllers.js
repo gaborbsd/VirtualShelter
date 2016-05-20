@@ -217,7 +217,8 @@
             getUsers: getUsers,
             updateUser: updateUser,
             deleteUser: deleteUser,
-            getCurrentUser: getCurrentUser
+            getCurrentUser: getCurrentUser,
+            getAdministeredShelters: getAdministeredShelters
         };
 
         return service;
@@ -281,6 +282,16 @@
         function deleteUser(id) {
             var deferred = $q.defer();
             $http.delete("api/user/" + id).success(function (data, status) {
+                deferred.resolve(data);
+            }).error(function (status) {
+                deferred.reject(status);
+            });
+            return deferred.promise;
+        }
+
+        function getAdministeredShelters() {
+            var deferred = $q.defer();
+            $http.get("api/user/administeredShelter").success(function (data, status) {
                 deferred.resolve(data);
             }).error(function (status) {
                 deferred.reject(status);
@@ -377,9 +388,9 @@
         }
     };
 
-    controllers.AdvertisementEditorController = function ($scope, $http, AdvertisementService, AnimalService) {
+    controllers.AdvertisementEditorController = function ($scope, $http, AdvertisementService, AnimalService, UserService) {
         $scope.advertisement = {};
-        $scope.animals = {};
+        $scope.administeredShelters = [];
         $scope.species = [];
         $scope.breeds = [];
 
@@ -393,6 +404,22 @@
             }, function (response) {
                 $scope.error = response;
             })
+        };
+
+        $scope.getAdministeredShelters = function () {
+            UserService.getAdministeredShelters().then(
+                function (data) {
+                    $scope.administeredShelters = data;
+                },
+                function (response) {
+                    $scope.error = response;
+                });
+        };
+
+        $scope.clearAdvertiser = function () {
+            if ($scope.advertisement.hasOwnProperty('advertiser')) {
+                delete $scope.advertisement.advertiser;
+            }
         };
 
         $scope.getSpecies = function () {
@@ -412,6 +439,7 @@
         };
 
         $scope.getSpecies();
+        $scope.getAdministeredShelters();
     };
 
     controllers.SearchController = function ($scope, $http, SearchService) {
@@ -434,7 +462,7 @@
     };
 
     controllers.UsersController = function ($scope, $http, UserService) {
-        $scope.users = {};
+        $scope.users = [];
         $scope.error = "";
         $scope.getUsers = function () {
             UserService.getUsers($scope.user).then(function (data) {
@@ -548,7 +576,7 @@
     };
 
     controllers.AdvertisementController = function ($scope, $http, AdvertisementService, $routeParams) {
-        $scope.advertisements = {};
+        $scope.advertisements = [];
         $scope.error = "";
         $scope.getAdvertisements = function () {
             AdvertisementService.getAdvertisements().then(function (data) {
@@ -596,7 +624,7 @@
     };
 
     controllers.SheltersController = function ($scope, $http, ShelterService) {
-        $scope.shelters = {};
+        $scope.shelters = [];
         $scope.error = "";
         $scope.getShelters = function () {
             ShelterService.getShelters($scope.shelter).then(function (data) {
@@ -621,6 +649,8 @@
                 $scope.error = response;
             });
         }
+
+        $scope.getShelters();
     };
 
     controllers.UpdateShelterEditorController = function ($scope, $http, $routeParams, ShelterService) {
@@ -646,7 +676,7 @@
     };
 
     controllers.SpeciesAndBreedsController = function ($scope, $http, $routeParams, SpeciesAndBreedsService) {
-        $scope.speciesList = {};
+        $scope.speciesList = [];
         $scope.error = "";
         $scope.species = {breeds: null};
 
@@ -688,9 +718,9 @@
     };
 
     controllers.BreedsController = function ($scope, $http, $routeParams, SpeciesAndBreedsService) {
-        $scope.species = {};
+        $scope.species = [];
         $scope.error = "";
-        $scope.breeds = {};
+        $scope.breeds = [];
         $scope.breed = {};
 
         if ($routeParams.id > 0) {

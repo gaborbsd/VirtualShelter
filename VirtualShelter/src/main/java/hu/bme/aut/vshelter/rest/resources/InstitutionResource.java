@@ -17,7 +17,7 @@ public class InstitutionResource extends ResourceSupport {
     private String payPal;
     private String phoneNumber;
     private String mobilePhoneNumber;
-    private List<User> institutionAdministrators;
+    private List<UserResource> institutionAdministrators;
 
     public long getInstitutionId() {
         return institutionId;
@@ -91,11 +91,11 @@ public class InstitutionResource extends ResourceSupport {
         this.mobilePhoneNumber = mobilePhoneNumber;
     }
 
-    public List<User> getInstitutionAdministrators() {
+    public List<UserResource> getInstitutionAdministrators() {
         return institutionAdministrators;
     }
 
-    public void setInstitutionAdministrators(List<User> institutionAdministrators) {
+    public void setInstitutionAdministrators(List<UserResource> institutionAdministrators) {
         this.institutionAdministrators = institutionAdministrators;
     }
 

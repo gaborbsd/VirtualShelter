@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,9 +50,16 @@ public class InstitutionController {
      * @return
      */
     @RequestMapping(method = RequestMethod.POST)
-    ResponseEntity<InstitutionResource> addInstitution(@RequestBody Institution institution) {
+    ResponseEntity<InstitutionResource> addInstitution(@RequestBody Institution institution, Principal principal) {
+        if (principal == null) {
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
+
         HttpStatus responseStatus = HttpStatus.CREATED;
         try {
+            final String userEmail = principal.getName();
+            final User user = siteAdministationOperations.findUserByEmail(userEmail);
+            institution.setOwner(user);
             this.advertisementOperations.registerInstitution(institution);
         } catch (VirtualShelterException e) {
             responseStatus = converter.convert(e);

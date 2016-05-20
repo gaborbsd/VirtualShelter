@@ -97,6 +97,10 @@ public interface ISiteAdministrationOperations {
      */
     public List<Institution> listInstituitionsOwnedByUser(long userId) throws VirtualShelterException;
 
+    public List<Institution> listInstitutionsAdministeredByUser(long userId) throws VirtualShelterException;
+
+    public Institution checkInstitutionAdministeredByUser(long shelterId, long userId) throws VirtualShelterException;
+
     /**
      * Updates the breed identified by the given breed's id
      *

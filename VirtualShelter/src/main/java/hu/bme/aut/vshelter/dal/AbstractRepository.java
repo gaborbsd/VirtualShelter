@@ -1,13 +1,13 @@
 package hu.bme.aut.vshelter.dal;
 
 import hu.bme.aut.vshelter.api.VirtualShelterException;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.NoRepositoryBean;
 
 import java.util.List;
 
 @NoRepositoryBean
-public interface AbstractRepository<T> extends CrudRepository<T, Long> {
+public interface AbstractRepository<T> extends JpaRepository<T, Long> {
 
     T findById(long id) throws VirtualShelterException;
 

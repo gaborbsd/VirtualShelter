@@ -156,6 +156,19 @@ public class UserController {
         return new ResponseEntity<List<InstitutionResource>>(resources, responseStatus);
     }
 
+    @RequestMapping(value = "/{id}/adminInstitution", method = RequestMethod.GET)
+    ResponseEntity<List<InstitutionResource>> getUsersAdministrableInstitution(@PathVariable Long id) {
+        List<InstitutionResource> resources = new ArrayList<>();
+        HttpStatus responseStatus = HttpStatus.OK;
+        try {
+            List<Institution> institutionList = this.siteAdministrationOperations.listInstitutionsAdministeredByUser(id);
+            resources.addAll(this.institutionResourceAssembler.toResources(institutionList));
+        } catch (VirtualShelterException e) {
+            responseStatus = converter.convert(e);
+        }
+        return new ResponseEntity<>(resources, responseStatus);
+    }
+
     /**
      * Create new institution,
      * the user will be the owner
@@ -377,4 +390,25 @@ public class UserController {
     public String currentUserName(Principal principal) {
         return principal.getName();
     }
+
+    @RequestMapping(value = "/administeredShelter", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<List<InstitutionResource>> currentUsersAdministeredInstitution(Principal principal) {
+        if (principal == null) {
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
+
+        final List<InstitutionResource> resources = new ArrayList<>();
+        HttpStatus responseStatus = HttpStatus.OK;
+        try {
+            final User user = siteAdministrationOperations.findUserByEmail(principal.getName());
+            final List<Institution> institutionList = this.siteAdministrationOperations
+                    .listInstitutionsAdministeredByUser(user.getId());
+            resources.addAll(this.institutionResourceAssembler.toResources(institutionList));
+        } catch (VirtualShelterException e) {
+            responseStatus = converter.convert(e);
+        }
+        return new ResponseEntity<>(resources, responseStatus);
+    }
+
 }
