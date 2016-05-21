@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +51,7 @@ public class UserController {
      * @return
      */
     @RequestMapping(method = RequestMethod.POST)
-    ResponseEntity<UserResource> addUser(@RequestBody User user) {
+    ResponseEntity<UserResource> addUser(@RequestBody @Valid User user) {
         HttpStatus responseStatus = HttpStatus.CREATED;
         try {
             this.advertisementOperations.registerUser(user);

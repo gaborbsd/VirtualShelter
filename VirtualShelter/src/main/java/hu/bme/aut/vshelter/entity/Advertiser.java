@@ -1,10 +1,9 @@
 package hu.bme.aut.vshelter.entity;
 
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
-
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
@@ -12,11 +11,6 @@ import java.util.List;
 @Table(name = "advertiser", catalog = "vshelter", uniqueConstraints = {
         @UniqueConstraint(columnNames = "email"),
         @UniqueConstraint(columnNames = "name")})
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type")
-@JsonSubTypes({
-        @JsonSubTypes.Type(name = "user", value = User.class),
-        @JsonSubTypes.Type(name = "shelter", value = Institution.class)
-})
 public abstract class Advertiser {
     @Id
     @GeneratedValue
@@ -24,6 +18,8 @@ public abstract class Advertiser {
     protected long id;
 
     @Column(name = "name", unique = true, nullable = false)
+    @NotNull
+    @Size(min = 1, message = "may not be empty")
     private String name;
 
     @Column(name = "email", unique = true, nullable = false)

@@ -8,18 +8,20 @@
 </div>
 <form class="form">
     <div class="panel-body">
-        <div class="form-group row">
+        <div class="form-group row" ng-class="{'has-error': (!!errorMap.name)}">
             <label class="control-label col-sm-4">Name*</label>
             <div class="col-sm-5">
                 <input class="form-control" type="text" name="name"
                        ng-model="user.name" placeholder="Name">
+                <span ng-hide="!errorMap.name" class="help-block">{{errorMap.name}}</span>
             </div>
         </div>
-        <div class="form-group row">
+        <div class="form-group row" ng-class="{'has-error': (!!errorMap.email)}">
             <label class="control-label col-sm-4">Email*</label>
             <div class="col-sm-5">
                 <input class="form-control" type="text" name="email"
                        ng-model="user.email" placeholder="Email">
+                <span ng-hide="!errorMap.email" class="help-block">{{errorMap.email}}</span>
             </div>
         </div>
         <div class="form-group row">

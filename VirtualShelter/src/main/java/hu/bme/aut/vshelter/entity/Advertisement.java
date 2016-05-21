@@ -1,5 +1,8 @@
 package hu.bme.aut.vshelter.entity;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
 import javax.persistence.*;
 import java.util.Calendar;
 
@@ -18,6 +21,11 @@ public class Advertisement {
     private String description;
 
     @ManyToOne(cascade = CascadeType.MERGE)
+    @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type")
+    @JsonSubTypes({
+            @JsonSubTypes.Type(name = "user", value = User.class),
+            @JsonSubTypes.Type(name = "shelter", value = Institution.class)
+    })
     private Advertiser advertiser;
 
     @ManyToOne(cascade = CascadeType.ALL)

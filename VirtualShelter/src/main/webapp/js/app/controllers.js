@@ -491,13 +491,26 @@
     controllers.UserEditorController = function ($scope, $http, $routeParams, UserService) {
         $scope.user = {};
         $scope.error = "";
+        $scope.errorMap = {};
 
         $scope.user.id = $routeParams.id ? $routeParams.id : null;
         $scope.saveUser = function () {
             UserService.saveUser($scope.user).then(function () {
                 location.href = "/";
             }, function (response) {
-                $scope.error = response;
+                if (typeof response == 'object') {
+                    $scope.error = "Validation failed!";
+                    $scope.errorMap = {};
+                    response.forEach(function (err) {
+                        $scope.errorMap[err.field] = err.defaultMessage;
+                    });
+                } else if (typeof response == 'string') {
+                    $scope.error = response;
+                    $scope.errorMap = {};
+                } else {
+                    $scope.error = "";
+                    $scope.errorMap = {};
+                }
             })
         };
 
