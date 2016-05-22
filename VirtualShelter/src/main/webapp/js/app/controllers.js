@@ -376,9 +376,11 @@
         }
     }
 
-    var controllers = {};
+    app.controller('HeaderController', HeaderController);
 
-    controllers.HeaderController = function ($scope, $http) {
+    HeaderController.$inject = ['$scope'];
+
+    function HeaderController($scope) {
         function login() {
 
         }
@@ -386,9 +388,13 @@
         function register() {
             location.href = "#/editor/user"
         }
-    };
+    }
 
-    controllers.AdvertisementEditorController = function ($scope, $http, AdvertisementService, AnimalService, UserService) {
+    app.controller('AdvertisementEditorController', AdvertisementEditorController);
+
+    AdvertisementEditorController.$inject = ['$scope', 'AdvertisementService', 'AnimalService', 'UserService'];
+
+    function AdvertisementEditorController($scope, AdvertisementService, AnimalService, UserService) {
         $scope.advertisement = {};
         $scope.administeredShelters = [];
         $scope.species = [];
@@ -440,9 +446,13 @@
 
         $scope.getSpecies();
         $scope.getAdministeredShelters();
-    };
+    }
 
-    controllers.SearchController = function ($scope, $http, SearchService) {
+    app.controller('SearchController', SearchController);
+
+    SearchController.$inject = ['$scope', '$http', 'SearchService'];
+
+    function SearchController($scope, $http, SearchService) {
         $scope.clientLimit;
         $scope.animals;
         $scope.page;
@@ -459,9 +469,13 @@
             });
         };
 
-    };
+    }
 
-    controllers.UsersController = function ($scope, $http, UserService) {
+    app.controller('UsersController', UsersController);
+
+    UsersController.$inject = ['$scope', 'UserService'];
+
+    function UsersController($scope, UserService) {
         $scope.users = [];
         $scope.error = "";
         $scope.getUsers = function () {
@@ -486,9 +500,13 @@
                 $scope.error = response;
             });
         }
-    };
+    }
 
-    controllers.UserEditorController = function ($scope, $http, $routeParams, UserService) {
+    app.controller('UserEditorController', UserEditorController);
+
+    UserEditorController.$inject = ['$scope', '$routeParams', 'UserService'];
+
+    function UserEditorController($scope, $routeParams, UserService) {
         $scope.user = {};
         $scope.error = "";
         $scope.errorMap = {};
@@ -521,9 +539,13 @@
                 $scope.error = response;
             })
         }
-    };
+    }
 
-    controllers.UpdateUserEditorController = function ($scope, $http, $routeParams, UserService) {
+    app.controller('UpdateUserEditorController', UpdateUserEditorController);
+
+    UpdateUserEditorController.$inject = ['$scope', '$routeParams', 'UserService'];
+
+    function UpdateUserEditorController($scope, $routeParams, UserService) {
         $scope.user = {};
         $scope.error = "";
 
@@ -543,9 +565,13 @@
                 $scope.error = response;
             })
         }
-    };
+    }
 
-    controllers.AnimalEditorController = function ($scope, $http, AnimalService, $routeParams) {
+    app.controller('AnimalEditorController', AnimalEditorController);
+
+    AnimalEditorController.$inject = ['$scope', 'AnimalService', '$routeParams'];
+
+    function AnimalEditorController($scope, AnimalService, $routeParams) {
         $scope.animal = {};
         $scope.error = "";
         $scope.species = [];
@@ -586,9 +612,13 @@
         }
 
         $scope.getSpecies();
-    };
+    }
 
-    controllers.AdvertisementController = function ($scope, $http, AdvertisementService, $routeParams) {
+    app.controller('AdvertisementController', AdvertisementController);
+
+    AdvertisementController.$inject = ['$scope', 'AdvertisementService', '$routeParams'];
+
+    function AdvertisementController($scope, AdvertisementService, $routeParams) {
         $scope.advertisements = [];
         $scope.error = "";
         $scope.getAdvertisements = function () {
@@ -611,9 +641,13 @@
                 $scope.error = response;
             })
         };
-    };
+    }
 
-    controllers.ShelterEditorController = function ($scope, $http, ShelterService, $routeParams) {
+    app.controller('ShelterEditorController', ShelterEditorController);
+
+    ShelterEditorController.$inject = ['$scope', 'ShelterService', '$routeParams'];
+
+    function ShelterEditorController($scope, ShelterService, $routeParams) {
         $scope.shelter = {};
         $scope.error = "";
         $scope.shelter.id = $routeParams.id ? $routeParams.id : -1;
@@ -634,9 +668,13 @@
                 $scope.error = response;
             })
         }
-    };
+    }
 
-    controllers.SheltersController = function ($scope, $http, ShelterService) {
+    app.controller('SheltersController', SheltersController);
+
+    SheltersController.$inject = ['$scope', 'ShelterService'];
+
+    function SheltersController($scope, ShelterService) {
         $scope.shelters = [];
         $scope.error = "";
         $scope.getShelters = function () {
@@ -661,12 +699,16 @@
             }, function (response) {
                 $scope.error = response;
             });
-        }
+        };
 
         $scope.getShelters();
-    };
+    }
 
-    controllers.UpdateShelterEditorController = function ($scope, $http, $routeParams, ShelterService) {
+    app.controller('UpdateShelterEditorController', UpdateShelterEditorController);
+
+    UpdateShelterEditorController.$inject = ['$scope', '$routeParams', 'ShelterService'];
+
+    function UpdateShelterEditorController($scope, $routeParams, ShelterService) {
         $scope.shelter = {};
         $scope.error = "";
 
@@ -686,9 +728,13 @@
                 $scope.error = response;
             })
         }
-    };
+    }
 
-    controllers.SpeciesAndBreedsController = function ($scope, $http, $routeParams, SpeciesAndBreedsService) {
+    app.controller('SpeciesAndBreedsController', SpeciesAndBreedsController);
+
+    SpeciesAndBreedsController.$inject = ['$scope', '$routeParams', 'SpeciesAndBreedsService'];
+
+    function SpeciesAndBreedsController($scope, $routeParams, SpeciesAndBreedsService) {
         $scope.speciesList = [];
         $scope.error = "";
         $scope.species = {breeds: null};
@@ -728,9 +774,13 @@
             });
         }
 
-    };
+    }
 
-    controllers.BreedsController = function ($scope, $http, $routeParams, SpeciesAndBreedsService) {
+    app.controller('BreedsController', BreedsController);
+
+    BreedsController.$inject = ['$scope', '$routeParams', 'SpeciesAndBreedsService'];
+
+    function BreedsController($scope, $routeParams, SpeciesAndBreedsService) {
         $scope.species = [];
         $scope.error = "";
         $scope.breeds = [];
@@ -786,9 +836,7 @@
             });
         }
 
-    };
-
-    app.controller(controllers);
+    }
 
 //Async file upload you can use it on any file input and this will emit a fileSelected event when a file is need to be uploaded
 //You should listen for this event in the controller where you need this kinda action
