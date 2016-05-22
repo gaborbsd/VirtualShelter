@@ -1,6 +1,7 @@
 package hu.bme.aut.vshelter.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Collections;
 import java.util.Set;
 
@@ -9,6 +10,7 @@ import java.util.Set;
 public class User extends Advertiser {
 
     @Column(name = "password", unique = false, nullable = false)
+    @NotNull
     private String password;
 
     @Column(name = "introductionText", unique = false, nullable = true)

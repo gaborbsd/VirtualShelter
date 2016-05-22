@@ -24,11 +24,12 @@
                 <span ng-hide="!errorMap.email" class="help-block">{{errorMap.email}}</span>
             </div>
         </div>
-        <div class="form-group row">
+        <div class="form-group row" ng-class="{'has-error': (!!errorMap.password)}">
             <label class="control-label col-sm-4">Password*</label>
             <div class="col-sm-5">
                 <input class="form-control" type="password" name="password" id="password"
                        ng-model="user.password">
+                <span ng-hide="!errorMap.password" class="help-block">{{errorMap.password}}</span>
             </div>
         </div>
         <div class="form-group row">

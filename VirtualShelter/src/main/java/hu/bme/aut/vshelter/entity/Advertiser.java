@@ -23,6 +23,7 @@ public abstract class Advertiser {
     private String name;
 
     @Column(name = "email", unique = true, nullable = false)
+    @NotNull
     @Pattern(regexp = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$",
             message = "Invalid email format")
     private String email;
