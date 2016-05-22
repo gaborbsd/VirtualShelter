@@ -1,5 +1,7 @@
 package hu.bme.aut.sportnetwork.rest;
 
+import java.security.Principal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -60,6 +62,13 @@ public class UserController {
 		user.setAddress(a);*/
 		User created = registrationOperation.registrate(user);
 		UserResource resource = userResourceAssembler.toResource(created);
+		return new ResponseEntity<UserResource>(resource, HttpStatus.CREATED);
+	}
+	
+	@RequestMapping(method=RequestMethod.GET)
+	ResponseEntity<UserResource> getCurrentUser(Principal principal) {
+		User user = userOperation.findByName(principal.getName());
+		UserResource resource = userResourceAssembler.toResource(user);
 		return new ResponseEntity<UserResource>(resource, HttpStatus.CREATED);
 	}
 }

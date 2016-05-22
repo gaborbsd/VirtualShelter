@@ -1,0 +1,142 @@
+<h1>Create Event</h1>
+<hr />
+		
+<form class="form">
+	<div class="panel-body">
+		
+		<div class="form-group row">
+			<label class="control-label col-md-3">Sport:</label>
+			<div class="col-md-3">
+				<select class="form-control" ng-model="event.type">
+					<option value="" disabled>Choose</option>
+					<option value="FOOTBALL">FOOTBALL</option>
+					<option value="BASKETBALL">BASKETBALL</option>
+					<option value="TENNIS">TENNIS</option>
+					<option value="VOLLEYBALL">VOLLEYBALL</option>
+					<option value="HANDBALL">HANDBALL</option>
+					<option value="ICE_HOCKEY">ICE_HOCKEY</option>
+					<option value="BADMINTON">BADMINTON</option>
+					<option value="BASEBALL">BASEBALL</option>
+					<option value="AMERICAN_FOOTBALL">AMERICAN_FOOTBALL</option>
+					<option value="SNOOKER">SNOOKER</option>
+					<option value="TABLE_TENNIS">TABLE TENNIS</option>
+					<option value="CHESS">CHESS</option>					
+				</select>
+			</div>
+			<label class="control-label col-md-3">Participants:</label>
+			<div class="col-md-3">
+				<select class="form-control" ng-model="event.maxSize">
+					  <option value="2">2</option>
+					  <option value="3">3</option>
+					  <option value="4">4</option>
+					  <option value="5">5</option>
+					  <option value="6">6</option>
+					  <option value="7">7</option>
+					  <option value="8">8</option>
+					  <option value="9">9</option>
+					  <option value="10">10</option>
+					  <option value="11">11</option>
+					  <option value="12">12</option>
+					  <option value="13">13</option>
+					  <option value="14">14</option>
+					  <option value="15">15</option>
+					  <option value="16">16</option>
+				</select>
+			</div>
+		</div>
+		
+		<div class="form-group row">
+			<label class="control-label col-md-3">Month:</label>
+			<div class="col-md-3">
+				<select class="form-control" ng-model="month">
+					  <option value="01">JAN</option>
+					  <option value="02">FEB</option>
+					  <option value="03">MAR</option>
+					  <option value="04">APR</option>
+					  <option value="05">MAY</option>
+					  <option value="06">JUN</option>
+					  <option value="07">JUL</option>
+					  <option value="08">AUG</option>
+					  <option value="09">SEP</option>
+					  <option value="10">OCT</option>
+					  <option value="11">NOV</option>
+					  <option value="12">DEC</option>
+				</select>
+			</div>
+			<label class="control-label col-md-3">Day:</label>
+			<div class="col-md-3">
+				<select class="form-control" ng-model="day">
+					<option value="01">1</option>       
+				    <option value="02">2</option>       
+				    <option value="03">3</option>       
+				    <option value="04">4</option>       
+				    <option value="05">5</option>       
+				    <option value="06">6</option>       
+				    <option value="07">7</option>       
+				    <option value="08">8</option>       
+				    <option value="09">9</option>       
+				    <option value="10">10</option>       
+				    <option value="11">11</option>       
+				    <option value="12">12</option>       
+				    <option value="13">13</option>       
+				    <option value="14">14</option>       
+				    <option value="15">15</option>       
+				    <option value="16">16</option>       
+				    <option value="17">17</option>       
+				    <option value="18">18</option>       
+				    <option value="19">19</option>       
+				    <option value="20">20</option>       
+				    <option value="21">21</option>       
+				    <option value="22">22</option>       
+				    <option value="23">23</option>       
+				    <option value="24">24</option>       
+				    <option value="25">25</option>       
+				    <option value="26">26</option>       
+				    <option value="27">27</option>       
+				    <option value="28">28</option>       
+				    <option value="29">29</option>       
+				    <option value="30">30</option>       
+				    <option value="31">31</option>
+			    </select>       
+			</div>
+			<label class="control-label col-md-3">Hour:</label>
+			<div class="col-md-3">
+				<select class="form-control" ng-model="hour">
+					<option value="00">0</option>
+					<option value="01">1</option>       
+				    <option value="02">2</option>       
+				    <option value="03">3</option>       
+				    <option value="04">4</option>       
+				    <option value="05">5</option>       
+				    <option value="06">6</option>       
+				    <option value="07">7</option>       
+				    <option value="08">8</option>       
+				    <option value="09">9</option>       
+				    <option value="10">10</option>       
+				    <option value="11">11</option>       
+				    <option value="12">12</option>       
+				    <option value="13">13</option>       
+				    <option value="14">14</option>       
+				    <option value="15">15</option>       
+				    <option value="16">16</option>       
+				    <option value="17">17</option>       
+				    <option value="18">18</option>       
+				    <option value="19">19</option>       
+				    <option value="20">20</option>       
+				    <option value="21">21</option>       
+				    <option value="22">22</option>       
+				    <option value="23">23</option> 
+			    </select>       
+			</div>						
+		</div>
+		
+		<div class="form-group row">
+			<label class="control-label col-md-3">Description:</label>
+			<div class="col-md-3">
+				<textarea class="form-control" rows="7" cols="70" ng-model="event.description"></textarea>
+			</div>
+		</div>
+	<div class="panel-footer text-center">
+        <button class="btn btn-primary" ng-click="createEvent()">Save</button>
+    </div>
+</form>

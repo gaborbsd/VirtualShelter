@@ -17,4 +17,10 @@ public class UserOperation implements IUserOperation {
 		return userRepository.findOne(id);
 	}
 
+
+	@Override
+	public User findByName(String name) {
+		return userRepository.findByName(name);
+	}
+
 }

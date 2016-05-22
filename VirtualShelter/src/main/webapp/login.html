@@ -1,33 +1,166 @@
-<html>
-<head>
+<html ng-app="sportnetworkApp">
+<head >
 <title>Login Page</title>
-<style>
 
-#login-box {
-	width: 350px;
-	padding: 30px;
-	margin: 100px auto;
-	background: #E0E0E0";
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px;
-	border: 2px solid #000;
-}
-</style>
+<script type="text/javascript" src="vendor/jquery/dist/jquery.js"></script>
+<script type="text/javascript" src="vendor/angular/angular.js"></script>
+<script type="text/javascript"
+	src="vendor/angular-ui/build/angular-ui.js"></script>
+<script type="text/javascript"
+	src="vendor/angular-paginate-anything/dist/paginate-anything.js"></script>
+<script type="text/javascript"
+	src="vendor/angular-route/angular-route.js"></script>
+<script type="text/javascript" src="vendor/select2/select2.js"></script>
+<script type="text/javascript"
+	src="vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+
+<script src="js/registrationcontroller.js"></script>
+<link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="vendor/angular-ui/build/angular-ui.css">
+<link rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap.css">
+<link href="css/bootstrap-responsive.min.css" rel="stylesheet" />
 </head>
-<body onload='document.loginForm.username.focus();'>
-
-	<div id="login-box" style="background:#FFFFCC">
-
-		<h2>Login with Email and Password</h2>
-
-		<h3>Please add your registered Email and Password!</h3><form name='f' action='/login' method='POST'>
-		<table>
-			<tr><td>Email:</td><td><input type='text' name='username' value=''></td></tr>
-			<tr><td>Password:</td><td><input type='password' name='password'/></td></tr>
-			<tr><td colspan='2'><input name="submit" type="submit" value="Login"/></td></tr>
-		</table>
-		</form>
+<body ng-controller="RegistrationController">
+	
+	<div id="page">
+	
+	<div id="header" align="center">
+  		<img src="img/logo.png" alt="logo" />
 	</div>
+	
+
+	<div id="login-box" style="background:#A9D0F5">
+		
+		
+			<form name='f' action='/login' method='POST'>
+				<div class="form-group row">
+					<label class="control-label col-sm-4">AUTSport</label>
+					<div align="center">
+						<table >
+							<tr><td>Email or Name</td><td>Password</td></tr>
+							<tr><td><input type='text' name='username' value=''></td><td><input type='password' name='password'/></td><td><input name="submit" type="submit" value="Login"/></td></tr>
+						</table>
+					</div>
+				</div>
+				<p>
+				
+			</form>
+			
+			<hr>
+		
+			<h2 align="center">Sign Up</h2>
+			
+		
+			<from class="form">
+			
+			
+
+	
+		
+<div class="panel-body">
+	<div class="form-group row">
+		<label class="control-label col-sm-4">Name*</label>
+		<div class="col-sm-5">
+			<input class="form-control" type="text" name="name"
+				ng-model="user.name" placeholder="Name">
+		</div>
+	</div>
+	<div class="form-group row">
+		<label class="control-label col-sm-4">Email*</label>
+		<div class="col-sm-5">
+			<input class="form-control" type="text" name="email"
+				ng-model="user.email" placeholder="Email">
+		</div>
+	</div>
+	<div class="form-group row">
+		<label class="control-label col-sm-4">Password*</label>
+		<div class="col-sm-5">
+			<input class="form-control" type="password" name="password" id="password"
+				ng-model="user.password">
+		</div>
+	</div>
+	<div class="form-group row">
+		<label class="control-label col-sm-4">Password again*</label>
+		<div class="col-sm-5">
+			<input class="form-control" type="password" name="password-re" id="password-re"
+				password-match="password">
+		</div>
+	</div>
+	<div class="form-group row">
+		<label class="control-label col-sm-4">Age*</label>
+		<div class="col-sm-5">
+			<input class="form-control" type="number" name="age" 
+				ng-model="user.age">
+		</div>
+	</div>
+	<div class="form-group row">
+		<label class="control-label col-sm-4">Country*</label>
+		<div class="col-sm-5">
+			<input class="form-control" type="text" name="country"
+				placeholder="Country" ng-model="user.address.country">
+		</div>
+	</div>
+	<div class="form-group row">
+		<label class="control-label col-sm-4">ZIP Code*</label>
+		<div class="col-sm-5">
+			<input class="form-control" type="number" name="zipCode"
+				placeholder="1000" ng-model="user.address.zipCode">
+		</div>
+	</div>
+	<div class="form-group row">
+		<label class="control-label col-sm-4">City*</label>
+		<div class="col-sm-5">
+			<input class="form-control" type="text" name="street"
+				placeholder="City" ng-model="user.address.city">
+		</div>
+	</div>
+	<div class="form-group row">
+		<label class="control-label col-sm-4">Street*</label>
+		<div class="col-sm-5">
+			<input class="form-control" type="text" name="street"
+				placeholder="Street" ng-model="user.address.street">
+		</div>
+	</div>
+	<div class="form-group row">
+		<label class="control-label col-sm-4">Province</label>
+		<div class="col-sm-5">
+			<input class="form-control" type="text" name="province"
+				placeholder="Province" ng-model="user.address.province">
+		</div>
+	</div>
+	
+	<div class="form-group row">
+		<label class="control-label col-sm-4">Phone number</label>
+		<div class="col-sm-5">
+			<input class="form-control" type="text" name="phoneNumber"
+				placeholder="Phone number" ng-model="user.phoneNumber">
+		</div>
+	</div>
+	<!--  
+	<div class="form-group row">
+		<label class="control-label col-sm-4">Mobile phone</label>
+		<div class="col-sm-5">
+			<input class="form-control" type="text" name="mobilePhoneNumber"
+				placeholder="Mobile phone" ng-model="user.mobilePhoneNumber">
+		</div>
+	</div>
+	<div class="form-group row">
+		<label class="control-label col-sm-4">About me</label>
+		<div class="col-sm-5">
+			<textarea class="form-control" rows="5" ng-model="user.introductionText"></textarea>
+		</div>
+	</div>
+	-->
+</div>
+<div class="panel-footer text-center">
+	<button class="btn btn-primary" ng-click="postUser()">Save</button>
+</div>
+</from>
+	</div>
+	
+	
+	</div>
+	
 
 </body>
 </html>

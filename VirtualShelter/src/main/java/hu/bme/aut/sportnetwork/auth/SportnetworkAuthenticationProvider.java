@@ -1,4 +1,4 @@
-/*package hu.bme.aut.sportnetwork.auth;
+package hu.bme.aut.sportnetwork.auth;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +23,7 @@ public class SportnetworkAuthenticationProvider implements AuthenticationProvide
 		String name = authentication.getName();
 		String password = authentication.getCredentials().toString();
 		
-		User u = userRepository.getUserByName(name);
+		User u = userRepository.findByName(name);
 		if (password.equals(u.getPassword())) {
 			List<GrantedAuthority> grantedAuths = new ArrayList<GrantedAuthority>();
 			grantedAuths.add(new SimpleGrantedAuthority("ROLE_USER"));
@@ -38,4 +38,3 @@ public class SportnetworkAuthenticationProvider implements AuthenticationProvide
 	}
 
 }
-*/

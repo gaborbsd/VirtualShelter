@@ -7,6 +7,12 @@ app.config(function($routeProvider) {
 	}).when('/editor/events', {
 		controller : 'SportEventController',
 		templateUrl : '/html/events.html'
+	}).when('/user', {
+		controller : 'UserEditorController',
+		templateUrl : '/html/users.html'
+	}).when('/editor/events/new', {
+		controller : 'CreateSportEventController',
+		templateUrl : '/html/createEvent.html'
 	}).otherwise({
 		redirectTo : '/editor/events'
 	})
@@ -37,3 +43,31 @@ app.controller('SportEventController', function($scope, $http) {
 	
 	$scope.getEvents();
 });
+
+app.controller('CreateSportEventController', function($scope, $http) {
+
+	$scope.createEvent = function() {
+		if ($scope.event)
+			//$scope.event.date = "2016-" + $scope.month + "-" + $scope.day + " " + $scope.hour + ":00:00";
+			$http.post("api/sportevent/create", $scope.event).success(function(data, status) {
+				alert("Event created");
+			}).error(function(data, status) {
+				alert(data);
+			});
+	}
+
+});
+
+app.controller('UserEditorController', function($scope, $http) {
+	
+	$scope.getUser = function() {
+		$http.get("api/user").success(function(data, status) {
+			$scope.user = data;
+		}).error(function(data, status) {
+			alert(data);
+		});
+	}
+	
+	$scope.getUser();
+});
+

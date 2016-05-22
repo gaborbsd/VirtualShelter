@@ -30,31 +30,19 @@
     </div>
     <div id='cssmenu'>
 	<ul>
-	   <li class='active'><a href="#/search"><span>Search</span></a></li>
-	   <li><a href='#/search'><span>Search</span></a></li>
-	   <li><a href="#/users"><span>Users</span></a></li>
-	   <li><a href="#/editor/user"><span>User Registration</span></a></li>
-	   <li><a href="#/editor/animal"><span>Animal Registration</span></a></li>
-	   <li><a href="#/editor/shelter"><span>Institution Registration</span></a></li>
-	   <li><a href="#/shelters"><span>Institutions</span></a></li>
-	   <li><a href="#/advertisements"><span>Advertisements</span></a></li>
-	   <li class='last'><a href="#/speciesandbreeds"><span>Species and Breeds</span></a></li>
+	   <li class='active'><a href="#/editor/events"><span>Search</span></a></li>
+	   <li><a href="#/editor/events"><span>Events</span></a></li>
+	   <li><a href="#/editor/events/new"><span>New Event</span></a></li>
+	   <li><a href="#/user"><span>Profile</span></a></li>
 	   <li><a href="logout"><span>Logout</span></a></li>	   
 	</ul>
 	</div>
 	    
+
     <div class="span4 section">
         <div id='cssmenu2'>
 		<ul>
-		   <li><a href='#'><span>Home</span></a></li>
-		   <li class='active has-sub'><a href='#/search'><span>Animals</span></a>
-		      <ul>
-		         <li class='last'><a href='#/search'><span>Animal Search</span></a>
-		         </li>
-		         <li class='last'><a href="#/editor/animal"><span>Animal Registration</span></a>
-		         </li>
-		      </ul>
-		   </li>
+		   <li><a href='#/editor/events'><span>Home</span></a></li>
 		   <li class='active has-sub'><a href="#/users"><span>Users</span></a>
 		      <ul>
 		         <li class='last'><a href="#/users"><span>User Management</span></a>
@@ -63,24 +51,14 @@
 		         </li>
 		      </ul>
 		   </li>
-		   <li class='active has-sub'><a href="#/advertisements"><span>Advertisements</span></a>
+		   <li class='active has-sub'><a href="#/editor/events"><span>Events</span></a>
 		      <ul>
-		         <li class='last'><a href="#/advertisements"><span>Advertisement Management</span></a>
+		         <li class='last'><a href="#/editor/events"><span>Events</span></a>
 		         </li>
-		         <li class='last'><a href="#/editor/advertisement"><span>Advertisement Registration</span></a>
+		         <li class='last'><a href="#/editor/events/new"><span>New Event</span></a>
 		         </li>
 		      </ul>
 		   </li>
-		   <li class='active has-sub'><a href="#/shelters"><span>Institutions</span></a>
-		      <ul>
-		         <li class='last'><a href="#/shelters"><span>Institutions Management</span></a>
-		         </li>
-		         <li class='last'><a href="#/editor/shelter"><span>Institutions Registration</span></a>
-		         </li>
-		      </ul>
-		   </li>
-		   <li><a href="#/speciesandbreeds"><span>Species and Breeds</span></a></li>
-		   <li class='last'><a href='#'><span>Contact</span></a></li>
 		</ul>
 		</div>
 
@@ -89,25 +67,7 @@
      <div class="span8" ng-view style="background:#FFFFCC">
          
      </div>
-     <!-- 
-     <div class="span8"  style="background:#FFFFCC">
-         <h1>List of events</h1>
 
-		<table ng-show="events.length > 0">
-			<thead>
-				<tr style="font-weight: bold;">
-				<td>Name</td>
-				</tr>
-			</thead>
-			<tr ng-repeat="event in events">
-				<td>{{event.maxSize}}</td>
-			</tr>
-		</table>
-		
-		<button class="btn btn-primary" ng-click="getEvents()">Save</button>
-     </div>
-     
-      -->
 
 
 </body>
