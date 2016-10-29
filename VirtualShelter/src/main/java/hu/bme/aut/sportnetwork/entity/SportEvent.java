@@ -29,7 +29,7 @@ public class SportEvent {
 	@ManyToOne(fetch = FetchType.EAGER)
 	private User owner;
 	
-	@OneToMany(fetch = FetchType.EAGER)
+	@OneToMany(mappedBy="event", fetch = FetchType.EAGER)
 	private List<Comment> comments;
 	
 	@ManyToMany

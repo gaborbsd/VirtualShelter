@@ -23,6 +23,9 @@ public class Comment {
 	@ManyToOne(fetch = FetchType.EAGER)
 	private User owner;
 	
+	@ManyToOne
+	private SportEvent event;
+	
 	@Column
 	private String message;
 	
@@ -60,6 +63,14 @@ public class Comment {
 
 	public void setDateOfComment(Date dateOfComment) {
 		this.dateOfComment = dateOfComment;
+	}
+
+	public SportEvent getEvent() {
+		return event;
+	}
+
+	public void setEvent(SportEvent event) {
+		this.event = event;
 	}
 	
 	
