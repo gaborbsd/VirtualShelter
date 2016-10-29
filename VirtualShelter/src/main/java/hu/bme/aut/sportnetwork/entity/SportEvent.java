@@ -1,6 +1,8 @@
 package hu.bme.aut.sportnetwork.entity;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,9 +11,15 @@ import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="sportevent")
 public class SportEvent {
 	
 	@Id
@@ -21,13 +29,22 @@ public class SportEvent {
 	@ManyToOne(fetch = FetchType.EAGER)
 	private User owner;
 	
+	@OneToMany(fetch = FetchType.EAGER)
+	private List<Comment> comments;
+	
+	@ManyToMany
+	@JoinTable(name="members_of_sportevent", 
+				joinColumns=@JoinColumn(name="sportevent_id"),
+				inverseJoinColumns=@JoinColumn(name="user_id"))
+	private List<User> members;
+	
 	@Column(nullable=false)
 	private Calendar date;
 	
 	@Enumerated(EnumType.STRING)
 	@Column(nullable=false)
 	private Sports type;
-	
+
 	private int maxSize;
 	
 	private String description;
@@ -78,6 +95,17 @@ public class SportEvent {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	
+	public List<Comment> getComments() {
+		if (comments == null) {
+			comments = new ArrayList<>();
+		}
+		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
 	}
 
 	@Override

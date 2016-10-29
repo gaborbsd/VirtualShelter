@@ -11,7 +11,7 @@ import hu.bme.aut.sportnetwork.entity.User;
 
 public class UserRepositoryImpl implements UserRepositoryCustom {
 	
-	/*@PersistenceContext
+	@PersistenceContext
 	private EntityManager em;
 
 	@Override
@@ -22,6 +22,6 @@ public class UserRepositoryImpl implements UserRepositoryCustom {
 				.setParameter(1, name);
 		return query.getSingleResult();
 	}
-*/
+
 
 }

@@ -20,7 +20,7 @@ public class UserOperation implements IUserOperation {
 
 	@Override
 	public User findByName(String name) {
-		return userRepository.findByName(name);
+		return userRepository.getUserByName(name);
 	}
 
 }

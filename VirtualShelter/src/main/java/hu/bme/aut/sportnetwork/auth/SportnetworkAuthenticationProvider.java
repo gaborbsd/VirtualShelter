@@ -23,8 +23,8 @@ public class SportnetworkAuthenticationProvider implements AuthenticationProvide
 		String name = authentication.getName();
 		String password = authentication.getCredentials().toString();
 		
-		User u = userRepository.findByName(name);
-		if (password.equals(u.getPassword())) {
+		User u = userRepository.getUserByName(name);
+		if (u != null && password.equals(u.getPassword())) {
 			List<GrantedAuthority> grantedAuths = new ArrayList<GrantedAuthority>();
 			grantedAuths.add(new SimpleGrantedAuthority("ROLE_USER"));
 			return new UsernamePasswordAuthenticationToken(name, password, grantedAuths);
