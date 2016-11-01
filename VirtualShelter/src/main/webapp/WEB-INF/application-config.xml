@@ -56,7 +56,7 @@
 		</property>
 	</bean>
 	
-	<import resource="spring-security.xml" />
+	<!--import resource="spring-security.xml" /-->
 
 	<bean id="jacksonObjectMapper" class="com.fasterxml.jackson.databind.ObjectMapper" />
 	<bean id="registrationOperation" class="hu.aut.bme.sportnetwork.api.impl.RegistrationOperation" />

@@ -25,7 +25,7 @@ public class Message {
 	@ManyToOne
 	private Conversation conversation;
 	
-	@Temporal(TemporalType.TIME)
+	@Temporal(TemporalType.DATE)
 	@Column(name="send_time")
 	private Date sendTime;
 

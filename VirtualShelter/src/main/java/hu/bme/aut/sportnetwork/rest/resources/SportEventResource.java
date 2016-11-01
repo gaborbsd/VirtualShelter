@@ -1,7 +1,7 @@
 package hu.bme.aut.sportnetwork.rest.resources;
 
 import java.util.Calendar;
-
+import java.util.Date;
 
 import org.springframework.hateoas.ResourceSupport;
 
@@ -12,7 +12,7 @@ public class SportEventResource extends ResourceSupport {
 	
 	private User owner;
 	
-	private Calendar date;
+	private Date date;
 
 	private Sports type;
 	
@@ -32,11 +32,11 @@ public class SportEventResource extends ResourceSupport {
 		this.owner = owner;
 	}
 
-	public Calendar getDate() {
+	public Date getDate() {
 		return date;
 	}
 
-	public void setDate(Calendar date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 

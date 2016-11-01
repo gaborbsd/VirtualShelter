@@ -1,6 +1,5 @@
 package hu.bme.aut.sportnetwork.dal.impl;
 
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;

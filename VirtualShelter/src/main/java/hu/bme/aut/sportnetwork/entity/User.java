@@ -1,5 +1,6 @@
 package hu.bme.aut.sportnetwork.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -37,6 +38,10 @@ public class User {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy="owner")
 	@JsonIgnore
 	private List<SportEvent> ownEvents;
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy="owner")
+	@JsonIgnore
+	private List<Notification> notifications;
 	
 	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	private Address address;
@@ -107,6 +112,17 @@ public class User {
 
 	public void setAddress(Address address) {
 		this.address = address;
+	}
+
+	public List<Notification> getNotifications() {
+		if (notifications==null) {
+			notifications = new ArrayList<>();
+		}
+		return notifications;
+	}
+
+	public void setNotifications(List<Notification> notifications) {
+		this.notifications = notifications;
 	}
 
 	@Override

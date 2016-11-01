@@ -2,6 +2,7 @@ package hu.bme.aut.sportnetwork.entity;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -17,6 +18,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name="sportevent")
@@ -39,7 +42,8 @@ public class SportEvent {
 	private List<User> members;
 	
 	@Column(nullable=false)
-	private Calendar date;
+	@Temporal(TemporalType.TIME)
+	private Date date;
 	
 	@Enumerated(EnumType.STRING)
 	@Column(nullable=false)
@@ -73,11 +77,11 @@ public class SportEvent {
 		this.maxSize = maxSize;
 	}
 
-	public Calendar getDate() {
+	public Date getDate() {
 		return date;
 	}
 
-	public void setDate(Calendar date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 

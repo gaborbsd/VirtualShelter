@@ -2,6 +2,7 @@ package hu.bme.aut.sportnetwork.rest;
 
 import java.security.Principal;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +48,7 @@ public class SportEventController {
 	ResponseEntity<SportEventResource> createEvent(Principal principal ,@RequestBody SportEvent event) {
 		User owner = userOperation.findByName(principal.getName());
 		event.setOwner(owner);
-		event.setDate(Calendar.getInstance());
+		event.setDate(new Date());
 		SportEvent created = sporteventOperation.create(event);
 		SportEventResource resource = sportEventResourceAssembler.toResource(created);
 		return new ResponseEntity<SportEventResource>(resource, HttpStatus.CREATED);
