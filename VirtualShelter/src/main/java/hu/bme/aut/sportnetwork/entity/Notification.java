@@ -22,7 +22,7 @@ public abstract class Notification {
 	@TableGenerator(name = "notification_gen", table = "id_gen", pkColumnName = "gen_name", valueColumnName = "gen_val", allocationSize = 1)
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE, generator = "notification_gen")
-	private int notificationId;
+	private long notificationId;
 	
 	@ManyToOne
 	@JoinColumn(name="owner_id", nullable=false)
@@ -34,11 +34,11 @@ public abstract class Notification {
 	@Column(name="send_time")
 	private Date sendTime;
 
-	public int getNotificationId() {
+	public long getNotificationId() {
 		return notificationId;
 	}
 
-	public void setNotificationId(int notificationId) {
+	public void setNotificationId(long notificationId) {
 		this.notificationId = notificationId;
 	}
 

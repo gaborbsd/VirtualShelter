@@ -48,8 +48,12 @@ public class SportEvent {
 	@Enumerated(EnumType.STRING)
 	@Column(nullable=false)
 	private Sports type;
-
+	
+	@Column(name = "max_size")
 	private int maxSize;
+	
+	@Column(name = "is_public")
+	private boolean isPublic;
 	
 	private String description;
 
@@ -110,6 +114,14 @@ public class SportEvent {
 
 	public void setComments(List<Comment> comments) {
 		this.comments = comments;
+	}
+
+	public boolean isPublic() {
+		return isPublic;
+	}
+
+	public void setPublic(boolean isPublic) {
+		this.isPublic = isPublic;
 	}
 
 	@Override

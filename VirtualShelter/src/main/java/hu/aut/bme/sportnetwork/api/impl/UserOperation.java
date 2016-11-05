@@ -3,11 +3,14 @@ package hu.aut.bme.sportnetwork.api.impl;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import hu.bme.aut.sportnetwork.api.IUserOperation;
+import hu.bme.aut.sportnetwork.dal.IFriendShipDAO;
 import hu.bme.aut.sportnetwork.dal.INotificationDAO;
 import hu.bme.aut.sportnetwork.dal.IUserDAO;
 import hu.bme.aut.sportnetwork.entity.FriendNotification;
+import hu.bme.aut.sportnetwork.entity.FriendShip;
 import hu.bme.aut.sportnetwork.entity.Notification;
 import hu.bme.aut.sportnetwork.entity.User;
 
@@ -18,6 +21,9 @@ public class UserOperation implements IUserOperation {
 	
 	@Autowired
 	private INotificationDAO notificationRepositroy;
+	
+	@Autowired
+	private IFriendShipDAO friendShipRepository;
 	
     @Override
 	public User findById(long id) {
@@ -39,5 +45,30 @@ public class UserOperation implements IUserOperation {
 		not.setSendTime(new Date());
 		notificationRepositroy.save(not);
 	}
+
+	@Override
+	@Transactional
+	public void acceptFriendRequest(long id) throws Exception {
+		User accepter = findByName("Cecil");
+		Notification not = notificationRepositroy.findOne(id);
+		if (not instanceof FriendNotification) {
+			User friend = not.getOwner();
+			FriendShip f1 = new FriendShip();
+			f1.setPerson(accepter);
+			f1.setFriend(friend);
+			f1.setListenNotifications(true);
+			FriendShip f2 = new FriendShip();
+			f2.setFriend(accepter);
+			f2.setPerson(friend);
+			f2.setListenNotifications(true);
+			friendShipRepository.save(f1);
+			friendShipRepository.save(f2);
+			notificationRepositroy.delete(id);
+		} else {
+			throw new Exception("WRONG NOTIFICATION ID");
+		}
+		
+	}
+	
 
 }

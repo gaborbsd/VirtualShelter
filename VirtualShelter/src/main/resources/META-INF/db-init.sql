@@ -14,6 +14,15 @@ INSERT INTO user VALUES (5, 12, "elemer5@gmail.com", "Elemer", "e", "+3670625419
 INSERT INTO user VALUES (6, 44, "ferenc6@gmail.com", "Ferenc", "f", "+36205291403",6);
 INSERT INTO user VALUES (7, 36, "gabor7@gmail.com", "Gabor", "g", "+36304954720",7);
 
-INSERT INTO sportevent VALUES (1, '2016-08-18 10:00:00', "tenisz",2, "TENNIS", 1);
-INSERT INTO sportevent VALUES (2, '2016-08-19 16:00:00', "tenisz",4, "TENNIS", 1);
-INSERT INTO sportevent VALUES (3, '2016-07-13 16:00:00', "foci",11, "FOOTBALL", 2);
+INSERT INTO sportevent VALUES (1, '2016-08-18 10:00:00', "tenisz", true,2, "TENNIS", 1);
+INSERT INTO sportevent VALUES (2, '2016-08-19 16:00:00', "tenisz", true, 4, "TENNIS", 1);
+INSERT INTO sportevent VALUES (3, '2016-07-13 16:00:00', "foci", true,11, "FOOTBALL", 2);
+
+INSERT INTO friendship VALUES (1, true, 1, 2);
+INSERT INTO friendship VALUES (2, true, 2, 1);
+INSERT INTO friendship VALUES (3, true, 1, 4);
+INSERT INTO friendship VALUES (4, false, 4, 1);
+INSERT INTO friendship VALUES (5, false, 1, 5);
+INSERT INTO friendship VALUES (6, true, 5, 1);
+INSERT INTO friendship VALUES (7, true, 6, 7);
+INSERT INTO friendship VALUES (8, true, 7, 6);

@@ -9,4 +9,6 @@ public interface IUserOperation {
 	User findByName(String name);
 	
 	void sendFriendRequest(String name, String message);
+	
+	void acceptFriendRequest(long id) throws Exception;
 }

@@ -42,9 +42,9 @@ public class SportEventController {
 	}
 	
 	@RequestMapping(value="/create", method=RequestMethod.POST)
-	ResponseEntity<SportEventResource> createEvent(Principal principal ,@RequestBody SportEvent event) {
-		User owner = userOperation.findByName(principal.getName());
-		event.setOwner(owner);
+	ResponseEntity<SportEventResource> createEvent(/*Principal principal ,*/@RequestBody SportEvent event) {
+		/*User owner = userOperation.findByName(principal.getName());
+		event.setOwner(owner);*/
 		event.setDate(new Date());
 		SportEvent created = sporteventOperation.create(event);
 		SportEventResource resource = sportEventResourceAssembler.toResource(created);

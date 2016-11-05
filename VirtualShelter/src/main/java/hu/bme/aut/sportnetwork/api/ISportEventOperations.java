@@ -14,7 +14,5 @@ public interface ISportEventOperations {
 	List<SportEvent> findEventsByOwner(User owner);
 	
 	void addUserToEvent(SportEvent e, User u);
-	
-	void sendEventNotifications(List<String> names, String message);
 
 }

@@ -8,10 +8,16 @@ import javax.persistence.Table;
 @Entity
 @Table(name="event_notification")
 public class EventNotification extends Notification {
-
+	
 	@ManyToOne
 	@JoinColumn(name = "event_id")
 	private SportEvent event;
+	
+	public EventNotification(){}
+	
+	public EventNotification(SportEvent event) {
+		this.event = event;
+	}
 
 	public SportEvent getEvent() {
 		return event;
