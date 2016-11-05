@@ -35,12 +35,9 @@ public class SportEventController {
 	
 	@RequestMapping(method=RequestMethod.GET)
 	ResponseEntity<List<SportEventResource>> findAllSportEvent() {
-		System.out.println("FINDALLEVENT");
 		List<SportEvent> events = sporteventOperation.findAll();
-		System.out.println("events" + events.size());
 		List<SportEventResource> resourceList = sportEventResourceAssembler
 				.toResources(events);
-		System.out.println("Succes" + resourceList);
 		return new ResponseEntity<List<SportEventResource>>(resourceList, HttpStatus.OK);
 	}
 	

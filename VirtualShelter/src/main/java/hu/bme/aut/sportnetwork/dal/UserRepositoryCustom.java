@@ -4,6 +4,6 @@ import hu.bme.aut.sportnetwork.entity.User;
 
 public interface UserRepositoryCustom {
 	
-	public User getUserByName(String name);
+	//public User getUserByName(String name);
 	
 }

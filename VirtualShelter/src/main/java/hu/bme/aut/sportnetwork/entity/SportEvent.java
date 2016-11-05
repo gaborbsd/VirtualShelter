@@ -42,7 +42,7 @@ public class SportEvent {
 	private List<User> members;
 	
 	@Column(nullable=false)
-	@Temporal(TemporalType.TIME)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date date;
 	
 	@Enumerated(EnumType.STRING)

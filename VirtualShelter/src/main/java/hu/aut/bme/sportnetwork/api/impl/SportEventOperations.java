@@ -5,14 +5,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import hu.bme.aut.sportnetwork.api.ISportEventOperations;
-import hu.bme.aut.sportnetwork.dal.SportEventRepository;
+import hu.bme.aut.sportnetwork.dal.ISportEventDAO;
 import hu.bme.aut.sportnetwork.entity.SportEvent;
 import hu.bme.aut.sportnetwork.entity.User;
 
 public class SportEventOperations implements ISportEventOperations {
 	
 	@Autowired
-	SportEventRepository sportEventRepository;
+	ISportEventDAO sportEventRepository;
 
 	@Override
 	public List<SportEvent> findAll() {

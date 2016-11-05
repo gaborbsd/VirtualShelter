@@ -5,6 +5,8 @@ import org.springframework.stereotype.Repository;
 import hu.bme.aut.sportnetwork.entity.User;
 
 @Repository
-public interface UserRepository extends AbstractRepository<User>, UserRepositoryCustom {
+public interface IUserDAO extends AbstractRepository<User> {
+	
+	User findByName(String name);
 
 }

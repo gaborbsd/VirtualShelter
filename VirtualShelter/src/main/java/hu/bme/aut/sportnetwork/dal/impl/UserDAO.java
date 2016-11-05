@@ -8,9 +8,9 @@ import javax.transaction.Transactional;
 import hu.bme.aut.sportnetwork.dal.UserRepositoryCustom;
 import hu.bme.aut.sportnetwork.entity.User;
 
-public class UserRepositoryImpl implements UserRepositoryCustom {
+public class UserDAO implements UserRepositoryCustom {
 	
-	@PersistenceContext
+	/*@PersistenceContext
 	private EntityManager em;
 
 	@Override
@@ -20,7 +20,7 @@ public class UserRepositoryImpl implements UserRepositoryCustom {
 				"SELECT u FROM User u WHERE u.name = ?1", User.class)
 				.setParameter(1, name);
 		return query.getSingleResult();
-	}
+	}*/
 
 
 }

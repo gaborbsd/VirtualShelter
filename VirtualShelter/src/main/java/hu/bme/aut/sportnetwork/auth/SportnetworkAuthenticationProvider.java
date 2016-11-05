@@ -10,20 +10,20 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
-import hu.bme.aut.sportnetwork.dal.UserRepository;
+import hu.bme.aut.sportnetwork.dal.IUserDAO;
 import hu.bme.aut.sportnetwork.entity.User;
 
 public class SportnetworkAuthenticationProvider implements AuthenticationProvider {
 	
 	@Autowired
-	UserRepository userRepository;
+	IUserDAO userRepository;
 
 	@Override
 	public Authentication authenticate(Authentication authentication){
 		String name = authentication.getName();
 		String password = authentication.getCredentials().toString();
 		
-		User u = userRepository.getUserByName(name);
+		User u = userRepository.findByName(name);
 		if (u != null && password.equals(u.getPassword())) {
 			List<GrantedAuthority> grantedAuths = new ArrayList<GrantedAuthority>();
 			grantedAuths.add(new SimpleGrantedAuthority("ROLE_USER"));
