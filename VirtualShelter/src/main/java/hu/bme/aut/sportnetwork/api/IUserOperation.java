@@ -7,4 +7,6 @@ public interface IUserOperation {
 	User findById(long id);
 	
 	User findByName(String name);
+	
+	void sendFriendRequest(String name, String message);
 }

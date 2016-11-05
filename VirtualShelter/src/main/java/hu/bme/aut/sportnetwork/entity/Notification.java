@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.TableGenerator;
 import javax.persistence.Temporal;
@@ -24,11 +25,12 @@ public abstract class Notification {
 	private int notificationId;
 	
 	@ManyToOne
+	@JoinColumn(name="owner_id", nullable=false)
 	private User owner;
 	
 	private String message;
 	
-	@Temporal(TemporalType.TIME)
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="send_time")
 	private Date sendTime;
 
