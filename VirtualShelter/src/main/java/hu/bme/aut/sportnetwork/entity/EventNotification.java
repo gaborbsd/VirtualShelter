@@ -13,9 +13,14 @@ public class EventNotification extends Notification {
 	@JoinColumn(name = "event_id")
 	private SportEvent event;
 	
+	@ManyToOne
+	@JoinColumn(name = "sender_id")
+	private User sender;
+	
 	public EventNotification(){}
 	
-	public EventNotification(SportEvent event) {
+	public EventNotification(User sender, SportEvent event) {
+		this.sender = sender;
 		this.event = event;
 	}
 
@@ -25,6 +30,14 @@ public class EventNotification extends Notification {
 
 	public void setEvent(SportEvent event) {
 		this.event = event;
+	}
+
+	public User getSender() {
+		return sender;
+	}
+
+	public void setSender(User sender) {
+		this.sender = sender;
 	}
 	
 	

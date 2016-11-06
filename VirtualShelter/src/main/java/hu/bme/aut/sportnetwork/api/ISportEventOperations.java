@@ -13,6 +13,10 @@ public interface ISportEventOperations {
 	
 	List<SportEvent> findEventsByOwner(User owner);
 	
-	void addUserToEvent(SportEvent e, User u);
+	void acceptEventRequest(long notificationId) throws Exception;
+	
+	List<SportEvent> listPublicEvents();
+	
+	void applyToSportEvent(long eventID) throws Exception;
 
 }

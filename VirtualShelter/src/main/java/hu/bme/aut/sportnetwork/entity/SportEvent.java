@@ -123,6 +123,17 @@ public class SportEvent {
 	public void setPublic(boolean isPublic) {
 		this.isPublic = isPublic;
 	}
+	
+	public List<User> getMembers() {
+		if (members == null) {
+			members = new ArrayList<>();
+		}
+		return members;
+	}
+
+	public void setMembers(List<User> members) {
+		this.members = members;
+	}
 
 	@Override
 	public int hashCode() {

@@ -10,5 +10,5 @@ public interface IUserOperation {
 	
 	void sendFriendRequest(String name, String message);
 	
-	void acceptFriendRequest(long id) throws Exception;
+	void acceptFriendRequest(long notificationId) throws Exception;
 }

@@ -48,11 +48,12 @@ public class UserOperation implements IUserOperation {
 
 	@Override
 	@Transactional
-	public void acceptFriendRequest(long id) throws Exception {
-		User accepter = findByName("Cecil");
-		Notification not = notificationRepositroy.findOne(id);
+	public void acceptFriendRequest(long notificationId) throws Exception {		
+		Notification not = notificationRepositroy.findOne(notificationId);
+		User accepter = not.getOwner();
 		if (not instanceof FriendNotification) {
-			User friend = not.getOwner();
+			FriendNotification friendNot = (FriendNotification) not;
+			User friend = friendNot.getUser();
 			FriendShip f1 = new FriendShip();
 			f1.setPerson(accepter);
 			f1.setFriend(friend);
@@ -63,7 +64,7 @@ public class UserOperation implements IUserOperation {
 			f2.setListenNotifications(true);
 			friendShipRepository.save(f1);
 			friendShipRepository.save(f2);
-			notificationRepositroy.delete(id);
+			notificationRepositroy.delete(notificationId);
 		} else {
 			throw new Exception("WRONG NOTIFICATION ID");
 		}
