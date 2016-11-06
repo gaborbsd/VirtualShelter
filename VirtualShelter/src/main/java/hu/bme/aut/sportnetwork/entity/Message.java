@@ -65,6 +65,14 @@ public class Message {
 	public void setSender(User sender) {
 		this.sender = sender;
 	}
+
+	public Conversation getConversation() {
+		return conversation;
+	}
+
+	public void setConversation(Conversation conversation) {
+		this.conversation = conversation;
+	}
 	
 	
 	

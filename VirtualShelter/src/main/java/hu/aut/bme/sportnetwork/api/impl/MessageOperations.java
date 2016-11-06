@@ -51,7 +51,7 @@ public class MessageOperations implements IMessageOperations {
 	public Conversation writeToUser(long userId, String message) {
 		User writer = userRepositroy.findByName("Andras");
 		User writeTo = userRepositroy.findOne(userId);
-		Conversation c = conversationRepository.getConversationByParticipants(writer, writeTo);
+		Conversation c = conversationRepository.findByUser1OrUser2(writer, writeTo);
 		
 		if (c == null) {
 			c = new Conversation();

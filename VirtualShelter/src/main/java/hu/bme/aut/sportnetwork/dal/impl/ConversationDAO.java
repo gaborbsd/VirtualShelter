@@ -15,7 +15,7 @@ public class ConversationDAO implements ConversationDAOCustom {
 	private EntityManager em;
 
 	@Override
-	public Conversation getConversationByParticipants(User user1, User user2) {
+	public Conversation findByUser1OrUser2(User user1, User user2) {
 		TypedQuery<Conversation> query = em.createQuery("SELECT c FROM Conversation c "
 				+ "WHERE (c.user1 = :user1 AND c.user2 = :user2) OR (c.user1 = :user2 AND c.user2 = :user1)", Conversation.class);
 		query.setParameter("user1", user1);

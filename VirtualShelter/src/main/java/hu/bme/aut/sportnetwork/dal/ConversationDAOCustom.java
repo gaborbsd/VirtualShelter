@@ -5,6 +5,6 @@ import hu.bme.aut.sportnetwork.entity.User;
 
 public interface ConversationDAOCustom {
 
-	public Conversation getConversationByParticipants(User user1, User user2);
+	public Conversation findByUser1OrUser2(User user1, User user2);
 	
 }
