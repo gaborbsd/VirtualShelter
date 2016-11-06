@@ -1,5 +1,6 @@
 package hu.bme.aut.sportnetwork.entity;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -30,7 +31,7 @@ public class Conversation {
 	@OneToMany(mappedBy="conversation")
 	private List<Message> messages;
 	
-	@Temporal(TemporalType.TIME)
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="last_send_time")
 	private Date lastSendTime;
 
@@ -59,6 +60,9 @@ public class Conversation {
 	}
 
 	public List<Message> getMessages() {
+		if (messages == null) {
+			messages = new ArrayList<>();
+		}
 		return messages;
 	}
 

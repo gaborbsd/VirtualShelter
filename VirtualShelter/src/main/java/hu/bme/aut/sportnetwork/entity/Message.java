@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -23,9 +24,13 @@ public class Message {
 	private String message;
 	
 	@ManyToOne
+	@JoinColumn(name = "conversation_id")
 	private Conversation conversation;
 	
-	@Temporal(TemporalType.DATE)
+	@ManyToOne
+	private User sender;
+	
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="send_time")
 	private Date sendTime;
 
@@ -52,6 +57,16 @@ public class Message {
 	public void setSendTime(Date sendTime) {
 		this.sendTime = sendTime;
 	}
+
+	public User getSender() {
+		return sender;
+	}
+
+	public void setSender(User sender) {
+		this.sender = sender;
+	}
+	
+	
 	
 	
 }
