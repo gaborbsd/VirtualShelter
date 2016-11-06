@@ -43,6 +43,10 @@ public class User {
 	@JsonIgnore
 	private List<Notification> notifications;
 	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy="user")
+	@JsonIgnore
+	private List<Rating> ratings;
+	
 	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	private Address address;
 	
@@ -123,6 +127,17 @@ public class User {
 
 	public void setNotifications(List<Notification> notifications) {
 		this.notifications = notifications;
+	}
+
+	public List<Rating> getRatings() {
+		if (ratings==null) {
+			ratings = new ArrayList<>();
+		}
+		return ratings;
+	}
+
+	public void setRatings(List<Rating> ratings) {
+		this.ratings = ratings;
 	}
 
 	@Override

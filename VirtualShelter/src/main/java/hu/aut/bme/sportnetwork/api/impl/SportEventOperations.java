@@ -98,4 +98,11 @@ public class SportEventOperations implements ISportEventOperations {
 		
 	}
 
+	@Override
+	public void rateUser(long eventID, long userId, int value) {
+		/*SportEvent event = sportEventRepository.findOne(eventID);
+		User toRate = event.getMembers().stream().filter(u -> u.getId() == userId).findFirst().get();
+		toRate.get*/
+	}
+
 }

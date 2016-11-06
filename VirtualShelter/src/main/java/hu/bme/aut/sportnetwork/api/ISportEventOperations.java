@@ -18,5 +18,7 @@ public interface ISportEventOperations {
 	List<SportEvent> listPublicEvents();
 	
 	void applyToSportEvent(long eventID) throws Exception;
+	
+	void rateUser(long eventID, long userId, int value);
 
 }
