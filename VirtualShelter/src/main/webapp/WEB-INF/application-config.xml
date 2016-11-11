@@ -59,9 +59,9 @@
 	<!--import resource="spring-security.xml" /-->
 
 	<bean id="jacksonObjectMapper" class="com.fasterxml.jackson.databind.ObjectMapper" />
-	<bean id="registrationOperation" class="hu.aut.bme.sportnetwork.api.impl.RegistrationOperation" />
-	<bean id="sporteventOperation" class="hu.aut.bme.sportnetwork.api.impl.SportEventOperations" />
-	<bean id="userOperation" class="hu.aut.bme.sportnetwork.api.impl.UserOperation" />
-	<bean id="messageOperation" class="hu.aut.bme.sportnetwork.api.impl.MessageOperations" />
+	<bean id="registrationOperation" class="hu.aut.bme.sportnetwork.api.impl.RegistrationOperationsImpl" />
+	<bean id="sporteventOperation" class="hu.aut.bme.sportnetwork.api.impl.SportEventOperationsImpl" />
+	<bean id="userOperation" class="hu.aut.bme.sportnetwork.api.impl.UserOperationsImpl" />
+	<bean id="messageOperation" class="hu.aut.bme.sportnetwork.api.impl.MessageOperationsImpl" />
 
 </beans>

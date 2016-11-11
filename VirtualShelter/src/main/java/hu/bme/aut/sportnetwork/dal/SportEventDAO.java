@@ -9,7 +9,7 @@ import hu.bme.aut.sportnetwork.entity.SportEvent;
 import hu.bme.aut.sportnetwork.entity.User;
 
 @Repository
-public interface ISportEventDAO extends AbstractRepository<SportEvent>{
+public interface SportEventDAO extends AbstractRepository<SportEvent>{
 
 	List<SportEvent> findByOwner(User u);
 	

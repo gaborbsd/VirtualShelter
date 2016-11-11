@@ -5,7 +5,7 @@ import java.util.List;
 import hu.bme.aut.sportnetwork.entity.SportEvent;
 import hu.bme.aut.sportnetwork.entity.User;
 
-public interface ISportEventOperations {
+public interface SportEventOperations {
 	
 	List<SportEvent> findAll();
 	

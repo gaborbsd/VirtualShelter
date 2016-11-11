@@ -10,13 +10,13 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
-import hu.bme.aut.sportnetwork.dal.IUserDAO;
+import hu.bme.aut.sportnetwork.dal.UserDAO;
 import hu.bme.aut.sportnetwork.entity.User;
 
 public class SportnetworkAuthenticationProvider implements AuthenticationProvider {
 	
 	@Autowired
-	IUserDAO userRepository;
+	UserDAO userRepository;
 
 	@Override
 	public Authentication authenticate(Authentication authentication){

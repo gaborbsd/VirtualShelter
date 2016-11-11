@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import hu.bme.aut.sportnetwork.api.IMessageOperations;
+import hu.bme.aut.sportnetwork.api.MessageOperations;
 import hu.bme.aut.sportnetwork.entity.Conversation;
 import hu.bme.aut.sportnetwork.entity.Message;
 import hu.bme.aut.sportnetwork.rest.resources.ConversationResource;
@@ -26,7 +26,7 @@ import hu.bme.aut.sportnetwork.rest.resources.WriteMessageArg;
 public class MessageController {
 	
 	@Autowired
-	private IMessageOperations messageOperation;
+	private MessageOperations messageOperation;
 	
 	@Autowired
 	private ConversationResourceAssembler conversationResourceAssembler;

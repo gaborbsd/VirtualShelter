@@ -2,14 +2,14 @@ package hu.aut.bme.sportnetwork.api.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import hu.bme.aut.sportnetwork.api.IRegistrationOperation;
-import hu.bme.aut.sportnetwork.dal.IUserDAO;
+import hu.bme.aut.sportnetwork.api.RegistrationOperations;
+import hu.bme.aut.sportnetwork.dal.UserDAO;
 import hu.bme.aut.sportnetwork.entity.User;
 
-public class RegistrationOperation implements IRegistrationOperation{
+public class RegistrationOperationsImpl implements RegistrationOperations{
 	
 	@Autowired
-	IUserDAO userRepository;
+	UserDAO userRepository;
 
 	@Override
 	public User registrate(User u) {

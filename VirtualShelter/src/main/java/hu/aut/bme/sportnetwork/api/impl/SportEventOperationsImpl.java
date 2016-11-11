@@ -7,11 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.transaction.annotation.Transactional;
 
-import hu.bme.aut.sportnetwork.api.ISportEventOperations;
-import hu.bme.aut.sportnetwork.dal.IFriendShipDAO;
-import hu.bme.aut.sportnetwork.dal.INotificationDAO;
-import hu.bme.aut.sportnetwork.dal.ISportEventDAO;
-import hu.bme.aut.sportnetwork.dal.IUserDAO;
+import hu.bme.aut.sportnetwork.api.SportEventOperations;
+import hu.bme.aut.sportnetwork.dal.FriendShipDAO;
+import hu.bme.aut.sportnetwork.dal.NotificationDAO;
+import hu.bme.aut.sportnetwork.dal.SportEventDAO;
+import hu.bme.aut.sportnetwork.dal.UserDAO;
 import hu.bme.aut.sportnetwork.entity.EventNotification;
 import hu.bme.aut.sportnetwork.entity.FriendNotification;
 import hu.bme.aut.sportnetwork.entity.FriendShip;
@@ -19,19 +19,19 @@ import hu.bme.aut.sportnetwork.entity.Notification;
 import hu.bme.aut.sportnetwork.entity.SportEvent;
 import hu.bme.aut.sportnetwork.entity.User;
 
-public class SportEventOperations implements ISportEventOperations {
+public class SportEventOperationsImpl implements SportEventOperations {
 	
 	@Autowired
-	ISportEventDAO sportEventRepository;
+	SportEventDAO sportEventRepository;
 	
 	@Autowired
-	IUserDAO userRepository;
+	UserDAO userRepository;
 	
 	@Autowired
-	IFriendShipDAO friendShipRepository;
+	FriendShipDAO friendShipRepository;
 	
 	@Autowired
-	INotificationDAO notificationRepositroy;
+	NotificationDAO notificationRepositroy;
 
 	@Override
 	public List<SportEvent> findAll() {

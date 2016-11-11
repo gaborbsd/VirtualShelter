@@ -7,7 +7,7 @@ import org.springframework.data.domain.Sort;
 import hu.bme.aut.sportnetwork.entity.Conversation;
 import hu.bme.aut.sportnetwork.entity.Message;
 
-public interface IMessageDAO extends AbstractRepository<Message>{
+public interface MessageDAO extends AbstractRepository<Message>{
 
 	List<Message> findByConversation(Conversation c, Sort sort);
 }

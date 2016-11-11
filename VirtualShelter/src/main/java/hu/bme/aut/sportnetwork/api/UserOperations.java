@@ -2,7 +2,7 @@ package hu.bme.aut.sportnetwork.api;
 
 import hu.bme.aut.sportnetwork.entity.User;
 
-public interface IUserOperation {
+public interface UserOperations {
 	
 	User findById(long id);
 	

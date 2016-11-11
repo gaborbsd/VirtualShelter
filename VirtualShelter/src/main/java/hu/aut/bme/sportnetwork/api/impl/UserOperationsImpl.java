@@ -5,25 +5,25 @@ import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
-import hu.bme.aut.sportnetwork.api.IUserOperation;
-import hu.bme.aut.sportnetwork.dal.IFriendShipDAO;
-import hu.bme.aut.sportnetwork.dal.INotificationDAO;
-import hu.bme.aut.sportnetwork.dal.IUserDAO;
+import hu.bme.aut.sportnetwork.api.UserOperations;
+import hu.bme.aut.sportnetwork.dal.FriendShipDAO;
+import hu.bme.aut.sportnetwork.dal.NotificationDAO;
+import hu.bme.aut.sportnetwork.dal.UserDAO;
 import hu.bme.aut.sportnetwork.entity.FriendNotification;
 import hu.bme.aut.sportnetwork.entity.FriendShip;
 import hu.bme.aut.sportnetwork.entity.Notification;
 import hu.bme.aut.sportnetwork.entity.User;
 
-public class UserOperation implements IUserOperation {
+public class UserOperationsImpl implements UserOperations {
 	
 	@Autowired
-	private IUserDAO userRepository;
+	private UserDAO userRepository;
 	
 	@Autowired
-	private INotificationDAO notificationRepositroy;
+	private NotificationDAO notificationRepositroy;
 	
 	@Autowired
-	private IFriendShipDAO friendShipRepository;
+	private FriendShipDAO friendShipRepository;
 	
     @Override
 	public User findById(long id) {

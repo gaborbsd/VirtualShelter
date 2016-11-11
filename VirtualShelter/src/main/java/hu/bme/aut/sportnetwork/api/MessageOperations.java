@@ -5,7 +5,7 @@ import java.util.List;
 import hu.bme.aut.sportnetwork.entity.Conversation;
 import hu.bme.aut.sportnetwork.entity.Message;
 
-public interface IMessageOperations {
+public interface MessageOperations {
 
 	public List<Conversation> listConversatinsByUser();
 	

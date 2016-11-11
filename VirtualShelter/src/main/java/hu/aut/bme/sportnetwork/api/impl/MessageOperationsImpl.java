@@ -6,24 +6,24 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 
-import hu.bme.aut.sportnetwork.api.IMessageOperations;
+import hu.bme.aut.sportnetwork.api.MessageOperations;
 import hu.bme.aut.sportnetwork.dal.ConversationDAO;
-import hu.bme.aut.sportnetwork.dal.IMessageDAO;
-import hu.bme.aut.sportnetwork.dal.IUserDAO;
+import hu.bme.aut.sportnetwork.dal.MessageDAO;
+import hu.bme.aut.sportnetwork.dal.UserDAO;
 import hu.bme.aut.sportnetwork.entity.Conversation;
 import hu.bme.aut.sportnetwork.entity.Message;
 import hu.bme.aut.sportnetwork.entity.User;
 
-public class MessageOperations implements IMessageOperations {
+public class MessageOperationsImpl implements MessageOperations {
 	
 	@Autowired
 	private ConversationDAO conversationRepository;
 	
 	@Autowired
-	private IUserDAO userRepositroy;
+	private UserDAO userRepositroy;
 	
 	@Autowired
-	private IMessageDAO messageRepository;
+	private MessageDAO messageRepository;
 
 	@Override
 	public List<Conversation> listConversatinsByUser() {

@@ -7,14 +7,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import hu.bme.aut.sportnetwork.api.IUserOperation;
+import hu.bme.aut.sportnetwork.api.UserOperations;
 
 @RestController
 @RequestMapping(value="notification")
 public class NotificationController {
 	
 	@Autowired
-	private IUserOperation userOperation;
+	private UserOperations userOperation;
 	
 	@RequestMapping(value="friend", method=RequestMethod.POST)
 	void sendFriendRequest(@RequestBody FriendRequestArg arg) {

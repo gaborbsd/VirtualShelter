@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import hu.bme.aut.sportnetwork.api.ISportEventOperations;
-import hu.bme.aut.sportnetwork.api.IUserOperation;
+import hu.bme.aut.sportnetwork.api.SportEventOperations;
+import hu.bme.aut.sportnetwork.api.UserOperations;
 import hu.bme.aut.sportnetwork.entity.SportEvent;
 import hu.bme.aut.sportnetwork.entity.User;
 import hu.bme.aut.sportnetwork.rest.resources.SportEventResource;
@@ -27,10 +27,10 @@ import hu.bme.aut.sportnetwork.rest.resources.UserResource;
 public class SportEventController {	
 	
 	@Autowired
-	private ISportEventOperations sporteventOperation;
+	private SportEventOperations sporteventOperation;
 	
 	@Autowired
-	IUserOperation userOperation; 
+	UserOperations userOperation; 
 	
 	@Autowired
 	private SportEventResourceAssembler sportEventResourceAssembler;
