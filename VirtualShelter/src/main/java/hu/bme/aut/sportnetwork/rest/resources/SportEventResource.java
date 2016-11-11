@@ -1,16 +1,14 @@
 package hu.bme.aut.sportnetwork.rest.resources;
 
-import java.util.Calendar;
 import java.util.Date;
 
 import org.springframework.hateoas.ResourceSupport;
 
 import hu.bme.aut.sportnetwork.entity.Sports;
-import hu.bme.aut.sportnetwork.entity.User;
 
 public class SportEventResource extends ResourceSupport {
 	
-	private User owner;
+	private String owner;
 	
 	private Date date;
 
@@ -24,11 +22,11 @@ public class SportEventResource extends ResourceSupport {
 		
 	}
 
-	public User getOwner() {
+	public String getOwner() {
 		return owner;
 	}
 
-	public void setOwner(User owner) {
+	public void setOwner(String owner) {
 		this.owner = owner;
 	}
 

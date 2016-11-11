@@ -13,5 +13,5 @@ public interface IMessageOperations {
 	
 	public Conversation writeToConversation(long conversationId, String message);
 	
-	public Conversation writeToUser(long UserId, String message);
+	public Conversation getConversationWithUser(String userName);
 }

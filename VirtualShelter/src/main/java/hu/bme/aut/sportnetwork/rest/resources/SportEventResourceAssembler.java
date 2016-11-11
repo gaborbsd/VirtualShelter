@@ -1,13 +1,14 @@
 package hu.bme.aut.sportnetwork.rest.resources;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.hateoas.EntityLinks;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
+
+
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 import org.springframework.stereotype.Component;
 
 import hu.bme.aut.sportnetwork.entity.SportEvent;
-import hu.bme.aut.sportnetwork.entity.User;
 import hu.bme.aut.sportnetwork.rest.SportEventController;
+import hu.bme.aut.sportnetwork.rest.UserController;
 
 @Component
 public class SportEventResourceAssembler extends
@@ -26,12 +27,13 @@ public class SportEventResourceAssembler extends
 	@Override
 	protected SportEventResource instantiateResource(SportEvent entity) {
 		SportEventResource resource = new SportEventResource();
-		resource.setOwner(entity.getOwner());
 		resource.setDate(entity.getDate());
 		resource.setType(entity.getType());
 		resource.setMaxSize(entity.getMaxSize());
 		resource.setDescription(entity.getDescription());
+		resource.setOwner(entity.getOwner().getName());
 		
+		resource.add(linkTo(UserController.class).slash(entity.getOwner().getId()).withRel(String.valueOf(entity.getOwner().getId())));
 		return resource;
 	}
 

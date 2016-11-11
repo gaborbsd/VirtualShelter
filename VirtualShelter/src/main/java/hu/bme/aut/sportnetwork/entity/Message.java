@@ -24,10 +24,11 @@ public class Message {
 	private String message;
 	
 	@ManyToOne
-	@JoinColumn(name = "conversation_id")
+	@JoinColumn(name = "conversation_id", nullable=false)
 	private Conversation conversation;
 	
-	@ManyToOne
+	@ManyToOne()
+	@JoinColumn(name = "sender_id", nullable=false)
 	private User sender;
 	
 	@Temporal(TemporalType.TIMESTAMP)

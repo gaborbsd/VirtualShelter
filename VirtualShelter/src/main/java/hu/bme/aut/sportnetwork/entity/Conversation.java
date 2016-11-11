@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -28,12 +30,15 @@ public class Conversation {
 	@ManyToOne 
 	private User user2;
 	
-	@OneToMany(mappedBy="conversation")
-	private List<Message> messages;
+	/*@OneToMany(mappedBy="conversation")
+	private List<Message> messages;*/
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="last_send_time")
 	private Date lastSendTime;
+	
+	@Column(name="active")
+	private boolean active;
 
 	public long getId() {
 		return id;
@@ -59,7 +64,7 @@ public class Conversation {
 		this.user2 = user2;
 	}
 
-	public List<Message> getMessages() {
+	/*public List<Message> getMessages() {
 		if (messages == null) {
 			messages = new ArrayList<>();
 		}
@@ -68,7 +73,7 @@ public class Conversation {
 
 	public void setMessages(List<Message> messages) {
 		this.messages = messages;
-	}
+	}*/
 
 	public Date getLastSendTime() {
 		return lastSendTime;
@@ -77,6 +82,16 @@ public class Conversation {
 	public void setLastSendTime(Date lastSendTime) {
 		this.lastSendTime = lastSendTime;
 	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+
+	
 	
 	
 }

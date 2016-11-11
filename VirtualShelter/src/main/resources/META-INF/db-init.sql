@@ -26,3 +26,18 @@ INSERT INTO friendship VALUES (5, false, 1, 5);
 INSERT INTO friendship VALUES (6, true, 5, 1);
 INSERT INTO friendship VALUES (7, true, 6, 7);
 INSERT INTO friendship VALUES (8, true, 7, 6);
+
+INSERT INTO conversation VALUES (1,true,'2016-08-20 16:00:00',1,2);
+INSERT INTO conversation VALUES (2,true,'2016-08-18 14:00:00',1,3);
+INSERT INTO conversation VALUES (3,true,'2016-08-21 14:00:00',4,1);
+INSERT INTO conversation VALUES (4,true,'2016-08-21 16:00:00',5,6);
+INSERT INTO conversation VALUES (5,false,'2016-08-22 16:00:00',1,7);
+
+INSERT INTO message VALUES (1,"Csa",'2016-08-18 10:00:00',1,1);
+INSERT INTO message VALUES (2,"Csa",'2016-08-18 12:00:00',1,2);
+INSERT INTO message VALUES (3,"Szeva",'2016-08-18 14:00:00',2,1);
+INSERT INTO message VALUES (4,"Csovaz",'2016-08-18 15:00:00',3,4);
+INSERT INTO message VALUES (5,"Hali",'2016-08-18 16:00:00',4,5);
+INSERT INTO message VALUES (6,"Mizu?",'2016-08-20 16:00:00',1,1);
+INSERT INTO message VALUES (7,"Szia",'2016-08-21 14:00:00',3,1);
+INSERT INTO message VALUES (8,"Szervusz",'2016-08-21 16:00:00',4,6);

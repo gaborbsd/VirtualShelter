@@ -18,7 +18,7 @@
                  <div class="cardBody">{{event.date}}</div>
                  <div class="cardBody">{{event.maxSize}}</div>
                  <div class="cardBody">{{event.description}}</div>
-                 <a href="#/user/{{event.owner.id}}">{{event.owner.name}}</a>
+                 <a href="#/user/{{event.links[0].rel}}">{{event.owner}}</a>
              </div>
          </div>
      </div>

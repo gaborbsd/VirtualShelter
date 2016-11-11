@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 
 import hu.bme.aut.sportnetwork.api.IMessageOperations;
-import hu.bme.aut.sportnetwork.dal.IConversationDAO;
+import hu.bme.aut.sportnetwork.dal.ConversationDAO;
 import hu.bme.aut.sportnetwork.dal.IMessageDAO;
 import hu.bme.aut.sportnetwork.dal.IUserDAO;
 import hu.bme.aut.sportnetwork.entity.Conversation;
@@ -17,7 +17,7 @@ import hu.bme.aut.sportnetwork.entity.User;
 public class MessageOperations implements IMessageOperations {
 	
 	@Autowired
-	private IConversationDAO conversationRepository;
+	private ConversationDAO conversationRepository;
 	
 	@Autowired
 	private IUserDAO userRepositroy;
@@ -28,14 +28,14 @@ public class MessageOperations implements IMessageOperations {
 	@Override
 	public List<Conversation> listConversatinsByUser() {
 		User writer = userRepositroy.findByName("Andras");
-		List<Conversation> ret = conversationRepository.findByUser1OrUser2(writer, writer, new Sort("lastSendTime"));
+		List<Conversation> ret = conversationRepository.findByUser1AndActiveTrueOrUser2AndActiveTrue(writer, writer, new Sort("lastSendTime"));
 		return ret;
 	}
 
 	@Override
 	public List<Message> listMessagesbyConversation(long conversationId) {
 		Conversation c = conversationRepository.findOne(conversationId);
-		return messageRepository.findByConversation(c, new Sort("send_time"));
+		return messageRepository.findByConversation(c, new Sort("sendTime"));
 	}
 
 	@Override
@@ -48,18 +48,20 @@ public class MessageOperations implements IMessageOperations {
 	}
 
 	@Override
-	public Conversation writeToUser(long userId, String message) {
+	public Conversation getConversationWithUser(String userName) {
 		User writer = userRepositroy.findByName("Andras");
-		User writeTo = userRepositroy.findOne(userId);
-		Conversation c = conversationRepository.findByUser1OrUser2(writer, writeTo);
+		User writeTo = userRepositroy.findByName(userName);
+		Conversation c = conversationRepository.own(writer, writeTo);
 		
 		if (c == null) {
 			c = new Conversation();
 			c.setUser1(writer);
 			c.setUser2(writeTo);
+			c.setActive(false);
+			c.setLastSendTime(new Date());
+			c = conversationRepository.save(c);
 		} 
-		
-		return writeToConversation(writer, c, message);
+		return c;
 	}
 	
 	private Conversation writeToConversation(User writer, Conversation c, String message) {
@@ -69,9 +71,15 @@ public class MessageOperations implements IMessageOperations {
 		m.setSender(writer);
 		m.setMessage(message);
 		m.setSendTime(sendTime);
+		m.setConversation(c);
+		
+		messageRepository.save(m);
 		
 		c.setLastSendTime(sendTime);
-		c.getMessages().add(m);
+				
+		if (!c.isActive()) {
+			c.setActive(true);
+		}
 		
 		Conversation ret = conversationRepository.save(c);
 		

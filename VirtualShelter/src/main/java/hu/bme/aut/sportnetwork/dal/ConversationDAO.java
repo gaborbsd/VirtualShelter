@@ -7,8 +7,8 @@ import org.springframework.data.domain.Sort;
 import hu.bme.aut.sportnetwork.entity.Conversation;
 import hu.bme.aut.sportnetwork.entity.User;
 
-public interface IConversationDAO extends AbstractRepository<Conversation>, ConversationDAOCustom {
+public interface ConversationDAO extends AbstractRepository<Conversation>, ConversationDAOCustom {
 	
-	List<Conversation> findByUser1OrUser2(User user1, User user2, Sort sort);
+	List<Conversation> findByUser1AndActiveTrueOrUser2AndActiveTrue(User user1, User user2, Sort sort);
 
 }
