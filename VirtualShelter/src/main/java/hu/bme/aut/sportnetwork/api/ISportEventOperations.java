@@ -9,6 +9,8 @@ public interface ISportEventOperations {
 	
 	List<SportEvent> findAll();
 	
+	SportEvent findById(long id);
+	
 	SportEvent create(SportEvent e);
 	
 	List<SportEvent> findEventsByOwner(User owner);

@@ -8,6 +8,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,6 +20,7 @@ import hu.bme.aut.sportnetwork.entity.SportEvent;
 import hu.bme.aut.sportnetwork.entity.User;
 import hu.bme.aut.sportnetwork.rest.resources.SportEventResource;
 import hu.bme.aut.sportnetwork.rest.resources.SportEventResourceAssembler;
+import hu.bme.aut.sportnetwork.rest.resources.UserResource;
 
 @RestController
 @RequestMapping(value="/sportevent")
@@ -48,6 +50,13 @@ public class SportEventController {
 		event.setDate(new Date());
 		SportEvent created = sporteventOperation.create(event);
 		SportEventResource resource = sportEventResourceAssembler.toResource(created);
+		return new ResponseEntity<SportEventResource>(resource, HttpStatus.CREATED);
+	}
+	
+	@RequestMapping(value="/{id}", method=RequestMethod.GET)
+	ResponseEntity<SportEventResource> getSportEvent(@PathVariable Long id) {
+		SportEvent event = sporteventOperation.findById(id);
+		SportEventResource resource = sportEventResourceAssembler.toResource(event);
 		return new ResponseEntity<SportEventResource>(resource, HttpStatus.CREATED);
 	}
 

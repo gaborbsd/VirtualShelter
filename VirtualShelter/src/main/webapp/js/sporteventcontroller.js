@@ -10,6 +10,9 @@ app.config(function($routeProvider) {
 	}).when('/user', {
 		controller : 'UserEditorController',
 		templateUrl : '/html/users.html'
+	}).when('/event/:id', {
+		controller : 'EventController',
+		templateUrl : '/html/event.html'
 	}).when('/editor/events/new', {
 		controller : 'CreateSportEventController',
 		templateUrl : '/html/createEvent.html'
@@ -29,6 +32,19 @@ app.controller('UserController', function($scope, $http, $routeParams) {
 	}
 	
 	$scope.getUser($routeParams.id);
+});
+
+app.controller('EventController', function($scope, $http, $routeParams) {
+	
+	$scope.getEvent = function(id) {
+		$http.get("api/sportevent/" + id).success(function(data, status) {
+			$scope.event = data;
+		}).error(function(data, status) {
+			alert(data);
+		});
+	}
+	
+	$scope.getEvent($routeParams.id);
 });
 
 app.controller('SportEventController', function($scope, $http) {

@@ -1,9 +1,12 @@
 package hu.bme.aut.sportnetwork.rest.resources;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.EntityLinks;
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 import org.springframework.stereotype.Component;
 
 import hu.bme.aut.sportnetwork.entity.SportEvent;
+import hu.bme.aut.sportnetwork.entity.User;
 import hu.bme.aut.sportnetwork.rest.SportEventController;
 
 @Component

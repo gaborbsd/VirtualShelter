@@ -105,4 +105,9 @@ public class SportEventOperations implements ISportEventOperations {
 		toRate.get*/
 	}
 
+	@Override
+	public SportEvent findById(long id) {
+		return sportEventRepository.findOne(id);
+	}
+
 }
