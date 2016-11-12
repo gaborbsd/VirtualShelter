@@ -9,9 +9,13 @@ import org.springframework.data.domain.Sort;
 import hu.bme.aut.sportnetwork.api.MessageOperations;
 import hu.bme.aut.sportnetwork.dal.ConversationDAO;
 import hu.bme.aut.sportnetwork.dal.MessageDAO;
+import hu.bme.aut.sportnetwork.dal.NotificationDAO;
 import hu.bme.aut.sportnetwork.dal.UserDAO;
 import hu.bme.aut.sportnetwork.entity.Conversation;
 import hu.bme.aut.sportnetwork.entity.Message;
+import hu.bme.aut.sportnetwork.entity.MessageNotification;
+import hu.bme.aut.sportnetwork.entity.Notification;
+import hu.bme.aut.sportnetwork.entity.NotificationStatus;
 import hu.bme.aut.sportnetwork.entity.User;
 
 public class MessageOperationsImpl implements MessageOperations {
@@ -21,6 +25,9 @@ public class MessageOperationsImpl implements MessageOperations {
 	
 	@Autowired
 	private UserDAO userRepositroy;
+	
+	@Autowired
+	private NotificationDAO notificationRepositroy;
 	
 	@Autowired
 	private MessageDAO messageRepository;
@@ -74,6 +81,14 @@ public class MessageOperationsImpl implements MessageOperations {
 		m.setConversation(c);
 		
 		messageRepository.save(m);
+		
+		Notification not = new MessageNotification(writer, c);
+		not.setOwner(c.getUser1().getName() == "Andras" ? c.getUser2() : c.getUser1());
+		not.setMessage(writer.getName() + "has been written you");
+		not.setSendTime(sendTime);
+		not.setStatus(NotificationStatus.SENT);
+		
+		notificationRepositroy.save(not);
 		
 		c.setLastSendTime(sendTime);
 				
