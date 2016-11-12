@@ -11,10 +11,11 @@ import hu.bme.aut.sportnetwork.api.UserOperations;
 import hu.bme.aut.sportnetwork.dal.FriendShipDAO;
 import hu.bme.aut.sportnetwork.dal.NotificationDAO;
 import hu.bme.aut.sportnetwork.dal.UserDAO;
-import hu.bme.aut.sportnetwork.entity.FriendNotification;
+import hu.bme.aut.sportnetwork.entity.FriendRequestNotification;
 import hu.bme.aut.sportnetwork.entity.FriendShip;
 import hu.bme.aut.sportnetwork.entity.Notification;
 import hu.bme.aut.sportnetwork.entity.NotificationStatus;
+import hu.bme.aut.sportnetwork.entity.RequestNotification;
 import hu.bme.aut.sportnetwork.entity.User;
 
 public class UserOperationsImpl implements UserOperations {
@@ -42,7 +43,7 @@ public class UserOperationsImpl implements UserOperations {
 	public void sendFriendRequest(String name, String message) {
 		User sender = findByName("Andras");
 		User u = findByName(name);
-		Notification not = new FriendNotification(sender);
+		RequestNotification not = new FriendRequestNotification(sender);
 		not.setOwner(u);
 		not.setMessage(message);
 		not.setStatus(NotificationStatus.SENT);
@@ -55,9 +56,9 @@ public class UserOperationsImpl implements UserOperations {
 	public void acceptFriendRequest(long notificationId) throws Exception {		
 		Notification not = notificationRepositroy.findOne(notificationId);
 		User accepter = not.getOwner();
-		if (not instanceof FriendNotification) {
-			FriendNotification friendNot = (FriendNotification) not;
-			User friend = friendNot.getUser();
+		if (not instanceof FriendRequestNotification) {
+			FriendRequestNotification friendNot = (FriendRequestNotification) not;
+			User friend = friendNot.getSender();
 			FriendShip f1 = new FriendShip();
 			f1.setPerson(accepter);
 			f1.setFriend(friend);
@@ -69,8 +70,8 @@ public class UserOperationsImpl implements UserOperations {
 			friendShipRepository.save(f1);
 			friendShipRepository.save(f2);
 			
-			not.setStatus(NotificationStatus.ACCEPTED);
-			not.setModificationTime(new Date());
+			friendNot.setStatus(NotificationStatus.ACCEPTED);
+			friendNot.setModificationTime(new Date());
 			notificationRepositroy.save(not);
 		} else {
 			throw new Exception("WRONG NOTIFICATION ID");
@@ -86,9 +87,9 @@ public class UserOperationsImpl implements UserOperations {
 	@Override
 	public List<User> listFriendRequest() {
 		User u = userRepository.findByName("Andras");
-		List<FriendNotification> nots = notificationRepositroy.getFriendRequestSenders(u);
+		List<FriendRequestNotification> nots = notificationRepositroy.getFriendRequestSenders(u);
 		List<User> ret = new ArrayList<>();
-		nots.forEach(n -> ret.add(n.getUser()));
+		nots.forEach(n -> ret.add(n.getSender()));
 		return ret;
 	}
 	

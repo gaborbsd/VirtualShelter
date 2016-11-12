@@ -6,8 +6,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="event_notification")
-public class EventNotification extends Notification {
+@Table(name="event_request_notification")
+public class EventRequestNotification extends RequestNotification {
 	
 	@ManyToOne
 	@JoinColumn(name = "event_id")
@@ -17,9 +17,9 @@ public class EventNotification extends Notification {
 	@JoinColumn(name = "sender_id")
 	private User sender;
 	
-	public EventNotification(){}
+	public EventRequestNotification(){}
 	
-	public EventNotification(User sender, SportEvent event) {
+	public EventRequestNotification(User sender, SportEvent event) {
 		this.sender = sender;
 		this.event = event;
 	}

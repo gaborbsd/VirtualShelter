@@ -86,7 +86,6 @@ public class MessageOperationsImpl implements MessageOperations {
 		not.setOwner(c.getUser1().getName() == "Andras" ? c.getUser2() : c.getUser1());
 		not.setMessage(writer.getName() + "has been written you");
 		not.setSendTime(sendTime);
-		not.setStatus(NotificationStatus.SENT);
 		
 		notificationRepositroy.save(not);
 		

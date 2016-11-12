@@ -35,14 +35,6 @@ public abstract class Notification {
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="send_time")
 	private Date sendTime;
-	
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="modification_time")
-	private Date modificationTime;
-	
-	@Enumerated(EnumType.STRING)
-	@Column(nullable=false)
-	private NotificationStatus status;
 
 	public long getNotificationId() {
 		return notificationId;
@@ -74,22 +66,6 @@ public abstract class Notification {
 
 	public void setMessage(String message) {
 		this.message = message;
-	}
-
-	public Date getModificationTime() {
-		return modificationTime;
-	}
-
-	public void setModificationTime(Date modificationTime) {
-		this.modificationTime = modificationTime;
-	}
-
-	public NotificationStatus getStatus() {
-		return status;
-	}
-
-	public void setStatus(NotificationStatus status) {
-		this.status = status;
 	}
 
 }
