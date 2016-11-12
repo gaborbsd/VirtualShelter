@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import hu.bme.aut.sportnetwork.api.SportEventOperations;
 import hu.bme.aut.sportnetwork.api.UserOperations;
 import hu.bme.aut.sportnetwork.rest.resources.FriendRequestArg;
 
@@ -19,16 +20,25 @@ public class NotificationController {
 	@Autowired
 	private UserOperations userOperation;
 	
+	@Autowired
+	private SportEventOperations eventOperation;
+	
 	@RequestMapping(value="friend", method=RequestMethod.POST)
 	ResponseEntity<String> sendFriendRequest(@RequestBody FriendRequestArg arg) {
 		userOperation.sendFriendRequest(arg.getTo(), arg.getMessage());
 		return new ResponseEntity<String>(HttpStatus.OK);
 	}
 	
-	@RequestMapping(value="friendAccept/{id}", method=RequestMethod.POST)
+	@RequestMapping(value="friendAccept/{id}", method=RequestMethod.PUT)
 	ResponseEntity<String> acceptFriendRequest(@PathVariable Long id) throws Exception {
 		userOperation.acceptFriendRequest(id);
+		
 		return new ResponseEntity<String>(HttpStatus.OK);
 	}
 
+	@RequestMapping(value="eventAccept/{id}", method=RequestMethod.PUT)
+	ResponseEntity<String> acceptEventRequest(@PathVariable Long id) throws Exception {
+		eventOperation.acceptEventRequest(id);
+		return new ResponseEntity<String>(HttpStatus.OK);
+	}
 }

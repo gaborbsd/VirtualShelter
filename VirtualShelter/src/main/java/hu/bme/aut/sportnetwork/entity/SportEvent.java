@@ -29,10 +29,10 @@ public class SportEvent {
 	@GeneratedValue
 	private long id;
 		
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne
 	private User owner;
 	
-	@OneToMany(mappedBy="event", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy="event")
 	private List<Comment> comments;
 	
 	@ManyToMany

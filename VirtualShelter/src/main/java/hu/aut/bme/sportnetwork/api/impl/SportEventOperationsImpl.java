@@ -8,14 +8,19 @@ import org.springframework.data.domain.Sort;
 import org.springframework.transaction.annotation.Transactional;
 
 import hu.bme.aut.sportnetwork.api.SportEventOperations;
+import hu.bme.aut.sportnetwork.dal.CommentDAO;
 import hu.bme.aut.sportnetwork.dal.FriendShipDAO;
 import hu.bme.aut.sportnetwork.dal.NotificationDAO;
 import hu.bme.aut.sportnetwork.dal.SportEventDAO;
 import hu.bme.aut.sportnetwork.dal.UserDAO;
+import hu.bme.aut.sportnetwork.entity.Comment;
 import hu.bme.aut.sportnetwork.entity.EventNotification;
+import hu.bme.aut.sportnetwork.entity.EventRequestNotification;
 import hu.bme.aut.sportnetwork.entity.FriendRequestNotification;
 import hu.bme.aut.sportnetwork.entity.FriendShip;
 import hu.bme.aut.sportnetwork.entity.Notification;
+import hu.bme.aut.sportnetwork.entity.NotificationStatus;
+import hu.bme.aut.sportnetwork.entity.RequestNotification;
 import hu.bme.aut.sportnetwork.entity.SportEvent;
 import hu.bme.aut.sportnetwork.entity.User;
 
@@ -28,10 +33,17 @@ public class SportEventOperationsImpl implements SportEventOperations {
 	UserDAO userRepository;
 	
 	@Autowired
+	CommentDAO commentRepository;
+	
+	@Autowired
 	FriendShipDAO friendShipRepository;
 	
 	@Autowired
 	NotificationDAO notificationRepositroy;
+	
+	private static final String NEW_EVENT = "NEW EVENT CREATED";
+	
+	private static final String EVENT_COMMENT = "COMMENT ADDED";
 
 	@Override
 	public List<SportEvent> findAll() {
@@ -42,10 +54,10 @@ public class SportEventOperationsImpl implements SportEventOperations {
 	public SportEvent create(SportEvent e) {
 		//User owner = e.getOwner();
 		User owner = userRepository.findByName("Andras");
-		SportEvent newEvent = sportEventRepository.save(e);
-		newEvent.setOwner(owner);
+		e.setOwner(owner);
+		SportEvent newEvent = sportEventRepository.save(e);		
 		List<Object> usersToNotify = friendShipRepository.findByPersonAndListenNotifications(owner, true);
-		usersToNotify.forEach(u -> sendEventNotification((User)u, owner, newEvent));
+		usersToNotify.forEach(u -> sendEventNotification((User)u, owner, newEvent, NEW_EVENT));
 		return newEvent;
 	}
 
@@ -54,11 +66,20 @@ public class SportEventOperationsImpl implements SportEventOperations {
 		return sportEventRepository.findByOwner(owner);
 	}
 
-	private void sendEventNotification(User sendTo, User sender, SportEvent e) {
+	private void sendEventNotification(User sendTo, User sender, SportEvent e, String message) {
 		Notification not = new EventNotification(sender, e);
 		not.setOwner(sendTo);
 		not.setSendTime(new Date());
-		not.setMessage("NEW EVENT CREATED");
+		not.setMessage(message);
+		notificationRepositroy.save(not);
+	}
+	
+	private void sendEventRequestNotification(User sendTo, User sender, SportEvent event) {
+		RequestNotification not = new EventRequestNotification(sender, event);
+		not.setOwner(sendTo);
+		not.setSendTime(new Date());
+		not.setMessage(sender.getName() + " APPLIED TO THIS EVENT");
+		not.setStatus(NotificationStatus.SENT);
 		notificationRepositroy.save(not);
 	}
 
@@ -69,12 +90,9 @@ public class SportEventOperationsImpl implements SportEventOperations {
 
 	@Override
 	public void applyToSportEvent(long eventID) throws Exception {
-		User applicant = userRepository.findByName("Elemer");
+		User applicant = userRepository.findByName("Andras");
 		SportEvent event = sportEventRepository.findOne(eventID);
-		if (event.getMaxSize() <= event.getMembers().size()) {
-			throw new Exception("NO SPACE");
-		}
-		sendEventNotification(event.getOwner(), applicant, event);		
+		sendEventRequestNotification(event.getOwner(), applicant, event);		
 	}
 
 	@Override
@@ -82,16 +100,18 @@ public class SportEventOperationsImpl implements SportEventOperations {
 	public void acceptEventRequest(long notificationId) throws Exception{		
 		Notification not = notificationRepositroy.findOne(notificationId);
 		//User accepter = not.getOwner();
-		if (not instanceof EventNotification) {
-			EventNotification eventNot = (EventNotification) not;
+		if (not instanceof EventRequestNotification) {
+			EventRequestNotification eventNot = (EventRequestNotification) not;
 			SportEvent event = eventNot.getEvent();
 			User applicant = eventNot.getSender();
 			if (event.getMaxSize() <= event.getMembers().size()) {
 				throw new Exception("NO SPACE");
 			}
 			event.getMembers().add(applicant);
+			eventNot.setStatus(NotificationStatus.ACCEPTED);
+			eventNot.setModificationTime(new Date());
 			sportEventRepository.save(event);
-			notificationRepositroy.delete(notificationId);
+			notificationRepositroy.save(eventNot);
 		} else {
 			throw new Exception("WRONG NOTIFICATION ID");
 		}
@@ -108,6 +128,28 @@ public class SportEventOperationsImpl implements SportEventOperations {
 	@Override
 	public SportEvent findById(long id) {
 		return sportEventRepository.findOne(id);
+	}
+
+	@Override
+	@Transactional
+	public void writeComment(long eventID, String comment) {
+		User commenter = userRepository.findByName("Andras");
+		SportEvent event = sportEventRepository.findOne(eventID);
+		Comment c = new Comment();
+		c.setOwner(commenter);
+		c.setEvent(event);
+		c.setDateOfComment(new Date());
+		c.setMessage(comment);
+
+		commentRepository.save(c);
+		
+		List<User> members = event.getMembers();
+		members.forEach(m -> sendEventNotification(m, commenter, event, EVENT_COMMENT));
+	}
+
+	@Override
+	public void deleteComment(long commentID) {
+		commentRepository.delete(commentID);
 	}
 
 }

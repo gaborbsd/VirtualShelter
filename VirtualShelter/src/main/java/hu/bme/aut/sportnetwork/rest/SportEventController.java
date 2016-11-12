@@ -59,5 +59,14 @@ public class SportEventController {
 		SportEventResource resource = sportEventResourceAssembler.toResource(event);
 		return new ResponseEntity<SportEventResource>(resource, HttpStatus.CREATED);
 	}
-
+	
+	@RequestMapping(value="/apply/{id}", method=RequestMethod.POST)
+	ResponseEntity<String> applyEvent(@PathVariable Long id) {
+		try {
+			sporteventOperation.applyToSportEvent(id);
+		} catch (Exception e) {
+			return new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		return new ResponseEntity<String>(HttpStatus.OK);
+	}
 }
