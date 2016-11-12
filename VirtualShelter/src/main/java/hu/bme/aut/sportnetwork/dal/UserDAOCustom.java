@@ -1,9 +1,11 @@
 package hu.bme.aut.sportnetwork.dal;
 
+import java.util.List;
+
 import hu.bme.aut.sportnetwork.entity.User;
 
-public interface UserRepositoryCustom {
+public interface UserDAOCustom {
 	
-	//public User getUserByName(String name);
+	List<User> getFriendsOfUser(String name);
 	
 }

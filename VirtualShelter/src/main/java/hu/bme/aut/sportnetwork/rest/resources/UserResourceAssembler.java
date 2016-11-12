@@ -1,8 +1,12 @@
 package hu.bme.aut.sportnetwork.rest.resources;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 import org.springframework.stereotype.Component;
 
+import hu.bme.aut.sportnetwork.entity.Sports;
 import hu.bme.aut.sportnetwork.entity.User;
 import hu.bme.aut.sportnetwork.rest.UserController;
 
@@ -27,6 +31,10 @@ public class UserResourceAssembler extends
 		resource.setAge(entity.getAge());
 		resource.setEmail(entity.getEmail());
 		resource.setPhoneNumber(entity.getPhoneNumber());
+		resource.setFriendStatus(entity.getFriendStatus());
+		List<Sports> interest = new ArrayList<Sports>();
+		entity.getInterest().forEach(i -> interest.add(i.getSport()));
+		resource.setInterest(interest);
 		return resource;
 	}
 }

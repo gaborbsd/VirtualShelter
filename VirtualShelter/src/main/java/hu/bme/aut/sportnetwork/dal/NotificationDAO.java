@@ -9,7 +9,7 @@ import hu.bme.aut.sportnetwork.entity.Notification;
 import hu.bme.aut.sportnetwork.entity.User;
 
 @Repository
-public interface NotificationDAO extends AbstractRepository<Notification>{
+public interface NotificationDAO extends AbstractRepository<Notification>, NotificationDAOCustom{
 	
 	List<Notification> findByOwner(User u, Sort sort);
 

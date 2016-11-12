@@ -1,6 +1,7 @@
 package hu.bme.aut.sportnetwork.rest;
 
 import java.security.Principal;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import hu.bme.aut.sportnetwork.api.RegistrationOperations;
 import hu.bme.aut.sportnetwork.api.UserOperations;
 import hu.bme.aut.sportnetwork.entity.User;
+import hu.bme.aut.sportnetwork.rest.resources.SportEventResource;
 import hu.bme.aut.sportnetwork.rest.resources.UserResource;
 import hu.bme.aut.sportnetwork.rest.resources.UserResourceAssembler;
 
@@ -70,5 +72,19 @@ public class UserController {
 		User user = userOperation.findByName(principal.getName());
 		UserResource resource = userResourceAssembler.toResource(user);
 		return new ResponseEntity<UserResource>(resource, HttpStatus.CREATED);
+	}
+	
+	@RequestMapping(value="friends", method=RequestMethod.GET)
+	ResponseEntity<List<UserResource>> listFriends() {
+		List<User> friends = userOperation.listFriends();
+		List<UserResource> resourceList = userResourceAssembler.toResources(friends);
+		return new ResponseEntity<List<UserResource>>(resourceList, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value="friendRequests", method=RequestMethod.GET)
+	ResponseEntity<List<UserResource>> listFriendRequests() {
+		List<User> friends = userOperation.listFriendRequest();
+		List<UserResource> resourceList = userResourceAssembler.toResources(friends);
+		return new ResponseEntity<List<UserResource>>(resourceList, HttpStatus.OK);
 	}
 }

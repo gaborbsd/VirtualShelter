@@ -1,5 +1,7 @@
 package hu.bme.aut.sportnetwork.api;
 
+import java.util.List;
+
 import hu.bme.aut.sportnetwork.entity.User;
 
 public interface UserOperations {
@@ -11,4 +13,8 @@ public interface UserOperations {
 	void sendFriendRequest(String name, String message);
 	
 	void acceptFriendRequest(long notificationId) throws Exception;
+	
+	List<User> listFriends();
+	
+	List<User> listFriendRequest();
 }

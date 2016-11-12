@@ -41,3 +41,5 @@ INSERT INTO message VALUES (5,"Hali",'2016-08-18 16:00:00',4,5);
 INSERT INTO message VALUES (6,"Mizu?",'2016-08-20 16:00:00',1,1);
 INSERT INTO message VALUES (7,"Szia",'2016-08-21 14:00:00',3,1);
 INSERT INTO message VALUES (8,"Szervusz",'2016-08-21 16:00:00',4,6);
+
+INSERT INTO friend_notification VALUES (1,"I would like to meet you",NULL,'2016-11-12 18:10:45',"SENT",1,3);

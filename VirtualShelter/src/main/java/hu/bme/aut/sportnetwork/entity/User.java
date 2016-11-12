@@ -9,9 +9,11 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.Pattern;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -47,8 +49,17 @@ public class User {
 	@JsonIgnore
 	private List<Rating> ratings;
 	
-	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	@ManyToOne(cascade=CascadeType.ALL)
 	private Address address;
+	
+	@OneToMany(fetch=FetchType.EAGER, mappedBy="user")
+	private List<UserInterest> interest;
+	
+	@OneToMany(mappedBy="person")
+	private List<FriendShip> friends;
+	
+	@Transient
+	private FriendStatus friendStatus;
 	
 	private String phoneNumber;
 	
@@ -138,6 +149,30 @@ public class User {
 
 	public void setRatings(List<Rating> ratings) {
 		this.ratings = ratings;
+	}
+	
+	public FriendStatus getFriendStatus() {
+		return friendStatus;
+	}
+
+	public void setFriendStatus(FriendStatus friendStatus) {
+		this.friendStatus = friendStatus;
+	}
+
+	public List<UserInterest> getInterest() {
+		return interest;
+	}
+
+	public void setInterest(List<UserInterest> interest) {
+		this.interest = interest;
+	}
+
+	public List<FriendShip> getFriends() {
+		return friends;
+	}
+
+	public void setFriends(List<FriendShip> friends) {
+		this.friends = friends;
 	}
 
 	@Override

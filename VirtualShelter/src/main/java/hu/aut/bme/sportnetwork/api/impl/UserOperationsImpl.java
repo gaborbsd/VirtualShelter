@@ -1,6 +1,8 @@
 package hu.aut.bme.sportnetwork.api.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,6 +14,7 @@ import hu.bme.aut.sportnetwork.dal.UserDAO;
 import hu.bme.aut.sportnetwork.entity.FriendNotification;
 import hu.bme.aut.sportnetwork.entity.FriendShip;
 import hu.bme.aut.sportnetwork.entity.Notification;
+import hu.bme.aut.sportnetwork.entity.NotificationStatus;
 import hu.bme.aut.sportnetwork.entity.User;
 
 public class UserOperationsImpl implements UserOperations {
@@ -42,6 +45,7 @@ public class UserOperationsImpl implements UserOperations {
 		Notification not = new FriendNotification(sender);
 		not.setOwner(u);
 		not.setMessage(message);
+		not.setStatus(NotificationStatus.SENT);
 		not.setSendTime(new Date());
 		notificationRepositroy.save(not);
 	}
@@ -64,11 +68,28 @@ public class UserOperationsImpl implements UserOperations {
 			f2.setListenNotifications(true);
 			friendShipRepository.save(f1);
 			friendShipRepository.save(f2);
-			notificationRepositroy.delete(notificationId);
+			
+			not.setStatus(NotificationStatus.ACCEPTED);
+			not.setModificationTime(new Date());
+			notificationRepositroy.save(not);
 		} else {
 			throw new Exception("WRONG NOTIFICATION ID");
 		}
 		
+	}
+
+	@Override
+	public List<User> listFriends() {
+		return userRepository.getFriendsOfUser("Andras");
+	}
+
+	@Override
+	public List<User> listFriendRequest() {
+		User u = userRepository.findByName("Andras");
+		List<FriendNotification> nots = notificationRepositroy.getFriendRequestSenders(u);
+		List<User> ret = new ArrayList<>();
+		nots.forEach(n -> ret.add(n.getUser()));
+		return ret;
 	}
 	
 
