@@ -35,7 +35,7 @@ public class MessageController {
 	private MessageResourceAssembler messageResourceAssembler;
 	
 	@RequestMapping(value="conversations", method=RequestMethod.GET)
-	ResponseEntity<List<ConversationResource>> findConversationsByUser() {
+	ResponseEntity<List<ConversationResource>> findConversationsByUser() throws Exception {
 		List<Conversation> conversations = messageOperation.listConversatinsByUser();
 		List<ConversationResource> resourceList = conversationResourceAssembler.toResources(conversations);
 		return new ResponseEntity<List<ConversationResource>>(resourceList, HttpStatus.OK);
@@ -49,7 +49,7 @@ public class MessageController {
 	}
 	
 	@RequestMapping(value="conversation", method=RequestMethod.POST) 
-	ResponseEntity<ConversationResource> getConversationWithUser(@RequestBody GetConversationWithUserArg arg) {
+	ResponseEntity<ConversationResource> getConversationWithUser(@RequestBody GetConversationWithUserArg arg) throws Exception {
 		Conversation c = messageOperation.getConversationWithUser(arg.getUserName());
 		ConversationResource resource = conversationResourceAssembler.toResource(c);
 		return new ResponseEntity<>(resource, HttpStatus.OK);

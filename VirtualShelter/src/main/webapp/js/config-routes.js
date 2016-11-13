@@ -17,7 +17,7 @@ app.config(function($routeProvider) {
 		controller : 'CreateSportEventController',
 		templateUrl : '/html/createEvent.html'
 	}).when('/conversations', {
-		controller : 'CreateSportEventController',
+		controller : 'ConversationController',
 		templateUrl : '/html/conversations.html'
 	}).otherwise({
 		redirectTo : '/editor/events'
