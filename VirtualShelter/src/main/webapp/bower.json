@@ -1,0 +1,25 @@
+{
+  "name": "webapp",
+  "authors": [
+    "badam17 <adambarsi17@gmail.com>"
+  ],
+  "description": "sportnetwork frontend",
+  "main": "index.html",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "angular": "^1.5.8",
+    "angular-ui": "^0.4.0",
+    "angular-paginate-anything": "^4.2.0",
+    "angular-route": "^1.5.8",
+    "bootstrap": "^3.3.7",
+    "select2": "^4.0.3"
+  }
+}
