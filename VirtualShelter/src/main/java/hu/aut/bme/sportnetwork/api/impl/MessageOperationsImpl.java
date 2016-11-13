@@ -35,7 +35,7 @@ public class MessageOperationsImpl implements MessageOperations {
 	@Override
 	public List<Conversation> listConversatinsByUser() {
 		User writer = userRepositroy.findByName("Andras");
-		List<Conversation> ret = conversationRepository.findByUser1AndActiveTrueOrUser2AndActiveTrue(writer, writer, new Sort("lastSendTime"));
+		List<Conversation> ret = conversationRepository.findByUser1AndActiveTrueOrUser2AndActiveTrue(writer, writer, new Sort(Sort.Direction.DESC, "lastSendTime"));
 		return ret;
 	}
 
@@ -90,6 +90,7 @@ public class MessageOperationsImpl implements MessageOperations {
 		notificationRepositroy.save(not);
 		
 		c.setLastSendTime(sendTime);
+		c.setLastMessage(message);
 				
 		if (!c.isActive()) {
 			c.setActive(true);

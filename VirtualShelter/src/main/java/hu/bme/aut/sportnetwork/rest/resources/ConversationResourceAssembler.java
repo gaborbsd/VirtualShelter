@@ -23,6 +23,8 @@ public class ConversationResourceAssembler extends ResourceAssemblerSupport<Conv
 	public ConversationResource instantiateResource(Conversation entity) {
 		ConversationResource resource = new ConversationResource();
 		resource.setDate(entity.getLastSendTime());
+		resource.setMessage(entity.getLastMessage());
+		resource.setPublicId(entity.getId());
 		resource.setUserName(entity.getUser1().getName().equals("Andras") ? entity.getUser2().getName() : entity.getUser1().getName());
 		
 		return resource;

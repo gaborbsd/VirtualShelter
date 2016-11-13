@@ -39,6 +39,9 @@ public class Conversation {
 	
 	@Column(name="active")
 	private boolean active;
+	
+	@Column(name="last_message")
+	private String lastMessage;
 
 	public long getId() {
 		return id;
@@ -89,6 +92,14 @@ public class Conversation {
 
 	public void setActive(boolean active) {
 		this.active = active;
+	}
+
+	public String getLastMessage() {
+		return lastMessage;
+	}
+
+	public void setLastMessage(String lastMessage) {
+		this.lastMessage = lastMessage;
 	}
 
 	
