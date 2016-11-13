@@ -56,10 +56,10 @@ public class MessageController {
 	}
 	
 	@RequestMapping(value="write", method=RequestMethod.POST) 
-	ResponseEntity<ConversationResource> writeMessage(@RequestBody WriteMessageArg arg) {
-		Conversation c = messageOperation.writeToConversation(arg.getConversationId(), arg.getMessage());
-		ConversationResource resource = conversationResourceAssembler.toResource(c);
-		return new ResponseEntity<>(resource, HttpStatus.OK);
+	ResponseEntity<List<MessageResource>> writeMessage(@RequestBody WriteMessageArg arg) {
+		List<Message> messages = messageOperation.writeToConversation(arg.getConversationId(), arg.getMessage());
+		List<MessageResource> resourceList = messageResourceAssembler.toResources(messages);
+		return new ResponseEntity<List<MessageResource>>(resourceList, HttpStatus.OK);
 	}
 
 }

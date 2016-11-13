@@ -19,6 +19,9 @@ app.config(function($routeProvider) {
 	}).when('/conversations', {
 		controller : 'ConversationController',
 		templateUrl : '/html/conversation/conversations.html'
+	}).when('/conversation/:id', {
+		controller : 'MessageController',
+		templateUrl : '/html/conversation/messages.html'
 	}).otherwise({
 		redirectTo : '/editor/events'
 	})

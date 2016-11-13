@@ -11,7 +11,7 @@ public interface MessageOperations {
 	
 	public List<Message> listMessagesbyConversation(long conversationId);
 	
-	public Conversation writeToConversation(long conversationId, String message);
+	public List<Message> writeToConversation(long conversationId, String message);
 	
 	public Conversation getConversationWithUser(String userName);
 }

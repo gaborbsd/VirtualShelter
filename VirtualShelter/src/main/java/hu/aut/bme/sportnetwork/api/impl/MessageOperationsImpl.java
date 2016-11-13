@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.transaction.annotation.Transactional;
 
 import hu.bme.aut.sportnetwork.api.MessageOperations;
 import hu.bme.aut.sportnetwork.dal.ConversationDAO;
@@ -46,7 +47,8 @@ public class MessageOperationsImpl implements MessageOperations {
 	}
 
 	@Override
-	public Conversation writeToConversation(long conversationId, String message) {
+	@Transactional
+	public List<Message> writeToConversation(long conversationId, String message) {
 		User writer = userRepositroy.findByName("Andras");
 		
 		Conversation c = conversationRepository.findOne(conversationId);
@@ -71,7 +73,7 @@ public class MessageOperationsImpl implements MessageOperations {
 		return c;
 	}
 	
-	private Conversation writeToConversation(User writer, Conversation c, String message) {
+	private List<Message> writeToConversation(User writer, Conversation c, String message) {
 		Date sendTime = new Date();
 		
 		Message m = new Message();
@@ -96,9 +98,9 @@ public class MessageOperationsImpl implements MessageOperations {
 			c.setActive(true);
 		}
 		
-		Conversation ret = conversationRepository.save(c);
+		Conversation co = conversationRepository.save(c);
 		
-		return ret;
+		return listMessagesbyConversation(co.getId());
 	}
 
 }

@@ -4,10 +4,13 @@ import java.util.Date;
 
 import org.springframework.hateoas.ResourceSupport;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class MessageResource extends ResourceSupport {
 	
 	private String message;
 	
+	@JsonFormat(pattern="yyyy-MM-dd hh:mm:ss")
 	private Date date;
 	
 	private String sender;
