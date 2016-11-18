@@ -1,9 +1,14 @@
-
-<h3 ng-repeat="m in messages">
-	{{m.sender}}
-	<span class="label label-default" >{{m.message}}</span>
-	{{m.date}}
-</h3>
+<div style="overflow: scroll; height: 250px;">
+	<ul ng-repeat="m in messages">
+		<li >
+			<font size="5">
+				{{m.sender}}
+				<span class="label label-default">{{m.message}}</span>
+				{{m.date}}
+				</font>			
+		</li>
+	</ul>
+</div>
 
 <input class="form-control" ng-model="message" id="ex3" type="text">
 
