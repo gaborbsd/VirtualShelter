@@ -1,13 +1,13 @@
 var app = angular.module('sportnetworkApp');
 
-app.controller('MessageController', function($scope, $routeParams, ConversationFactory) {
+app.controller('MessageController', function($scope, $routeParams, $interval, ConversationFactory) {
 
 	$scope.getMessages = function(id) {
-		ConversationFactory.getMessages(id).then(function (data) {
-            $scope.messages = data;
-        }, function (error) {
-            alert(error);
-        });
+		ConversationFactory.pollMessages(id, function(data){
+			$scope.messages = data;
+		}, function(error){
+			alert(error);
+		});
 	};
 	
 	$scope.writeMessage = function() {
@@ -24,4 +24,11 @@ app.controller('MessageController', function($scope, $routeParams, ConversationF
 	};
 	
 	$scope.getMessages($routeParams.id);
+	stop = $interval(function() {
+		$scope.getMessages($routeParams.id);
+    }, 2000);
+	
+	$scope.$on("$destroy", function(){
+		$interval.cancel(stop);
+	});
 });

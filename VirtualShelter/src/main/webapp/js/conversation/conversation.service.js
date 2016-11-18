@@ -13,14 +13,14 @@ app.factory("ConversationFactory", function($http, $q) {
 		return deferred.promise;
 	};
 	
-	factory.getMessages = function(id) {
-		var deferred = $q.defer();
-		$http.get("api/messages/" + id).success(function(data, status) {
-			deferred.resolve(data);
-		}).error(function(data, status) {
-			deferred.reject(data);
+	factory.pollMessages = function(id, callback, error) {
+		return $http.get("api/messages/" + id).then(function (response) {
+            if (typeof response.data === 'object') {
+                callback(response.data);
+            } else {
+                error(response.data);
+            }
 		});
-		return deferred.promise;
 	};
 	
 	factory.writeMessage = function(arg) {
