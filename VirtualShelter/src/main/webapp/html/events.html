@@ -1,5 +1,5 @@
   
- <h1>Event List</h1>
+ 
 <hr />
 <div class="row-fluid" ng-hide='error==""'>
 	<div class="col-md-12">
@@ -9,17 +9,16 @@
 
 
 <div class="panel-body">
-	<div>
-         <div class="row cardContainer" ng-show="events.length > 0">
-		    <br /><br />
-             <div class="span3 card" ng-repeat="event in events | orderBy:'name'" style="height:150px">
-                 <button  class="btn close cardClose" ng-click="deleteUser(user.userId)" >&times;</button>
-                 <div class="cardHeader">{{event.type}}</div>
-                 <div class="cardBody">{{event.date}}</div>
-                 <div class="cardBody">{{event.maxSize}}</div>
-                 <div class="cardBody">{{event.description}}</div>
-                 <a href="#/user/{{event.links[0].rel}}">{{event.owner}}</a>
-             </div>
-         </div>
-     </div>
+	<h1 class="cardLabel">Event List</h1>
+     <div ng-show="events.length > 0">
+	    <br /><br />
+            <div class="span3 card" ng-repeat="event in events | orderBy:'name'"  style="width: 320px">
+                <button  class="btn close cardClose" ng-click="deleteUser(user.userId)" >&times;</button>
+                <div class="cardHeader">{{event.type}}  ({{event.levels}}) </div>
+                <div class="cardBody">owner: <a href="#/user/{{event.ownerId}}">{{event.owner}}</a> </div>
+                <div class="cardBody">{{event.city}}:  {{event.date}}</div>
+                <div class="cardBody">{{event.members}}</div>
+                <div class="cardBody"><a href="#/user/{{event.links[0].rel}}">check</a> </div>
+            </div>
+    </div>
 </div>

@@ -20,6 +20,8 @@ import hu.bme.aut.sportnetwork.entity.SportEvent;
 import hu.bme.aut.sportnetwork.entity.User;
 import hu.bme.aut.sportnetwork.rest.resources.SportEventResource;
 import hu.bme.aut.sportnetwork.rest.resources.SportEventResourceAssembler;
+import hu.bme.aut.sportnetwork.rest.resources.SportEventShortResource;
+import hu.bme.aut.sportnetwork.rest.resources.SportEventShortResourceAssembler;
 import hu.bme.aut.sportnetwork.rest.resources.UserResource;
 
 @RestController
@@ -35,12 +37,15 @@ public class SportEventController {
 	@Autowired
 	private SportEventResourceAssembler sportEventResourceAssembler;
 	
+	@Autowired
+	private SportEventShortResourceAssembler sportEventShortResourceAssembler;
+	
 	@RequestMapping(method=RequestMethod.GET)
-	ResponseEntity<List<SportEventResource>> findAllSportEvent() {
+	ResponseEntity<List<SportEventShortResource>> findAllSportEvent() {
 		List<SportEvent> events = sporteventOperation.findAll();
-		List<SportEventResource> resourceList = sportEventResourceAssembler
+		List<SportEventShortResource> resourceList = sportEventShortResourceAssembler
 				.toResources(events);
-		return new ResponseEntity<List<SportEventResource>>(resourceList, HttpStatus.OK);
+		return new ResponseEntity<List<SportEventShortResource>>(resourceList, HttpStatus.OK);
 	}
 	
 	@RequestMapping(value="/create", method=RequestMethod.POST)

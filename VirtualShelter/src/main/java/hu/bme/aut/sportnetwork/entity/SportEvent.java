@@ -41,6 +41,12 @@ public class SportEvent {
 				inverseJoinColumns=@JoinColumn(name="user_id"))
 	private List<User> members;
 	
+	@ManyToOne
+	private Address address;
+	
+	@Column(name = "member_size")
+	private int memberSize;
+	
 	@Column(nullable=false)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date date;
@@ -54,6 +60,12 @@ public class SportEvent {
 	
 	@Column(name = "is_public")
 	private boolean isPublic;
+	
+	@Column(name = "level_from")
+	private int levelIntervalFrom;
+	
+	@Column(name = "level_to")
+	private int levelIntervalTo;
 	
 	private String description;
 
@@ -133,6 +145,38 @@ public class SportEvent {
 
 	public void setMembers(List<User> members) {
 		this.members = members;
+	}
+	
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
+	public int getMemberSize() {
+		return memberSize;
+	}
+
+	public void setMemberSize(int memberSize) {
+		this.memberSize = memberSize;
+	}	
+
+	public int getLevelIntervalFrom() {
+		return levelIntervalFrom;
+	}
+
+	public void setLevelIntervalFrom(int levelIntervalFrom) {
+		this.levelIntervalFrom = levelIntervalFrom;
+	}
+
+	public int getLevelIntervalTo() {
+		return levelIntervalTo;
+	}
+
+	public void setLevelIntervalTo(int levelIntervalTo) {
+		this.levelIntervalTo = levelIntervalTo;
 	}
 
 	@Override
