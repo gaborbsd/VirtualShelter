@@ -26,19 +26,6 @@ app.controller('EventController', function($scope, $http, $routeParams) {
 	$scope.getEvent($routeParams.id);
 });
 
-app.controller('SportEventController', function($scope, $http) {
-
-	$scope.getEvents = function() {
-		$http.get("api/sportevent").success(function(data, status) {
-			$scope.events = data;
-		}).error(function(data, status) {
-			alert(status);
-		});
-	}
-	
-	$scope.getEvents();
-});
-
 app.controller('CreateSportEventController', function($scope, $http) {
 
 	$scope.createEvent = function() {

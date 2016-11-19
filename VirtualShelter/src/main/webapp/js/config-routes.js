@@ -4,9 +4,9 @@ app.config(function($routeProvider) {
 	$routeProvider.when('/user/:id', {
 		controller : 'UserController',
 		templateUrl : '/html/users.html'
-	}).when('/editor/events', {
-		controller : 'SportEventController',
-		templateUrl : '/html/events.html'
+	}).when('/listevents', {
+		controller : 'SportEventListController',
+		templateUrl : '/html/event/eventlist.html'
 	}).when('/user', {
 		controller : 'UserEditorController',
 		templateUrl : '/html/users.html'
@@ -23,6 +23,6 @@ app.config(function($routeProvider) {
 		controller : 'MessageController',
 		templateUrl : '/html/conversation/messages.html'
 	}).otherwise({
-		redirectTo : '/editor/events'
+		redirectTo : '/listevents'
 	})
 })

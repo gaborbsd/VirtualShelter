@@ -40,7 +40,7 @@ public class SportEventController {
 	@Autowired
 	private SportEventShortResourceAssembler sportEventShortResourceAssembler;
 	
-	@RequestMapping(method=RequestMethod.GET)
+	@RequestMapping(value="public", method=RequestMethod.GET)
 	ResponseEntity<List<SportEventShortResource>> findAllSportEvent() {
 		List<SportEvent> events = sporteventOperation.findAll();
 		List<SportEventShortResource> resourceList = sportEventShortResourceAssembler
