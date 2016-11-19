@@ -14,8 +14,8 @@ app.config(function($routeProvider) {
 		controller : 'EventController',
 		templateUrl : '/html/event.html'
 	}).when('/editor/events/new', {
-		controller : 'CreateSportEventController',
-		templateUrl : '/html/createEvent.html'
+		controller : 'EventCreateController',
+		templateUrl : '/html/event/newevent.html'
 	}).when('/conversations', {
 		controller : 'ConversationController',
 		templateUrl : '/html/conversation/conversations.html'

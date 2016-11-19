@@ -52,7 +52,6 @@ public class SportEventController {
 	ResponseEntity<SportEventResource> createEvent(/*Principal principal ,*/@RequestBody SportEvent event) {
 		/*User owner = userOperation.findByName(principal.getName());
 		event.setOwner(owner);*/
-		event.setDate(new Date());
 		SportEvent created = sporteventOperation.create(event);
 		SportEventResource resource = sportEventResourceAssembler.toResource(created);
 		return new ResponseEntity<SportEventResource>(resource, HttpStatus.CREATED);

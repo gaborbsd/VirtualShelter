@@ -1,14 +1,21 @@
 package hu.bme.aut.sportnetwork.entity;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Pattern;
 
 @Entity
-@Table(name="address")
+@Table(name="address", uniqueConstraints={
+		@UniqueConstraint(columnNames={"city", "address"})
+})
 public class Address {
 	
 	@Id
@@ -23,12 +30,15 @@ public class Address {
 	@Column(nullable = false)
 	private String city;
 	
-	@Column(nullable = false)
 	@Pattern(regexp="\\d{4,6}", 
 				message="Invalid zipcode format")
 	private int zipCode;
 	
+	@Column(nullable=false)
 	private String address;
+	
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="address")
+	private List<SportEvent> events;
 
 	public long getId() {
 		return id;
@@ -76,6 +86,16 @@ public class Address {
 
 	public void setAddress(String address) {
 		this.address = address;
+	}
+	
+	
+
+	public List<SportEvent> getEvents() {
+		return events;
+	}
+
+	public void setEvents(List<SportEvent> events) {
+		this.events = events;
 	}
 
 	@Override

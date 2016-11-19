@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -41,10 +42,10 @@ public class SportEvent {
 				inverseJoinColumns=@JoinColumn(name="user_id"))
 	private List<User> members;
 	
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	private Address address;
 	
-	@Column(name = "member_size")
+	@Column(name = "member_size", nullable = false)
 	private int memberSize;
 	
 	@Column(nullable=false)
@@ -55,16 +56,16 @@ public class SportEvent {
 	@Column(nullable=false)
 	private Sports type;
 	
-	@Column(name = "max_size")
+	@Column(name = "max_size", nullable = false)
 	private int maxSize;
 	
-	@Column(name = "is_public")
+	@Column(name = "is_public", nullable = false)
 	private boolean isPublic;
 	
-	@Column(name = "level_from")
+	@Column(name = "level_from", nullable = false)
 	private int levelIntervalFrom;
 	
-	@Column(name = "level_to")
+	@Column(name = "level_to", nullable = false)
 	private int levelIntervalTo;
 	
 	private String description;
@@ -128,11 +129,11 @@ public class SportEvent {
 		this.comments = comments;
 	}
 
-	public boolean isPublic() {
+	public boolean getIsPublic() {
 		return isPublic;
 	}
 
-	public void setPublic(boolean isPublic) {
+	public void setIsPublic(boolean isPublic) {
 		this.isPublic = isPublic;
 	}
 	

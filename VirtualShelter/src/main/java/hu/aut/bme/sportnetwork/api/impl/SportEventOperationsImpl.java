@@ -8,11 +8,13 @@ import org.springframework.data.domain.Sort;
 import org.springframework.transaction.annotation.Transactional;
 
 import hu.bme.aut.sportnetwork.api.SportEventOperations;
+import hu.bme.aut.sportnetwork.dal.AddressDAO;
 import hu.bme.aut.sportnetwork.dal.CommentDAO;
 import hu.bme.aut.sportnetwork.dal.FriendShipDAO;
 import hu.bme.aut.sportnetwork.dal.NotificationDAO;
 import hu.bme.aut.sportnetwork.dal.SportEventDAO;
 import hu.bme.aut.sportnetwork.dal.UserDAO;
+import hu.bme.aut.sportnetwork.entity.Address;
 import hu.bme.aut.sportnetwork.entity.Comment;
 import hu.bme.aut.sportnetwork.entity.EventNotification;
 import hu.bme.aut.sportnetwork.entity.EventRequestNotification;
@@ -51,11 +53,14 @@ public class SportEventOperationsImpl implements SportEventOperations {
 	}
 
 	@Override
+	@Transactional
 	public SportEvent create(SportEvent e) {
 		//User owner = e.getOwner();
 		User owner = userRepository.findByName("Andras");
 		e.setOwner(owner);
-		SportEvent newEvent = sportEventRepository.save(e);		
+		e.getMembers().add(owner);
+		e.setMemberSize(e.getMembers().size());
+		SportEvent newEvent = sportEventRepository.saveNewEvent(e);
 		List<Object> usersToNotify = friendShipRepository.findByPersonAndListenNotifications(owner, true);
 		usersToNotify.forEach(u -> sendEventNotification((User)u, owner, newEvent, NEW_EVENT));
 		return newEvent;
