@@ -29,6 +29,8 @@ public class SportEventResource extends ResourceSupport {
 	
 	private List<UserLinkWrapper> members;
 	
+	private int status;
+	
 	public SportEventResource() {
 		
 	}
@@ -101,6 +103,14 @@ public class SportEventResource extends ResourceSupport {
 
 	public void setMembers(List<UserLinkWrapper> members) {
 		this.members = members;
+	}
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
 	}
 	
 	

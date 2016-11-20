@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import hu.aut.bme.sportnetwork.api.impl.SportEventFilter;
@@ -12,6 +13,7 @@ import hu.bme.aut.sportnetwork.dal.SportEventDAOCustom;
 import hu.bme.aut.sportnetwork.entity.Address;
 import hu.bme.aut.sportnetwork.entity.SportEvent;
 import hu.bme.aut.sportnetwork.entity.Sports;
+import hu.bme.aut.sportnetwork.entity.User;
 
 public class SportEventDAOImpl implements SportEventDAOCustom {
 
@@ -85,6 +87,19 @@ public class SportEventDAOImpl implements SportEventDAOCustom {
 		}
 		
 		return query.getResultList();
+	}
+	
+	@Override
+	public boolean isUserMemberOfEvent(SportEvent e, User u) {
+		Query query = em.createNativeQuery("SELECT count(*) FROM members_of_sportevent "
+				+ "WHERE user_id=?1 AND sportevent_id=?2");
+		query.setParameter(1, u.getId());
+		query.setParameter(2, e.getId());
+		
+		int res = ((Number) query.getSingleResult()).intValue();
+		
+		return res != 0;
+		
 	}
 	
 	private void addWhereLevelStringClausePart(StringBuilder whereString, int from, int to, boolean allowUndefinedIntervall) {

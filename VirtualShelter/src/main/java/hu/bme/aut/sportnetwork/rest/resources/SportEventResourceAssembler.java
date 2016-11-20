@@ -9,6 +9,7 @@ import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 import org.springframework.stereotype.Component;
 
 import hu.bme.aut.sportnetwork.entity.Comment;
+import hu.bme.aut.sportnetwork.entity.EventStatus;
 import hu.bme.aut.sportnetwork.entity.SportEvent;
 import hu.bme.aut.sportnetwork.rest.SportEventController;
 import hu.bme.aut.sportnetwork.rest.UserController;
@@ -39,6 +40,21 @@ public class SportEventResourceAssembler extends
 		entity.getComments().forEach(c -> addComment(comments, c));
 		resource.setComments(comments);
 		resource.setOwner(entity.getOwner().getName());
+		
+		
+		switch (entity.getStatus()) {
+			case OWNER:
+				resource.setStatus(0);
+				break;
+			case MEMBER:
+				resource.setStatus(1);
+				break;
+			case APPLIED:
+				resource.setStatus(2);
+				break;
+			case NOT_MEMBER:
+				resource.setStatus(3);
+		}
 		
 		resource.add(linkTo(UserController.class).slash(entity.getOwner().getId()).withRel(String.valueOf(entity.getOwner().getId())));
 		return resource;

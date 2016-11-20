@@ -18,6 +18,7 @@ import hu.bme.aut.sportnetwork.entity.Address;
 import hu.bme.aut.sportnetwork.entity.Comment;
 import hu.bme.aut.sportnetwork.entity.EventNotification;
 import hu.bme.aut.sportnetwork.entity.EventRequestNotification;
+import hu.bme.aut.sportnetwork.entity.EventStatus;
 import hu.bme.aut.sportnetwork.entity.FriendRequestNotification;
 import hu.bme.aut.sportnetwork.entity.FriendShip;
 import hu.bme.aut.sportnetwork.entity.Notification;
@@ -65,6 +66,7 @@ public class SportEventOperationsImpl implements SportEventOperations {
 		SportEvent newEvent = sportEventRepository.saveNewEvent(e);
 		List<Object> usersToNotify = friendShipRepository.findByPersonAndListenNotifications(owner, true);
 		usersToNotify.forEach(u -> sendEventNotification((User)u, owner, newEvent, NEW_EVENT));
+		newEvent.setStatus(EventStatus.OWNER);
 		return newEvent;
 	}
 
@@ -134,8 +136,10 @@ public class SportEventOperationsImpl implements SportEventOperations {
 
 	@Override
 	public SportEvent findById(long id) {
+		User user = userRepository.findByName("Andras");
 		SportEvent ret = sportEventRepository.findOne(id);
 		setEventComments(ret);
+		setEventStatus(ret, user);
 		return ret;
 	}
 
@@ -155,7 +159,8 @@ public class SportEventOperationsImpl implements SportEventOperations {
 		List<User> members = event.getMembers();
 		members.forEach(m -> sendEventNotification(m, commenter, event, EVENT_COMMENT));
 		
-		setEventComments(event);		
+		setEventComments(event);	
+		setEventStatus(event, commenter);
 		return event;
 	}
 
@@ -184,10 +189,23 @@ public class SportEventOperationsImpl implements SportEventOperations {
 		return ret;
 	}
 	
-	private SportEvent setEventComments(SportEvent event) {
+	private void setEventComments(SportEvent event) {
 		List<Comment> comments = commentRepository.findByEvent(event, new Sort("dateOfComment"));
 		event.setComments(comments);
-		return event;
+	}
+	
+	private void setEventStatus(SportEvent event, User user) {
+		if (event.getOwner().getName().equals(user.getName())) {
+			event.setStatus(EventStatus.OWNER);
+		} else if (sportEventRepository.isUserMemberOfEvent(event, user)) {
+			event.setStatus(EventStatus.MEMBER);
+		} else if (notificationRepositroy.isUserAppliedToEvent(event, user)) {
+			event.setStatus(EventStatus.APPLIED);
+		} else {
+			event.setStatus(EventStatus.NOT_MEMBER);
+		}
+		
+		
 	}
 
 }

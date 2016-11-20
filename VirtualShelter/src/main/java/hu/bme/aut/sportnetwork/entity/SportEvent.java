@@ -21,6 +21,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name="sportevent")
@@ -58,6 +59,9 @@ public class SportEvent {
 	@Enumerated(EnumType.STRING)
 	@Column(nullable=false)
 	private Sports type;
+	
+	@Transient
+	private EventStatus status;
 	
 	@Column(name = "max_size", nullable = false)
 	private int maxSize;
@@ -138,6 +142,14 @@ public class SportEvent {
 
 	public void setComments(List<Comment> comments) {
 		this.comments = comments;
+	}
+
+	public EventStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(EventStatus status) {
+		this.status = status;
 	}
 
 	public boolean getIsPublic() {
