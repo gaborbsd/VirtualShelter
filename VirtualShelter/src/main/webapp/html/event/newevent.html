@@ -3,6 +3,14 @@
 		
 <form class="form">
 	<div class="panel-body">
+	
+		<div class="form-group row">
+			<label class="control-label col-sm-3">Title:</label>
+			<div class="col-sm-9">
+				<input class="form-control" type="text" name="title"
+					ng-model="title">
+			</div>
+		</div>
 		
 		<div class="form-group row">
 			<label class="control-label col-md-3">Sport:</label>
@@ -43,6 +51,12 @@
 					  <option value="16">16</option>
 				</select>
 			</div>
+		</div>
+		
+		<br>
+		
+		<div class="form-group row" align="center">
+			<label>Date:</label>
 		</div>
 		
 		<div class="form-group row">
@@ -139,6 +153,12 @@
 			</div>						
 		</div>
 		
+		<br>
+		
+		<div class="form-group row" align="center">
+			<label>Allowed levels:</label>
+		</div>
+		
 		<div class="form-group row">
 			<label class="control-label col-md-3">Level:</label>
 			<div class="col-md-3">
@@ -203,11 +223,11 @@
 	<br>
 		
 		<div class="form-group row">
-			<label class="control-label col-md-3">Description:</label>
+			<label class="control-label col-md-4">Description:</label>
 			<div class="col-md-3">
 				<textarea class="form-control" rows="7" cols="100" ng-model="description"></textarea>
 			</div>
-			<label class="control-label col-md-3">Publicity: </label>
+			<label class="control-label col-md-2">Publicity: </label>
 			<div class="col-md-3">				
 				<input type="radio" name="public" ng-model="publicity" value="public" checked="checked"> Public<br>
 	  			<input type="radio" name="public" ng-model="publicity" value="private"> Private<br>

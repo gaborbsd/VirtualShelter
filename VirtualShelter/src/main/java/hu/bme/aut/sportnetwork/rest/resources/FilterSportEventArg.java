@@ -4,6 +4,8 @@ public class FilterSportEventArg {
 	
 	private String text;
 	
+	private boolean title;
+	
 	private boolean city;
 	
 	private boolean sport;
@@ -61,5 +63,15 @@ public class FilterSportEventArg {
 	public void setLevelTo(int levelTo) {
 		this.levelTo = levelTo;
 	}
+
+	public boolean getTitle() {
+		return title;
+	}
+
+	public void setTitle(boolean title) {
+		this.title = title;
+	}
+	
+	
 
 }

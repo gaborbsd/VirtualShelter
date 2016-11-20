@@ -16,9 +16,9 @@ INSERT INTO user VALUES (5, 12, "elemer5@gmail.com", "Elemer", "e", "+3670625419
 INSERT INTO user VALUES (6, 44, "ferenc6@gmail.com", "Ferenc", "f", "+36205291403",6);
 INSERT INTO user VALUES (7, 36, "gabor7@gmail.com", "Gabor", "g", "+36304954720",7);
 
-INSERT INTO sportevent VALUES (1, '2016-08-18 10:00:00', "tenisz", true, 4,6, 2, 1, "TENNIS", 8, 1);
-INSERT INTO sportevent VALUES (2, '2016-08-19 16:00:00', "tenisz", true, 4,6, 4, 1, "TENNIS", 8, 1);
-INSERT INTO sportevent VALUES (3, '2016-07-13 16:00:00', "foci", true, 8,8,11, 1, "FOOTBALL", 9, 2);
+INSERT INTO sportevent VALUES (1, '2016-08-18 10:00:00', "tenisz", true, 4,6, 2, 1, "Tennis event 1" ,"TENNIS", 8, 1);
+INSERT INTO sportevent VALUES (2, '2016-08-19 16:00:00', "tenisz", true, 4,6, 4, 1, "Tennis event 2", "TENNIS", 8, 1);
+INSERT INTO sportevent VALUES (3, '2016-07-13 16:00:00', "foci", true, 8,8,11, 1, "football event","FOOTBALL", 9, 2);
 
 INSERT INTO members_of_sportevent VALUES (1,1);
 INSERT INTO members_of_sportevent VALUES (2,1);

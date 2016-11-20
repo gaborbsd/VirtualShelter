@@ -12,6 +12,8 @@ public class SportEventShortResource extends ResourceSupport {
 	
 	private String owner;
 	
+	private String title;
+	
 	private long ownerId;
 	
 	private long eventId; 
@@ -37,6 +39,14 @@ public class SportEventShortResource extends ResourceSupport {
 
 	public long getOwnerId() {
 		return ownerId;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	public void setOwnerId(long ownerId) {

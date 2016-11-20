@@ -33,6 +33,9 @@ public class SportEvent {
 	@ManyToOne
 	private User owner;
 	
+	@Column(name="title", nullable = false)
+	private String title;
+	
 	@OneToMany(mappedBy="event")
 	private List<Comment> comments;
 	
@@ -110,6 +113,14 @@ public class SportEvent {
 		this.owner = owner;
 	}
 	
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
 	public String getDescription() {
 		return description;
 	}

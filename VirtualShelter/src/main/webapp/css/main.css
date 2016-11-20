@@ -138,7 +138,7 @@ body {
 .card {
     background-color:#eeeeee;
     border: 4px solid black;
-    height:130px;
+    height:150px;
     width: 350px;
     margin-bottom: 20px;
 }
@@ -162,6 +162,14 @@ body {
 
 .cardContainer {
     width:100%;
+}
+
+.cardTitle {
+	font-weight:bold;
+    padding-left: 5px;
+    overflow: hidden;
+    font-size: 15px;
+    text-overflow: ellipsis;
 }
 
 .cardBody {

@@ -29,6 +29,7 @@ ResourceAssemblerSupport<SportEvent, SportEventShortResource> {
 		resource.setEventId(entity.getId());
 		resource.setOwnerId(entity.getOwner().getId());
 		resource.setOwner(entity.getOwner().getName());
+		resource.setTitle(entity.getTitle());
 		resource.setDate(entity.getDate());
 		resource.setType(entity.getType());
 		resource.setCity(entity.getAddress().getCity());

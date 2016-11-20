@@ -17,19 +17,23 @@ app.controller('SportEventListController', function($scope, EventFactory) {
 			if ($scope.text) {
 				arg.text = $scope.text; 
 			}
-			if (!$scope.city && !$scope.sport && !$scope.owner) {
+			if (!$scope.city && !$scope.sport && !$scope.owner && !$scope.title) {
 				arg.city = true;
 				arg.sport = true;
 				arg.owner = true;
+				arg.title = true;
 			}
 			if ($scope.city) {
-				arg.city = $scope.city;
+				arg.city = true;
 			}
 			if ($scope.sport) {
-				arg.sport = $scope.sport;
+				arg.sport = true;
 			}
 			if ($scope.owner) {
-				arg.owner = $scope.owner;
+				arg.owner = true;
+			}
+			if ($scope.title) {
+				arg.title = true;
 			}
 			if ($scope.levelIntervalFrom != null) {
 				arg.levelFrom = parseInt($scope.levelIntervalFrom);

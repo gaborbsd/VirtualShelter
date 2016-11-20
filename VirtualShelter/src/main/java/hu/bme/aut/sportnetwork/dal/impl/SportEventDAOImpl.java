@@ -57,7 +57,7 @@ public class SportEventDAOImpl implements SportEventDAOCustom {
 			
 		} else {
 			
-			addWhereDataStringClausePart(whereDataString, fromString, arg.getSport(), arg.getText(), arg.getCity(), arg.getOwner());
+			addWhereDataStringClausePart(whereDataString, fromString, arg.getSport(), arg.getText(), arg.getCity(), arg.getOwner(), arg.getTitle());
 			
 			addWhereLevelStringClausePart(whereLevelString, arg.getLevelFrom(), arg.getLevelTo(), true);
 		}
@@ -77,7 +77,7 @@ public class SportEventDAOImpl implements SportEventDAOCustom {
 		TypedQuery<SportEvent> query = em.createQuery(s, SportEvent.class);
 		
 		if (!emptyText) {
-			query.setParameter("text", "%" + arg.getText() + "%");
+			query.setParameter("text", "%" + arg.getText().toLowerCase() + "%");
 		}
 		
 		if (arg.getSport() != null) {
@@ -102,23 +102,24 @@ public class SportEventDAOImpl implements SportEventDAOCustom {
 	}
 	
 	private void addWhereDataStringClausePart(StringBuilder whereString, StringBuilder fromString, Sports sport,
-			String text, boolean city, boolean owner) {
+			String text, boolean city, boolean owner, boolean title) {
 		
 		if (city) {
 			fromString.append(" JOIN e.address a");
-			whereString.append(" OR LOWER(a.city) LIKE ");
-			whereString.append(":text");
+			whereString.append(" OR LOWER(a.city) LIKE :text");
 		}
 		
 		if (owner) {
 			fromString.append(" JOIN e.owner o");
-			whereString.append(" OR LOWER(o.name) LIKE ");
-			whereString.append(":text");
+			whereString.append(" OR LOWER(o.name) LIKE :text");
+		}
+		
+		if (title) {
+			whereString.append(" OR LOWER(e.title) LIKE :text");
 		}
 		
 		if (sport != null) {
-			whereString.append(" OR e.type = ");
-			whereString.append(":sport");
+			whereString.append(" OR e.type = :sport");
 		}
 
 	}

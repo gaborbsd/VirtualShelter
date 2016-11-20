@@ -6,6 +6,8 @@ public class SportEventFilter {
 
 	private String text;
 	
+	private boolean title;
+	
 	private boolean city;
 	
 	private Sports sport;
@@ -63,4 +65,14 @@ public class SportEventFilter {
 	public void setLevelTo(int levelTo) {
 		this.levelTo = levelTo;
 	}
+
+	public boolean getTitle() {
+		return title;
+	}
+
+	public void setTitle(boolean title) {
+		this.title = title;
+	}
+	
+	
 }

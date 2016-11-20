@@ -166,14 +166,15 @@ public class SportEventOperationsImpl implements SportEventOperations {
 	
 	private SportEventFilter toEventFilter(FilterSportEventArg arg) {
 		SportEventFilter ret = new SportEventFilter();
+		ret.setTitle(arg.getTitle());
+		ret.setOwner(arg.getOwner());
 		ret.setCity(arg.getCity());
 		ret.setLevelFrom(arg.getLevelFrom());
-		ret.setLevelTo(arg.getLevelTo());
-		ret.setOwner(arg.getOwner());
+		ret.setLevelTo(arg.getLevelTo());		
 		boolean sportNeeded = arg.getText() != null && !arg.getText().isEmpty() && arg.getSport();
 		ret.setSport(sportNeeded ?
 				Sports.toSport(arg.getText()) : null);
-		ret.setText(!arg.getOwner() && !arg.getCity() ? 
+		ret.setText(!arg.getOwner() && !arg.getCity() && !arg.getTitle() ? 
 				null : arg.getText());
 		return ret;
 	}

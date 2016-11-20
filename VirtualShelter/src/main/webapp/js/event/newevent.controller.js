@@ -5,6 +5,7 @@ app.controller('EventCreateController', function($scope, EventFactory) {
 	$scope.createEvent = function() {
 		if (validate()) {
 			arg = {
+				title: $scope.title,
 			    type: $scope.type,
 			 	maxSize: $scope.maxSize,
 			    levelIntervalFrom: $scope.levelIntervalFrom,
@@ -27,7 +28,10 @@ app.controller('EventCreateController', function($scope, EventFactory) {
 	};
 	
 	validate = function() {
-		if ($scope.type == null) {
+		if (!$scope.title) {
+			alert("Fill title");
+			return false;
+		} else if ($scope.type == null) {
 			alert("Choose a sport");
 			return false;
 		} else if ($scope.maxSize == null) {
@@ -42,7 +46,7 @@ app.controller('EventCreateController', function($scope, EventFactory) {
 		} else if ($scope.levelIntervalTo < $scope.levelIntervalFrom) {
 			alert("Incorrect levelintervall");
 			return false;
-		} else if ($scope.country == null || $scope.city == null || $scope.address == null) {
+		} else if (!$scope.country || !$scope.city || !$scope.address) {
 			alert("Country city and address are mandantory");
 			return false;
 		} else if ($scope.publicity == null) {
