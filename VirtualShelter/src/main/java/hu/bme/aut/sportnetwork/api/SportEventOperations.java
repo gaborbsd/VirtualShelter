@@ -26,7 +26,7 @@ public interface SportEventOperations {
 	
 	void rateUser(long eventID, long userId, int value);
 	
-	void writeComment(long eventID, String comment);
+	SportEvent writeComment(long eventID, String comment);
 	
 	void deleteComment(long commentID);
 }

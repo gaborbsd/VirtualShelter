@@ -24,6 +24,7 @@ import hu.bme.aut.sportnetwork.rest.resources.SportEventResourceAssembler;
 import hu.bme.aut.sportnetwork.rest.resources.SportEventShortResource;
 import hu.bme.aut.sportnetwork.rest.resources.SportEventShortResourceAssembler;
 import hu.bme.aut.sportnetwork.rest.resources.UserResource;
+import hu.bme.aut.sportnetwork.rest.resources.WriteCommentArg;
 
 @RestController
 @RequestMapping(value="/sportevent")
@@ -66,6 +67,13 @@ public class SportEventController {
 		return new ResponseEntity<SportEventResource>(resource, HttpStatus.CREATED);
 	}
 	
+	@RequestMapping(value="write", method=RequestMethod.POST)
+	ResponseEntity<SportEventResource> writeComment(@RequestBody WriteCommentArg arg) {
+		SportEvent event = sporteventOperation.writeComment(arg.getEventId(), arg.getMessage());
+		SportEventResource resource = sportEventResourceAssembler.toResource(event);
+		return new ResponseEntity<SportEventResource>(resource, HttpStatus.OK);
+	}
+	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	ResponseEntity<SportEventResource> getSportEvent(@PathVariable Long id) {
 		SportEvent event = sporteventOperation.findById(id);
@@ -74,12 +82,8 @@ public class SportEventController {
 	}
 	
 	@RequestMapping(value="/apply/{id}", method=RequestMethod.POST)
-	ResponseEntity<String> applyEvent(@PathVariable Long id) {
-		try {
-			sporteventOperation.applyToSportEvent(id);
-		} catch (Exception e) {
-			return new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
+	ResponseEntity<String> applyEvent(@PathVariable Long id) throws Exception {
+		sporteventOperation.applyToSportEvent(id);		
 		return new ResponseEntity<String>(HttpStatus.OK);
 	}
 }

@@ -134,12 +134,14 @@ public class SportEventOperationsImpl implements SportEventOperations {
 
 	@Override
 	public SportEvent findById(long id) {
-		return sportEventRepository.findOne(id);
+		SportEvent ret = sportEventRepository.findOne(id);
+		setEventComments(ret);
+		return ret;
 	}
 
 	@Override
 	@Transactional
-	public void writeComment(long eventID, String comment) {
+	public SportEvent writeComment(long eventID, String comment) {
 		User commenter = userRepository.findByName("Andras");
 		SportEvent event = sportEventRepository.findOne(eventID);
 		Comment c = new Comment();
@@ -152,6 +154,9 @@ public class SportEventOperationsImpl implements SportEventOperations {
 		
 		List<User> members = event.getMembers();
 		members.forEach(m -> sendEventNotification(m, commenter, event, EVENT_COMMENT));
+		
+		setEventComments(event);		
+		return event;
 	}
 
 	@Override
@@ -177,6 +182,12 @@ public class SportEventOperationsImpl implements SportEventOperations {
 		ret.setText(!arg.getOwner() && !arg.getCity() && !arg.getTitle() ? 
 				null : arg.getText());
 		return ret;
+	}
+	
+	private SportEvent setEventComments(SportEvent event) {
+		List<Comment> comments = commentRepository.findByEvent(event, new Sort("dateOfComment"));
+		event.setComments(comments);
+		return event;
 	}
 
 }

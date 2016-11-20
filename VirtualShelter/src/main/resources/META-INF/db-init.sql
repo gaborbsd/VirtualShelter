@@ -20,6 +20,8 @@ INSERT INTO sportevent VALUES (1, '2016-08-18 10:00:00', "tenisz", true, 4,6, 2,
 INSERT INTO sportevent VALUES (2, '2016-08-19 16:00:00', "tenisz", true, 4,6, 4, 1, "Tennis event 2", "TENNIS", 8, 1);
 INSERT INTO sportevent VALUES (3, '2016-07-13 16:00:00', "foci", true, 8,8,11, 1, "football event","FOOTBALL", 9, 2);
 
+INSERT INTO comment VALUES(1, '2016-10-18 10:44:00', "Labdat hozol?", 1, 4);
+
 INSERT INTO members_of_sportevent VALUES (1,1);
 INSERT INTO members_of_sportevent VALUES (2,1);
 INSERT INTO members_of_sportevent VALUES (3,2);
