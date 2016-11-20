@@ -1,13 +1,17 @@
 package hu.bme.aut.sportnetwork.dal.impl;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+import hu.aut.bme.sportnetwork.api.impl.SportEventFilter;
 import hu.bme.aut.sportnetwork.dal.SportEventDAOCustom;
 import hu.bme.aut.sportnetwork.entity.Address;
 import hu.bme.aut.sportnetwork.entity.SportEvent;
+import hu.bme.aut.sportnetwork.entity.Sports;
 
 public class SportEventDAOImpl implements SportEventDAOCustom {
 
@@ -38,6 +42,85 @@ public class SportEventDAOImpl implements SportEventDAOCustom {
 		}
 		
 		return ret;
+	}
+
+	@Override
+	public List<SportEvent> filterPublic(SportEventFilter arg) throws Exception {
+		StringBuilder queryString = new StringBuilder("SELECT e ");
+		StringBuilder fromString = new StringBuilder("FROM SportEvent e");
+		StringBuilder whereLevelString = new StringBuilder();
+		StringBuilder whereDataString = new StringBuilder();
+		boolean emptyText = arg.getText() == null || arg.getText().isEmpty();
+		
+		if (emptyText && arg.getSport()==null) {
+			addWhereLevelStringClausePart(whereLevelString, arg.getLevelFrom(), arg.getLevelTo(), false);
+			
+		} else {
+			
+			addWhereDataStringClausePart(whereDataString, fromString, arg.getSport(), arg.getText(), arg.getCity(), arg.getOwner());
+			
+			addWhereLevelStringClausePart(whereLevelString, arg.getLevelFrom(), arg.getLevelTo(), true);
+		}
+		
+		queryString.append(fromString.toString());
+		queryString.append(" WHERE ");
+		if (whereDataString.length() != 0) {
+			queryString.append("(");
+			queryString.append(whereDataString.toString().substring(4));
+			queryString.append(") AND ");
+		}
+		queryString.append(whereLevelString.toString().substring(5));
+		
+		String s = queryString.toString();
+		
+		
+		TypedQuery<SportEvent> query = em.createQuery(s, SportEvent.class);
+		
+		if (!emptyText) {
+			query.setParameter("text", "%" + arg.getText() + "%");
+		}
+		
+		if (arg.getSport() != null) {
+			query.setParameter("sport", arg.getSport());
+		}
+		
+		return query.getResultList();
+	}
+	
+	private void addWhereLevelStringClausePart(StringBuilder whereString, int from, int to, boolean allowUndefinedIntervall) {
+		if (from == 0 && to == 0) {
+			from = allowUndefinedIntervall ? 1 : 11;
+		}
+		if (from != 0) {
+			whereString.append(" AND e.levelIntervalTo >= ");
+			whereString.append(Integer.toString(from));
+		}
+		if (to != 0) {
+			whereString.append(" AND e.levelIntervalFrom <= ");
+			whereString.append(Integer.toString(to));
+		}
+	}
+	
+	private void addWhereDataStringClausePart(StringBuilder whereString, StringBuilder fromString, Sports sport,
+			String text, boolean city, boolean owner) {
+		
+		if (city) {
+			fromString.append(" JOIN e.address a");
+			whereString.append(" OR LOWER(a.city) LIKE ");
+			whereString.append(":text");
+		}
+		
+		if (owner) {
+			fromString.append(" JOIN e.owner o");
+			whereString.append(" OR LOWER(o.name) LIKE ");
+			whereString.append(":text");
+		}
+		
+		if (sport != null) {
+			whereString.append(" OR e.type = ");
+			whereString.append(":sport");
+		}
+
 	}
 
 }

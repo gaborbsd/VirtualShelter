@@ -24,7 +24,9 @@ import hu.bme.aut.sportnetwork.entity.Notification;
 import hu.bme.aut.sportnetwork.entity.NotificationStatus;
 import hu.bme.aut.sportnetwork.entity.RequestNotification;
 import hu.bme.aut.sportnetwork.entity.SportEvent;
+import hu.bme.aut.sportnetwork.entity.Sports;
 import hu.bme.aut.sportnetwork.entity.User;
+import hu.bme.aut.sportnetwork.rest.resources.FilterSportEventArg;
 
 public class SportEventOperationsImpl implements SportEventOperations {
 	
@@ -155,6 +157,25 @@ public class SportEventOperationsImpl implements SportEventOperations {
 	@Override
 	public void deleteComment(long commentID) {
 		commentRepository.delete(commentID);
+	}
+
+	@Override
+	public List<SportEvent> filterPublicEvents(FilterSportEventArg arg) throws Exception{
+		return sportEventRepository.filterPublic(toEventFilter(arg));
+	}
+	
+	private SportEventFilter toEventFilter(FilterSportEventArg arg) {
+		SportEventFilter ret = new SportEventFilter();
+		ret.setCity(arg.getCity());
+		ret.setLevelFrom(arg.getLevelFrom());
+		ret.setLevelTo(arg.getLevelTo());
+		ret.setOwner(arg.getOwner());
+		boolean sportNeeded = arg.getText() != null && !arg.getText().isEmpty() && arg.getSport();
+		ret.setSport(sportNeeded ?
+				Sports.toSport(arg.getText()) : null);
+		ret.setText(!arg.getOwner() && !arg.getCity() ? 
+				null : arg.getText());
+		return ret;
 	}
 
 }

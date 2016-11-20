@@ -18,6 +18,7 @@ import hu.bme.aut.sportnetwork.api.SportEventOperations;
 import hu.bme.aut.sportnetwork.api.UserOperations;
 import hu.bme.aut.sportnetwork.entity.SportEvent;
 import hu.bme.aut.sportnetwork.entity.User;
+import hu.bme.aut.sportnetwork.rest.resources.FilterSportEventArg;
 import hu.bme.aut.sportnetwork.rest.resources.SportEventResource;
 import hu.bme.aut.sportnetwork.rest.resources.SportEventResourceAssembler;
 import hu.bme.aut.sportnetwork.rest.resources.SportEventShortResource;
@@ -43,6 +44,14 @@ public class SportEventController {
 	@RequestMapping(value="public", method=RequestMethod.GET)
 	ResponseEntity<List<SportEventShortResource>> findAllSportEvent() {
 		List<SportEvent> events = sporteventOperation.findAll();
+		List<SportEventShortResource> resourceList = sportEventShortResourceAssembler
+				.toResources(events);
+		return new ResponseEntity<List<SportEventShortResource>>(resourceList, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value="public/search", method=RequestMethod.POST)
+	ResponseEntity<List<SportEventShortResource>> findFilteredSportEvent(@RequestBody FilterSportEventArg arg) throws Exception {
+		List<SportEvent> events = sporteventOperation.filterPublicEvents(arg);
 		List<SportEventShortResource> resourceList = sportEventShortResourceAssembler
 				.toResources(events);
 		return new ResponseEntity<List<SportEventShortResource>>(resourceList, HttpStatus.OK);

@@ -12,5 +12,14 @@ public enum Sports {
 	AMERICAN_FOOTBALL,
 	SNOOKER,
 	TABLE_TENNIS,
-	CHESS
+	CHESS;
+	
+	public static Sports toSport(String text) {
+		for (Sports s : Sports.values()) {
+			if (s.toString().equals(text.toUpperCase())) {
+				return s;
+			}
+		}
+		return null;
+	}
 }

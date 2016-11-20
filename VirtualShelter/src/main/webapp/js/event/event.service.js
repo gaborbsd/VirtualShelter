@@ -13,6 +13,16 @@ app.factory("EventFactory", function($http, $q) {
 		return deferred.promise;
 	};
 	
+	factory.searchPublicEvents = function(cond) {
+		var deferred = $q.defer();
+		$http.post("api/sportevent/public/search", cond).success(function(data, status) {
+			deferred.resolve(data);
+		}).error(function(data, status) {
+			deferred.reject(data);
+		});
+		return deferred.promise;
+	}
+	
 	factory.createEvent = function(event) {
 		var deferred = $q.defer();
 		$http.post("api/sportevent/create", event).success(function(data, status) {
