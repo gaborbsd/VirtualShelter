@@ -4,12 +4,15 @@ import java.util.Date;
 
 import org.springframework.hateoas.ResourceSupport;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import hu.bme.aut.sportnetwork.entity.Sports;
 
 public class SportEventResource extends ResourceSupport {
 	
 	private String owner;
 	
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date date;
 
 	private Sports type;

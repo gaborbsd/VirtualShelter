@@ -12,7 +12,7 @@ app.config(function($routeProvider) {
 		templateUrl : '/html/users.html'
 	}).when('/event/:id', {
 		controller : 'EventController',
-		templateUrl : '/html/event.html'
+		templateUrl : '/html/event/event.html'
 	}).when('/editor/events/new', {
 		controller : 'EventCreateController',
 		templateUrl : '/html/event/newevent.html'
