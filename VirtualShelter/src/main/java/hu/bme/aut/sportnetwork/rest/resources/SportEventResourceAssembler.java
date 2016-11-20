@@ -35,6 +35,7 @@ public class SportEventResourceAssembler extends
 		resource.setDate(entity.getDate());
 		resource.setType(entity.getType());
 		resource.setMaxSize(entity.getMaxSize());
+		resource.setIsOpened(entity.getIsOpened());
 		resource.setDescription(entity.getDescription());
 		List<CommentWrapper> comments = new ArrayList<>();
 		entity.getComments().forEach(c -> addComment(comments, c));

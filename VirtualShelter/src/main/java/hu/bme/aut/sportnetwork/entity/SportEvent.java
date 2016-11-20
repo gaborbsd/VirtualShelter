@@ -37,7 +37,7 @@ public class SportEvent {
 	@Column(name="title", nullable = false)
 	private String title;
 	
-	@OneToMany(mappedBy="event")
+	@OneToMany(mappedBy="event", orphanRemoval=true)
 	private List<Comment> comments;
 	
 	@ManyToMany
@@ -46,7 +46,7 @@ public class SportEvent {
 				inverseJoinColumns=@JoinColumn(name="user_id"))
 	private List<User> members;
 	
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne(cascade={CascadeType.PERSIST, CascadeType.MERGE})
 	private Address address;
 	
 	@Column(name = "member_size", nullable = false)
@@ -68,6 +68,9 @@ public class SportEvent {
 	
 	@Column(name = "is_public", nullable = false)
 	private boolean isPublic;
+	
+	@Column(name = "is_opened", nullable = false)
+	private boolean isOpened;
 	
 	@Column(name = "level_from", nullable = false)
 	private int levelIntervalFrom;
@@ -150,6 +153,14 @@ public class SportEvent {
 
 	public void setStatus(EventStatus status) {
 		this.status = status;
+	}
+
+	public boolean getIsOpened() {
+		return isOpened;
+	}
+
+	public void setIsOpened(boolean isOpened) {
+		this.isOpened = isOpened;
 	}
 
 	public boolean getIsPublic() {

@@ -51,8 +51,8 @@ public class SportEventOperationsImpl implements SportEventOperations {
 	private static final String EVENT_COMMENT = "COMMENT ADDED";
 
 	@Override
-	public List<SportEvent> findAll() {
-		return sportEventRepository.findAll();
+	public List<SportEvent> findAllOpenedEvents() {
+		return sportEventRepository.findByIsOpened(true);
 	}
 
 	@Override
@@ -63,6 +63,7 @@ public class SportEventOperationsImpl implements SportEventOperations {
 		e.setOwner(owner);
 		e.getMembers().add(owner);
 		e.setMemberSize(e.getMembers().size());
+		e.setIsOpened(true);
 		SportEvent newEvent = sportEventRepository.saveNewEvent(e);
 		List<Object> usersToNotify = friendShipRepository.findByPersonAndListenNotifications(owner, true);
 		usersToNotify.forEach(u -> sendEventNotification((User)u, owner, newEvent, NEW_EVENT));
@@ -93,15 +94,19 @@ public class SportEventOperationsImpl implements SportEventOperations {
 	}
 
 	@Override
-	public List<SportEvent> listPublicEvents() {
+	public List<SportEvent> listPublicOpenedEvents() {
 		return sportEventRepository.findByIsPublic(true, new Sort("date"));
 	}
 
 	@Override
-	public void applyToSportEvent(long eventID) throws Exception {
+	@Transactional
+	public SportEvent applyToSportEvent(long eventID) throws Exception {
 		User applicant = userRepository.findByName("Andras");
 		SportEvent event = sportEventRepository.findOne(eventID);
-		sendEventRequestNotification(event.getOwner(), applicant, event);		
+		sendEventRequestNotification(event.getOwner(), applicant, event);
+		setEventComments(event);
+		event.setStatus(EventStatus.APPLIED);
+		return event;
 	}
 
 	@Override
@@ -206,6 +211,45 @@ public class SportEventOperationsImpl implements SportEventOperations {
 		}
 		
 		
+	}
+
+	@Override
+	public SportEvent cancelEventRequest(long eventID) {
+		User applicant = userRepository.findByName("Andras");
+		SportEvent event = sportEventRepository.findOne(eventID);
+		notificationRepositroy.deleteEventRequest(event, applicant);
+		setEventComments(event);
+		event.setStatus(EventStatus.NOT_MEMBER);
+		return event;
+	}
+
+	@Override
+	@Transactional
+	public SportEvent removeUserFromSportEvent(long eventID) {
+		User applicant = userRepository.findByName("Andras");
+		SportEvent event = sportEventRepository.findOne(eventID);
+		event.setMemberSize(event.getMemberSize() - 1);
+		sportEventRepository.save(event);
+		sportEventRepository.removeUserFromSportEvent(event, applicant);
+		setEventComments(event);
+		event.setStatus(EventStatus.NOT_MEMBER);
+		return event;
+	}
+
+	@Override
+	@Transactional
+	public SportEvent closeEvent(long eventID) {
+		SportEvent event = sportEventRepository.findOne(eventID);
+		event.setIsOpened(false);
+		sportEventRepository.save(event);
+		setEventComments(event);
+		event.setStatus(EventStatus.OWNER);
+		return event;
+	}
+
+	@Override
+	public void deleteEvent(long eventID) {
+		sportEventRepository.delete(eventID);
 	}
 
 }

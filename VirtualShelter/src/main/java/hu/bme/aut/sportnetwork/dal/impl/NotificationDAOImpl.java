@@ -5,7 +5,9 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.Transient;
 import javax.persistence.TypedQuery;
+import javax.transaction.Transactional;
 
 import hu.bme.aut.sportnetwork.dal.NotificationDAOCustom;
 import hu.bme.aut.sportnetwork.entity.FriendRequestNotification;
@@ -34,6 +36,17 @@ public class NotificationDAOImpl implements NotificationDAOCustom {
 		int res = ((Number) query.getSingleResult()).intValue();
 		
 		return res != 0;
+	}
+
+	@Override
+	@Transactional
+	public void deleteEventRequest(SportEvent e, User u) {
+		Query query = em.createQuery("DELETE FROM EventRequestNotification WHERE event = :event AND sender = :sender");
+		query.setParameter("event", e);
+		query.setParameter("sender", u);
+		
+		query.executeUpdate();
+		
 	}
 
 }

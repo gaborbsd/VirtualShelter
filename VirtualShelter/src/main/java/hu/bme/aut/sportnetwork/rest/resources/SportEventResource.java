@@ -31,6 +31,8 @@ public class SportEventResource extends ResourceSupport {
 	
 	private int status;
 	
+	private boolean isOpened;
+	
 	public SportEventResource() {
 		
 	}
@@ -112,9 +114,14 @@ public class SportEventResource extends ResourceSupport {
 	public void setStatus(int status) {
 		this.status = status;
 	}
-	
-	
-	
-	
+
+	public boolean getIsOpened() {
+		return isOpened;
+	}
+
+	public void setIsOpened(boolean isOpened) {
+		this.isOpened = isOpened;
+	}
+		
 
 }

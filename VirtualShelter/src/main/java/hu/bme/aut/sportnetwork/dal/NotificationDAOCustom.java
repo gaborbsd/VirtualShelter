@@ -11,4 +11,6 @@ public interface NotificationDAOCustom {
 	List<FriendRequestNotification> getFriendRequestSenders(User u);
 	
 	boolean isUserAppliedToEvent(SportEvent e, User u);
+	
+	void deleteEventRequest(SportEvent e, User u);
 }

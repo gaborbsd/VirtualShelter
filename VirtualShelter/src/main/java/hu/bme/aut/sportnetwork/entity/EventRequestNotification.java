@@ -4,9 +4,12 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name="event_request_notification")
+@Table(name="event_request_notification", uniqueConstraints={
+		@UniqueConstraint(columnNames={"event_id", "sender_id"})
+})
 public class EventRequestNotification extends RequestNotification {
 	
 	@ManyToOne

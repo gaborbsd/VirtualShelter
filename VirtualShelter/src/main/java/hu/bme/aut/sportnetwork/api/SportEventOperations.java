@@ -8,7 +8,7 @@ import hu.bme.aut.sportnetwork.rest.resources.FilterSportEventArg;
 
 public interface SportEventOperations {
 	
-	List<SportEvent> findAll();
+	List<SportEvent> findAllOpenedEvents();
 	
 	List<SportEvent> filterPublicEvents(FilterSportEventArg arg) throws Exception;
 	
@@ -16,17 +16,25 @@ public interface SportEventOperations {
 	
 	SportEvent create(SportEvent e);
 	
+	SportEvent removeUserFromSportEvent(long eventID);
+	
 	List<SportEvent> findEventsByOwner(User owner);
 	
 	void acceptEventRequest(long notificationId) throws Exception;
 	
-	List<SportEvent> listPublicEvents();
+	List<SportEvent> listPublicOpenedEvents();
 	
-	void applyToSportEvent(long eventID) throws Exception;
+	SportEvent applyToSportEvent(long eventID) throws Exception;
+	
+	SportEvent cancelEventRequest(long eventID);
 	
 	void rateUser(long eventID, long userId, int value);
 	
 	SportEvent writeComment(long eventID, String comment);
 	
 	void deleteComment(long commentID);
+	
+	SportEvent closeEvent(long eventID);
+	
+	void deleteEvent(long eventID);
 }

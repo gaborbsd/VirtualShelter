@@ -7,6 +7,7 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import javax.transaction.Transactional;
 
 import hu.aut.bme.sportnetwork.api.impl.SportEventFilter;
 import hu.bme.aut.sportnetwork.dal.SportEventDAOCustom;
@@ -72,6 +73,7 @@ public class SportEventDAOImpl implements SportEventDAOCustom {
 			queryString.append(") AND ");
 		}
 		queryString.append(whereLevelString.toString().substring(5));
+		queryString.append(" AND e.isOpened = true");
 		
 		String s = queryString.toString();
 		
@@ -137,6 +139,18 @@ public class SportEventDAOImpl implements SportEventDAOCustom {
 			whereString.append(" OR e.type = :sport");
 		}
 
+	}
+
+	@Override
+	@Transactional
+	public void removeUserFromSportEvent(SportEvent e, User u) {
+		Query query = em.createNativeQuery("DELETE FROM members_of_sportevent "
+				+ "WHERE user_id=?1 AND sportevent_id=?2");
+		query.setParameter(1, u.getId());
+		query.setParameter(2, e.getId());
+		
+		query.executeUpdate();
+		
 	}
 
 }

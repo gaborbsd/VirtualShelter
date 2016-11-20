@@ -14,4 +14,6 @@ public interface SportEventDAO extends AbstractRepository<SportEvent>, SportEven
 	List<SportEvent> findByOwner(User u);
 	
 	List<SportEvent> findByIsPublic(boolean isPublic, Sort sort);
+	
+	List<SportEvent> findByIsOpened(boolean isOpened);
 }

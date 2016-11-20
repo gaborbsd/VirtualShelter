@@ -44,7 +44,7 @@ public class SportEventController {
 	
 	@RequestMapping(value="public", method=RequestMethod.GET)
 	ResponseEntity<List<SportEventShortResource>> findAllSportEvent() {
-		List<SportEvent> events = sporteventOperation.findAll();
+		List<SportEvent> events = sporteventOperation.findAllOpenedEvents();
 		List<SportEventShortResource> resourceList = sportEventShortResourceAssembler
 				.toResources(events);
 		return new ResponseEntity<List<SportEventShortResource>>(resourceList, HttpStatus.OK);
@@ -82,8 +82,36 @@ public class SportEventController {
 	}
 	
 	@RequestMapping(value="/apply/{id}", method=RequestMethod.POST)
-	ResponseEntity<String> applyEvent(@PathVariable Long id) throws Exception {
-		sporteventOperation.applyToSportEvent(id);		
+	ResponseEntity<SportEventResource> applyEvent(@PathVariable Long id) throws Exception {
+		SportEvent event = sporteventOperation.applyToSportEvent(id);		
+		SportEventResource resource = sportEventResourceAssembler.toResource(event);
+		return new ResponseEntity<SportEventResource>(resource, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value="/delete/{id}", method=RequestMethod.DELETE)
+	ResponseEntity<String> deleteEvent(@PathVariable Long id) throws Exception {
+		sporteventOperation.deleteEvent(id);
 		return new ResponseEntity<String>(HttpStatus.OK);
+	}
+	
+	@RequestMapping(value="/close/{id}", method=RequestMethod.PUT)
+	ResponseEntity<SportEventResource> closeEvent(@PathVariable Long id) throws Exception {
+		SportEvent event = sporteventOperation.closeEvent(id);
+		SportEventResource resource = sportEventResourceAssembler.toResource(event);
+		return new ResponseEntity<SportEventResource>(resource, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value="/cancel/{id}", method=RequestMethod.DELETE)
+	ResponseEntity<SportEventResource> cancelEventRequest(@PathVariable Long id) throws Exception {
+		SportEvent event = sporteventOperation.cancelEventRequest(id);
+		SportEventResource resource = sportEventResourceAssembler.toResource(event);
+		return new ResponseEntity<SportEventResource>(resource, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value="/leave/{id}", method=RequestMethod.DELETE)
+	ResponseEntity<SportEventResource> leaveEvent(@PathVariable Long id) throws Exception {
+		SportEvent event = sporteventOperation.removeUserFromSportEvent(id);
+		SportEventResource resource = sportEventResourceAssembler.toResource(event);
+		return new ResponseEntity<SportEventResource>(resource, HttpStatus.OK);
 	}
 }

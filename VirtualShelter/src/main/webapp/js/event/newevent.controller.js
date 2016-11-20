@@ -43,7 +43,7 @@ app.controller('EventCreateController', function($scope, EventFactory) {
 		} else if ($scope.levelIntervalFrom == null || $scope.levelIntervalTo == null) {
 			alert("Fill levelintervalls");
 			return false;
-		} else if ($scope.levelIntervalTo < $scope.levelIntervalFrom) {
+		} else if (parseInt($scope.levelIntervalTo) < parseInt($scope.levelIntervalFrom)) {
 			alert("Incorrect levelintervall");
 			return false;
 		} else if (!$scope.country || !$scope.city || !$scope.address) {

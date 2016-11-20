@@ -1,10 +1,27 @@
-<div class="page-header">
-   
-   <h1>
+<div class="page-header" align="center"> 
+   <h2>
       {{event.title}} 
-   </h1>
-   
+   </h2>  
 </div>
+
+<div ng-if="event.status==2 && event.isOpened" align="right">
+	applied for this event
+</div>
+
+<div class="dropdown dropdownMenu" align="right" ng-if="event.isOpened">
+  <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Menu
+  <span class="caret"></span></button>
+  <ul class="dropdown-menu dropdown-menu-right dropdownMenu">
+    <li ng-show="event.status==0"><a ng-click="deleteEvent()" >delete</a></li>
+    <li ng-show="event.status==0"><a ng-click="closeEvent()" >close</a></li>
+    <li ng-show="event.status==1"><a ng-click="leaveEvent()" >leave event</a></li>
+    <li ng-show="event.status==2"><a ng-click="cancelEvent()" >cancel request</a></li>
+    <li ng-show="event.status==3"><a ng-click="joinEvent()" >join</a></li>
+  </ul>
+</div>
+	
+	
+	
 <table>
   <tr>
     <td>Owner:  </td>
