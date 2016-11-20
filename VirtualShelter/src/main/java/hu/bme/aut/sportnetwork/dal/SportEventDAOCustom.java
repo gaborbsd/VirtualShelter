@@ -11,9 +11,5 @@ public interface SportEventDAOCustom {
 	SportEvent saveNewEvent(SportEvent e);
 	
 	List<SportEvent> filterPublic(SportEventFilter arg) throws Exception;
-	
-	boolean isUserMemberOfEvent(SportEvent e, User u);
-	
-	void removeUserFromSportEvent(SportEvent e, User u);
 
 }

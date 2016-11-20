@@ -91,19 +91,6 @@ public class SportEventDAOImpl implements SportEventDAOCustom {
 		return query.getResultList();
 	}
 	
-	@Override
-	public boolean isUserMemberOfEvent(SportEvent e, User u) {
-		Query query = em.createNativeQuery("SELECT count(*) FROM members_of_sportevent "
-				+ "WHERE user_id=?1 AND sportevent_id=?2");
-		query.setParameter(1, u.getId());
-		query.setParameter(2, e.getId());
-		
-		int res = ((Number) query.getSingleResult()).intValue();
-		
-		return res != 0;
-		
-	}
-	
 	private void addWhereLevelStringClausePart(StringBuilder whereString, int from, int to, boolean allowUndefinedIntervall) {
 		if (from == 0 && to == 0) {
 			from = allowUndefinedIntervall ? 1 : 11;
@@ -139,18 +126,6 @@ public class SportEventDAOImpl implements SportEventDAOCustom {
 			whereString.append(" OR e.type = :sport");
 		}
 
-	}
-
-	@Override
-	@Transactional
-	public void removeUserFromSportEvent(SportEvent e, User u) {
-		Query query = em.createNativeQuery("DELETE FROM members_of_sportevent "
-				+ "WHERE user_id=?1 AND sportevent_id=?2");
-		query.setParameter(1, u.getId());
-		query.setParameter(2, e.getId());
-		
-		query.executeUpdate();
-		
 	}
 
 }

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 import hu.bme.aut.sportnetwork.entity.Comment;
 import hu.bme.aut.sportnetwork.entity.EventStatus;
 import hu.bme.aut.sportnetwork.entity.SportEvent;
+import hu.bme.aut.sportnetwork.entity.User;
 import hu.bme.aut.sportnetwork.rest.SportEventController;
 import hu.bme.aut.sportnetwork.rest.UserController;
 
@@ -37,9 +38,15 @@ public class SportEventResourceAssembler extends
 		resource.setMaxSize(entity.getMaxSize());
 		resource.setIsOpened(entity.getIsOpened());
 		resource.setDescription(entity.getDescription());
+		
 		List<CommentWrapper> comments = new ArrayList<>();
 		entity.getComments().forEach(c -> addComment(comments, c));
 		resource.setComments(comments);
+		
+		List<UserLinkWrapper> members = new ArrayList<>();
+		entity.getMembers().forEach(m -> addMember(members, m));
+		resource.setMembers(members);
+		
 		resource.setOwner(entity.getOwner().getName());
 		
 		
@@ -61,6 +68,14 @@ public class SportEventResourceAssembler extends
 		return resource;
 	}
 	
+	private void addMember(List<UserLinkWrapper> members, User m) {
+		UserLinkWrapper u = new UserLinkWrapper();
+		u.setId(m.getId());
+		u.setName(m.getName());
+		
+		members.add(u);
+	}
+
 	private void addComment(List<CommentWrapper> comments, Comment c) {
 		UserLinkWrapper u  = new UserLinkWrapper();
 		u.setId(c.getOwner().getId());

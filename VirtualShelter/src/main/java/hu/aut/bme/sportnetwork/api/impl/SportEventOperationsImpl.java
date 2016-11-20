@@ -102,9 +102,8 @@ public class SportEventOperationsImpl implements SportEventOperations {
 	@Transactional
 	public SportEvent applyToSportEvent(long eventID) throws Exception {
 		User applicant = userRepository.findByName("Andras");
-		SportEvent event = sportEventRepository.findOne(eventID);
+		SportEvent event = eagerFetchSportEvent(eventID);
 		sendEventRequestNotification(event.getOwner(), applicant, event);
-		setEventComments(event);
 		event.setStatus(EventStatus.APPLIED);
 		return event;
 	}
@@ -140,10 +139,10 @@ public class SportEventOperationsImpl implements SportEventOperations {
 	}
 
 	@Override
+	@Transactional
 	public SportEvent findById(long id) {
 		User user = userRepository.findByName("Andras");
-		SportEvent ret = sportEventRepository.findOne(id);
-		setEventComments(ret);
+		SportEvent ret = eagerFetchSportEvent(id);
 		setEventStatus(ret, user);
 		return ret;
 	}
@@ -152,19 +151,18 @@ public class SportEventOperationsImpl implements SportEventOperations {
 	@Transactional
 	public SportEvent writeComment(long eventID, String comment) {
 		User commenter = userRepository.findByName("Andras");
-		SportEvent event = sportEventRepository.findOne(eventID);
+		SportEvent event = eagerFetchSportEvent(eventID);
 		Comment c = new Comment();
 		c.setOwner(commenter);
 		c.setEvent(event);
 		c.setDateOfComment(new Date());
 		c.setMessage(comment);
-
-		commentRepository.save(c);
+		event.getComments().add(c);
+		sportEventRepository.save(event);
 		
 		List<User> members = event.getMembers();
 		members.forEach(m -> sendEventNotification(m, commenter, event, EVENT_COMMENT));
-		
-		setEventComments(event);	
+
 		setEventStatus(event, commenter);
 		return event;
 	}
@@ -194,31 +192,24 @@ public class SportEventOperationsImpl implements SportEventOperations {
 		return ret;
 	}
 	
-	private void setEventComments(SportEvent event) {
-		List<Comment> comments = commentRepository.findByEvent(event, new Sort("dateOfComment"));
-		event.setComments(comments);
-	}
-	
 	private void setEventStatus(SportEvent event, User user) {
 		if (event.getOwner().getName().equals(user.getName())) {
 			event.setStatus(EventStatus.OWNER);
-		} else if (sportEventRepository.isUserMemberOfEvent(event, user)) {
+		} else if (event.getMembers().contains(user)) {
 			event.setStatus(EventStatus.MEMBER);
 		} else if (notificationRepositroy.isUserAppliedToEvent(event, user)) {
 			event.setStatus(EventStatus.APPLIED);
 		} else {
 			event.setStatus(EventStatus.NOT_MEMBER);
-		}
-		
-		
+		}	
 	}
 
 	@Override
+	@Transactional
 	public SportEvent cancelEventRequest(long eventID) {
 		User applicant = userRepository.findByName("Andras");
-		SportEvent event = sportEventRepository.findOne(eventID);
+		SportEvent event = eagerFetchSportEvent(eventID);
 		notificationRepositroy.deleteEventRequest(event, applicant);
-		setEventComments(event);
 		event.setStatus(EventStatus.NOT_MEMBER);
 		return event;
 	}
@@ -227,11 +218,11 @@ public class SportEventOperationsImpl implements SportEventOperations {
 	@Transactional
 	public SportEvent removeUserFromSportEvent(long eventID) {
 		User applicant = userRepository.findByName("Andras");
-		SportEvent event = sportEventRepository.findOne(eventID);
+		SportEvent event = eagerFetchSportEvent(eventID);
 		event.setMemberSize(event.getMemberSize() - 1);
+		event.getMembers().remove(applicant);
 		sportEventRepository.save(event);
-		sportEventRepository.removeUserFromSportEvent(event, applicant);
-		setEventComments(event);
+		
 		event.setStatus(EventStatus.NOT_MEMBER);
 		return event;
 	}
@@ -239,10 +230,9 @@ public class SportEventOperationsImpl implements SportEventOperations {
 	@Override
 	@Transactional
 	public SportEvent closeEvent(long eventID) {
-		SportEvent event = sportEventRepository.findOne(eventID);
+		SportEvent event = eagerFetchSportEvent(eventID);
 		event.setIsOpened(false);
 		sportEventRepository.save(event);
-		setEventComments(event);
 		event.setStatus(EventStatus.OWNER);
 		return event;
 	}
@@ -250,6 +240,13 @@ public class SportEventOperationsImpl implements SportEventOperations {
 	@Override
 	public void deleteEvent(long eventID) {
 		sportEventRepository.delete(eventID);
+	}
+	
+	private SportEvent eagerFetchSportEvent(long id) {
+		SportEvent event = sportEventRepository.findOne(id);
+		event.getMembers().size();
+		event.getComments().size();
+		return event;
 	}
 
 }

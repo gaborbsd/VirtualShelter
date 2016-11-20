@@ -37,10 +37,10 @@ public class SportEvent {
 	@Column(name="title", nullable = false)
 	private String title;
 	
-	@OneToMany(mappedBy="event", orphanRemoval=true)
+	@OneToMany(mappedBy="event", cascade={CascadeType.MERGE, CascadeType.REMOVE})
 	private List<Comment> comments;
 	
-	@ManyToMany
+	@ManyToMany(cascade=CascadeType.MERGE)
 	@JoinTable(name="members_of_sportevent", 
 				joinColumns=@JoinColumn(name="sportevent_id"),
 				inverseJoinColumns=@JoinColumn(name="user_id"))

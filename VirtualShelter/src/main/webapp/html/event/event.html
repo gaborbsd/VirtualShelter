@@ -20,7 +20,13 @@
   </ul>
 </div>
 	
-	
+<div ng-show="event.members.length > 0" >
+	<ul ng-repeat="m in event.members">
+		<li >
+			<a href="#/user/{{m.id}}">{{m.name}}</a>	
+		</li>
+	</ul>
+</div>	
 	
 <table>
   <tr>
