@@ -38,6 +38,10 @@ public class SportEventResourceAssembler extends
 		resource.setMaxSize(entity.getMaxSize());
 		resource.setIsOpened(entity.getIsOpened());
 		resource.setDescription(entity.getDescription());
+		resource.setCity(entity.getAddress().getCity());
+		resource.setAddress(entity.getAddress().getAddress());
+		resource.setLevel(entity.getLevelIntervalFrom() == entity.getLevelIntervalTo() ? String.valueOf(entity.getLevelIntervalFrom()) :
+			String.valueOf(entity.getLevelIntervalFrom()) + "-" + String.valueOf(entity.getLevelIntervalTo()));
 		
 		List<CommentWrapper> comments = new ArrayList<>();
 		entity.getComments().forEach(c -> addComment(comments, c));

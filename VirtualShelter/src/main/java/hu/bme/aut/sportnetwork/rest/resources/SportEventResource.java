@@ -23,7 +23,13 @@ public class SportEventResource extends ResourceSupport {
 	
 	private int maxSize;
 	
+	private String level;
+	
 	private String description;
+	
+	private String city;
+	
+	private String address;
 	
 	private List<CommentWrapper> comments;
 	
@@ -122,6 +128,30 @@ public class SportEventResource extends ResourceSupport {
 	public void setIsOpened(boolean isOpened) {
 		this.isOpened = isOpened;
 	}
-		
 
+	public String getLevel() {
+		return level;
+	}
+
+	public void setLevel(String level) {
+		this.level = level;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	
+	
 }

@@ -135,8 +135,8 @@ body {
     height:800px;
 }
 
-.dropdownMenu {
-	margin-right: 40px;
+.memberList {
+	font-size: 15px;
 }
 
 .card {
@@ -377,7 +377,18 @@ body {
   border-radius: 3px 0 0 3px;
 }
 
+li.borderless { 
+	border-top: 0 none; 
+}
 
+.commentLabel {
+	background-color: #DCDCE6;
+}
+
+.borderlist {
+    list-style-position:inside;
+    border: 1px solid black;
+}
 
 
 
