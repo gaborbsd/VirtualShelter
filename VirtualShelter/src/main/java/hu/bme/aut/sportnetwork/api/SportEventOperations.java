@@ -32,7 +32,7 @@ public interface SportEventOperations {
 	
 	SportEvent writeComment(long eventID, String comment);
 	
-	void deleteComment(long commentID);
+	SportEvent deleteComment(long commentID);
 	
 	SportEvent closeEvent(long eventID);
 	

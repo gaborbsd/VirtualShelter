@@ -33,6 +33,16 @@ app.factory("EventFactory", function($http, $q) {
 		return deferred.promise;
 	}
 	
+	factory.deleteComment = function(id) {
+		var deferred = $q.defer();
+		$http.delete("api/sportevent/delcomment/" + id).success(function(data, status) {
+			deferred.resolve(data);
+		}).error(function(data, status) {
+			deferred.reject(data);
+		});
+		return deferred.promise;
+	}
+	
     factory.deleteEvent = function(id) {
     	var deferred = $q.defer();
 		$http.delete("api/sportevent/delete/" + id).success(function(data, status) {

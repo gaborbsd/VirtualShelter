@@ -87,8 +87,9 @@
 	<ul ng-repeat="c in event.comments">
 		<li>
 				<a href="#/user/{{c.writer.id}}"><font color="blue">{{c.writer.name}}</font>:</a> 
-				<label class="commentLabel">{{c.message}}</label>
-					
+				<label class="commentLabel">{{c.message}}</label>				
+                <button ng-show="event.status==0 || c.mine" class="btn close cardClose" ng-click="deleteComment(c.id)" >&times;</button>					
+               
 		</li>
 	</ul>
 </div>

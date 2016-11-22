@@ -10,6 +10,10 @@ public class CommentWrapper {
 	
 	private String message;
 	
+	private Long id;
+	
+	private boolean mine;
+	
 	/*@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date date;*/
 
@@ -29,13 +33,24 @@ public class CommentWrapper {
 		this.message = message;
 	}
 
-	/*public Date getDate() {
-		return date;
+	public Long getId() {
+		return id;
 	}
 
-	public void setDate(Date date) {
-		this.date = date;
-	}*/
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public boolean isMine() {
+		return mine;
+	}
+
+	public void setMine(boolean mine) {
+		this.mine = mine;
+	}
+	
+	
+
 	
 	
 

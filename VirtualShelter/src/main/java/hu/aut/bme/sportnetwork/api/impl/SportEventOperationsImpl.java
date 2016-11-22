@@ -168,8 +168,15 @@ public class SportEventOperationsImpl implements SportEventOperations {
 	}
 
 	@Override
-	public void deleteComment(long commentID) {
-		commentRepository.delete(commentID);
+	@Transactional
+	public SportEvent deleteComment(long commentID) {
+		User commenter = userRepository.findByName("Andras");
+		SportEvent event = commentRepository.findOne(commentID).getEvent();
+		event = eagerFetchSportEvent(event.getId());
+		setEventStatus(event, commenter);
+		event.getComments().removeIf(c -> c.getId() == commentID);
+		sportEventRepository.save(event);
+		return event;
 	}
 
 	@Override

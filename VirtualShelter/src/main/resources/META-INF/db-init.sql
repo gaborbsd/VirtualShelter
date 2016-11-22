@@ -22,6 +22,7 @@ INSERT INTO sportevent VALUES (3, '2016-07-13 16:00:00', "foci", true,true, 8,8,
 INSERT INTO sportevent VALUES (4, '2016-09-15 16:00:00', "kezi", true,true, 3,7,8, 2, "kezikezijeee","HANDBALL", 9, 4);
 
 INSERT INTO comment VALUES(1, '2016-10-18 10:44:00', "Labdat hozol?", 1, 4);
+INSERT INTO comment VALUES(2, '2016-11-03 14:44:00', "Lehet esni fog", 3, 2);
 
 INSERT INTO members_of_sportevent VALUES (1,1);
 INSERT INTO members_of_sportevent VALUES (2,1);

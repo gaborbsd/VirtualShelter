@@ -37,7 +37,7 @@ public class SportEvent {
 	@Column(name="title", nullable = false)
 	private String title;
 	
-	@OneToMany(mappedBy="event", cascade={CascadeType.MERGE, CascadeType.REMOVE})
+	@OneToMany(mappedBy="event", orphanRemoval=true, cascade=CascadeType.MERGE)
 	private List<Comment> comments;
 	
 	@ManyToMany(cascade=CascadeType.MERGE)

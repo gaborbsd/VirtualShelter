@@ -86,6 +86,8 @@ public class SportEventResourceAssembler extends
 		u.setName(c.getOwner().getName());
 		CommentWrapper w = new CommentWrapper();
 		w.setMessage(c.getMessage());
+		w.setId(c.getId());
+		w.setMine(c.getOwner().getName().equals("Andras"));
 		w.setWriter(u);
 		//w.setDate(c.getDateOfComment());
 		comments.add(w);

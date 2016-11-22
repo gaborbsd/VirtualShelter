@@ -22,6 +22,17 @@ app.controller('EventController', function($scope, $routeParams, $interval, Even
 		}
 	}
 	
+	$scope.deleteComment = function(id){
+		var confirmed = confirm("Are you sure you want to delete this comment?");
+		if (confirmed) {
+			EventFactory.deleteComment(id).then(function (data) {
+				$scope.event = data;
+	        }, function (error) {
+	            alert(error);
+	        });
+		}
+	}
+	
 	$scope.deleteEvent = function(){
 		var confirmed = confirm("Are you sure you want to delete this event?");
 		if (confirmed) {

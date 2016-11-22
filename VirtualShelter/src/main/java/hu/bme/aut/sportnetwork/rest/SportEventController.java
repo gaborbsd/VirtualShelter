@@ -74,6 +74,13 @@ public class SportEventController {
 		return new ResponseEntity<SportEventResource>(resource, HttpStatus.OK);
 	}
 	
+	@RequestMapping(value="/delcomment/{id}", method=RequestMethod.DELETE)
+	ResponseEntity<SportEventResource> deleteComment(@PathVariable Long id) {
+		SportEvent event = sporteventOperation.deleteComment(id);
+		SportEventResource resource = sportEventResourceAssembler.toResource(event);
+		return new ResponseEntity<SportEventResource>(resource, HttpStatus.OK);
+	}
+	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	ResponseEntity<SportEventResource> getSportEvent(@PathVariable Long id) {
 		SportEvent event = sporteventOperation.findById(id);
