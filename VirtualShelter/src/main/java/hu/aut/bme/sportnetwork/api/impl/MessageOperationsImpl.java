@@ -8,6 +8,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.transaction.annotation.Transactional;
 
 import hu.bme.aut.sportnetwork.api.MessageOperations;
+import hu.bme.aut.sportnetwork.auth.AuthOperations;
 import hu.bme.aut.sportnetwork.dal.ConversationDAO;
 import hu.bme.aut.sportnetwork.dal.MessageDAO;
 import hu.bme.aut.sportnetwork.dal.NotificationDAO;
@@ -32,10 +33,13 @@ public class MessageOperationsImpl implements MessageOperations {
 	
 	@Autowired
 	private MessageDAO messageRepository;
+	
+	@Autowired
+	private AuthOperations authOperation;
 
 	@Override
 	public List<Conversation> listConversatinsByUser() {
-		User writer = userRepositroy.findByName("Andras");
+		User writer = authOperation.getLoggedInUser();
 		List<Conversation> ret = conversationRepository.findByUser1AndActiveTrueOrUser2AndActiveTrue(writer, writer, new Sort(Sort.Direction.DESC, "lastSendTime"));
 		return ret;
 	}
@@ -49,7 +53,7 @@ public class MessageOperationsImpl implements MessageOperations {
 	@Override
 	@Transactional
 	public List<Message> writeToConversation(long conversationId, String message) {
-		User writer = userRepositroy.findByName("Andras");
+		User writer = authOperation.getLoggedInUser();
 		
 		Conversation c = conversationRepository.findOne(conversationId);
 		
@@ -58,7 +62,7 @@ public class MessageOperationsImpl implements MessageOperations {
 
 	@Override
 	public Conversation getConversationWithUser(String userName) {
-		User writer = userRepositroy.findByName("Andras");
+		User writer = authOperation.getLoggedInUser();
 		User writeTo = userRepositroy.findByName(userName);
 		Conversation c = conversationRepository.own(writer, writeTo);
 		
@@ -85,7 +89,7 @@ public class MessageOperationsImpl implements MessageOperations {
 		messageRepository.save(m);
 		
 		Notification not = new MessageNotification(writer, c);
-		not.setOwner(c.getUser1().getName() == "Andras" ? c.getUser2() : c.getUser1());
+		not.setOwner(c.getUser1().getName() == authOperation.getLoggedInUserName() ? c.getUser2() : c.getUser1());
 		not.setMessage(writer.getName() + "has been written you");
 		not.setSendTime(sendTime);
 		

@@ -5,9 +5,11 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 import org.springframework.stereotype.Component;
 
+import hu.bme.aut.sportnetwork.auth.AuthOperations;
 import hu.bme.aut.sportnetwork.entity.Comment;
 import hu.bme.aut.sportnetwork.entity.EventStatus;
 import hu.bme.aut.sportnetwork.entity.SportEvent;
@@ -18,6 +20,9 @@ import hu.bme.aut.sportnetwork.rest.UserController;
 @Component
 public class SportEventResourceAssembler extends
 	ResourceAssemblerSupport<SportEvent, SportEventResource> {
+	
+	@Autowired
+	private AuthOperations authOperations;
 
 	public SportEventResourceAssembler() {
 		super(SportEventController.class, SportEventResource.class);
@@ -87,7 +92,7 @@ public class SportEventResourceAssembler extends
 		CommentWrapper w = new CommentWrapper();
 		w.setMessage(c.getMessage());
 		w.setId(c.getId());
-		w.setMine(c.getOwner().getName().equals("Andras"));
+		w.setMine(c.getOwner().getName().equals(authOperations.getLoggedInUserName()));
 		w.setWriter(u);
 		//w.setDate(c.getDateOfComment());
 		comments.add(w);

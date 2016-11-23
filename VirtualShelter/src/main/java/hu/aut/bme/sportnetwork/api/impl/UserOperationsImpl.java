@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import hu.bme.aut.sportnetwork.api.UserOperations;
+import hu.bme.aut.sportnetwork.auth.AuthOperations;
 import hu.bme.aut.sportnetwork.dal.FriendShipDAO;
 import hu.bme.aut.sportnetwork.dal.NotificationDAO;
 import hu.bme.aut.sportnetwork.dal.UserDAO;
@@ -29,6 +30,9 @@ public class UserOperationsImpl implements UserOperations {
 	@Autowired
 	private FriendShipDAO friendShipRepository;
 	
+	@Autowired
+	private AuthOperations authOperations;
+	
     @Override
 	public User findById(long id) {
 		return userRepository.findOne(id);
@@ -41,7 +45,7 @@ public class UserOperationsImpl implements UserOperations {
 
 	@Override
 	public void sendFriendRequest(String name, String message) {
-		User sender = findByName("Andras");
+		User sender = authOperations.getLoggedInUser();
 		User u = findByName(name);
 		RequestNotification not = new FriendRequestNotification(sender);
 		not.setOwner(u);
@@ -81,12 +85,12 @@ public class UserOperationsImpl implements UserOperations {
 
 	@Override
 	public List<User> listFriends() {
-		return userRepository.getFriendsOfUser("Andras");
+		return userRepository.getFriendsOfUser(authOperations.getLoggedInUserName());
 	}
 
 	@Override
 	public List<User> listFriendRequest() {
-		User u = userRepository.findByName("Andras");
+		User u = authOperations.getLoggedInUser();
 		List<FriendRequestNotification> nots = notificationRepositroy.getFriendRequestSenders(u);
 		List<User> ret = new ArrayList<>();
 		nots.forEach(n -> ret.add(n.getSender()));

@@ -5,9 +5,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.transaction.annotation.Transactional;
 
 import hu.bme.aut.sportnetwork.api.SportEventOperations;
+import hu.bme.aut.sportnetwork.auth.AuthOperations;
 import hu.bme.aut.sportnetwork.dal.AddressDAO;
 import hu.bme.aut.sportnetwork.dal.CommentDAO;
 import hu.bme.aut.sportnetwork.dal.FriendShipDAO;
@@ -46,6 +48,9 @@ public class SportEventOperationsImpl implements SportEventOperations {
 	@Autowired
 	NotificationDAO notificationRepositroy;
 	
+	@Autowired
+	AuthOperations authOperation;
+	
 	private static final String NEW_EVENT = "NEW EVENT CREATED";
 	
 	private static final String EVENT_COMMENT = "COMMENT ADDED";
@@ -58,8 +63,7 @@ public class SportEventOperationsImpl implements SportEventOperations {
 	@Override
 	@Transactional
 	public SportEvent create(SportEvent e) {
-		//User owner = e.getOwner();
-		User owner = userRepository.findByName("Andras");
+		User owner = authOperation.getLoggedInUser();
 		e.setOwner(owner);
 		e.getMembers().add(owner);
 		e.setMemberSize(e.getMembers().size());
@@ -101,7 +105,7 @@ public class SportEventOperationsImpl implements SportEventOperations {
 	@Override
 	@Transactional
 	public SportEvent applyToSportEvent(long eventID) throws Exception {
-		User applicant = userRepository.findByName("Andras");
+		User applicant = authOperation.getLoggedInUser();
 		SportEvent event = eagerFetchSportEvent(eventID);
 		sendEventRequestNotification(event.getOwner(), applicant, event);
 		event.setStatus(EventStatus.APPLIED);
@@ -141,7 +145,7 @@ public class SportEventOperationsImpl implements SportEventOperations {
 	@Override
 	@Transactional
 	public SportEvent findById(long id) {
-		User user = userRepository.findByName("Andras");
+		User user = authOperation.getLoggedInUser();
 		SportEvent ret = eagerFetchSportEvent(id);
 		setEventStatus(ret, user);
 		return ret;
@@ -150,7 +154,7 @@ public class SportEventOperationsImpl implements SportEventOperations {
 	@Override
 	@Transactional
 	public SportEvent writeComment(long eventID, String comment) {
-		User commenter = userRepository.findByName("Andras");
+		User commenter = authOperation.getLoggedInUser();
 		SportEvent event = eagerFetchSportEvent(eventID);
 		Comment c = new Comment();
 		c.setOwner(commenter);
@@ -170,10 +174,10 @@ public class SportEventOperationsImpl implements SportEventOperations {
 	@Override
 	@Transactional
 	public SportEvent deleteComment(long commentID) {
-		User commenter = userRepository.findByName("Andras");
+		User deleter = authOperation.getLoggedInUser();
 		SportEvent event = commentRepository.findOne(commentID).getEvent();
 		event = eagerFetchSportEvent(event.getId());
-		setEventStatus(event, commenter);
+		setEventStatus(event, deleter);
 		event.getComments().removeIf(c -> c.getId() == commentID);
 		sportEventRepository.save(event);
 		return event;
@@ -214,9 +218,9 @@ public class SportEventOperationsImpl implements SportEventOperations {
 	@Override
 	@Transactional
 	public SportEvent cancelEventRequest(long eventID) {
-		User applicant = userRepository.findByName("Andras");
+		User canceler = authOperation.getLoggedInUser();
 		SportEvent event = eagerFetchSportEvent(eventID);
-		notificationRepositroy.deleteEventRequest(event, applicant);
+		notificationRepositroy.deleteEventRequest(event, canceler);
 		event.setStatus(EventStatus.NOT_MEMBER);
 		return event;
 	}
@@ -224,10 +228,10 @@ public class SportEventOperationsImpl implements SportEventOperations {
 	@Override
 	@Transactional
 	public SportEvent removeUserFromSportEvent(long eventID) {
-		User applicant = userRepository.findByName("Andras");
+		User toRemove = authOperation.getLoggedInUser();
 		SportEvent event = eagerFetchSportEvent(eventID);
 		event.setMemberSize(event.getMemberSize() - 1);
-		event.getMembers().remove(applicant);
+		event.getMembers().remove(toRemove);
 		sportEventRepository.save(event);
 		
 		event.setStatus(EventStatus.NOT_MEMBER);
