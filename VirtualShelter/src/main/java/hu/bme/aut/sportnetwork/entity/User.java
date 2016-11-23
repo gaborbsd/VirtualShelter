@@ -61,6 +61,9 @@ public class User {
 	@Transient
 	private FriendStatus friendStatus;
 	
+	@Column(name="is_admin", nullable=false)
+	private boolean isAdmin;
+	
 	private String phoneNumber;
 	
 	private int age;
@@ -173,6 +176,14 @@ public class User {
 
 	public void setFriends(List<FriendShip> friends) {
 		this.friends = friends;
+	}
+	
+	public boolean isAdmin() {
+		return isAdmin;
+	}
+
+	public void setAdmin(boolean isAdmin) {
+		this.isAdmin = isAdmin;
 	}
 
 	@Override

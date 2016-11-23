@@ -26,7 +26,13 @@ public class SportnetworkAuthenticationProvider implements AuthenticationProvide
 		User u = userRepository.findByName(name);
 		if (u != null && password.equals(u.getPassword())) {
 			List<GrantedAuthority> grantedAuths = new ArrayList<GrantedAuthority>();
-			grantedAuths.add(new SimpleGrantedAuthority("ROLE_USER"));
+			grantedAuths.add(new SimpleGrantedAuthority(Roles.AUTHENTICATED));
+			if (u.isAdmin()) {
+				grantedAuths.add(new SimpleGrantedAuthority(Roles.ADMIN));
+			} else {
+				grantedAuths.add(new SimpleGrantedAuthority(Roles.USER));
+			}
+			
 			return new UsernamePasswordAuthenticationToken(name, password, grantedAuths);
 		} 
 		throw new RuntimeException("UNSUCCESFULL AUT");
