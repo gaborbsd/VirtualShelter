@@ -19,6 +19,10 @@ import javax.persistence.UniqueConstraint;
 })
 public class EventRequestNotification extends EventNotification {
 	
+	public static final int EVENT_REQUEST_NOTIFICATION = 2;
+
+	public static final String EVENT_REQUEST_MESSAGE = " wants to join your ";
+
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "modification_time")
 	private Date modificationTime;

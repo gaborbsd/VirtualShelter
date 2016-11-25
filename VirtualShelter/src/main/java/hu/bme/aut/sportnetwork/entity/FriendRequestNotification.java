@@ -19,6 +19,10 @@ import javax.persistence.UniqueConstraint;
 })
 public class FriendRequestNotification extends Notification {
 
+	public static final int FRIEND_REQUEST_NOTIFICATION = 4;
+
+	public static final String FRIEND_REQUEST_MESSAGE = " wants to be your friend ";
+
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "modification_time")
 	private Date modificationTime;

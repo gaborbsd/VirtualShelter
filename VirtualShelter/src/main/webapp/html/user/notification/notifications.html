@@ -1,8 +1,10 @@
 <ul>
 
-
-
   <div ng-repeat="n in notifications" class="row" style="margin-top: 20px; margin-bottom: 20px">
+  	<div ng-show="n.type==1">
+  		<a href="#event/{{n.eventId}}">An event</a>{{n.message}}
+  		<button class="btn btn-default" ng-click="rate(n.eventId)" style="margin-left: 10px;">Rate</button>
+  	</div>
   	<div ng-show="n.type==2">
   		<a href="#user/{{n.sender.id}}">{{n.sender.name}}</a>{{n.message}}<a href="#event/{{n.eventId}}">event</a> 
   		<button class="btn btn-default" ng-click="acceptEvent(n.notId, n.eventId)" style="margin-left: 10px; margin-right: 10px">Accept</button>

@@ -53,5 +53,9 @@ app.controller('NotificationController', function($scope, NotificationFactory) {
         });
 	};
 	
+	$scope.rate = function(id) {
+		window.location.href = "#/rate/" + id;
+	}
+	
 	$scope.getAll();
 });

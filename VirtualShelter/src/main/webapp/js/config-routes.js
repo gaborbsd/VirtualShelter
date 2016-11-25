@@ -25,6 +25,9 @@ app.config(function($routeProvider) {
 	}).when('/conversation/:id', {
 		controller : 'MessageController',
 		templateUrl : '/html/user/conversation/messages.html'
+	}).when('/rate/:id', {
+		controller : 'RateController',
+		templateUrl : '/html/user/notification/rate.html'
 	}).otherwise({
 		redirectTo : '/listevents'
 	})

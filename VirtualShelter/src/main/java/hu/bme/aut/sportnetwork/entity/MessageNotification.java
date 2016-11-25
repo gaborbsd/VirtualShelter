@@ -9,6 +9,10 @@ import javax.persistence.Table;
 @Table(name="message_notification")
 public class MessageNotification extends Notification {
 	
+	public static final int MESSAGE_NOTIFICATION = 5;
+
+	public static final String MESSAGE_MESSAGE = " wrote to you ";
+
 	@ManyToOne
 	@JoinColumn(name="conversation_id")
 	private Conversation conversation;

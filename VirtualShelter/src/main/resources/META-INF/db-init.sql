@@ -21,6 +21,7 @@ INSERT INTO sportevent VALUES (1, '2016-08-18 10:00:00', "tenisz", true,true, 4,
 INSERT INTO sportevent VALUES (2, '2016-08-19 16:00:00', "tenisz", true,true, 4,6, 4, 1, "Tennis event 2", "TENNIS", 8, 1);
 INSERT INTO sportevent VALUES (3, '2016-07-13 16:00:00', "foci", true,true, 8,8,11, 1, "football event","FOOTBALL", 9, 2);
 INSERT INTO sportevent VALUES (4, '2016-09-15 16:00:00', "kezi", true,true, 3,7,8, 2, "kezikezijeee","HANDBALL", 9, 4);
+INSERT INTO sportevent VALUES (5, '2016-11-16 16:00:00', "focijeee", false,true, 1,10,3, 3, "focicsumicsa","FOOTBALL", 9, 4);
 
 INSERT INTO comment VALUES(1, '2016-10-18 10:44:00', "Labdat hozol?", 1, 4);
 INSERT INTO comment VALUES(2, '2016-11-03 14:44:00', "Lehet esni fog", 3, 2);
@@ -30,6 +31,9 @@ INSERT INTO members_of_sportevent VALUES (2,1);
 INSERT INTO members_of_sportevent VALUES (3,2);
 INSERT INTO members_of_sportevent VALUES (4,4);
 INSERT INTO members_of_sportevent VALUES (4,7);
+INSERT INTO members_of_sportevent VALUES (5,1);
+INSERT INTO members_of_sportevent VALUES (5,4);
+INSERT INTO members_of_sportevent VALUES (5,6);
 
 INSERT INTO friendship VALUES (1, true, true, 1, 2);
 INSERT INTO friendship VALUES (2, true, true, 1, 4);
@@ -56,4 +60,7 @@ INSERT INTO friend_request_notification VALUES (2, false,'2016-11-12 18:10:45',1
 INSERT INTO event_simple_notification VALUES (3, false,'2016-11-13 18:10:45',1,4,"created a new event",4);
 INSERT INTO event_request_notification VALUES (4, false,'2016-11-13 19:10:45',1,4,NULL,1);
 INSERT INTO message_notification VALUES (5, false,'2016-11-15 19:10:45',1,2,1);
+INSERT INTO event_rate_notification VALUES (6, false, '2016-11-17 16:00:00',1,4,5)
+INSERT INTO event_rate_notification VALUES (7, false, '2016-11-17 16:00:00',4,4,5)
+INSERT INTO event_rate_notification VALUES (8, false, '2016-11-17 16:00:00',6,4,5)
 

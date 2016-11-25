@@ -9,9 +9,11 @@ import javax.persistence.Table;
 @Table(name = "event_simple_notification")
 public class EventSimpleNotification extends EventNotification {
 
-	public transient static final String NEW_EVENT = " created a new event ";
+	public static final String NEW_EVENT = " created a new event ";
 
-	public transient static final String EVENT_COMMENT = " commented on event ";
+	public static final String EVENT_COMMENT = " commented on event ";
+
+	public static final int EVENT_SIMPLE_NOTIFICATION = 3;
 
 	private String message;
 

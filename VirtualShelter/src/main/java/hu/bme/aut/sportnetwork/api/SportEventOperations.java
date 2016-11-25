@@ -34,7 +34,7 @@ public interface SportEventOperations {
 	
 	SportEvent deleteComment(long commentID);
 	
-	SportEvent closeEvent(long eventID);
+	SportEvent closeEvent(long eventID) throws Exception;
 	
 	void deleteEvent(long eventID);
 }

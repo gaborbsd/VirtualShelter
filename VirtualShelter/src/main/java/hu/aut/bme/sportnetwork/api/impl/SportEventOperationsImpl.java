@@ -1,5 +1,6 @@
 package hu.aut.bme.sportnetwork.api.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -25,6 +26,7 @@ import hu.bme.aut.sportnetwork.entity.FriendRequestNotification;
 import hu.bme.aut.sportnetwork.entity.FriendShip;
 import hu.bme.aut.sportnetwork.entity.Notification;
 import hu.bme.aut.sportnetwork.entity.EventNotification;
+import hu.bme.aut.sportnetwork.entity.EventRateNotification;
 import hu.bme.aut.sportnetwork.entity.SportEvent;
 import hu.bme.aut.sportnetwork.entity.Sports;
 import hu.bme.aut.sportnetwork.entity.User;
@@ -234,12 +236,30 @@ public class SportEventOperationsImpl implements SportEventOperations {
 
 	@Override
 	@Transactional
-	public SportEvent closeEvent(long eventID) {
+	public SportEvent closeEvent(long eventID) throws Exception {
+		User owner = authOperation.getLoggedInUser();
 		SportEvent event = eagerFetchSportEvent(eventID);
+		if (!owner.getName().equals(event.getOwner().getName())) {
+			throw new Exception("NOT YOUR EVENT");
+		}
 		event.setIsOpened(false);
 		sportEventRepository.save(event);
+		List<User> toNotify = event.getMembers();
+		sendEventVoteNotification(owner, event, toNotify);
 		event.setStatus(EventStatus.OWNER);
 		return event;
+	}
+
+	private void sendEventVoteNotification(User owner, SportEvent event, List<User> toNotify) {
+		List<EventRateNotification> notifcications = new ArrayList<>();
+		for (User u : toNotify) {
+			EventRateNotification not = new EventRateNotification(event);
+			not.setOwner(u);
+			not.setSender(owner);
+			notifcications.add(not);
+		}
+		notificationRepositroy.save(notifcications);
+
 	}
 
 	@Override
