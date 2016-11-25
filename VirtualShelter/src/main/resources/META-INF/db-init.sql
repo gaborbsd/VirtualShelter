@@ -60,7 +60,9 @@ INSERT INTO friend_request_notification VALUES (2, false,'2016-11-12 18:10:45',1
 INSERT INTO event_simple_notification VALUES (3, false,'2016-11-13 18:10:45',1,4,"created a new event",4);
 INSERT INTO event_request_notification VALUES (4, false,'2016-11-13 19:10:45',1,4,NULL,1);
 INSERT INTO message_notification VALUES (5, false,'2016-11-15 19:10:45',1,2,1);
-INSERT INTO event_rate_notification VALUES (6, false, '2016-11-17 16:00:00',1,4,5)
-INSERT INTO event_rate_notification VALUES (7, false, '2016-11-17 16:00:00',4,4,5)
-INSERT INTO event_rate_notification VALUES (8, false, '2016-11-17 16:00:00',6,4,5)
+INSERT INTO event_rate_notification VALUES (6, false, '2016-11-17 16:00:00',1,4,5);
+INSERT INTO event_rate_notification VALUES (7, false, '2016-11-17 16:00:00',4,4,5);
+INSERT INTO event_rate_notification VALUES (8, false, '2016-11-17 16:00:00',6,4,5);
+
+INSERT INTO rating VALUES (1, 1, "FOOTBALL", 3, 4);
 

@@ -17,6 +17,7 @@ import hu.bme.aut.sportnetwork.dal.FriendShipDAO;
 import hu.bme.aut.sportnetwork.dal.NotificationDAO;
 import hu.bme.aut.sportnetwork.dal.SportEventDAO;
 import hu.bme.aut.sportnetwork.dal.UserDAO;
+import hu.bme.aut.sportnetwork.dal.impl.RateParam;
 import hu.bme.aut.sportnetwork.entity.Address;
 import hu.bme.aut.sportnetwork.entity.Comment;
 import hu.bme.aut.sportnetwork.entity.EventSimpleNotification;
@@ -31,6 +32,8 @@ import hu.bme.aut.sportnetwork.entity.SportEvent;
 import hu.bme.aut.sportnetwork.entity.Sports;
 import hu.bme.aut.sportnetwork.entity.User;
 import hu.bme.aut.sportnetwork.rest.resources.FilterSportEventArg;
+import hu.bme.aut.sportnetwork.rest.resources.RateUsersArg;
+import hu.bme.aut.sportnetwork.rest.resources.RateWrapper;
 
 public class SportEventOperationsImpl implements SportEventOperations {
 	
@@ -273,6 +276,45 @@ public class SportEventOperationsImpl implements SportEventOperations {
 		event.getMembers().size();
 		event.getComments().size();
 		return event;
+	}
+
+	private SportEvent getEventByNotification(long id) {
+		EventRateNotification not = (EventRateNotification) notificationRepositroy.findOne(id);
+		SportEvent ret = not.getEvent();
+		ret.getMembers().size();
+		return ret;
+	}
+
+	@Override
+	@Transactional
+	public List<User> getMembersOfSportEvent(long notificationId) {
+		SportEvent event = getEventByNotification(notificationId);
+		return event.getMembers();
+	}
+
+	@Override
+	@Transactional
+	public void rateUsers(RateUsersArg arg) throws Exception {
+		User user = authOperation.getLoggedInUser();
+		SportEvent event = getEventByNotification(arg.getNotificationId());
+		if (!event.getMembers().contains(user)) {
+			throw new Exception("You are not allowed to vote");
+		}
+
+		userRepository.rateUsers(toParam(arg), event);
+
+		notificationRepositroy.delete(arg.getNotificationId());
+	}
+
+	private RateParam toParam(RateUsersArg arg) {
+		RateParam param = new RateParam();
+
+		for (RateWrapper wr : arg.getRates()) {
+			param.getRates().add(wr.getRate());
+			param.getUsers().add(userRepository.findByName(wr.getName()));
+		}
+
+		return param;
 	}
 
 }

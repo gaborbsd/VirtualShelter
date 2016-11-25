@@ -5,6 +5,7 @@ import java.util.List;
 import hu.bme.aut.sportnetwork.entity.SportEvent;
 import hu.bme.aut.sportnetwork.entity.User;
 import hu.bme.aut.sportnetwork.rest.resources.FilterSportEventArg;
+import hu.bme.aut.sportnetwork.rest.resources.RateUsersArg;
 
 public interface SportEventOperations {
 	
@@ -37,4 +38,8 @@ public interface SportEventOperations {
 	SportEvent closeEvent(long eventID) throws Exception;
 	
 	void deleteEvent(long eventID);
+
+	List<User> getMembersOfSportEvent(long notificationId);
+	
+	void rateUsers(RateUsersArg arg) throws Exception;
 }

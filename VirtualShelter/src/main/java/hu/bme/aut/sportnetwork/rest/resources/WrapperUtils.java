@@ -1,5 +1,6 @@
 package hu.bme.aut.sportnetwork.rest.resources;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -25,11 +26,7 @@ public class WrapperUtils {
 	}
 
 	public static void addMember(List<UserLinkWrapper> members, User m) {
-		UserLinkWrapper u = new UserLinkWrapper();
-		u.setId(m.getId());
-		u.setName(m.getName());
-
-		members.add(u);
+		members.add(toWrapper(m));
 	}
 
 	public static void addComment(List<CommentWrapper> comments, Comment c) {
@@ -43,6 +40,23 @@ public class WrapperUtils {
 		w.setWriter(u);
 		// w.setDate(c.getDateOfComment());
 		comments.add(w);
+	}
+
+	public static UserLinkWrapper toWrapper(User u) {
+		UserLinkWrapper wrapper = new UserLinkWrapper();
+		wrapper.setId(u.getId());
+		wrapper.setName(u.getName());
+		return wrapper;
+	}
+	
+	public static List<UserLinkWrapper> toWrapperListCloseCurrent(List<User> us) {
+		List<UserLinkWrapper> ret = new ArrayList<>();
+		for (User u : us) {
+			if (!u.getName().equals(authOperation.getLoggedInUserName())) {
+				ret.add(toWrapper(u));
+			}
+		}
+		return ret;
 	}
 
 }

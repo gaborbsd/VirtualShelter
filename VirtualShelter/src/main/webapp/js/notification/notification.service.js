@@ -53,5 +53,25 @@ app.factory("NotificationFactory", function($http, $q) {
 		return deferred.promise;
 	};
 	
+	factory.getMembersToRate = function(id) {
+		var deferred = $q.defer();
+		$http.get("api/notification/rate/" + id).success(function(data, status) {
+			deferred.resolve(data);
+		}).error(function(data, status) {
+			deferred.reject(data);
+		});
+		return deferred.promise;
+	};
+	
+	factory.rate = function(arg) {
+		var deferred = $q.defer();
+		$http.post("api/notification/rate", arg).success(function(data, status) {
+			deferred.resolve(data);
+		}).error(function(data, status) {
+			deferred.reject(data);
+		});
+		return deferred.promise;
+	};
+	
 	return factory;
 });

@@ -45,7 +45,7 @@ public class User {
 	@JsonIgnore
 	private List<Notification> notifications;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy="user")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	@JsonIgnore
 	private List<Rating> ratings;
 	
