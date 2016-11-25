@@ -88,7 +88,13 @@ public class MessageOperationsImpl implements MessageOperations {
 		messageRepository.save(m);
 		
 		Notification not = new MessageNotification(writer, c);
-		not.setOwner(c.getUser1().getName() == authOperation.getLoggedInUserName() ? c.getUser2() : c.getUser1());
+
+		User sendTo = c.getUser1().getName() == authOperation.getLoggedInUserName() ? c.getUser2() : c.getUser1();
+		sendTo.setHasNotification(true);
+
+		userRepositroy.save(sendTo);
+
+		not.setOwner(sendTo);
 		not.setSendTime(sendTime);
 		
 		notificationRepositroy.save(not);

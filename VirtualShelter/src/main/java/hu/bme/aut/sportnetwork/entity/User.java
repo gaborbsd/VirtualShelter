@@ -37,6 +37,9 @@ public class User {
 	@Column(nullable = false)
 	private String password;
 	
+	@Column(name = "has_notification")
+	private boolean hasNotification;
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy="owner")
 	@JsonIgnore
 	private List<SportEvent> ownEvents;
@@ -173,6 +176,14 @@ public class User {
 
 	public void setAdmin(boolean isAdmin) {
 		this.isAdmin = isAdmin;
+	}
+
+	public boolean getHasNotification() {
+		return hasNotification;
+	}
+
+	public void setHasNotification(boolean hasNotification) {
+		this.hasNotification = hasNotification;
 	}
 
 	@Override

@@ -21,7 +21,7 @@ import javax.persistence.TemporalType;
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
 public abstract class Notification {
 	
-	@TableGenerator(name = "notification_gen", table = "id_gen", pkColumnName = "gen_name", valueColumnName = "gen_val", allocationSize = 1)
+	@TableGenerator(name = "notification_gen", table = "id_gen", pkColumnName = "gen_name", valueColumnName = "gen_val", allocationSize = 1, initialValue = 9)
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE, generator = "notification_gen")
 	protected long notificationId;

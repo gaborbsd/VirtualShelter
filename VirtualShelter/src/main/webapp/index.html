@@ -31,6 +31,7 @@
 <script src="js/event/event.controller.js"></script>
 <script src="js/notification/notification.controller.js"></script>
 <script src="js/notification/rate.controller.js"></script>
+<script src="js/notification/polling.contoller.js"></script>
 	
 	
 <script src="js/sporteventcontroller.js"></script>
@@ -40,7 +41,7 @@
 <link href="css/bootstrap-responsive.min.css" rel="stylesheet" />
 
 </head>
-<body style="background:#E4E8F3" >
+<body style="background:#E4E8F3" ng-controller="PollingController">
 	<div class="navbar navbar-fixed-top">
         <div class="navbar-inner">
 
@@ -53,7 +54,7 @@
 	   <li><a href="#/editor/events/new"><span>New Event</span></a></li>
 	   <li><a href="#/user"><span>Profile</span></a></li>
 	   <li><a href="#/conversations"><span>Conversations</span></a></li>
-	   <li><a href="#/notifications"><span>Notifications</span></a></li>
+	   <li ng-class="not.notStatus ? 'active' : ''"><a href="#/notifications"><span>Notifications</span></a></li>
 	   <li><a href="logout"><span>Logout</span></a></li>	   
 	</ul>
 	</div>

@@ -20,6 +20,7 @@ import hu.bme.aut.sportnetwork.entity.User;
 import hu.bme.aut.sportnetwork.rest.resources.FriendRequestArg;
 import hu.bme.aut.sportnetwork.rest.resources.NotificationResource;
 import hu.bme.aut.sportnetwork.rest.resources.NotificationResourceAssembler;
+import hu.bme.aut.sportnetwork.rest.resources.PollNotificationRet;
 import hu.bme.aut.sportnetwork.rest.resources.RateMembersRet;
 import hu.bme.aut.sportnetwork.rest.resources.SportEventShortResource;
 import hu.bme.aut.sportnetwork.rest.resources.RateUsersArg;
@@ -91,5 +92,14 @@ public class NotificationController {
 	ResponseEntity<String> rateToUsers(@RequestBody RateUsersArg arg) throws Exception {
 		eventOperation.rateUsers(arg);
 		return new ResponseEntity<String>(HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "poll", method = RequestMethod.GET)
+	@ResponseBody
+	PollNotificationRet hasNewNotification() {
+		boolean b = userOperation.pollNotification();
+		PollNotificationRet ret = new PollNotificationRet();
+		ret.setNotStatus(b);
+		return ret;
 	}
 }

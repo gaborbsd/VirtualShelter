@@ -87,6 +87,12 @@ public class UserOperationsImpl implements UserOperations {
 		nots.forEach(n -> ret.add(n.getSender()));
 		return ret;
 	}
+
+	@Override
+	public boolean pollNotification() {
+		User user = authOperations.getLoggedInUser();
+		return user.getHasNotification();
+	}
 	
 
 }

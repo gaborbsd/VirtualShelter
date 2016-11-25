@@ -17,4 +17,6 @@ public interface UserOperations {
 	List<User> listFriends();
 	
 	List<User> listFriendRequest();
+
+	boolean pollNotification();
 }

@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import hu.bme.aut.sportnetwork.api.NotificationOperations;
 import hu.bme.aut.sportnetwork.auth.AuthOperations;
 import hu.bme.aut.sportnetwork.dal.NotificationDAO;
+import hu.bme.aut.sportnetwork.dal.UserDAO;
 import hu.bme.aut.sportnetwork.entity.Notification;
 import hu.bme.aut.sportnetwork.entity.User;
 
@@ -20,9 +21,15 @@ public class NotificationOperationsImpl implements NotificationOperations {
 	@Autowired
 	private AuthOperations authOperations;
 	
+	@Autowired
+	private UserDAO userRepository;
+
 	@Override
+	@Transactional
 	public List<Notification> getNotifications() {
 		User user = authOperations.getLoggedInUser();
+		user.setHasNotification(false);
+		userRepository.save(user);
 		return notificationRepositroy.findByOwnerAndIsDeclined(user, false, new Sort(Sort.Direction.DESC, "sendTime"));
 	}
 

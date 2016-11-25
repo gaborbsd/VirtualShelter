@@ -6,28 +6,24 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.transaction.annotation.Transactional;
 
 import hu.bme.aut.sportnetwork.api.SportEventOperations;
 import hu.bme.aut.sportnetwork.auth.AuthOperations;
-import hu.bme.aut.sportnetwork.dal.AddressDAO;
 import hu.bme.aut.sportnetwork.dal.CommentDAO;
 import hu.bme.aut.sportnetwork.dal.FriendShipDAO;
 import hu.bme.aut.sportnetwork.dal.NotificationDAO;
 import hu.bme.aut.sportnetwork.dal.SportEventDAO;
 import hu.bme.aut.sportnetwork.dal.UserDAO;
 import hu.bme.aut.sportnetwork.dal.impl.RateParam;
-import hu.bme.aut.sportnetwork.entity.Address;
 import hu.bme.aut.sportnetwork.entity.Comment;
-import hu.bme.aut.sportnetwork.entity.EventSimpleNotification;
-import hu.bme.aut.sportnetwork.entity.EventRequestNotification;
-import hu.bme.aut.sportnetwork.entity.EventStatus;
-import hu.bme.aut.sportnetwork.entity.FriendRequestNotification;
-import hu.bme.aut.sportnetwork.entity.FriendShip;
-import hu.bme.aut.sportnetwork.entity.Notification;
 import hu.bme.aut.sportnetwork.entity.EventNotification;
 import hu.bme.aut.sportnetwork.entity.EventRateNotification;
+import hu.bme.aut.sportnetwork.entity.EventRequestNotification;
+import hu.bme.aut.sportnetwork.entity.EventSimpleNotification;
+import hu.bme.aut.sportnetwork.entity.EventStatus;
+import hu.bme.aut.sportnetwork.entity.FriendShip;
+import hu.bme.aut.sportnetwork.entity.Notification;
 import hu.bme.aut.sportnetwork.entity.SportEvent;
 import hu.bme.aut.sportnetwork.entity.Sports;
 import hu.bme.aut.sportnetwork.entity.User;
@@ -87,6 +83,8 @@ public class SportEventOperationsImpl implements SportEventOperations {
 		Notification not = new EventSimpleNotification(sender, e, message);
 		not.setOwner(sendTo);
 		not.setSendTime(new Date());
+		sendTo.setHasNotification(true);
+		userRepository.save(sendTo);
 		notificationRepositroy.save(not);
 	}
 	
@@ -94,6 +92,8 @@ public class SportEventOperationsImpl implements SportEventOperations {
 		EventNotification not = new EventRequestNotification(sender, event);
 		not.setOwner(sendTo);
 		not.setSendTime(new Date());
+		sendTo.setHasNotification(true);
+		userRepository.save(sendTo);
 		notificationRepositroy.save(not);
 	}
 
@@ -260,6 +260,8 @@ public class SportEventOperationsImpl implements SportEventOperations {
 			not.setOwner(u);
 			not.setSender(owner);
 			notifcications.add(not);
+			u.setHasNotification(true);
+			userRepository.save(u);
 		}
 		notificationRepositroy.save(notifcications);
 
