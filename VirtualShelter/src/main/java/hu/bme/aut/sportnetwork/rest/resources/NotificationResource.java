@@ -4,6 +4,8 @@ import org.springframework.hateoas.ResourceSupport;
 
 public class NotificationResource extends ResourceSupport {
 
+	private long notId;
+
 	private String message;
 
 	private UserLinkWrapper sender;
@@ -13,6 +15,14 @@ public class NotificationResource extends ResourceSupport {
 	private long eventId;
 
 	private long conversationId;
+
+	public long getNotId() {
+		return notId;
+	}
+
+	public void setNotId(long notId) {
+		this.notId = notId;
+	}
 
 	public String getMessage() {
 		return message;

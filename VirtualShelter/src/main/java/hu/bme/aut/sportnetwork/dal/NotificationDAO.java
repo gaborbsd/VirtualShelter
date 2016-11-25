@@ -11,6 +11,6 @@ import hu.bme.aut.sportnetwork.entity.User;
 @Repository
 public interface NotificationDAO extends AbstractRepository<Notification>, NotificationDAOCustom{
 	
-	List<Notification> findByOwnerAndIsDeclined(User u, Boolean isDeclined, Sort sort);
+	List<Notification> findByOwnerAndIsDeclined(User owner, Boolean isDeclined, Sort sort);
 
 }

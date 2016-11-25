@@ -55,9 +55,6 @@ public class User {
 	@OneToMany(fetch=FetchType.EAGER, mappedBy="user")
 	private List<UserInterest> interest;
 	
-	@OneToMany(mappedBy="person")
-	private List<FriendShip> friends;
-	
 	@Transient
 	private FriendStatus friendStatus;
 	
@@ -168,14 +165,6 @@ public class User {
 
 	public void setInterest(List<UserInterest> interest) {
 		this.interest = interest;
-	}
-
-	public List<FriendShip> getFriends() {
-		return friends;
-	}
-
-	public void setFriends(List<FriendShip> friends) {
-		this.friends = friends;
 	}
 	
 	public boolean isAdmin() {

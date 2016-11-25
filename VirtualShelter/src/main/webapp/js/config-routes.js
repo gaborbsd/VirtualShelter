@@ -19,6 +19,9 @@ app.config(function($routeProvider) {
 	}).when('/conversations', {
 		controller : 'ConversationController',
 		templateUrl : '/html/user/conversation/conversations.html'
+	}).when('/notifications', {
+		controller : 'NotificationController',
+		templateUrl : '/html/user/notification/notifications.html'
 	}).when('/conversation/:id', {
 		controller : 'MessageController',
 		templateUrl : '/html/user/conversation/messages.html'

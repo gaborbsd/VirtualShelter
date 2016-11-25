@@ -29,16 +29,12 @@ INSERT INTO members_of_sportevent VALUES (1,1);
 INSERT INTO members_of_sportevent VALUES (2,1);
 INSERT INTO members_of_sportevent VALUES (3,2);
 INSERT INTO members_of_sportevent VALUES (4,4);
-INSERT INTO members_of_sportevent VALUES (4,1);
+INSERT INTO members_of_sportevent VALUES (4,7);
 
-INSERT INTO friendship VALUES (1, true, 1, 2);
-INSERT INTO friendship VALUES (2, true, 2, 1);
-INSERT INTO friendship VALUES (3, true, 1, 4);
-INSERT INTO friendship VALUES (4, false, 4, 1);
-INSERT INTO friendship VALUES (5, false, 1, 5);
-INSERT INTO friendship VALUES (6, true, 5, 1);
-INSERT INTO friendship VALUES (7, true, 6, 7);
-INSERT INTO friendship VALUES (8, true, 7, 6);
+INSERT INTO friendship VALUES (1, true, true, 1, 2);
+INSERT INTO friendship VALUES (2, true, true, 1, 4);
+INSERT INTO friendship VALUES (3, false,true, 1, 5);
+INSERT INTO friendship VALUES (4, true,true, 6, 7);
 
 INSERT INTO conversation VALUES (1,true,"Mizu?",'2016-08-20 16:00:00',1,2);
 INSERT INTO conversation VALUES (2,true,"Szeva",'2016-08-18 14:00:00',1,3);
@@ -55,4 +51,9 @@ INSERT INTO message VALUES (6,"Mizu?",'2016-08-20 16:00:00',1,1);
 INSERT INTO message VALUES (7,"Szia",'2016-08-21 14:00:00',3,1);
 INSERT INTO message VALUES (8,"Szervusz",'2016-08-21 16:00:00',4,6);
 
-INSERT INTO friend_request_notification VALUES (1, false, "I would like to meet you",'2016-11-12 18:10:45',3,1,NULL);
+INSERT INTO friend_request_notification VALUES (1, false,'2016-11-12 18:10:45',3,1,NULL);
+INSERT INTO friend_request_notification VALUES (2, false,'2016-11-12 18:10:45',1,6,NULL);
+INSERT INTO event_simple_notification VALUES (3, false,'2016-11-13 18:10:45',1,4,"created a new event",4);
+INSERT INTO event_request_notification VALUES (4, false,'2016-11-13 19:10:45',1,4,NULL,1);
+INSERT INTO message_notification VALUES (5, false,'2016-11-15 19:10:45',1,2,1);
+

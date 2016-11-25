@@ -45,7 +45,7 @@ public class NotificationController {
 
 	@RequestMapping(value="friend", method=RequestMethod.POST)
 	ResponseEntity<String> sendFriendRequest(@RequestBody FriendRequestArg arg) {
-		userOperation.sendFriendRequest(arg.getTo(), arg.getMessage());
+		userOperation.sendFriendRequest(arg.getTo());
 		return new ResponseEntity<String>(HttpStatus.OK);
 	}
 	
@@ -59,6 +59,19 @@ public class NotificationController {
 	@RequestMapping(value="eventAccept/{id}", method=RequestMethod.PUT)
 	ResponseEntity<String> acceptEventRequest(@PathVariable Long id) throws Exception {
 		eventOperation.acceptEventRequest(id);
+		return new ResponseEntity<String>(HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "decline/{id}", method = RequestMethod.PUT)
+	ResponseEntity<List<NotificationResource>> declineRequest(@PathVariable Long id) throws Exception {
+		List<Notification> notifications = notificationOperation.declineRequest(id);
+		List<NotificationResource> resourceList = notificationResourceAssembler.toResources(notifications);
+		return new ResponseEntity<List<NotificationResource>>(resourceList, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "delete/{id}", method = RequestMethod.DELETE)
+	ResponseEntity<String> deleteNotification(@PathVariable Long id) throws Exception {
+		notificationOperation.deleteNotification(id);
 		return new ResponseEntity<String>(HttpStatus.OK);
 	}
 }

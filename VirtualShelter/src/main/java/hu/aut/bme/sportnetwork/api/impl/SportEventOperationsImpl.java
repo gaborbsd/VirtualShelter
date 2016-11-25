@@ -49,10 +49,6 @@ public class SportEventOperationsImpl implements SportEventOperations {
 	
 	@Autowired
 	AuthOperations authOperation;
-	
-	private static final String NEW_EVENT = "NEW EVENT CREATED";
-	
-	private static final String EVENT_COMMENT = "COMMENT ADDED";
 
 	@Override
 	public List<SportEvent> findAllOpenedEvents() {
@@ -68,8 +64,11 @@ public class SportEventOperationsImpl implements SportEventOperations {
 		e.setMemberSize(e.getMembers().size());
 		e.setIsOpened(true);
 		SportEvent newEvent = sportEventRepository.saveNewEvent(e);
-		List<Object> usersToNotify = friendShipRepository.findByPersonAndListenNotifications(owner, true);
-		usersToNotify.forEach(u -> sendEventNotification((User)u, owner, newEvent, NEW_EVENT));
+		List<FriendShip> usersToNotify = friendShipRepository.findByUser1AndUser2ListenOrUser2AndUser1Listen(owner,
+				owner, true, true);
+		usersToNotify.forEach(
+				f -> sendEventNotification(f.getUser1().getName().equals(owner.getName()) ? f.getUser2() : f.getUser1()
+			, owner, newEvent, EventSimpleNotification.NEW_EVENT));
 		newEvent.setStatus(EventStatus.OWNER);
 		return newEvent;
 	}
@@ -80,10 +79,9 @@ public class SportEventOperationsImpl implements SportEventOperations {
 	}
 
 	private void sendEventNotification(User sendTo, User sender, SportEvent e, String message) {
-		Notification not = new EventSimpleNotification(sender, e);
+		Notification not = new EventSimpleNotification(sender, e, message);
 		not.setOwner(sendTo);
 		not.setSendTime(new Date());
-		not.setMessage(message);
 		notificationRepositroy.save(not);
 	}
 	
@@ -91,7 +89,6 @@ public class SportEventOperationsImpl implements SportEventOperations {
 		EventNotification not = new EventRequestNotification(sender, event);
 		not.setOwner(sendTo);
 		not.setSendTime(new Date());
-		not.setMessage(sender.getName() + " APPLIED TO THIS EVENT");
 		notificationRepositroy.save(not);
 	}
 
@@ -122,10 +119,10 @@ public class SportEventOperationsImpl implements SportEventOperations {
 			if (event.getMaxSize() <= event.getMembers().size()) {
 				throw new Exception("NO SPACE");
 			}
+			event.setMemberSize(event.getMemberSize() + 1);
 			event.getMembers().add(applicant);
-			eventNot.setModificationTime(new Date());
 			sportEventRepository.save(event);
-			notificationRepositroy.save(eventNot);
+			notificationRepositroy.delete(notificationId);
 		} else {
 			throw new Exception("WRONG NOTIFICATION ID");
 		}
@@ -162,7 +159,7 @@ public class SportEventOperationsImpl implements SportEventOperations {
 		sportEventRepository.save(event);
 		
 		List<User> members = event.getMembers();
-		members.forEach(m -> sendEventNotification(m, commenter, event, EVENT_COMMENT));
+		members.forEach(m -> sendEventNotification(m, commenter, event, EventSimpleNotification.EVENT_COMMENT));
 
 		setEventStatus(event, commenter);
 		return event;

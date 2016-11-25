@@ -17,15 +17,19 @@ public class FriendShip {
 	private long id;
 	
 	@ManyToOne
-	@JoinColumn(name="person")
-	private User person;
+	@JoinColumn(name = "user1")
+	private User user1;
 	
 	@ManyToOne
-	@JoinColumn(name="friend")
-	private User friend;
+	@JoinColumn(name = "user2")
+	private User user2;
+
+	@Column(name = "user1_listen", columnDefinition = "boolean default 0")
+	private boolean user1Listen;
 	
-	@Column(name="listen_notfications", columnDefinition="boolean default 0")
-	private boolean listenNotifications;
+
+	@Column(name = "user2_listen", columnDefinition = "boolean default 0")
+	private boolean user2Listen;
 
 	public long getId() {
 		return id;
@@ -35,29 +39,38 @@ public class FriendShip {
 		this.id = id;
 	}
 
-	public User getPerson() {
-		return person;
+	public User getUser1() {
+		return user1;
 	}
 
-	public void setPerson(User person) {
-		this.person = person;
+	public void setUser1(User user1) {
+		this.user1 = user1;
 	}
 
-	public User getFriend() {
-		return friend;
+	public User getUser2() {
+		return user2;
 	}
 
-	public void setFriend(User friend) {
-		this.friend = friend;
+	public void setUser2(User user2) {
+		this.user2 = user2;
 	}
 
-	public boolean isListenNotifications() {
-		return listenNotifications;
+	public boolean getUser1Listen() {
+		return user1Listen;
 	}
 
-	public void setListenNotifications(boolean listenNotifications) {
-		this.listenNotifications = listenNotifications;
+	public void setUser1Listen(boolean user1Listen) {
+		this.user1Listen = user1Listen;
 	}
+
+	public boolean getUser2Listen() {
+		return user2Listen;
+	}
+
+	public void setUser2Listen(boolean user2Listen) {
+		this.user2Listen = user2Listen;
+	}
+
 	
 	
 }

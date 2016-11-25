@@ -30,8 +30,6 @@ public abstract class Notification {
 	@JoinColumn(name="owner_id", nullable=false)
 	protected User owner;
 	
-	protected String message;
-	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="send_time")
 	protected Date sendTime;
@@ -65,14 +63,6 @@ public abstract class Notification {
 
 	public void setSendTime(Date sendTime) {
 		this.sendTime = sendTime;
-	}
-
-	public String getMessage() {
-		return message;
-	}
-
-	public void setMessage(String message) {
-		this.message = message;
 	}
 
 	public User getSender() {

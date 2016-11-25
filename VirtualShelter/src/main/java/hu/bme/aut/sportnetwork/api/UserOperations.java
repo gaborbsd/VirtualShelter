@@ -10,7 +10,7 @@ public interface UserOperations {
 	
 	User findByName(String name);
 	
-	void sendFriendRequest(String name, String message);
+	void sendFriendRequest(String name);
 	
 	void acceptFriendRequest(long notificationId) throws Exception;
 	

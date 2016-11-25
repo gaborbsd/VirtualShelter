@@ -22,6 +22,12 @@ public class NotificationResourceAssembler extends ResourceAssemblerSupport<Noti
 
 	private static final int MESSAGE_NOTIFICATION = 5;
 
+	private static final String EVENT_REQUEST_MESSAGE = " wants to join your ";
+
+	private static final String FRIEND_REQUEST_MESSAGE = " wants to be your friend ";
+
+	private static final String MESSAGE_MESSAGE = " wrote to you ";
+
 	public NotificationResourceAssembler() {
 		super(NotificationController.class, NotificationResource.class);
 	}
@@ -34,20 +40,26 @@ public class NotificationResourceAssembler extends ResourceAssemblerSupport<Noti
 
 	public NotificationResource instantiateResource(Notification entity) {
 		NotificationResource resource = new NotificationResource();
-		resource.setMessage(entity.getMessage());
-		resource.setSender(new UserLinkWrapper(entity.getOwner().getId(), entity.getOwner().getName()));
+		resource.setNotId(entity.getNotificationId());
+		resource.setSender(new UserLinkWrapper(entity.getSender().getId(), entity.getSender().getName()));
 
 		if (entity instanceof EventNotification) {
 			resource.setEventId(((EventNotification) entity).getEvent().getId());
-			resource.setType(EVENT_SIMPLE_NOTIFICATION);
+
 
 			if (entity instanceof EventRequestNotification) {
 				resource.setType(EVENT_REQUEST_NOTIFICATION);
+				resource.setMessage(EVENT_REQUEST_MESSAGE);
+			} else if (entity instanceof EventSimpleNotification) {
+				resource.setType(EVENT_SIMPLE_NOTIFICATION);
+				resource.setMessage(((EventSimpleNotification) entity).getMessage());
 			}
 		} else if (entity instanceof FriendRequestNotification) {
 			resource.setType(FRIEND_REQUEST_NOTIFICATION);
+			resource.setMessage(FRIEND_REQUEST_MESSAGE);
 		} else if (entity instanceof MessageNotification) {
 			resource.setType(MESSAGE_NOTIFICATION);
+			resource.setMessage(MESSAGE_MESSAGE);
 			resource.setConversationId(((MessageNotification) entity).getConversation().getId());
 		}
 

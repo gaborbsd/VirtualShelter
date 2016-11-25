@@ -43,12 +43,11 @@ public class UserOperationsImpl implements UserOperations {
 	}
 
 	@Override
-	public void sendFriendRequest(String name, String message) {
+	public void sendFriendRequest(String name) {
 		User sender = authOperations.getLoggedInUser();
 		User u = findByName(name);
 		Notification not = new FriendRequestNotification(sender);
 		not.setOwner(u);
-		not.setMessage(message);
 		not.setSendTime(new Date());
 		notificationRepositroy.save(not);
 	}
@@ -61,19 +60,14 @@ public class UserOperationsImpl implements UserOperations {
 		if (not instanceof FriendRequestNotification) {
 			FriendRequestNotification friendNot = (FriendRequestNotification) not;
 			User friend = friendNot.getSender();
-			FriendShip f1 = new FriendShip();
-			f1.setPerson(accepter);
-			f1.setFriend(friend);
-			f1.setListenNotifications(true);
-			FriendShip f2 = new FriendShip();
-			f2.setFriend(accepter);
-			f2.setPerson(friend);
-			f2.setListenNotifications(true);
-			friendShipRepository.save(f1);
-			friendShipRepository.save(f2);
+			FriendShip f = new FriendShip();
+			f.setUser1(accepter);
+			f.setUser2(friend);
+			f.setUser1Listen(true);
+			f.setUser2Listen(true);
+			friendShipRepository.save(f);
 			
-			friendNot.setModificationTime(new Date());
-			notificationRepositroy.save(not);
+			notificationRepositroy.delete(notificationId);
 		} else {
 			throw new Exception("WRONG NOTIFICATION ID");
 		}
