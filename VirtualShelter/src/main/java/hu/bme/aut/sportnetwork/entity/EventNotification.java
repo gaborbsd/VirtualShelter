@@ -1,28 +1,17 @@
 package hu.bme.aut.sportnetwork.entity;
 
-import javax.persistence.Entity;
+import java.util.Date;
+
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.MappedSuperclass;
 
-@Entity
-@Table(name="event_notification")
+@MappedSuperclass
 public class EventNotification extends Notification {
-	
+
 	@ManyToOne
 	@JoinColumn(name = "event_id")
-	private SportEvent event;
-	
-	@ManyToOne
-	@JoinColumn(name = "sender_id")
-	private User sender;
-	
-	public EventNotification(){}
-	
-	public EventNotification(User sender, SportEvent event) {
-		this.sender = sender;
-		this.event = event;
-	}
+	protected SportEvent event;
 
 	public SportEvent getEvent() {
 		return event;
@@ -31,13 +20,4 @@ public class EventNotification extends Notification {
 	public void setEvent(SportEvent event) {
 		this.event = event;
 	}
-
-	public User getSender() {
-		return sender;
-	}
-
-	public void setSender(User sender) {
-		this.sender = sender;
-	}
-
 }

@@ -71,7 +71,7 @@ public class UserController {
 	ResponseEntity<UserResource> getCurrentUser(Principal principal) {
 		User user = userOperation.findByName(principal.getName());
 		UserResource resource = userResourceAssembler.toResource(user);
-		return new ResponseEntity<UserResource>(resource, HttpStatus.CREATED);
+		return new ResponseEntity<UserResource>(resource, HttpStatus.OK);
 	}
 	
 	@RequestMapping(value="friends", method=RequestMethod.GET)

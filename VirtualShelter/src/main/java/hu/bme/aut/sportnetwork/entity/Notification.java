@@ -24,17 +24,24 @@ public abstract class Notification {
 	@TableGenerator(name = "notification_gen", table = "id_gen", pkColumnName = "gen_name", valueColumnName = "gen_val", allocationSize = 1)
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE, generator = "notification_gen")
-	private long notificationId;
+	protected long notificationId;
 	
 	@ManyToOne
 	@JoinColumn(name="owner_id", nullable=false)
-	private User owner;
+	protected User owner;
 	
-	private String message;
+	protected String message;
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="send_time")
-	private Date sendTime;
+	protected Date sendTime;
+	
+	@ManyToOne
+	@JoinColumn(name = "sender_id")
+	protected User sender;
+
+	@Column(name = "declined")
+	private boolean isDeclined;
 
 	public long getNotificationId() {
 		return notificationId;
@@ -67,5 +74,23 @@ public abstract class Notification {
 	public void setMessage(String message) {
 		this.message = message;
 	}
+
+	public User getSender() {
+		return sender;
+	}
+
+	public void setSender(User sender) {
+		this.sender = sender;
+	}
+
+	public boolean getIsDeclined() {
+		return isDeclined;
+	}
+
+	public void setIsDeclined(boolean isDeclined) {
+		this.isDeclined = isDeclined;
+	}
+	
+	
 
 }

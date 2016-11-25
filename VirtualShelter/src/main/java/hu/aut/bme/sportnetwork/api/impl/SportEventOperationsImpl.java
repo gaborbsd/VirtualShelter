@@ -18,14 +18,13 @@ import hu.bme.aut.sportnetwork.dal.SportEventDAO;
 import hu.bme.aut.sportnetwork.dal.UserDAO;
 import hu.bme.aut.sportnetwork.entity.Address;
 import hu.bme.aut.sportnetwork.entity.Comment;
-import hu.bme.aut.sportnetwork.entity.EventNotification;
+import hu.bme.aut.sportnetwork.entity.EventSimpleNotification;
 import hu.bme.aut.sportnetwork.entity.EventRequestNotification;
 import hu.bme.aut.sportnetwork.entity.EventStatus;
 import hu.bme.aut.sportnetwork.entity.FriendRequestNotification;
 import hu.bme.aut.sportnetwork.entity.FriendShip;
 import hu.bme.aut.sportnetwork.entity.Notification;
-import hu.bme.aut.sportnetwork.entity.NotificationStatus;
-import hu.bme.aut.sportnetwork.entity.RequestNotification;
+import hu.bme.aut.sportnetwork.entity.EventNotification;
 import hu.bme.aut.sportnetwork.entity.SportEvent;
 import hu.bme.aut.sportnetwork.entity.Sports;
 import hu.bme.aut.sportnetwork.entity.User;
@@ -81,7 +80,7 @@ public class SportEventOperationsImpl implements SportEventOperations {
 	}
 
 	private void sendEventNotification(User sendTo, User sender, SportEvent e, String message) {
-		Notification not = new EventNotification(sender, e);
+		Notification not = new EventSimpleNotification(sender, e);
 		not.setOwner(sendTo);
 		not.setSendTime(new Date());
 		not.setMessage(message);
@@ -89,11 +88,10 @@ public class SportEventOperationsImpl implements SportEventOperations {
 	}
 	
 	private void sendEventRequestNotification(User sendTo, User sender, SportEvent event) {
-		RequestNotification not = new EventRequestNotification(sender, event);
+		EventNotification not = new EventRequestNotification(sender, event);
 		not.setOwner(sendTo);
 		not.setSendTime(new Date());
 		not.setMessage(sender.getName() + " APPLIED TO THIS EVENT");
-		not.setStatus(NotificationStatus.SENT);
 		notificationRepositroy.save(not);
 	}
 
@@ -125,7 +123,6 @@ public class SportEventOperationsImpl implements SportEventOperations {
 				throw new Exception("NO SPACE");
 			}
 			event.getMembers().add(applicant);
-			eventNot.setStatus(NotificationStatus.ACCEPTED);
 			eventNot.setModificationTime(new Date());
 			sportEventRepository.save(event);
 			notificationRepositroy.save(eventNot);
@@ -250,6 +247,7 @@ public class SportEventOperationsImpl implements SportEventOperations {
 
 	@Override
 	public void deleteEvent(long eventID) {
+		notificationRepositroy.deleteNotificationsOfEvent(eventID);
 		sportEventRepository.delete(eventID);
 	}
 	

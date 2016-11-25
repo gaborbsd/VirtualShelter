@@ -15,8 +15,7 @@ import hu.bme.aut.sportnetwork.dal.UserDAO;
 import hu.bme.aut.sportnetwork.entity.FriendRequestNotification;
 import hu.bme.aut.sportnetwork.entity.FriendShip;
 import hu.bme.aut.sportnetwork.entity.Notification;
-import hu.bme.aut.sportnetwork.entity.NotificationStatus;
-import hu.bme.aut.sportnetwork.entity.RequestNotification;
+import hu.bme.aut.sportnetwork.entity.EventNotification;
 import hu.bme.aut.sportnetwork.entity.User;
 
 public class UserOperationsImpl implements UserOperations {
@@ -47,10 +46,9 @@ public class UserOperationsImpl implements UserOperations {
 	public void sendFriendRequest(String name, String message) {
 		User sender = authOperations.getLoggedInUser();
 		User u = findByName(name);
-		RequestNotification not = new FriendRequestNotification(sender);
+		Notification not = new FriendRequestNotification(sender);
 		not.setOwner(u);
 		not.setMessage(message);
-		not.setStatus(NotificationStatus.SENT);
 		not.setSendTime(new Date());
 		notificationRepositroy.save(not);
 	}
@@ -74,7 +72,6 @@ public class UserOperationsImpl implements UserOperations {
 			friendShipRepository.save(f1);
 			friendShipRepository.save(f2);
 			
-			friendNot.setStatus(NotificationStatus.ACCEPTED);
 			friendNot.setModificationTime(new Date());
 			notificationRepositroy.save(not);
 		} else {

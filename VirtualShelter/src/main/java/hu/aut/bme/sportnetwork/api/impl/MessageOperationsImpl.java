@@ -17,7 +17,6 @@ import hu.bme.aut.sportnetwork.entity.Conversation;
 import hu.bme.aut.sportnetwork.entity.Message;
 import hu.bme.aut.sportnetwork.entity.MessageNotification;
 import hu.bme.aut.sportnetwork.entity.Notification;
-import hu.bme.aut.sportnetwork.entity.NotificationStatus;
 import hu.bme.aut.sportnetwork.entity.User;
 
 public class MessageOperationsImpl implements MessageOperations {

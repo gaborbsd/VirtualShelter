@@ -20,9 +20,6 @@ import hu.bme.aut.sportnetwork.rest.UserController;
 @Component
 public class SportEventResourceAssembler extends
 	ResourceAssemblerSupport<SportEvent, SportEventResource> {
-	
-	@Autowired
-	private AuthOperations authOperations;
 
 	public SportEventResourceAssembler() {
 		super(SportEventController.class, SportEventResource.class);
@@ -49,11 +46,11 @@ public class SportEventResourceAssembler extends
 			String.valueOf(entity.getLevelIntervalFrom()) + "-" + String.valueOf(entity.getLevelIntervalTo()));
 		
 		List<CommentWrapper> comments = new ArrayList<>();
-		entity.getComments().forEach(c -> addComment(comments, c));
+		entity.getComments().forEach(c -> WrapperUtils.addComment(comments, c));
 		resource.setComments(comments);
 		
 		List<UserLinkWrapper> members = new ArrayList<>();
-		entity.getMembers().forEach(m -> addMember(members, m));
+		entity.getMembers().forEach(m -> WrapperUtils.addMember(members, m));
 		resource.setMembers(members);
 		
 		resource.setOwner(entity.getOwner().getName());
@@ -77,26 +74,6 @@ public class SportEventResourceAssembler extends
 		return resource;
 	}
 	
-	private void addMember(List<UserLinkWrapper> members, User m) {
-		UserLinkWrapper u = new UserLinkWrapper();
-		u.setId(m.getId());
-		u.setName(m.getName());
-		
-		members.add(u);
-	}
 
-	private void addComment(List<CommentWrapper> comments, Comment c) {
-		UserLinkWrapper u  = new UserLinkWrapper();
-		u.setId(c.getOwner().getId());
-		u.setName(c.getOwner().getName());
-		CommentWrapper w = new CommentWrapper();
-		w.setMessage(c.getMessage());
-		w.setId(c.getId());
-		w.setMine(c.getOwner().getName().equals(authOperations.getLoggedInUserName()));
-		w.setWriter(u);
-		//w.setDate(c.getDateOfComment());
-		comments.add(w);
-		
-	}
 
 }

@@ -34,8 +34,8 @@ public class SportnetworkAuthenticationProvider implements AuthenticationProvide
 			}
 			
 			return new UsernamePasswordAuthenticationToken(name, password, grantedAuths);
-		} 
-		throw new RuntimeException("UNSUCCESFULL AUT");
+		}
+		return null;
 	}
 
 	@Override

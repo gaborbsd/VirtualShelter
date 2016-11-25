@@ -6,6 +6,14 @@ public class UserLinkWrapper {
 	
 	private Long id;
 
+	public UserLinkWrapper() {
+	}
+
+	public UserLinkWrapper(Long id, String name) {
+		this.id = id;
+		this.name = name;
+	}
+
 	public String getName() {
 		return name;
 	}

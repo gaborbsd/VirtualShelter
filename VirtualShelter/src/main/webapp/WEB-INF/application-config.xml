@@ -63,6 +63,7 @@
 	<bean id="sporteventOperation" class="hu.aut.bme.sportnetwork.api.impl.SportEventOperationsImpl" />
 	<bean id="userOperation" class="hu.aut.bme.sportnetwork.api.impl.UserOperationsImpl" />
 	<bean id="messageOperation" class="hu.aut.bme.sportnetwork.api.impl.MessageOperationsImpl" />
+	<bean id="notificationOperation" class="hu.aut.bme.sportnetwork.api.impl.NotificationOperationsImpl" />	
 	<bean id="authOperation" class="hu.bme.aut.sportnetwork.auth.AuthOperations" />
 
 </beans>

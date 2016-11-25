@@ -13,4 +13,6 @@ public interface NotificationDAOCustom {
 	boolean isUserAppliedToEvent(SportEvent e, User u);
 	
 	void deleteEventRequest(SportEvent e, User u);
+
+	void deleteNotificationsOfEvent(long eventId);
 }

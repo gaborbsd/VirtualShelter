@@ -12,11 +12,7 @@ public class MessageNotification extends Notification {
 	@ManyToOne
 	@JoinColumn(name="conversation_id")
 	private Conversation conversation;
-	
-	@ManyToOne
-	@JoinColumn(name = "sender_id")
-	private User sender;
-	
+
 	public MessageNotification(){}
 	
 	public MessageNotification(User sender, Conversation conversation) {
@@ -30,14 +26,6 @@ public class MessageNotification extends Notification {
 
 	public void setConversation(Conversation conversation) {
 		this.conversation = conversation;
-	}
-
-	public User getSender() {
-		return sender;
-	}
-
-	public void setSender(User sender) {
-		this.sender = sender;
 	}
 	
 	
