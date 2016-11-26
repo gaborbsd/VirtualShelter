@@ -47,12 +47,6 @@ public class NotificationController {
 		List<NotificationResource> resourceList = notificationResourceAssembler.toResources(notifications);
 		return new ResponseEntity<List<NotificationResource>>(resourceList, HttpStatus.OK);
 	}
-
-	@RequestMapping(value="friend", method=RequestMethod.POST)
-	ResponseEntity<String> sendFriendRequest(@RequestBody FriendRequestArg arg) {
-		userOperation.sendFriendRequest(arg.getTo());
-		return new ResponseEntity<String>(HttpStatus.OK);
-	}
 	
 	@RequestMapping(value="friendAccept/{id}", method=RequestMethod.PUT)
 	ResponseEntity<String> acceptFriendRequest(@PathVariable Long id) throws Exception {

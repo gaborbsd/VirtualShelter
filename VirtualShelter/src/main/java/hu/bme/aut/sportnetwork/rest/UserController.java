@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import hu.bme.aut.sportnetwork.api.RegistrationOperations;
 import hu.bme.aut.sportnetwork.api.UserOperations;
 import hu.bme.aut.sportnetwork.entity.User;
+import hu.bme.aut.sportnetwork.rest.resources.FriendRequestArg;
 import hu.bme.aut.sportnetwork.rest.resources.UserArg;
 import hu.bme.aut.sportnetwork.rest.resources.UserResource;
 import hu.bme.aut.sportnetwork.rest.resources.UserResourceAssembler;
@@ -69,6 +70,34 @@ public class UserController {
 		return new ResponseEntity<List<UserResource>>(resourceList, HttpStatus.OK);
 	}
 	
+	@RequestMapping(value = "friend", method = RequestMethod.POST)
+	ResponseEntity<UserResource> sendFriendRequest(@RequestBody FriendRequestArg arg) {
+		User user = userOperation.sendFriendRequest(arg.getTo());
+		UserResource resource = userResourceAssembler.toResource(user);
+		return new ResponseEntity<UserResource>(resource, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "cancel", method = RequestMethod.DELETE)
+	ResponseEntity<UserResource> cancelFriendRequest(@RequestBody FriendRequestArg arg) throws Exception {
+		User user = userOperation.cancelFriendRequest(arg.getTo());
+		UserResource resource = userResourceAssembler.toResource(user);
+		return new ResponseEntity<UserResource>(resource, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "decline", method = RequestMethod.PUT)
+	ResponseEntity<UserResource> declineFriendRequest(@RequestBody FriendRequestArg arg) throws Exception {
+		User user = userOperation.declineFriendRequest(arg.getTo());
+		UserResource resource = userResourceAssembler.toResource(user);
+		return new ResponseEntity<UserResource>(resource, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "deleteFriend/{id}", method = RequestMethod.DELETE)
+	ResponseEntity<UserResource> deleteFriend(@PathVariable Long id) {
+		User user = userOperation.deleteFriend(id);
+		UserResource resource = userResourceAssembler.toResource(user);
+		return new ResponseEntity<UserResource>(resource, HttpStatus.OK);
+	}
+
 	@RequestMapping(value="friendRequests", method=RequestMethod.GET)
 	ResponseEntity<List<UserResource>> listFriendRequests() {
 		List<User> friends = userOperation.listFriendRequest();

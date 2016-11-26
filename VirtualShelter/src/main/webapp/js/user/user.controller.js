@@ -11,6 +11,36 @@ app.controller('UserController', function($scope, $routeParams, UserFactory) {
         });
 	};
 	
+	$scope.cancelRequest = function() {
+		var arg = {
+				to: $scope.user.name
+			}
+		UserFactory.cancelRequest(arg).then(function (data) {
+				$scope.user = data;
+	        }, function (error) {
+	            alert(error);
+	    });
+	};
+	
+	$scope.declineRequest = function() {
+		var arg = {
+				to: $scope.user.name
+			}
+		UserFactory.declineRequest(arg).then(function (data) {
+				$scope.user = data;
+	        }, function (error) {
+	            alert(error);
+	    });
+	};
+	
+	$scope.deleteFriend = function() {
+		UserFactory.deleteFriend($routeParams.id).then(function (data) {
+				$scope.user = data;
+	        }, function (error) {
+	            alert(error);
+	    });
+	};
+	
 	$scope.getUser = function() {
 		if ($routeParams.id) {
 			UserFactory.getOne($routeParams.id).then(function (data) {
@@ -26,6 +56,17 @@ app.controller('UserController', function($scope, $routeParams, UserFactory) {
 	        });
 		}
 		
+	};
+	
+	$scope.sendRequest = function() {
+		var arg = {
+			to: $scope.user.name
+		}
+		UserFactory.sendRequest(arg).then(function (data) {
+			$scope.user = data;
+        }, function (error) {
+            alert(error);
+        });
 	};
 	
 	$scope.getUser();

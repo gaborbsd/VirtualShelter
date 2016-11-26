@@ -81,6 +81,8 @@ public class UserResourceAssembler extends
 			return 4;
 		case NOT_FRIEND:
 			return 5;
+		case DECLINED:
+			return 6;
 
 		default:
 			return 0;

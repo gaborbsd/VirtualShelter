@@ -60,13 +60,16 @@ public class UserOperationsImpl implements UserOperations {
 	}
 
 	@Override
-	public void sendFriendRequest(String name) {
+	@Transactional
+	public User sendFriendRequest(String name) {
 		User sender = authOperations.getLoggedInUser();
-		User u = findByName(name);
+		User u = fetchUserWithRatings(name);
+		u.setFriendStatus(FriendStatus.REQUEST_SENT);
 		Notification not = new FriendRequestNotification(sender);
 		not.setOwner(u);
 		not.setSendTime(new Date());
 		notificationRepositroy.save(not);
+		return u;
 	}
 
 	@Override
@@ -133,7 +136,7 @@ public class UserOperationsImpl implements UserOperations {
 			return FriendStatus.SELF;
 		}
 
-		if (friendShipRepository.countByUser1AndUser2(self, other) != 0) {
+		if (friendShipRepository.getByUser1AndUser2(self, other) != null) {
 			return FriendStatus.FRIEND;
 		}
 
@@ -144,9 +147,56 @@ public class UserOperationsImpl implements UserOperations {
 		}
 
 		if (request.getOwner().getName().equals(self.getName())) {
+			if (request.getIsDeclined()) {
+				return FriendStatus.DECLINED;
+			}
 			return FriendStatus.REQUEST_RECEIVED;
 		}
 
 		return FriendStatus.REQUEST_SENT;
+	}
+
+	@Override
+	@Transactional
+	public User cancelFriendRequest(String name) throws Exception {
+		User canceler = authOperations.getLoggedInUser();
+		User u = fetchUserWithRatings(name);
+		u.setFriendStatus(FriendStatus.NOT_FRIEND);
+		FriendRequestNotification not = notificationRepositroy.isFriendRequestBetween(canceler, u);
+		if (not == null) {
+			throw new Exception("NO REQUEST");
+		}
+		notificationRepositroy.delete(not.getNotificationId());
+
+		return u;
+	}
+
+	@Override
+	@Transactional
+	public User declineFriendRequest(String name) throws Exception {
+		User decliner = authOperations.getLoggedInUser();
+		User u = fetchUserWithRatings(name);
+		u.setFriendStatus(FriendStatus.DECLINED);
+		FriendRequestNotification not = notificationRepositroy.isFriendRequestBetween(decliner, u);
+		if (not == null) {
+			throw new Exception("NO REQUEST");
+		}
+		not.setIsDeclined(true);
+		notificationRepositroy.save(not);
+
+		return u;
+	}
+
+	@Override
+	@Transactional
+	public User deleteFriend(long id) {
+		User deleter = authOperations.getLoggedInUser();
+		User u = fetchUserWithRatings(id);
+		u.setFriendStatus(FriendStatus.NOT_FRIEND);
+		FriendShip f = friendShipRepository.getByUser1AndUser2(deleter, u);
+
+		friendShipRepository.delete(f.getId());
+
+		return u;
 	}
 }

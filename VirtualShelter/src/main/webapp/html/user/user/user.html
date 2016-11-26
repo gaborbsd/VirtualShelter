@@ -17,6 +17,9 @@
 <div ng-if="user.status==4" align="right" style="margin-right: 70px">	
 	Want to be your friend
 </div>
+<div ng-if="user.status==6" align="right" style="margin-right: 85px">	
+	Request declined
+</div>
 
 <div class="row">
 
@@ -30,9 +33,11 @@
 	  <ul class="dropdown-menu dropdown-menu-right dropdownMenu">
 	    <li ng-show="user.status==1"><a ng-click="edit()" >edit</a></li>
 	    <li ng-show="user.status==2"><a ng-click="deleteFriend()" >delete friend</a></li>
-	    <li ng-show="user.status==3"><a ng-click="cancel()" >cancel request</a></li>
+	    <li ng-show="user.status==3"><a ng-click="cancelRequest()" >cancel request</a></li>
 	    <li ng-show="user.status==4"><a ng-click="acceptFriend()" >accept</a></li>
-	    <li ng-show="user.status==5"><a ng-click="send()" >send friend request</a></li>
+	    <li ng-show="user.status==4"><a ng-click="declineRequest()" >decline</a></li>
+	    <li ng-show="user.status==5"><a ng-click="sendRequest()" >send friend request</a></li>
+	    <li ng-show="user.status==6"><a ng-click="acceptFriend()" >accept</a></li>
 	  </ul>
 	</div>
 
@@ -48,7 +53,7 @@
 </div>
 
 <div>
-	<p><font size="3pt" ><b>City:</b>
+	<p><font size="3pt" ><b>Residence:</b>
 	{{user.city}}
 	</font></p>
 </div>

@@ -11,7 +11,7 @@ public interface UserOperations {
 	
 	User findByName(String name);
 	
-	void sendFriendRequest(String name);
+	User sendFriendRequest(String name);
 	
 	User acceptFriendRequest(long userId) throws Exception;
 	
@@ -24,4 +24,10 @@ public interface UserOperations {
 	User getCurrent();
 
 	User friendAccept(User accepter, User friend, FriendRequestNotification not);
+
+	User cancelFriendRequest(String name) throws Exception;
+
+	User declineFriendRequest(String name) throws Exception;
+
+	User deleteFriend(long id);
 }

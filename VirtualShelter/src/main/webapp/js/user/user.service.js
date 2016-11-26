@@ -13,6 +13,36 @@ app.factory("UserFactory", function($http, $q) {
 		return deferred.promise;
 	};
 	
+	factory.cancelRequest = function(arg) {
+		var deferred = $q.defer();
+		$http.delete("api/user/cancel", arg).success(function(data, status) {
+			deferred.resolve(data);
+		}).error(function(data, status) {
+			deferred.reject(data);
+		});
+		return deferred.promise;
+	};
+	
+	factory.declineRequest = function(arg) {
+		var deferred = $q.defer();
+		$http.put("api/user/decline", arg).success(function(data, status) {
+			deferred.resolve(data);
+		}).error(function(data, status) {
+			deferred.reject(data);
+		});
+		return deferred.promise;
+	};
+	
+	factory.deleteFriend = function(id) {
+		var deferred = $q.defer();
+		$http.delete("api/user/deleteFriend/" + id).success(function(data, status) {
+			deferred.resolve(data);
+		}).error(function(data, status) {
+			deferred.reject(data);
+		});
+		return deferred.promise;
+	};
+	
 	factory.getOne = function(id) {
 		var deferred = $q.defer();
 		$http.get("api/user/" + id).success(function(data, status) {
@@ -26,6 +56,16 @@ app.factory("UserFactory", function($http, $q) {
 	factory.getCurrent = function() {
 		var deferred = $q.defer();
 		$http.get("api/user/").success(function(data, status) {
+			deferred.resolve(data);
+		}).error(function(data, status) {
+			deferred.reject(data);
+		});
+		return deferred.promise;
+	};
+	
+	factory.sendRequest = function(arg) {
+		var deferred = $q.defer();
+		$http.post("api/user/friend", arg).success(function(data, status) {
 			deferred.resolve(data);
 		}).error(function(data, status) {
 			deferred.reject(data);
