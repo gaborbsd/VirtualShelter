@@ -16,6 +16,7 @@ import hu.bme.aut.sportnetwork.dal.NotificationDAO;
 import hu.bme.aut.sportnetwork.dal.SportEventDAO;
 import hu.bme.aut.sportnetwork.dal.UserDAO;
 import hu.bme.aut.sportnetwork.dal.impl.RateParam;
+import hu.bme.aut.sportnetwork.entity.Address;
 import hu.bme.aut.sportnetwork.entity.Comment;
 import hu.bme.aut.sportnetwork.entity.EventNotification;
 import hu.bme.aut.sportnetwork.entity.EventRateNotification;
@@ -64,6 +65,11 @@ public class SportEventOperationsImpl implements SportEventOperations {
 		e.getMembers().add(owner);
 		e.setMemberSize(e.getMembers().size());
 		e.setIsOpened(true);
+
+		if (e.getAddress().getCountry() == null || e.getAddress().getCountry().isEmpty()) {
+			e.getAddress().setCountry(Address.EMPTY);
+		}
+
 		SportEvent newEvent = sportEventRepository.saveNewEvent(e);
 		List<FriendShip> usersToNotify = friendShipRepository.findByUser1AndUser2ListenOrUser2AndUser1Listen(owner,
 				owner, true, true);

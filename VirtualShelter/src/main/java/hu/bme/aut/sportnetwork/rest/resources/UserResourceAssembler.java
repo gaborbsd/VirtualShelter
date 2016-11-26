@@ -32,9 +32,11 @@ public class UserResourceAssembler extends
 		resource.setEmail(entity.getEmail());
 		resource.setPhoneNumber(entity.getPhoneNumber());
 		resource.setFriendStatus(entity.getFriendStatus());
-		List<Sports> interest = new ArrayList<Sports>();
-		entity.getInterest().forEach(i -> interest.add(i.getSport()));
-		resource.setInterest(interest);
+		/*
+		 * List<Sports> interest = new ArrayList<Sports>();
+		 * entity.getInterest().forEach(i -> interest.add(i.getSport()));
+		 * resource.setInterest(interest);
+		 */
 		return resource;
 	}
 }

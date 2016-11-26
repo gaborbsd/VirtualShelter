@@ -390,5 +390,10 @@ li.borderless {
     border: 1px solid black;
 }
 
+.registration {
+	margin-left: 20px; 
+	margin-right: 60px;
+}
+
 
 

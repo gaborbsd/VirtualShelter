@@ -16,6 +16,7 @@ import hu.bme.aut.sportnetwork.api.RegistrationOperations;
 import hu.bme.aut.sportnetwork.api.UserOperations;
 import hu.bme.aut.sportnetwork.entity.User;
 import hu.bme.aut.sportnetwork.rest.resources.SportEventResource;
+import hu.bme.aut.sportnetwork.rest.resources.UserArg;
 import hu.bme.aut.sportnetwork.rest.resources.UserResource;
 import hu.bme.aut.sportnetwork.rest.resources.UserResourceAssembler;
 
@@ -51,17 +52,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/register", method=RequestMethod.POST)
-	ResponseEntity<UserResource> addUser(@RequestBody User user) {
-		/*Address a = new Address();
-		a.setCity("KAp");
-		a.setCountry("HUN");
-		a.setZipCode(7400);
-		a.setStreet("Honv");
-		User user = new User();
-		user.setEmail("denes4@gmail.com");
-		user.setName("Denes");
-		user.setPassword("d");
-		user.setAddress(a);*/
+	ResponseEntity<UserResource> addUser(@RequestBody UserArg user) {
 		User created = registrationOperation.registrate(user);
 		UserResource resource = userResourceAssembler.toResource(created);
 		return new ResponseEntity<UserResource>(resource, HttpStatus.CREATED);

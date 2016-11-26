@@ -23,7 +23,10 @@ public class SportEventDAOImpl implements SportEventDAOCustom {
 	
 	@Override
 	public SportEvent saveNewEvent(SportEvent e) {
-		TypedQuery<Address> addressQuery = em.createQuery("SELECT a FROM Address a WHERE a.city=:city AND a.address=:address", Address.class);
+		TypedQuery<Address> addressQuery = em.createQuery(
+				"SELECT a FROM Address a WHERE a.country=:country AND a.city=:city AND a.address=:address",
+				Address.class);
+		addressQuery.setParameter("country", e.getAddress().getCountry());
 		addressQuery.setParameter("city", e.getAddress().getCity());
 		addressQuery.setParameter("address", e.getAddress().getAddress());
 		

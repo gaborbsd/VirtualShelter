@@ -47,10 +47,10 @@ public class SportnetworkSuccessHandler extends SimpleUrlAuthenticationSuccessHa
 		 
 		 String url = null;
 		 
-		 if (roles.contains(Roles.USER)) {
-			 url = USER_HOME;
-		 } else if (roles.contains(Roles.ADMIN)) {
+		if (roles.contains(Roles.ADMIN)) {
 			url = ADMIN_HOME;
+		} else if (roles.contains(Roles.USER)) {
+			url = USER_HOME;
 		 } else {
 			url = ERROR_HOME;
 		 }

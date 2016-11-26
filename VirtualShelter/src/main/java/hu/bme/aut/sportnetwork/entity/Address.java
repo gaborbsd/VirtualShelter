@@ -14,15 +14,16 @@ import javax.validation.constraints.Pattern;
 
 @Entity
 @Table(name="address", uniqueConstraints={
-		@UniqueConstraint(columnNames={"city", "address"})
+		@UniqueConstraint(columnNames = { "country", "city", "address" })
 })
 public class Address {
 	
+	public static final String EMPTY = "NONE";
+
 	@Id
 	@GeneratedValue
 	private long id;
 	
-	@Column(nullable = false)
 	private String country;
 	
 	private String province;
@@ -34,7 +35,6 @@ public class Address {
 				message="Invalid zipcode format")
 	private int zipCode;
 	
-	@Column(nullable=false)
 	private String address;
 	
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="address")

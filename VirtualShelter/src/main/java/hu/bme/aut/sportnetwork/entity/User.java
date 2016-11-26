@@ -37,6 +37,14 @@ public class User {
 	@Column(nullable = false)
 	private String password;
 	
+	private String introduction;
+
+	@Column(name = "has_warning")
+	private boolean hasWarning;
+
+	@Column(name = "warning_message")
+	private String warningMessage;
+
 	@Column(name = "has_notification")
 	private boolean hasNotification;
 
@@ -44,19 +52,12 @@ public class User {
 	@JsonIgnore
 	private List<SportEvent> ownEvents;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy="owner")
-	@JsonIgnore
-	private List<Notification> notifications;
-	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
 	@JsonIgnore
 	private List<Rating> ratings;
 	
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	private Address address;
-	
-	@OneToMany(fetch=FetchType.EAGER, mappedBy="user")
-	private List<UserInterest> interest;
 	
 	@Transient
 	private FriendStatus friendStatus;
@@ -132,17 +133,6 @@ public class User {
 		this.address = address;
 	}
 
-	public List<Notification> getNotifications() {
-		if (notifications==null) {
-			notifications = new ArrayList<>();
-		}
-		return notifications;
-	}
-
-	public void setNotifications(List<Notification> notifications) {
-		this.notifications = notifications;
-	}
-
 	public List<Rating> getRatings() {
 		if (ratings==null) {
 			ratings = new ArrayList<>();
@@ -161,14 +151,6 @@ public class User {
 	public void setFriendStatus(FriendStatus friendStatus) {
 		this.friendStatus = friendStatus;
 	}
-
-	public List<UserInterest> getInterest() {
-		return interest;
-	}
-
-	public void setInterest(List<UserInterest> interest) {
-		this.interest = interest;
-	}
 	
 	public boolean isAdmin() {
 		return isAdmin;
@@ -184,6 +166,30 @@ public class User {
 
 	public void setHasNotification(boolean hasNotification) {
 		this.hasNotification = hasNotification;
+	}
+
+	public String getIntroduction() {
+		return introduction;
+	}
+
+	public void setIntroduction(String introduction) {
+		this.introduction = introduction;
+	}
+
+	public boolean getHasWarning() {
+		return hasWarning;
+	}
+
+	public void setHasWarning(boolean hasWarning) {
+		this.hasWarning = hasWarning;
+	}
+
+	public String getWarningMessage() {
+		return warningMessage;
+	}
+
+	public void setWarningMessage(String warningMessage) {
+		this.warningMessage = warningMessage;
 	}
 
 	@Override
