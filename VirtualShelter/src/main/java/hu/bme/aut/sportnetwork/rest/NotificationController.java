@@ -56,7 +56,7 @@ public class NotificationController {
 	
 	@RequestMapping(value="friendAccept/{id}", method=RequestMethod.PUT)
 	ResponseEntity<String> acceptFriendRequest(@PathVariable Long id) throws Exception {
-		userOperation.acceptFriendRequest(id);
+		notificationOperation.friendAccept(id);
 		
 		return new ResponseEntity<String>(HttpStatus.OK);
 	}

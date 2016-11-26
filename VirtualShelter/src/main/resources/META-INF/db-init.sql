@@ -65,6 +65,9 @@ INSERT INTO event_rate_notification VALUES (7, false, '2016-11-17 16:00:00',4,4,
 INSERT INTO event_rate_notification VALUES (8, false, '2016-11-17 16:00:00',6,4,5);
 
 INSERT INTO rating VALUES (1, 1, "FOOTBALL", 3, 4);
+INSERT INTO rating VALUES (2, 3, "TENNIS", 23, 1);
+INSERT INTO rating VALUES (3, 0, "HANDBALL", 0, 1);
+INSERT INTO rating VALUES (4, 1, "FOOTBALL", 5, 1);
 
 INSERT INTO id_gen VALUES ("Notification",9);
 

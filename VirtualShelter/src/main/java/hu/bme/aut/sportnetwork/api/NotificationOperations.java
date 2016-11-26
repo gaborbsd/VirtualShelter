@@ -11,4 +11,6 @@ public interface NotificationOperations {
 	List<Notification> declineRequest(long id) throws Exception;
 
 	void deleteNotification(long id) throws Exception;
+
+	void friendAccept(long notificationId) throws Exception;
 }

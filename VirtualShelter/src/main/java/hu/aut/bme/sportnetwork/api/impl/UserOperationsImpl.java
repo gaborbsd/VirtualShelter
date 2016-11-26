@@ -71,24 +71,32 @@ public class UserOperationsImpl implements UserOperations {
 
 	@Override
 	@Transactional
-	public void acceptFriendRequest(long notificationId) throws Exception {		
-		Notification not = notificationRepositroy.findOne(notificationId);
-		User accepter = not.getOwner();
-		if (not instanceof FriendRequestNotification) {
-			FriendRequestNotification friendNot = (FriendRequestNotification) not;
-			User friend = friendNot.getSender();
-			FriendShip f = new FriendShip();
-			f.setUser1(accepter);
-			f.setUser2(friend);
-			f.setUser1Listen(true);
-			f.setUser2Listen(true);
-			friendShipRepository.save(f);
-			
-			notificationRepositroy.delete(notificationId);
-		} else {
-			throw new Exception("WRONG NOTIFICATION ID");
+	public User acceptFriendRequest(long userId) throws Exception {
+		User accepter = authOperations.getLoggedInUser();
+		User friend = userRepository.findOne(userId);
+		friend.getRatings().size();
+		friend.setFriendStatus(FriendStatus.FRIEND);
+		FriendRequestNotification not = notificationRepositroy.isFriendRequestBetween(friend, accepter);
+		if (not == null) {
+			throw new Exception("NO REQUEST");
 		}
-		
+		return friendAccept(accepter, friend, not);
+	}
+
+	@Override
+	public User friendAccept(User accepter, User friend, FriendRequestNotification not) {
+
+
+		FriendShip f = new FriendShip();
+		f.setUser1(accepter);
+		f.setUser2(friend);
+		f.setUser1Listen(true);
+		f.setUser2Listen(true);
+		friendShipRepository.save(f);
+
+		notificationRepositroy.delete(not.getNotificationId());
+
+		return friend;
 	}
 
 	@Override

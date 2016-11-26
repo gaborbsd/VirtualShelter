@@ -1,6 +1,5 @@
 package hu.bme.aut.sportnetwork.rest;
 
-import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 import hu.bme.aut.sportnetwork.api.RegistrationOperations;
 import hu.bme.aut.sportnetwork.api.UserOperations;
 import hu.bme.aut.sportnetwork.entity.User;
-import hu.bme.aut.sportnetwork.rest.resources.SportEventResource;
 import hu.bme.aut.sportnetwork.rest.resources.UserArg;
 import hu.bme.aut.sportnetwork.rest.resources.UserResource;
 import hu.bme.aut.sportnetwork.rest.resources.UserResourceAssembler;
@@ -76,5 +74,12 @@ public class UserController {
 		List<User> friends = userOperation.listFriendRequest();
 		List<UserResource> resourceList = userResourceAssembler.toResources(friends);
 		return new ResponseEntity<List<UserResource>>(resourceList, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "friendAccept/{id}", method = RequestMethod.PUT)
+	ResponseEntity<UserResource> acceptFriendRequest(@PathVariable Long id) throws Exception {
+		User user = userOperation.acceptFriendRequest(id);
+		UserResource resource = userResourceAssembler.toResource(user);
+		return new ResponseEntity<UserResource>(resource, HttpStatus.OK);
 	}
 }
