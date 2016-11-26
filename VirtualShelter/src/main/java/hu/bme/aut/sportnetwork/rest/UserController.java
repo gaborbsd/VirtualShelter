@@ -111,4 +111,12 @@ public class UserController {
 		UserResource resource = userResourceAssembler.toResource(user);
 		return new ResponseEntity<UserResource>(resource, HttpStatus.OK);
 	}
+
+	@RequestMapping(value = "modify", method = RequestMethod.PUT)
+	ResponseEntity<UserResource> modifyUser(@RequestBody UserArg arg) throws Exception {
+		User user = userOperation.modify(arg);
+		UserResource resource = userResourceAssembler.toResource(user);
+		return new ResponseEntity<UserResource>(resource, HttpStatus.OK);
+
+	}
 }

@@ -105,4 +105,28 @@ public class UserDAOImpl implements UserDAOCustom {
 
 	}
 
+	@Override
+	public User modifyUser(User modified) {
+		TypedQuery<Address> addressQuery = em.createQuery(
+				"SELECT a FROM Address a WHERE a.country=:country AND a.city=:city AND a.address=:address",
+				Address.class);
+		addressQuery.setParameter("country", modified.getAddress().getCountry());
+		addressQuery.setParameter("city", modified.getAddress().getCity());
+		addressQuery.setParameter("address", modified.getAddress().getAddress());
+
+		Address a = null;
+		try {
+			a = addressQuery.getSingleResult();
+		} catch (NoResultException ex) {
+
+		}
+
+		if (a != null) {
+			modified.setAddress(a);
+		}
+		User ret = em.merge(modified);
+
+		return ret;
+	}
+
 }

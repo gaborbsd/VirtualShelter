@@ -10,6 +10,9 @@ app.config(function($routeProvider) {
 	}).when('/user', {
 		controller : 'UserController',
 		templateUrl : '/html/user/user/user.html'
+	}).when('/edit', {
+		controller : 'UserEditorController',
+		templateUrl : '/html/user/user/edit.html'
 	}).when('/event/:id', {
 		controller : 'EventController',
 		templateUrl : '/html/user/event/event.html'

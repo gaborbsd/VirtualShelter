@@ -16,4 +16,6 @@ public interface UserDAOCustom {
 
 	User saveNewUser(User user);
 
+	User modifyUser(User modified);
+
 }

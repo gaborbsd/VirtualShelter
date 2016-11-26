@@ -16,7 +16,9 @@ import hu.bme.aut.sportnetwork.entity.FriendRequestNotification;
 import hu.bme.aut.sportnetwork.entity.FriendShip;
 import hu.bme.aut.sportnetwork.entity.FriendStatus;
 import hu.bme.aut.sportnetwork.entity.Notification;
+import hu.bme.aut.sportnetwork.entity.Rating;
 import hu.bme.aut.sportnetwork.entity.User;
+import hu.bme.aut.sportnetwork.rest.resources.UserArg;
 
 public class UserOperationsImpl implements UserOperations {
 	
@@ -198,5 +200,33 @@ public class UserOperationsImpl implements UserOperations {
 		friendShipRepository.delete(f.getId());
 
 		return u;
+	}
+
+	@Override
+	@Transactional
+	public User modify(UserArg arg) throws Exception {
+		User current = authOperations.getLoggedInUser();
+		List<Rating> ratings = current.getRatings();
+		if (!current.getName().equals(arg.getName())) {
+			throw new Exception("NO RIGHT FOR THIS OPERATION");
+		}
+		User modified = User.toUser(arg);
+
+		for (Rating rating : modified.getRatings()) {
+			if (ratings.stream().allMatch(r -> r.getSport() != rating.getSport())) {
+				ratings.add(rating);
+			}
+		}
+
+		modified.setRatings(ratings);
+		modified.setId(current.getId());
+
+		User saved = userRepository.modifyUser(modified);
+
+		saved.getRatings().size();
+		saved.setFriendStatus(FriendStatus.SELF);
+		return saved;
+		// userRepository.modifyUser(modified);
+
 	}
 }

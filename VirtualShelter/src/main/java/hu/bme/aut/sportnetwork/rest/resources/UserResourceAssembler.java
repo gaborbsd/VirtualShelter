@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 import org.springframework.stereotype.Component;
 
+import hu.bme.aut.sportnetwork.entity.Address;
 import hu.bme.aut.sportnetwork.entity.FriendStatus;
 import hu.bme.aut.sportnetwork.entity.Rating;
 import hu.bme.aut.sportnetwork.entity.Sports;
@@ -30,7 +31,8 @@ public class UserResourceAssembler extends
 	protected UserResource instantiateResource(User entity) {
 		UserResource resource = new UserResource();
 		resource.setAge(entity.getAge());
-		resource.setCity(entity.getAddress().getCity());
+
+		resource.setAddress(toAddress(entity.getAddress()));
 		resource.setEmail(entity.getEmail());
 
 		resource.setInterest(toInterest(entity.getRatings()));
@@ -87,5 +89,15 @@ public class UserResourceAssembler extends
 		default:
 			return 0;
 		}
+	}
+
+	private Address toAddress(Address entity) {
+		Address a = new Address();
+		a.setAddress(entity.getAddress());
+		a.setCity(entity.getCity());
+		a.setCountry(entity.getCountry());
+		a.setZipCode(entity.getZipCode());
+		a.setProvince(entity.getProvince());
+		return a;
 	}
 }

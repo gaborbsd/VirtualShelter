@@ -63,6 +63,16 @@ app.factory("UserFactory", function($http, $q) {
 		return deferred.promise;
 	};
 	
+	factory.modifyUser = function(arg) {
+		var deferred = $q.defer();
+		$http.put("api/user/modify", arg).success(function(data, status) {
+			deferred.resolve(data);
+		}).error(function(data, status) {
+			deferred.reject(data);
+		});
+		return deferred.promise;
+	};
+		
 	factory.sendRequest = function(arg) {
 		var deferred = $q.defer();
 		$http.post("api/user/friend", arg).success(function(data, status) {

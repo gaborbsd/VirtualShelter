@@ -1,5 +1,6 @@
 package hu.bme.aut.sportnetwork.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -91,6 +92,9 @@ public class Address {
 	
 
 	public List<SportEvent> getEvents() {
+		if (events == null) {
+			events = new ArrayList<>();
+		}
 		return events;
 	}
 

@@ -41,6 +41,10 @@ app.controller('UserController', function($scope, $routeParams, UserFactory) {
 	    });
 	};
 	
+	$scope.edit = function() {
+		window.location.href = "#/edit";
+	};
+	
 	$scope.getUser = function() {
 		if ($routeParams.id) {
 			UserFactory.getOne($routeParams.id).then(function (data) {

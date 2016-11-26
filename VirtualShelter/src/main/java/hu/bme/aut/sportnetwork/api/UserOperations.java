@@ -4,6 +4,7 @@ import java.util.List;
 
 import hu.bme.aut.sportnetwork.entity.FriendRequestNotification;
 import hu.bme.aut.sportnetwork.entity.User;
+import hu.bme.aut.sportnetwork.rest.resources.UserArg;
 
 public interface UserOperations {
 	
@@ -30,4 +31,6 @@ public interface UserOperations {
 	User declineFriendRequest(String name) throws Exception;
 
 	User deleteFriend(long id);
+
+	User modify(UserArg arg) throws Exception;
 }

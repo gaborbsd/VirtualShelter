@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.hateoas.ResourceSupport;
 
+import hu.bme.aut.sportnetwork.entity.Address;
 import hu.bme.aut.sportnetwork.entity.FriendStatus;
 import hu.bme.aut.sportnetwork.entity.Sports;
 
@@ -17,7 +18,7 @@ public class UserResource extends ResourceSupport {
 	private int status;
 	private List<InterestWrapper> interest;
 	private String introduction;
-	private String city;
+	private Address address;
 	private String warning;
 	
 	public UserResource() {
@@ -80,12 +81,12 @@ public class UserResource extends ResourceSupport {
 		this.introduction = introduction;
 	}
 
-	public String getCity() {
-		return city;
+	public Address getAddress() {
+		return address;
 	}
 
-	public void setCity(String city) {
-		this.city = city;
+	public void setAddress(Address address) {
+		this.address = address;
 	}
 
 	public String getWarning() {

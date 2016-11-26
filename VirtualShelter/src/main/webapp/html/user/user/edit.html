@@ -1,0 +1,115 @@
+<from class="form">
+			
+<div align="center"> 
+   <h2>
+      {{user.name}} 
+   </h2>  
+</div>				
+		
+<div class="panel-body">
+
+	<div class="form-group row">
+		<label class="control-label col-sm-3 registration">Email*</label>
+		<div class="col-sm-5">
+			<input class="form-control" type="text" name="email"
+				ng-model="user.email" placeholder="Email">
+		</div>
+	</div>
+	<div class="form-group row">
+		<label class="control-label col-sm-3 registration">Password*</label>
+		<div class="col-sm-5">
+			<input class="form-control" type="password" name="password" id="password"
+				ng-model="user.password">
+		</div>
+	</div>
+	<div class="form-group row">
+		<label class="control-label col-sm-3 registration">Password again*</label>
+		<div class="col-sm-5">
+			<input class="form-control" type="password" name="password-re" id="password-re"
+				password-match="password" ng-model="pw">
+		</div>
+	</div>
+	<div class="form-group row">
+		<label class="control-label col-sm-3 registration">Age*</label>
+		<div class="col-sm-5">
+			<input class="form-control" type="number" name="age" 
+				ng-model="user.age">
+		</div>
+	</div>
+	<div class="form-group row">
+		<label class="control-label col-sm-3 registration">Country*</label>
+		<div class="col-sm-5">
+			<input class="form-control" type="text" name="country"
+				placeholder="Country" ng-model="user.address.country">
+		</div>
+	</div>
+	<div class="form-group row">
+		<label class="control-label col-sm-3 registration">ZIP Code</label>
+		<div class="col-sm-5">
+			<input class="form-control" type="number" name="zipCode"
+				placeholder="1000" ng-model="user.address.zipCode">
+		</div>
+	</div>
+	<div class="form-group row">
+		<label class="control-label col-sm-3 registration">City*</label>
+		<div class="col-sm-5">
+			<input class="form-control" type="text" name="street"
+				placeholder="City" ng-model="user.address.city">
+		</div>
+	</div>
+	<div class="form-group row">
+		<label class="control-label col-sm-3 registration">Street
+		</label>
+		<div class="col-sm-5">
+			<input class="form-control" type="text" name="street"
+				placeholder="Street" ng-model="user.address.address">
+		</div>
+	</div>
+	<div class="form-group row">
+		<label class="control-label col-sm-3 registration">Province</label>
+		<div class="col-sm-5">
+			<input class="form-control" type="text" name="province"
+				placeholder="Province" ng-model="user.address.province">
+		</div>
+	</div>
+	
+	<div class="form-group row">
+		<label class="control-label col-sm-3 registration">Phone number</label>
+		<div class="col-sm-5">
+			<input class="form-control" type="text" name="phoneNumber"
+				placeholder="Phone number" ng-model="user.phoneNumber">
+		</div>
+	</div>
+	
+	<div class="form-group row">
+		<label class="control-label col-sm-3 registration">About me</label>
+		<div class="col-sm-5">
+			<textarea class="form-control" rows="2" ng-model="user.introduction"></textarea>
+		</div>
+	</div>
+	
+	<div class="form-group row">
+		<label class="control-label col-sm-4 registration">Interest</label>
+		<div class="col-sm-3">
+			<select class="form-control" multiple="multiple" ng-model="user.interest">
+				<option value="FOOTBALL">FOOTBALL</option>
+				<option value="BASKETBALL">BASKETBALL</option>
+				<option value="TENNIS">TENNIS</option>
+				<option value="VOLLEYBALL">VOLLEYBALL</option>
+				<option value="HANDBALL">HANDBALL</option>
+				<option value="ICE_HOCKEY">ICE_HOCKEY</option>
+				<option value="BADMINTON">BADMINTON</option>
+				<option value="BASEBALL">BASEBALL</option>
+				<option value="AMERICAN_FOOTBALL">AMERICAN_FOOTBALL</option>
+				<option value="SNOOKER">SNOOKER</option>
+				<option value="TABLE_TENNIS">TABLE TENNIS</option>
+				<option value="CHESS">CHESS</option>
+			</select>
+		</div>
+	</div>
+
+</div>
+<div class="panel-footer text-center">
+	<button class="btn btn-primary" ng-click="modifyUser()">Save</button>
+</div>
+</from>
