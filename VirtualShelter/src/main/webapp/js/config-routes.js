@@ -3,13 +3,13 @@ var app = angular.module('sportnetworkApp', ['ngRoute']);
 app.config(function($routeProvider) {
 	$routeProvider.when('/user/:id', {
 		controller : 'UserController',
-		templateUrl : '/html/user/users.html'
+		templateUrl : '/html/user/user/user.html'
 	}).when('/listevents', {
 		controller : 'SportEventListController',
 		templateUrl : '/html/user/event/eventlist.html'
 	}).when('/user', {
-		controller : 'UserEditorController',
-		templateUrl : '/html/user/users.html'
+		controller : 'UserController',
+		templateUrl : '/html/user/user/user.html'
 	}).when('/event/:id', {
 		controller : 'EventController',
 		templateUrl : '/html/user/event/event.html'

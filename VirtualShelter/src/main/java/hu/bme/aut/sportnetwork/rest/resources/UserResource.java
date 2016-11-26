@@ -14,8 +14,11 @@ public class UserResource extends ResourceSupport {
 	private int age;
 	private String email;
 	private String phoneNumber;
-	private FriendStatus friendStatus;
-	private List<Sports> interest;
+	private int status;
+	private List<InterestWrapper> interest;
+	private String introduction;
+	private String city;
+	private String warning;
 	
 	public UserResource() {
 		
@@ -50,23 +53,47 @@ public class UserResource extends ResourceSupport {
 		this.phoneNumber = phoneNumber;
 	}
 
-	public FriendStatus getFriendStatus() {
-		return friendStatus;
-	}
-
-	public void setFriendStatus(FriendStatus friendStatus) {
-		this.friendStatus = friendStatus;
-	}
-
-	public List<Sports> getInterest() {
+	public List<InterestWrapper> getInterest() {
 		if (interest == null) {
-			return new ArrayList<>();
+			interest = new ArrayList<>();
 		}
 		return interest;
 	}
 
-	public void setInterest(List<Sports> interest) {
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
+	public void setInterest(List<InterestWrapper> interest) {
 		this.interest = interest;
+	}
+
+	public String getIntroduction() {
+		return introduction;
+	}
+
+	public void setIntroduction(String introduction) {
+		this.introduction = introduction;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getWarning() {
+		return warning;
+	}
+
+	public void setWarning(String warning) {
+		this.warning = warning;
 	}
 	
 	

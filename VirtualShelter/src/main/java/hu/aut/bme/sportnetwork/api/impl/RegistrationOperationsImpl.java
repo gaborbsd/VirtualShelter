@@ -16,8 +16,8 @@ public class RegistrationOperationsImpl implements RegistrationOperations{
 	UserDAO userRepository;
 
 	@Override
-	public User registrate(UserArg arg) {
-		return userRepository.saveNewUser((toUser(arg)));
+	public void registrate(UserArg arg) {
+		userRepository.saveNewUser((toUser(arg)));
 	}
 
 	private User toUser(UserArg arg) {

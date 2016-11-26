@@ -14,8 +14,8 @@ import hu.bme.aut.sportnetwork.dal.NotificationDAO;
 import hu.bme.aut.sportnetwork.dal.UserDAO;
 import hu.bme.aut.sportnetwork.entity.FriendRequestNotification;
 import hu.bme.aut.sportnetwork.entity.FriendShip;
+import hu.bme.aut.sportnetwork.entity.FriendStatus;
 import hu.bme.aut.sportnetwork.entity.Notification;
-import hu.bme.aut.sportnetwork.entity.EventNotification;
 import hu.bme.aut.sportnetwork.entity.User;
 
 public class UserOperationsImpl implements UserOperations {
@@ -33,13 +33,30 @@ public class UserOperationsImpl implements UserOperations {
 	private AuthOperations authOperations;
 	
     @Override
+	@Transactional
 	public User findById(long id) {
-		return userRepository.findOne(id);
+		User me = authOperations.getLoggedInUser();
+		User u = fetchUserWithRatings(id);
+		u.setFriendStatus(setFriendStatus(me, u));
+		return u;
 	}
 
     @Override
+	@Transactional
 	public User findByName(String name) {
-		return userRepository.findByName(name);
+		return fetchUserWithRatings(name);
+	}
+
+	private User fetchUserWithRatings(String name) {
+		User ret = userRepository.findByName(name);
+		ret.getRatings().size();
+		return ret;
+	}
+
+	private User fetchUserWithRatings(long id) {
+		User ret = userRepository.findOne(id);
+		ret.getRatings().size();
+		return ret;
 	}
 
 	@Override
@@ -93,6 +110,35 @@ public class UserOperationsImpl implements UserOperations {
 		User user = authOperations.getLoggedInUser();
 		return user.getHasNotification();
 	}
-	
 
+	@Override
+	@Transactional
+	public User getCurrent() {
+		User u = authOperations.getLoggedInUser();
+		u.getRatings().size();
+		u.setFriendStatus(FriendStatus.SELF);
+		return u;
+	}
+	
+	private FriendStatus setFriendStatus(User self, User other) {
+		if (self.getName().equals(other.getName())) {
+			return FriendStatus.SELF;
+		}
+
+		if (friendShipRepository.countByUser1AndUser2(self, other) != 0) {
+			return FriendStatus.FRIEND;
+		}
+
+		FriendRequestNotification request = notificationRepositroy.isFriendRequestBetween(self, other);
+
+		if (request == null) {
+			return FriendStatus.NOT_FRIEND;
+		}
+
+		if (request.getOwner().getName().equals(self.getName())) {
+			return FriendStatus.REQUEST_RECEIVED;
+		}
+
+		return FriendStatus.REQUEST_SENT;
+	}
 }

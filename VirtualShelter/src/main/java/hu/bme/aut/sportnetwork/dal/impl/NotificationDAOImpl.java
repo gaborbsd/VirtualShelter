@@ -3,6 +3,7 @@ package hu.bme.aut.sportnetwork.dal.impl;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.Transient;
@@ -61,6 +62,25 @@ public class NotificationDAOImpl implements NotificationDAOCustom {
 		query2.setParameter("id", eventId);
 
 		query2.executeUpdate();
+	}
+
+	@Override
+	public FriendRequestNotification isFriendRequestBetween(User u1, User u2) {
+		TypedQuery<FriendRequestNotification> query = em.createQuery(
+				"SELECT f from FriendRequestNotification f WHERE (sender = :u1 AND owner = :u2) OR (sender = :u2 AND owner = :u1)",
+				FriendRequestNotification.class);
+		query.setParameter("u1", u1);
+		query.setParameter("u2", u2);
+		
+		FriendRequestNotification ret = null;
+
+		try {
+			ret = query.getSingleResult();
+		} catch (NoResultException e) {
+
+		}
+
+		return ret;
 	}
 
 }

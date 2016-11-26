@@ -52,15 +52,14 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/register", method=RequestMethod.POST)
-	ResponseEntity<UserResource> addUser(@RequestBody UserArg user) {
-		User created = registrationOperation.registrate(user);
-		UserResource resource = userResourceAssembler.toResource(created);
-		return new ResponseEntity<UserResource>(resource, HttpStatus.CREATED);
+	ResponseEntity<String> addUser(@RequestBody UserArg user) {
+		registrationOperation.registrate(user);
+		return new ResponseEntity<String>(HttpStatus.OK);
 	}
 	
 	@RequestMapping(method=RequestMethod.GET)
-	ResponseEntity<UserResource> getCurrentUser(Principal principal) {
-		User user = userOperation.findByName(principal.getName());
+	ResponseEntity<UserResource> getCurrentUser() {
+		User user = userOperation.getCurrent();
 		UserResource resource = userResourceAssembler.toResource(user);
 		return new ResponseEntity<UserResource>(resource, HttpStatus.OK);
 	}

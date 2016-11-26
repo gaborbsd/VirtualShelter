@@ -1,0 +1,99 @@
+<label>{{event.type}} ({{event.members.length}}/{{event.maxSize}})</label>
+
+<div align="center"> 
+   <h2>
+      {{user.name}} 
+   </h2>  
+</div>
+
+<br>
+
+<div ng-if="event.status==0 && event.isOpened" align="right" style="margin-right: 80px">
+	Owner of this event
+</div>
+<div ng-if="event.status==1 && event.isOpened" align="right" style="margin-right: 75px">
+	Member of this event
+</div>
+<div ng-if="event.status==2 && event.isOpened" align="right" style="margin-right: 80px">	
+	Applied for this event
+</div>
+
+<div class="row">
+
+	<div class="col-xs-6" style="margin-left: 30px">
+		<label ng-show="event.status!=0"><font size="4pt">Owner: {{event.owner}}</font></label>
+	</div>
+	
+	<div class="dropdown col-xs-4" align="right" ng-if="event.isOpened">
+	  <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Menu
+	  <span class="caret"></span></button>
+	  <ul class="dropdown-menu dropdown-menu-right dropdownMenu">
+	    <li ng-show="event.status==0"><a ng-click="deleteEvent()" >delete</a></li>
+	    <li ng-show="event.status==0"><a ng-click="closeEvent()" >close</a></li>
+	    <li ng-show="event.status==1"><a ng-click="leaveEvent()" >leave event</a></li>
+	    <li ng-show="event.status==2"><a ng-click="cancelEvent()" >cancel request</a></li>
+	    <li ng-show="event.status==3"><a ng-click="joinEvent()" >join</a></li>
+	  </ul>
+	</div>
+
+</div>
+
+<br>
+<br>
+
+<div ng-show="event.description">
+	<p><font size="3pt" ><b>Description:</b>
+	{{event.description}}
+	</font></p>
+</div>
+
+<div>
+	<p><font size="3pt" ><b>Expected levels:</b>
+	{{event.level}}
+	</font></p>
+</div>
+
+<div class="row" style="margin-left: 20px">
+	<div class="col-xs-7">
+		<div ng-show="event.members.length > 0">
+			<h3>Members:</h3> 
+		
+			<ul ng-show="event.members.length > 0">
+				<li ng-repeat="m in event.members" class="memberList">
+					<a href="#/user/{{m.id}}">{{m.name}}</a>
+				</li>  
+			</ul>
+		</div>
+	</div> 
+	
+	<div class="col-xs-4" align="center">
+		<br>
+		<font size="5pt">
+		{{event.date}} 
+		<br>
+		{{event.city}} 
+		<br>
+		{{event.address}}
+		</font>
+	</div>
+</div>
+	
+
+<h3>Comments:</h3> 
+
+<div ng-show="event.comments.length > 0" style="background-color: #E4E4EE; overflow-y: scroll; max-height: 220px;">
+
+ 	
+	<ul ng-repeat="c in event.comments">
+		<li>
+				<a href="#/user/{{c.writer.id}}"><font color="blue">{{c.writer.name}}</font>:</a> 
+				<label class="commentLabel">{{c.message}}</label>				
+                <button ng-show="event.status==0 || c.mine" class="btn close cardClose" ng-click="deleteComment(c.id)" >&times;</button>					
+               
+		</li>
+	</ul>
+</div>
+
+<input ng-model="message" type="text">
+
+<button class="btn btn-primary" ng-click="writeComment()">Write</button>

@@ -15,4 +15,6 @@ public interface NotificationDAOCustom {
 	void deleteEventRequest(SportEvent e, User u);
 
 	void deleteNotificationsOfEvent(long eventId);
+
+	FriendRequestNotification isFriendRequestBetween(User u1, User u2);
 }

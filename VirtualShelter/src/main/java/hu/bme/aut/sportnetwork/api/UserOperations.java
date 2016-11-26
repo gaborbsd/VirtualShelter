@@ -19,4 +19,6 @@ public interface UserOperations {
 	List<User> listFriendRequest();
 
 	boolean pollNotification();
+
+	User getCurrent();
 }
