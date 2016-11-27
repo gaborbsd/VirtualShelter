@@ -7,6 +7,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.transaction.annotation.Transactional;
 
 import hu.bme.aut.sportnetwork.api.NotificationOperations;
+import hu.bme.aut.sportnetwork.api.SportNetworkException;
 import hu.bme.aut.sportnetwork.api.UserOperations;
 import hu.bme.aut.sportnetwork.auth.AuthOperations;
 import hu.bme.aut.sportnetwork.dal.NotificationDAO;
@@ -40,11 +41,11 @@ public class NotificationOperationsImpl implements NotificationOperations {
 
 	@Override
 	@Transactional
-	public List<Notification> declineRequest(long id) throws Exception {
+	public List<Notification> declineRequest(long id) throws SportNetworkException {
 		User user = authOperations.getLoggedInUser();
 		Notification not = notificationRepositroy.findOne(id);
 		if (!not.getOwner().getName().equals(user.getName())) {
-			throw new Exception("NOT YOUR NOTIFICATION");
+			throw new SportNetworkException("NOT YOUR NOTIFICATION");
 		}
 		not.setIsDeclined(true);
 		notificationRepositroy.save(not);
@@ -52,30 +53,30 @@ public class NotificationOperationsImpl implements NotificationOperations {
 	}
 
 	@Override
-	public void deleteNotification(long id) throws Exception {
+	public void deleteNotification(long id) throws SportNetworkException {
 		User user = authOperations.getLoggedInUser();
 		Notification not = notificationRepositroy.findOne(id);
 		if (!not.getOwner().getName().equals(user.getName())) {
-			throw new Exception("NOT YOUR NOTIFICATION");
+			throw new SportNetworkException("NOT YOUR NOTIFICATION");
 		}
 		notificationRepositroy.delete(id);
 	}
 
 	@Override
 	@Transactional
-	public void friendAccept(long notificationId) throws Exception {
+	public void friendAccept(long notificationId) throws SportNetworkException {
 		Notification not = notificationRepositroy.findOne(notificationId);
 		FriendRequestNotification friendNot = null;
 		try {
 			friendNot = (FriendRequestNotification) not;
 		} catch (Exception e) {
-			throw new Exception("WRONG NOT ID");
+			throw new SportNetworkException("WRONG NOT ID");
 		}
 
 		User accepter = authOperations.getLoggedInUser();
 
 		if (!accepter.getName().equals(not.getOwner().getName())) {
-			throw new Exception("NOT YOUR NOTIFICATION");
+			throw new SportNetworkException("NOT YOUR NOTIFICATION");
 		}
 
 		User friend = not.getSender();

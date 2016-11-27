@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import hu.bme.aut.sportnetwork.api.RegistrationOperations;
+import hu.bme.aut.sportnetwork.api.SportNetworkException;
 import hu.bme.aut.sportnetwork.api.UserOperations;
 import hu.bme.aut.sportnetwork.entity.User;
 import hu.bme.aut.sportnetwork.rest.resources.RequestArg;
@@ -37,17 +38,6 @@ public class UserController {
 	
 	@Autowired
 	UserShortResourceAssembler userShortResourceAssembler;
-
-	/*@RequestMapping(method=RequestMethod.GET)
-	ResponseEntity<List<UserResource>> findAllUsers() {
-		List<User> users = userRepository.findAll();
-		
-		List<UserResource> resourceList = userResourceAssembler
-				.toResources(users);
-		
-		return new ResponseEntity<List<UserResource>>(resourceList, HttpStatus.OK);
-	}
-	*/
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	ResponseEntity<UserResource> getUser(@PathVariable Long id) {
@@ -58,7 +48,11 @@ public class UserController {
 	
 	@RequestMapping(value="/register", method=RequestMethod.POST)
 	ResponseEntity<String> addUser(@RequestBody UserArg user) {
-		registrationOperation.registrate(user);
+		try {
+			registrationOperation.registrate(user);
+		} catch (SportNetworkException e) {
+			return new ResponseEntity<String>(e.getMessage(), HttpStatus.CONFLICT);
+		}
 		return new ResponseEntity<String>(HttpStatus.OK);
 	}
 	
@@ -126,10 +120,9 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "modify", method = RequestMethod.PUT)
-	ResponseEntity<UserResource> modifyUser(@RequestBody UserArg arg) throws Exception {
-		User user = userOperation.modify(arg);
-		UserResource resource = userResourceAssembler.toResource(user);
-		return new ResponseEntity<UserResource>(resource, HttpStatus.OK);
+	ResponseEntity<String> modifyUser(@RequestBody UserArg arg) throws Exception {
+		userOperation.modify(arg);
+		return new ResponseEntity<String>(HttpStatus.OK);
 
 	}
 }

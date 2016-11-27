@@ -14,7 +14,11 @@ public class AuthOperations {
 	
 	public User getLoggedInUser() {
 		String name = getLoggedInUserName();
-		return userRepository.findByName(name);
+		User u = userRepository.findByName(name);
+		if (u == null) {
+			u = userRepository.findByEmail(name);
+		}
+		return u;
 	}
 	
 	public String getLoggedInUserName() {

@@ -14,7 +14,7 @@ public interface UserOperations {
 	
 	User sendFriendRequest(String name);
 	
-	User acceptFriendRequest(long userId) throws Exception;
+	User acceptFriendRequest(long userId) throws SportNetworkException;
 	
 	List<User> listFriends();
 	
@@ -26,13 +26,13 @@ public interface UserOperations {
 
 	User friendAccept(User accepter, User friend, FriendRequestNotification not);
 
-	User cancelFriendRequest(String name) throws Exception;
+	User cancelFriendRequest(String name) throws SportNetworkException;
 
-	User declineFriendRequest(String name) throws Exception;
+	User declineFriendRequest(String name) throws SportNetworkException;
 
 	User deleteFriend(long id);
 
-	User modify(UserArg arg) throws Exception;
+	User modify(UserArg arg) throws SportNetworkException;
 
 	List<User> search(String text);
 

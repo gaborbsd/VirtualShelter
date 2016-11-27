@@ -9,4 +9,6 @@ public interface UserDAO extends AbstractRepository<User>, UserDAOCustom {
 	
 	User findByName(String name);
 
+	User findByEmail(String email);
+
 }

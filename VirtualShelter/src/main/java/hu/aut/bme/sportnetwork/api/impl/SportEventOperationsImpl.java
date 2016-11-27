@@ -9,6 +9,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.transaction.annotation.Transactional;
 
 import hu.bme.aut.sportnetwork.api.SportEventOperations;
+import hu.bme.aut.sportnetwork.api.SportNetworkException;
 import hu.bme.aut.sportnetwork.api.UserOperations;
 import hu.bme.aut.sportnetwork.auth.AuthOperations;
 import hu.bme.aut.sportnetwork.dal.CommentDAO;
@@ -76,7 +77,7 @@ public class SportEventOperationsImpl implements SportEventOperations {
 
 		SportEvent newEvent = sportEventRepository.saveNewEvent(e);
 		List<FriendShip> usersToNotify = friendShipRepository.findByUser1AndUser2ListenOrUser2AndUser1Listen(owner,
-				owner, true, true);
+				true, owner, true);
 		usersToNotify.forEach(
 				f -> sendEventNotification(f.getUser1().getName().equals(owner.getName()) ? f.getUser2() : f.getUser1()
 			, owner, newEvent, EventSimpleNotification.NEW_EVENT));
@@ -124,7 +125,7 @@ public class SportEventOperationsImpl implements SportEventOperations {
 
 	@Override
 	@Transactional
-	public void acceptEventRequest(long notificationId) throws Exception{		
+	public void acceptEventRequest(long notificationId) throws SportNetworkException {
 		Notification not = notificationRepositroy.findOne(notificationId);
 		//User accepter = not.getOwner();
 		if (not instanceof EventRequestNotification) {
@@ -132,14 +133,14 @@ public class SportEventOperationsImpl implements SportEventOperations {
 			SportEvent event = eventNot.getEvent();
 			User applicant = eventNot.getSender();
 			if (event.getMaxSize() <= event.getMembers().size()) {
-				throw new Exception("NO SPACE");
+				throw new SportNetworkException("NO SPACE");
 			}
 			event.setMemberSize(event.getMemberSize() + 1);
 			event.getMembers().add(applicant);
 			sportEventRepository.save(event);
 			notificationRepositroy.delete(notificationId);
 		} else {
-			throw new Exception("WRONG NOTIFICATION ID");
+			throw new SportNetworkException("WRONG NOTIFICATION ID");
 		}
 		
 	}

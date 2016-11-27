@@ -4,7 +4,7 @@ app.controller('RegistrationController', function($scope, $http) {
 
 	$scope.postUser = function() {
 		if (validate()) {
-			$http.post('api/user/register', $scope.user).success(function() {
+			$http.post('api/user/register', $scope.user).success(function(status) {
 				alert("Registration succesfull");
 			}).error(function(data, status) {
 				alert(data);

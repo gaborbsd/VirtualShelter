@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
+import hu.bme.aut.sportnetwork.api.SportNetworkException;
 import hu.bme.aut.sportnetwork.api.UserOperations;
 import hu.bme.aut.sportnetwork.auth.AuthOperations;
 import hu.bme.aut.sportnetwork.dal.FriendShipDAO;
@@ -65,14 +66,14 @@ public class UserOperationsImpl implements UserOperations {
 
 	@Override
 	@Transactional
-	public User acceptFriendRequest(long userId) throws Exception {
+	public User acceptFriendRequest(long userId) throws SportNetworkException {
 		User accepter = authOperations.getLoggedInUser();
 		User friend = userRepository.findOne(userId);
 		friend.getRatings().size();
 		friend.setFriendStatus(FriendStatus.FRIEND);
 		FriendRequestNotification not = notificationRepositroy.isFriendRequestBetween(friend, accepter);
 		if (not == null) {
-			throw new Exception("NO REQUEST");
+			throw new SportNetworkException("NO REQUEST");
 		}
 		return friendAccept(accepter, friend, not);
 	}
@@ -156,13 +157,13 @@ public class UserOperationsImpl implements UserOperations {
 
 	@Override
 	@Transactional
-	public User cancelFriendRequest(String name) throws Exception {
+	public User cancelFriendRequest(String name) throws SportNetworkException {
 		User canceler = authOperations.getLoggedInUser();
 		User u = userRepository.findByName(name);
 		u.setFriendStatus(FriendStatus.NOT_FRIEND);
 		FriendRequestNotification not = notificationRepositroy.isFriendRequestBetween(canceler, u);
 		if (not == null) {
-			throw new Exception("NO REQUEST");
+			throw new SportNetworkException("NO REQUEST");
 		}
 		notificationRepositroy.delete(not.getNotificationId());
 
@@ -171,13 +172,13 @@ public class UserOperationsImpl implements UserOperations {
 
 	@Override
 	@Transactional
-	public User declineFriendRequest(String name) throws Exception {
+	public User declineFriendRequest(String name) throws SportNetworkException {
 		User decliner = authOperations.getLoggedInUser();
 		User u = userRepository.findByName(name);
 		u.setFriendStatus(FriendStatus.DECLINED);
 		FriendRequestNotification not = notificationRepositroy.isFriendRequestBetween(decliner, u);
 		if (not == null) {
-			throw new Exception("NO REQUEST");
+			throw new SportNetworkException("NO REQUEST");
 		}
 		not.setIsDeclined(true);
 		notificationRepositroy.save(not);
@@ -200,12 +201,19 @@ public class UserOperationsImpl implements UserOperations {
 
 	@Override
 	@Transactional
-	public User modify(UserArg arg) throws Exception {
+	public User modify(UserArg arg) throws SportNetworkException {
 		User current = authOperations.getLoggedInUser();
-		List<Rating> ratings = current.getRatings();
 		if (!current.getName().equals(arg.getName())) {
-			throw new Exception("NO RIGHT FOR THIS OPERATION");
+			throw new SportNetworkException("NO RIGHT FOR THIS OPERATION");
 		}
+
+		User u = userRepository.findByEmail(arg.getEmail());
+		if (u != null && !current.getEmail().equals(u.getEmail())) {
+			throw new SportNetworkException("EMAIL ALREADY EXISTS");
+		}
+
+		List<Rating> ratings = current.getRatings();
+
 		User modified = User.toUser(arg);
 
 		for (Rating rating : modified.getRatings()) {

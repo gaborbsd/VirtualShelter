@@ -8,9 +8,9 @@ public interface NotificationOperations {
 
 	List<Notification> getNotifications();
 
-	List<Notification> declineRequest(long id) throws Exception;
+	List<Notification> declineRequest(long id) throws SportNetworkException;
 
-	void deleteNotification(long id) throws Exception;
+	void deleteNotification(long id) throws SportNetworkException;
 
-	void friendAccept(long notificationId) throws Exception;
+	void friendAccept(long notificationId) throws SportNetworkException;
 }

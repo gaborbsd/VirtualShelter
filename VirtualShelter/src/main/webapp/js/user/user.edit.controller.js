@@ -13,12 +13,10 @@ app.controller('UserEditorController', function($scope, UserFactory) {
 	};
 	
 	$scope.modifyUser = function() {
-		console.log($scope.user);
 		if (validate()) {
 			UserFactory.modifyUser($scope.user).then(function (data) {
 				alert("data saved");
-	            $scope.user = data;
-	            cutScope();
+	            window.location.href = "#/user";
 	        }, function (error) {
 	            alert(error);
 	        });	
@@ -63,6 +61,7 @@ app.controller('UserEditorController', function($scope, UserFactory) {
 		delete $scope.user.warning;
 		delete $scope.user.links;
 		delete $scope.user.interest;
+		delete $scope.user.deleted;
 		delete $scope.pw;
 	}
 		
