@@ -20,6 +20,7 @@
 	    <!--intercept-url pattern="/**" access="hasRole('ROLE_BASIC')" />  -->
         <intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
         <intercept-url pattern="/html/admin/**" access="hasRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/api/admin/**" access="hasRole('ROLE_ADMIN')" />
         <logout logout-url="/logout" />
         <form-login
 		    login-page="/login.html"

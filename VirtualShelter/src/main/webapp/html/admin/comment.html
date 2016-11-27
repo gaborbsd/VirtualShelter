@@ -1,0 +1,11 @@
+COMMENTADMIN
+
+<div ng-show="comments">
+	<ul>
+	  <li ng-repeat="c in comments">
+		 {{c.writer.name}} {{c.message}} 
+ 		  
+ 		  <input type="button" value="Delete" ng-click="del(c.id)">
+	  </li>
+	</ul>
+</div>

@@ -2,6 +2,7 @@ package hu.bme.aut.sportnetwork.api;
 
 import java.util.List;
 
+import hu.bme.aut.sportnetwork.entity.Comment;
 import hu.bme.aut.sportnetwork.entity.SportEvent;
 import hu.bme.aut.sportnetwork.entity.User;
 import hu.bme.aut.sportnetwork.rest.resources.FilterSportEventArg;
@@ -48,4 +49,8 @@ public interface SportEventOperations {
 	List<SportEvent> findMyClosedEvents();
 
 	List<SportEvent> findMyEvents();
+
+	List<SportEvent> findByTitle(String value);
+
+	List<Comment> getCommentsOfEvent(long eventId);
 }

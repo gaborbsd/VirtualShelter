@@ -53,6 +53,7 @@ public class NotificationDAOImpl implements NotificationDAOCustom {
 	@Override
 	@Transactional
 	public void deleteNotificationsOfEvent(long eventId) {
+
 		Query query1 = em.createQuery("DELETE FROM EventRequestNotification WHERE event.id = :id");
 		query1.setParameter("id", eventId);
 
@@ -62,6 +63,12 @@ public class NotificationDAOImpl implements NotificationDAOCustom {
 		query2.setParameter("id", eventId);
 
 		query2.executeUpdate();
+
+		Query query3 = em.createQuery("DELETE FROM EventRateNotification WHERE event.id = :id");
+		query3.setParameter("id", eventId);
+
+		query3.executeUpdate();
+
 	}
 
 	@Override

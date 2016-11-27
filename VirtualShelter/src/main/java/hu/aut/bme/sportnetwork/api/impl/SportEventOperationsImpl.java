@@ -347,4 +347,23 @@ public class SportEventOperationsImpl implements SportEventOperations {
 		return sportEventRepository.findByMembersAndIsOpened(user, true);
 	}
 
+	@Override
+	public List<SportEvent> findByTitle(String value) {
+		List<SportEvent> ret = sportEventRepository.findByTitleLike(makeLikeValue(value));
+		if (ret == null) {
+			ret = new ArrayList<>();
+		}
+		return ret;
+	}
+
+	private String makeLikeValue(String value) {
+		return "%" + value.toLowerCase() + "%";
+	}
+
+	@Override
+	public List<Comment> getCommentsOfEvent(long eventId) {
+		SportEvent event = sportEventRepository.findOne(eventId);
+		return commentRepository.findByEvent(event, new Sort("dateOfComment"));
+	}
+
 }

@@ -22,4 +22,7 @@ public interface SportEventDAO extends AbstractRepository<SportEvent>, SportEven
 
 	@Query("SELECT e from SportEvent e WHERE ?1 MEMBER OF e.members AND e.isOpened = ?2")
 	List<SportEvent> findByMembersAndIsOpened(User user, boolean isOpened);
+
+	@Query("SELECT e from SportEvent e WHERE LOWER(e.title) LIKE ?1")
+	List<SportEvent> findByTitleLike(String title);
 }
