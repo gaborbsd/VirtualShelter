@@ -54,6 +54,7 @@ public class UserOperationsImpl implements UserOperations {
 	public User sendFriendRequest(String name) {
 		User sender = authOperations.getLoggedInUser();
 		User u = userRepository.findByName(name);
+		u.setHasNotification(true);
 		u.setFriendStatus(FriendStatus.REQUEST_SENT);
 		Notification not = new FriendRequestNotification(sender);
 		not.setOwner(u);

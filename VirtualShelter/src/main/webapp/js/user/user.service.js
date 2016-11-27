@@ -103,5 +103,15 @@ app.factory("UserFactory", function($http, $q) {
 		return deferred.promise;
 	};
 	
+	factory.write = function(arg) {
+		var deferred = $q.defer();
+		$http.post("api/messages/conversation", arg).success(function(data, status) {
+			deferred.resolve(data);
+		}).error(function(data, status) {
+			deferred.reject(data);
+		});
+		return deferred.promise;
+	};
+	
 	return factory;
 });

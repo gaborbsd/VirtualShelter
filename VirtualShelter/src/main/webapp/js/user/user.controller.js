@@ -73,5 +73,16 @@ app.controller('UserController', function($scope, $routeParams, UserFactory) {
         });
 	};
 	
+	$scope.write = function() {
+		var arg = {
+			userName: $scope.user.name
+		}
+		UserFactory.write(arg).then(function (data) {
+			window.location.href = "#/conversation/" + data.publicId;
+        }, function (error) {
+            alert(error);
+        });
+	};
+	
 	$scope.getUser();
 });

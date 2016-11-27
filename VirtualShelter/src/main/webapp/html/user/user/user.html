@@ -39,6 +39,7 @@
 	    <li ng-show="user.status==4"><a ng-click="declineRequest()" >decline</a></li>
 	    <li ng-show="user.status==5"><a ng-click="sendRequest()" >send friend request</a></li>
 	    <li ng-show="user.status==6"><a ng-click="acceptFriend()" >accept</a></li>
+	    <li ng-show="user.status!=1"><a ng-click="write()" >write message</a></li>
 	  </ul>
 	</div>
 

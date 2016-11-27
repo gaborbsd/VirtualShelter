@@ -89,7 +89,7 @@ public class MessageOperationsImpl implements MessageOperations {
 		
 		Notification not = new MessageNotification(writer, c);
 
-		User sendTo = c.getUser1().getName() == authOperation.getLoggedInUserName() ? c.getUser2() : c.getUser1();
+		User sendTo = c.getUser1().getName().equals(authOperation.getLoggedInUserName()) ? c.getUser2() : c.getUser1();
 		sendTo.setHasNotification(true);
 
 		userRepositroy.save(sendTo);
