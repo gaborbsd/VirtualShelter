@@ -3,6 +3,16 @@ var app = angular.module('sportnetworkApp');
 app.factory("EventFactory", function($http, $q) {
 	var factory = {};
 	
+	factory.browse = function(type) {
+		var deferred = $q.defer();
+		$http.get("api/sportevent/browse/?type=" + type).success(function(data, status) {
+			deferred.resolve(data);
+		}).error(function(data, status) {
+			deferred.reject(data);
+		});
+		return deferred.promise;
+	}
+	
 	factory.cancelEvent = function(id) {
 		var deferred = $q.defer();
 		$http.delete("api/sportevent/cancel/" + id).success(function(data, status) {

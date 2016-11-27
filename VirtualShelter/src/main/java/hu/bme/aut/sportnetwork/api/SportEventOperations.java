@@ -42,4 +42,10 @@ public interface SportEventOperations {
 	List<User> getMembersOfSportEvent(long notificationId);
 	
 	void rateUsers(RateUsersArg arg) throws Exception;
+
+	List<SportEvent> findFriendEvents();
+
+	List<SportEvent> findMyClosedEvents();
+
+	List<SportEvent> findMyEvents();
 }

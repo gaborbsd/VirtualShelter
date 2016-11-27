@@ -9,6 +9,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.transaction.annotation.Transactional;
 
 import hu.bme.aut.sportnetwork.api.SportEventOperations;
+import hu.bme.aut.sportnetwork.api.UserOperations;
 import hu.bme.aut.sportnetwork.auth.AuthOperations;
 import hu.bme.aut.sportnetwork.dal.CommentDAO;
 import hu.bme.aut.sportnetwork.dal.FriendShipDAO;
@@ -51,6 +52,9 @@ public class SportEventOperationsImpl implements SportEventOperations {
 	
 	@Autowired
 	AuthOperations authOperation;
+
+	@Autowired
+	UserOperations userOperation;
 
 	@Override
 	public List<SportEvent> findAllOpenedEvents() {
@@ -323,6 +327,24 @@ public class SportEventOperationsImpl implements SportEventOperations {
 		}
 
 		return param;
+	}
+
+	@Override
+	public List<SportEvent> findFriendEvents() {
+		List<User> friends = userOperation.listFriends();
+		return sportEventRepository.findByOwnerInAndIsOpened(friends, true);
+	}
+
+	@Override
+	public List<SportEvent> findMyClosedEvents() {
+		User user = authOperation.getLoggedInUser();
+		return sportEventRepository.findByMembersAndIsOpened(user, false);
+	}
+
+	@Override
+	public List<SportEvent> findMyEvents() {
+		User user = authOperation.getLoggedInUser();
+		return sportEventRepository.findByMembersAndIsOpened(user, true);
 	}
 
 }

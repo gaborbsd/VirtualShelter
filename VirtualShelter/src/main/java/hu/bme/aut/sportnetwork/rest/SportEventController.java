@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import hu.bme.aut.sportnetwork.api.SportEventOperations;
@@ -120,5 +121,20 @@ public class SportEventController {
 		SportEvent event = sporteventOperation.removeUserFromSportEvent(id);
 		SportEventResource resource = sportEventResourceAssembler.toResource(event);
 		return new ResponseEntity<SportEventResource>(resource, HttpStatus.OK);
+	}
+
+	@RequestMapping(value="/browse", method=RequestMethod.GET)
+	ResponseEntity<List<SportEventShortResource>> browseEvent(@RequestParam(value = "type") String type) {
+		List<SportEvent> events = null;
+		if ("f".equals(type)) {
+			events = sporteventOperation.findFriendEvents();
+		} else if ("c".equals(type)) {
+			events = sporteventOperation.findMyClosedEvents();
+		} else {
+			events = sporteventOperation.findMyEvents();
+		}
+		
+		List<SportEventShortResource> resourceList = sportEventShortResourceAssembler.toResources(events);
+		return new ResponseEntity<List<SportEventShortResource>>(resourceList, HttpStatus.OK);
 	}
 }

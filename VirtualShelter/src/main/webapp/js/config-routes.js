@@ -4,6 +4,9 @@ app.config(function($routeProvider) {
 	$routeProvider.when('/user/:id', {
 		controller : 'UserController',
 		templateUrl : '/html/user/user/user.html'
+	}).when('/browse/:type', {
+		controller : 'EventBrowseController',
+		templateUrl : '/html/user/event/browse.html'
 	}).when('/listevents', {
 		controller : 'SportEventListController',
 		templateUrl : '/html/user/event/eventlist.html'
