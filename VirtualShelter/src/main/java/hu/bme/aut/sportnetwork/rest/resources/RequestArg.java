@@ -1,6 +1,6 @@
 package hu.bme.aut.sportnetwork.rest.resources;
 
-public class FriendRequestArg {
+public class RequestArg {
 	
 	private String to;
 	private String message;

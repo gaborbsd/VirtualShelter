@@ -229,4 +229,21 @@ public class UserOperationsImpl implements UserOperations {
 	public List<User> search(String text) {
 		return userRepository.search(text.toLowerCase());
 	}
+
+	@Override
+	@Transactional
+	public void warnUser(String name, String message) {
+		User u = userRepository.findByName(name);
+		u.setHasWarning(true);
+		u.setWarningMessage(message);
+		userRepository.save(u);
+	}
+
+	@Override
+	public void deleteUser(Long id) {
+		User u = userRepository.findOne(id);
+		u.setDeleted(true);
+		userRepository.save(u);
+
+	}
 }

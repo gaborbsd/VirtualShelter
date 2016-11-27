@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import hu.bme.aut.sportnetwork.api.RegistrationOperations;
 import hu.bme.aut.sportnetwork.api.UserOperations;
 import hu.bme.aut.sportnetwork.entity.User;
-import hu.bme.aut.sportnetwork.rest.resources.FriendRequestArg;
+import hu.bme.aut.sportnetwork.rest.resources.RequestArg;
 import hu.bme.aut.sportnetwork.rest.resources.StringArg;
 import hu.bme.aut.sportnetwork.rest.resources.UserArg;
 import hu.bme.aut.sportnetwork.rest.resources.UserResource;
@@ -77,21 +77,21 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "friend", method = RequestMethod.POST)
-	ResponseEntity<UserResource> sendFriendRequest(@RequestBody FriendRequestArg arg) {
+	ResponseEntity<UserResource> sendFriendRequest(@RequestBody RequestArg arg) {
 		User user = userOperation.sendFriendRequest(arg.getTo());
 		UserResource resource = userResourceAssembler.toResource(user);
 		return new ResponseEntity<UserResource>(resource, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "cancel", method = RequestMethod.DELETE)
-	ResponseEntity<UserResource> cancelFriendRequest(@RequestBody FriendRequestArg arg) throws Exception {
+	ResponseEntity<UserResource> cancelFriendRequest(@RequestBody RequestArg arg) throws Exception {
 		User user = userOperation.cancelFriendRequest(arg.getTo());
 		UserResource resource = userResourceAssembler.toResource(user);
 		return new ResponseEntity<UserResource>(resource, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "decline", method = RequestMethod.PUT)
-	ResponseEntity<UserResource> declineFriendRequest(@RequestBody FriendRequestArg arg) throws Exception {
+	ResponseEntity<UserResource> declineFriendRequest(@RequestBody RequestArg arg) throws Exception {
 		User user = userOperation.declineFriendRequest(arg.getTo());
 		UserResource resource = userResourceAssembler.toResource(user);
 		return new ResponseEntity<UserResource>(resource, HttpStatus.OK);

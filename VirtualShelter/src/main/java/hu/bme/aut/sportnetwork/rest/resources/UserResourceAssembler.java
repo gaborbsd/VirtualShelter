@@ -33,6 +33,7 @@ public class UserResourceAssembler extends
 		resource.setAge(entity.getAge());
 
 		resource.setAddress(toAddress(entity.getAddress()));
+		resource.setDeleted(entity.getDeleted());
 		resource.setEmail(entity.getEmail());
 
 		resource.setInterest(toInterest(entity.getRatings()));

@@ -20,6 +20,7 @@ public class UserResource extends ResourceSupport {
 	private String introduction;
 	private Address address;
 	private String warning;
+	private boolean deleted;
 	
 	public UserResource() {
 		
@@ -95,6 +96,14 @@ public class UserResource extends ResourceSupport {
 
 	public void setWarning(String warning) {
 		this.warning = warning;
+	}
+
+	public boolean getDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
 	}
 	
 	

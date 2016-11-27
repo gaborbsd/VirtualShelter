@@ -1,12 +1,29 @@
-<html ng-app="sportnetworkApp">
+<html ng-app="adminApp">
 <head >
 <title>Admin Page</title>
 
+<script type="text/javascript" src="../../lib/angular/angular.js"></script>
+<script type="text/javascript"
+	src="../../lib/angular-route/angular-route.js"></script>
 
+<script src="config-admin.js"></script>
+<script src="user.admin.controller.js"></script>
+<script src="event.admin.controller.js"></script>
 </head>
 <body >
-	
- <label>FASZ ADMIN</label>
+ 
+ <div class="row">
+ 	<a href="#user">Users</a>
+ 	<a href="#event">Events</a>
+ 	<a href="../../logout"><span>Logout</span></a>
+ </div>
+ 
+ <br>
+ <br>
+ 
+ <div class="span8" ng-view>
+         
+ </div>
 
 </body>
 </html>

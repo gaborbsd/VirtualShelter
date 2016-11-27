@@ -17,7 +17,7 @@ import hu.bme.aut.sportnetwork.api.SportEventOperations;
 import hu.bme.aut.sportnetwork.api.UserOperations;
 import hu.bme.aut.sportnetwork.entity.Notification;
 import hu.bme.aut.sportnetwork.entity.User;
-import hu.bme.aut.sportnetwork.rest.resources.FriendRequestArg;
+import hu.bme.aut.sportnetwork.rest.resources.RequestArg;
 import hu.bme.aut.sportnetwork.rest.resources.NotificationResource;
 import hu.bme.aut.sportnetwork.rest.resources.NotificationResourceAssembler;
 import hu.bme.aut.sportnetwork.rest.resources.PollNotificationRet;

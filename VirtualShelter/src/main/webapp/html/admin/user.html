@@ -1,0 +1,17 @@
+USERADMIN
+
+<div class="row">
+ 	<input type="text" ng-model="text">
+ 	<input type="button" value="Search" ng-click="search()">
+ </div>
+
+<div ng-show="users">
+	<ul>
+	  <li ng-repeat="u in users"> {{u.name}} {{u.city}} {{u.age}} 
+	      <input type="text" ng-model="u.message">
+ 		  <input type="button" value="Warn" ng-click="warn(u.name, u.message)">
+ 		  <input type="button" value="Delete" ng-click="del(u.userId)">
+ 		  <font ng-show="u.warned" color="red">WARNED</font>
+	  </li>
+	</ul>
+</div>

@@ -17,6 +17,8 @@ public class UserShortResource extends ResourceSupport {
 
 	private String interest;
 
+	private boolean warned;
+
 	public String getName() {
 		return name;
 	}
@@ -55,6 +57,14 @@ public class UserShortResource extends ResourceSupport {
 
 	public void setInterest(String interest) {
 		this.interest = interest;
+	}
+
+	public boolean getWarned() {
+		return warned;
+	}
+
+	public void setWarned(boolean warned) {
+		this.warned = warned;
 	}
 
 }

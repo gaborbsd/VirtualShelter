@@ -27,6 +27,7 @@ public class UserShortResourceAssembler extends ResourceAssemblerSupport<User, U
 		ret.setCity(entity.getAddress().getCity());
 		ret.setUserId(entity.getId());
 		ret.setName(entity.getName());
+		ret.setWarned(entity.getHasWarning());
 
 		StringBuilder b = new StringBuilder(" ");
 		for (int i = 0; i < entity.getRatings().size() && i < 3; i++) {

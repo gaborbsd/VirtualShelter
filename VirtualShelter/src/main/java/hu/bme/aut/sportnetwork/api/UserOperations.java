@@ -35,4 +35,8 @@ public interface UserOperations {
 	User modify(UserArg arg) throws Exception;
 
 	List<User> search(String text);
+
+	void warnUser(String name, String message);
+
+	void deleteUser(Long id);
 }

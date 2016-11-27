@@ -26,12 +26,11 @@ public class UserDAOImpl implements UserDAOCustom {
 	@PersistenceContext
 	private EntityManager em;
 
-
 	@Override
 	@Transactional
 	public void rateUsers(RateParam param, SportEvent event) {
-		TypedQuery<Rating> query = em
-				.createQuery("SELECT r FROM Rating r WHERE r.user = :user AND r.sport = :sport", Rating.class);
+		TypedQuery<Rating> query = em.createQuery("SELECT r FROM Rating r WHERE r.user = :user AND r.sport = :sport",
+				Rating.class);
 
 		for (int i = 0; i < param.getRates().size(); i++) {
 			query.setParameter("user", param.getUsers().get(i));
@@ -64,9 +63,9 @@ public class UserDAOImpl implements UserDAOCustom {
 	@Override
 	@Transactional
 	public User saveNewUser(User u) {
-		TypedQuery<Address> addressQuery = em
-				.createQuery("SELECT a FROM Address a WHERE a.country=:country AND a.city=:city AND a.address=:address",
-						Address.class);
+		TypedQuery<Address> addressQuery = em.createQuery(
+				"SELECT a FROM Address a WHERE a.country=:country AND a.city=:city AND a.address=:address",
+				Address.class);
 		addressQuery.setParameter("country", u.getAddress().getCountry());
 		addressQuery.setParameter("city", u.getAddress().getCity());
 		addressQuery.setParameter("address", u.getAddress().getAddress());
@@ -119,7 +118,8 @@ public class UserDAOImpl implements UserDAOCustom {
 	@Override
 	public List<User> search(String text) {
 		TypedQuery<User> query = em.createQuery(
-				"SELECT u FROM User u WHERE (LOWER(u.name) LIKE :text OR LOWER(u.address.city) LIKE :text) AND u.isAdmin = false",
+				"SELECT u FROM User u WHERE (LOWER(u.name) LIKE :text OR LOWER(u.address.city) LIKE :text) "
+						+ "AND u.isAdmin = false AND u.isDeleted = false",
 				User.class);
 		query.setParameter("text", "%" + text + "%");
 

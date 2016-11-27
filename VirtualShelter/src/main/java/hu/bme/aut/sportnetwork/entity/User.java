@@ -50,6 +50,9 @@ public class User {
 	@Column(name = "has_notification")
 	private boolean hasNotification;
 
+	@Column(name = "deleted")
+	private boolean isDeleted;
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy="owner")
 	@JsonIgnore
 	private List<SportEvent> ownEvents;
@@ -194,6 +197,14 @@ public class User {
 		this.warningMessage = warningMessage;
 	}
 
+	public boolean getDeleted() {
+		return isDeleted;
+	}
+
+	public void setDeleted(boolean isDeleted) {
+		this.isDeleted = isDeleted;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -234,6 +245,7 @@ public class User {
 		u.setEmail(arg.getEmail());
 		u.setHasNotification(false);
 		u.setHasWarning(false);
+		u.setDeleted(false);
 		u.setIntroduction(arg.getIntroduction());
 		u.setName(arg.getName());
 		u.setPassword(arg.getPassword());

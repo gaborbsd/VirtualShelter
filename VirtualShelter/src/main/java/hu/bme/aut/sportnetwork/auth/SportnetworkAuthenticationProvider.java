@@ -24,7 +24,7 @@ public class SportnetworkAuthenticationProvider implements AuthenticationProvide
 		String password = authentication.getCredentials().toString();
 		
 		User u = userRepository.findByName(name);
-		if (u != null && password.equals(u.getPassword())) {
+		if (u != null && password.equals(u.getPassword()) && !u.getDeleted()) {
 			List<GrantedAuthority> grantedAuths = new ArrayList<GrantedAuthority>();
 			if (u.isAdmin()) {
 				grantedAuths.add(new SimpleGrantedAuthority(Roles.ADMIN));
