@@ -38,7 +38,7 @@ public class UserOperationsImpl implements UserOperations {
 	@Transactional
 	public User findById(long id) {
 		User me = authOperations.getLoggedInUser();
-		User u = fetchUserWithRatings(id);
+		User u = userRepository.findOne(id);
 		u.setFriendStatus(setFriendStatus(me, u));
 		return u;
 	}
@@ -46,26 +46,14 @@ public class UserOperationsImpl implements UserOperations {
     @Override
 	@Transactional
 	public User findByName(String name) {
-		return fetchUserWithRatings(name);
-	}
-
-	private User fetchUserWithRatings(String name) {
-		User ret = userRepository.findByName(name);
-		ret.getRatings().size();
-		return ret;
-	}
-
-	private User fetchUserWithRatings(long id) {
-		User ret = userRepository.findOne(id);
-		ret.getRatings().size();
-		return ret;
+		return userRepository.findByName(name);
 	}
 
 	@Override
 	@Transactional
 	public User sendFriendRequest(String name) {
 		User sender = authOperations.getLoggedInUser();
-		User u = fetchUserWithRatings(name);
+		User u = userRepository.findByName(name);
 		u.setFriendStatus(FriendStatus.REQUEST_SENT);
 		Notification not = new FriendRequestNotification(sender);
 		not.setOwner(u);
@@ -106,7 +94,14 @@ public class UserOperationsImpl implements UserOperations {
 
 	@Override
 	public List<User> listFriends() {
-		return userRepository.getFriendsOfUser(authOperations.getLoggedInUserName());
+		User u = authOperations.getLoggedInUser();
+		List<FriendShip> fl = friendShipRepository.getByUser1OrUser2(u, u);
+
+		List<User> ret = new ArrayList<>();
+
+		fl.forEach(f -> ret.add(f.getUser1().getName().equals(u.getName()) ? f.getUser2() : f.getUser1()));
+
+		return ret;
 	}
 
 	@Override
@@ -162,7 +157,7 @@ public class UserOperationsImpl implements UserOperations {
 	@Transactional
 	public User cancelFriendRequest(String name) throws Exception {
 		User canceler = authOperations.getLoggedInUser();
-		User u = fetchUserWithRatings(name);
+		User u = userRepository.findByName(name);
 		u.setFriendStatus(FriendStatus.NOT_FRIEND);
 		FriendRequestNotification not = notificationRepositroy.isFriendRequestBetween(canceler, u);
 		if (not == null) {
@@ -177,7 +172,7 @@ public class UserOperationsImpl implements UserOperations {
 	@Transactional
 	public User declineFriendRequest(String name) throws Exception {
 		User decliner = authOperations.getLoggedInUser();
-		User u = fetchUserWithRatings(name);
+		User u = userRepository.findByName(name);
 		u.setFriendStatus(FriendStatus.DECLINED);
 		FriendRequestNotification not = notificationRepositroy.isFriendRequestBetween(decliner, u);
 		if (not == null) {
@@ -193,7 +188,7 @@ public class UserOperationsImpl implements UserOperations {
 	@Transactional
 	public User deleteFriend(long id) {
 		User deleter = authOperations.getLoggedInUser();
-		User u = fetchUserWithRatings(id);
+		User u = userRepository.findOne(id);
 		u.setFriendStatus(FriendStatus.NOT_FRIEND);
 		FriendShip f = friendShipRepository.getByUser1AndUser2(deleter, u);
 
@@ -228,5 +223,10 @@ public class UserOperationsImpl implements UserOperations {
 		return saved;
 		// userRepository.modifyUser(modified);
 
+	}
+
+	@Override
+	public List<User> search(String text) {
+		return userRepository.search(text.toLowerCase());
 	}
 }

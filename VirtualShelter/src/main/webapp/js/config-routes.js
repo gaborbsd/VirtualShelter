@@ -19,6 +19,9 @@ app.config(function($routeProvider) {
 	}).when('/editor/events/new', {
 		controller : 'EventCreateController',
 		templateUrl : '/html/user/event/newevent.html'
+	}).when('/friends', {
+		controller : 'FriendsController',
+		templateUrl : '/html/user/user/friends.html'
 	}).when('/conversations', {
 		controller : 'ConversationController',
 		templateUrl : '/html/user/conversation/conversations.html'
@@ -28,6 +31,9 @@ app.config(function($routeProvider) {
 	}).when('/conversation/:id', {
 		controller : 'MessageController',
 		templateUrl : '/html/user/conversation/messages.html'
+	}).when('/search', {
+		controller : 'UserSearchController',
+		templateUrl : '/html/user/user/search.html'
 	}).when('/rate/:id', {
 		controller : 'RateController',
 		templateUrl : '/html/user/notification/rate.html'

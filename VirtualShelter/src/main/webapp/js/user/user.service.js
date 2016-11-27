@@ -43,6 +43,16 @@ app.factory("UserFactory", function($http, $q) {
 		return deferred.promise;
 	};
 	
+	factory.getFriends = function() {
+		var deferred = $q.defer();
+		$http.get("api/user/friends").success(function(data, status) {
+			deferred.resolve(data);
+		}).error(function(data, status) {
+			deferred.reject(data);
+		});
+		return deferred.promise;
+	};
+	
 	factory.getOne = function(id) {
 		var deferred = $q.defer();
 		$http.get("api/user/" + id).success(function(data, status) {
@@ -66,6 +76,16 @@ app.factory("UserFactory", function($http, $q) {
 	factory.modifyUser = function(arg) {
 		var deferred = $q.defer();
 		$http.put("api/user/modify", arg).success(function(data, status) {
+			deferred.resolve(data);
+		}).error(function(data, status) {
+			deferred.reject(data);
+		});
+		return deferred.promise;
+	};
+	
+	factory.search = function(arg) {
+		var deferred = $q.defer();
+		$http.post("api/user/search", arg).success(function(data, status) {
 			deferred.resolve(data);
 		}).error(function(data, status) {
 			deferred.reject(data);

@@ -33,4 +33,6 @@ public interface UserOperations {
 	User deleteFriend(long id);
 
 	User modify(UserArg arg) throws Exception;
+
+	List<User> search(String text);
 }

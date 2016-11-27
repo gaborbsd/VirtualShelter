@@ -35,7 +35,8 @@
 <script src="js/notification/polling.contoller.js"></script>
 <script src="js/user/user.controller.js"></script>
 <script src="js/user/user.edit.controller.js"></script>
-	
+<script src="js/user/friends.controller.js"></script>	
+<script src="js/user/search.controller.js"></script>
 
 <link rel="stylesheet" href=css/main.css>
 <link rel="stylesheet" href="lib/angular-ui/build/angular-ui.css">
@@ -52,9 +53,9 @@
     <div id='cssmenu'>
 	<ul>
 	   <li><a href="#/listevents"><span>Events</span></a></li>
-	   <li><a href="#/listevents"><span>Users</span></a></li>
+	   <li><a href="#/search"><span>Users</span></a></li>
 	   <li><a href="#/editor/events/new"><span>New Event</span></a></li>
-	   <li><a href="#/user"><span>Profile</span></a></li>
+	   <li><a href="#/user"><span>Friend events</span></a></li>
 	   <li><a href="#/conversations"><span>Conversations</span></a></li>
 	   <li ng-class="not.notStatus ? 'active' : ''"><a href="#/notifications"><span>Notifications</span></a></li>
 	   <li><a href="logout"><span>Logout</span></a></li>	   
@@ -65,10 +66,11 @@
     <div class="span4 section" style="background:#E4E8F3">
         <div id='cssmenu2'>
 		<ul>
-		   <li><a href='#/editor/events'><span>Home</span></a></li>
-		   <li class='active has-sub'><a href="#/users"><span>Profile</span></a></li>
-		   <li class='active has-sub'><a href="#/editor/events"><span>MyEvents</span></a></li>
-		   <li class='active has-sub'><a href="#/editor/events"><span>Friends</span></a></li>
+		   <li><a href="#/listevents"><span>Home</span></a></li>
+		   <li><a href="#/user"><span>Profile</span></a></li>
+		   <li><a href="#/editor/events"><span>MyEvents</span></a></li>
+		   <li><a href="#/friends"><span>Friends</span></a></li>
+		   <li><a href="#/editor/events"><span>Closed Events</span></a></li>
 		</ul>
 		</div>
 

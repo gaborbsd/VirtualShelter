@@ -54,7 +54,7 @@ public class User {
 	@JsonIgnore
 	private List<SportEvent> ownEvents;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL)
 	@JsonIgnore
 	private List<Rating> ratings;
 	

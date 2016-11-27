@@ -1,0 +1,16 @@
+<div class="col-md-12" style="margin-top: 10px; margin-bottom: 10px;">
+	<input class="form-control" type="text" name="country" ng-model="text">
+</div>
+
+<br>
+<div class="text-center">
+	<button class="btn btn-primary" ng-click="search()">Search</button>
+</div>
+<br>
+
+<div class="list-group">
+  <a href="#user/{{u.userId}}" class="list-group-item" ng-repeat="u in users">
+    <span class="badge pull-left" style="margin-right: 10px;">{{u.name}}</span>
+    ({{u.age}}) {{u.city}} {{u.interest}}</p>
+  </a>
+</div>

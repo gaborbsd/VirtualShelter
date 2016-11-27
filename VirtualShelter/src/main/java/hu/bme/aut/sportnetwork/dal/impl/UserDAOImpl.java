@@ -26,19 +26,6 @@ public class UserDAOImpl implements UserDAOCustom {
 	@PersistenceContext
 	private EntityManager em;
 
-	@Override
-	@Transactional
-	public List<User> getFriendsOfUser(String name) {
-		/*
-		 * TypedQuery<FriendShip> query = em.
-		 * createQuery("SELECT f FROM User u JOIN u.friends f WHERE name = :name"
-		 * , FriendShip.class); query.setParameter("name", name); List<User> ret
-		 * = new ArrayList<>(); List<FriendShip> res = query.getResultList();
-		 * res.forEach(f -> ret.add(f.getUser1())); ret.forEach(u ->
-		 * u.setFriendStatus(FriendStatus.FRIEND)); return ret;
-		 */
-		return new ArrayList<>();
-	}
 
 	@Override
 	@Transactional
@@ -127,6 +114,16 @@ public class UserDAOImpl implements UserDAOCustom {
 		User ret = em.merge(modified);
 
 		return ret;
+	}
+
+	@Override
+	public List<User> search(String text) {
+		TypedQuery<User> query = em.createQuery(
+				"SELECT u FROM User u WHERE (LOWER(u.name) LIKE :text OR LOWER(u.address.city) LIKE :text) AND u.isAdmin = false",
+				User.class);
+		query.setParameter("text", "%" + text + "%");
+
+		return query.getResultList();
 	}
 
 }

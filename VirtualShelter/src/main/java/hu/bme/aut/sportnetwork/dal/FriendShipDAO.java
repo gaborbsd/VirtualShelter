@@ -14,4 +14,6 @@ public interface FriendShipDAO extends AbstractRepository<FriendShip>{
 
 	@Query("SELECT f FROM FriendShip f WHERE (user1 = ?1 AND user2 = ?2) OR (user2 = ?1 AND user1 = ?2)")
 	FriendShip getByUser1AndUser2(User user1, User user2);
+
+	List<FriendShip> getByUser1OrUser2(User user1, User user2);
 }

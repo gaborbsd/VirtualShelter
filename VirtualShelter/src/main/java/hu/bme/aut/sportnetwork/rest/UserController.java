@@ -15,9 +15,12 @@ import hu.bme.aut.sportnetwork.api.RegistrationOperations;
 import hu.bme.aut.sportnetwork.api.UserOperations;
 import hu.bme.aut.sportnetwork.entity.User;
 import hu.bme.aut.sportnetwork.rest.resources.FriendRequestArg;
+import hu.bme.aut.sportnetwork.rest.resources.StringArg;
 import hu.bme.aut.sportnetwork.rest.resources.UserArg;
 import hu.bme.aut.sportnetwork.rest.resources.UserResource;
 import hu.bme.aut.sportnetwork.rest.resources.UserResourceAssembler;
+import hu.bme.aut.sportnetwork.rest.resources.UserShortResource;
+import hu.bme.aut.sportnetwork.rest.resources.UserShortResourceAssembler;
 
 @RestController
 @RequestMapping(value="/user")
@@ -32,6 +35,9 @@ public class UserController {
 	@Autowired
 	UserResourceAssembler userResourceAssembler;
 	
+	@Autowired
+	UserShortResourceAssembler userShortResourceAssembler;
+
 	/*@RequestMapping(method=RequestMethod.GET)
 	ResponseEntity<List<UserResource>> findAllUsers() {
 		List<User> users = userRepository.findAll();
@@ -64,10 +70,10 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="friends", method=RequestMethod.GET)
-	ResponseEntity<List<UserResource>> listFriends() {
+	ResponseEntity<List<UserShortResource>> listFriends() {
 		List<User> friends = userOperation.listFriends();
-		List<UserResource> resourceList = userResourceAssembler.toResources(friends);
-		return new ResponseEntity<List<UserResource>>(resourceList, HttpStatus.OK);
+		List<UserShortResource> resourceList = userShortResourceAssembler.toResources(friends);
+		return new ResponseEntity<List<UserShortResource>>(resourceList, HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "friend", method = RequestMethod.POST)
@@ -103,6 +109,13 @@ public class UserController {
 		List<User> friends = userOperation.listFriendRequest();
 		List<UserResource> resourceList = userResourceAssembler.toResources(friends);
 		return new ResponseEntity<List<UserResource>>(resourceList, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "search", method = RequestMethod.POST)
+	ResponseEntity<List<UserShortResource>> searchUser(@RequestBody StringArg arg) {
+		List<User> friends = userOperation.search(arg.getValue());
+		List<UserShortResource> resourceList = userShortResourceAssembler.toResources(friends);
+		return new ResponseEntity<List<UserShortResource>>(resourceList, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "friendAccept/{id}", method = RequestMethod.PUT)
