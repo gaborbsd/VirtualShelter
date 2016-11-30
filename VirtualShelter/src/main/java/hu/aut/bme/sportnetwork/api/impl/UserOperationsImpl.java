@@ -97,21 +97,12 @@ public class UserOperationsImpl implements UserOperations {
 	@Override
 	public List<User> listFriends() {
 		User u = authOperations.getLoggedInUser();
-		List<FriendShip> fl = friendShipRepository.getByUser1OrUser2(u, u);
+		List<FriendShip> fl = friendShipRepository.findByUser(u);
 
 		List<User> ret = new ArrayList<>();
 
 		fl.forEach(f -> ret.add(f.getUser1().getName().equals(u.getName()) ? f.getUser2() : f.getUser1()));
 
-		return ret;
-	}
-
-	@Override
-	public List<User> listFriendRequest() {
-		User u = authOperations.getLoggedInUser();
-		List<FriendRequestNotification> nots = notificationRepositroy.getFriendRequestSenders(u);
-		List<User> ret = new ArrayList<>();
-		nots.forEach(n -> ret.add(n.getSender()));
 		return ret;
 	}
 

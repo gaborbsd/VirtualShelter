@@ -18,6 +18,10 @@ public class SportEventFilter {
 	
 	private int levelTo;
 
+	private boolean isLevelTo;
+
+	private boolean isLevelFrom;
+
 	public String getText() {
 		return text;
 	}
@@ -73,6 +77,21 @@ public class SportEventFilter {
 	public void setTitle(boolean title) {
 		this.title = title;
 	}
-	
-	
+
+	public boolean isLevelTo() {
+		return isLevelTo;
+	}
+
+	public void setLevelTo(boolean isLevelTo) {
+		this.isLevelTo = isLevelTo;
+	}
+
+	public boolean isLevelFrom() {
+		return isLevelFrom;
+	}
+
+	public void setLevelFrom(boolean isLevelFrom) {
+		this.isLevelFrom = isLevelFrom;
+	}
+
 }

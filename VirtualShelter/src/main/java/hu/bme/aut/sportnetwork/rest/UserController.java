@@ -98,13 +98,6 @@ public class UserController {
 		return new ResponseEntity<UserResource>(resource, HttpStatus.OK);
 	}
 
-	@RequestMapping(value="friendRequests", method=RequestMethod.GET)
-	ResponseEntity<List<UserResource>> listFriendRequests() {
-		List<User> friends = userOperation.listFriendRequest();
-		List<UserResource> resourceList = userResourceAssembler.toResources(friends);
-		return new ResponseEntity<List<UserResource>>(resourceList, HttpStatus.OK);
-	}
-
 	@RequestMapping(value = "search", method = RequestMethod.POST)
 	ResponseEntity<List<UserShortResource>> searchUser(@RequestBody StringArg arg) {
 		List<User> friends = userOperation.search(arg.getValue());

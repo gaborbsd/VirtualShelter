@@ -17,8 +17,6 @@ public interface UserOperations {
 	User acceptFriendRequest(long userId) throws SportNetworkException;
 	
 	List<User> listFriends();
-	
-	List<User> listFriendRequest();
 
 	boolean pollNotification();
 

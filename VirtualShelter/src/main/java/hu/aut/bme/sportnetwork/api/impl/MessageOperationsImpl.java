@@ -39,7 +39,7 @@ public class MessageOperationsImpl implements MessageOperations {
 	@Override
 	public List<Conversation> listConversatinsByUser() {
 		User writer = authOperation.getLoggedInUser();
-		List<Conversation> ret = conversationRepository.findByUser1AndActiveTrueOrUser2AndActiveTrue(writer, writer, new Sort(Sort.Direction.DESC, "lastSendTime"));
+		List<Conversation> ret = conversationRepository.findByUserAndActive(writer);
 		return ret;
 	}
 
@@ -63,7 +63,7 @@ public class MessageOperationsImpl implements MessageOperations {
 	public Conversation getConversationWithUser(String userName) {
 		User writer = authOperation.getLoggedInUser();
 		User writeTo = userRepositroy.findByName(userName);
-		Conversation c = conversationRepository.own(writer, writeTo);
+		Conversation c = conversationRepository.getByUser1AndUser2(writer, writeTo);
 		
 		if (c == null) {
 			c = new Conversation();

@@ -1,20 +1,25 @@
 package hu.bme.aut.sportnetwork.dal.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
-import javax.transaction.Transactional;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.ParameterExpression;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 
 import hu.aut.bme.sportnetwork.api.impl.SportEventFilter;
 import hu.bme.aut.sportnetwork.dal.SportEventDAOCustom;
 import hu.bme.aut.sportnetwork.entity.Address;
+import hu.bme.aut.sportnetwork.entity.Address_;
 import hu.bme.aut.sportnetwork.entity.SportEvent;
-import hu.bme.aut.sportnetwork.entity.Sports;
-import hu.bme.aut.sportnetwork.entity.User;
+import hu.bme.aut.sportnetwork.entity.SportEvent_;
+import hu.bme.aut.sportnetwork.entity.User_;
 
 public class SportEventDAOImpl implements SportEventDAOCustom {
 
@@ -51,84 +56,84 @@ public class SportEventDAOImpl implements SportEventDAOCustom {
 	}
 
 	@Override
-	public List<SportEvent> filterPublic(SportEventFilter arg) throws Exception {
-		StringBuilder queryString = new StringBuilder("SELECT e ");
-		StringBuilder fromString = new StringBuilder("FROM SportEvent e");
-		StringBuilder whereLevelString = new StringBuilder();
-		StringBuilder whereDataString = new StringBuilder();
-		boolean emptyText = arg.getText() == null || arg.getText().isEmpty();
+	public List<SportEvent> filterPublic(SportEventFilter arg) {
+		boolean isFilterText = arg.getCity() || arg.getOwner() || arg.getTitle();
 		
-		if (emptyText && arg.getSport()==null) {
-			addWhereLevelStringClausePart(whereLevelString, arg.getLevelFrom(), arg.getLevelTo(), false);
-			
-		} else {
-			
-			addWhereDataStringClausePart(whereDataString, fromString, arg.getSport(), arg.getText(), arg.getCity(), arg.getOwner(), arg.getTitle());
-			
-			addWhereLevelStringClausePart(whereLevelString, arg.getLevelFrom(), arg.getLevelTo(), true);
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+		CriteriaQuery<SportEvent> cq = cb.createQuery(SportEvent.class);
+		Root<SportEvent> e = cq.from(SportEvent.class);
+		cq.select(e);
+		
+		List<Predicate> andPredicates = new ArrayList<>();
+		
+		Predicate opened = cb.equal(e.get(SportEvent_.isOpened), true);
+		andPredicates.add(opened);
+		
+		if (arg.isLevelFrom()) {
+			Predicate greaterThenFrom = cb.greaterThanOrEqualTo(e.get(SportEvent_.levelIntervalTo), arg.getLevelFrom());
+			andPredicates.add(greaterThenFrom);
 		}
-		
-		queryString.append(fromString.toString());
-		queryString.append(" WHERE ");
-		if (whereDataString.length() != 0) {
-			queryString.append("(");
-			queryString.append(whereDataString.toString().substring(4));
-			queryString.append(") AND ");
-		}
-		queryString.append(whereLevelString.toString().substring(5));
-		queryString.append(" AND e.isOpened = true");
-		
-		String s = queryString.toString();
-		
-		
-		TypedQuery<SportEvent> query = em.createQuery(s, SportEvent.class);
-		
-		if (!emptyText) {
-			query.setParameter("text", "%" + arg.getText().toLowerCase() + "%");
-		}
-		
-		if (arg.getSport() != null) {
-			query.setParameter("sport", arg.getSport());
-		}
-		
-		return query.getResultList();
-	}
-	
-	private void addWhereLevelStringClausePart(StringBuilder whereString, int from, int to, boolean allowUndefinedIntervall) {
-		if (from == 0 && to == 0) {
-			from = allowUndefinedIntervall ? 1 : 11;
-		}
-		if (from != 0) {
-			whereString.append(" AND e.levelIntervalTo >= ");
-			whereString.append(Integer.toString(from));
-		}
-		if (to != 0) {
-			whereString.append(" AND e.levelIntervalFrom <= ");
-			whereString.append(Integer.toString(to));
-		}
-	}
-	
-	private void addWhereDataStringClausePart(StringBuilder whereString, StringBuilder fromString, Sports sport,
-			String text, boolean city, boolean owner, boolean title) {
-		
-		if (city) {
-			fromString.append(" JOIN e.address a");
-			whereString.append(" OR LOWER(a.city) LIKE :text");
-		}
-		
-		if (owner) {
-			fromString.append(" JOIN e.owner o");
-			whereString.append(" OR LOWER(o.name) LIKE :text");
-		}
-		
-		if (title) {
-			whereString.append(" OR LOWER(e.title) LIKE :text");
-		}
-		
-		if (sport != null) {
-			whereString.append(" OR e.type = :sport");
+		if (arg.isLevelTo()) {
+			Predicate lessThenTo = cb.lessThanOrEqualTo(e.get(SportEvent_.levelIntervalFrom), arg.getLevelTo());
+			andPredicates.add(lessThenTo);
 		}
 
+		List<Predicate> orPredicates = new ArrayList<>();
+
+		if (arg.getSport() != null) {
+			Predicate equalSport = cb.equal(e.get(SportEvent_.type), arg.getSport());
+			orPredicates.add(equalSport);
+		}
+
+		ParameterExpression<String> p = cb.parameter(String.class);
+
+		if (isFilterText) {
+
+			if (arg.getCity()) {
+				Predicate cityPredicate = cb.like(e.join(SportEvent_.address).get(Address_.city), p);
+				orPredicates.add(cityPredicate);
+			}
+
+			if (arg.getOwner()) {
+				Predicate ownerPredicate = cb.like(e.join(SportEvent_.owner).get(User_.name), p);
+				orPredicates.add(ownerPredicate);
+			}
+
+			if (arg.getTitle()) {
+				Predicate titlePredicate = cb.like(e.get(SportEvent_.title), p);
+				orPredicates.add(titlePredicate);
+			}
+		}
+
+		if (!orPredicates.isEmpty()) {
+			Predicate[] disjArray = new Predicate[orPredicates.size()];
+			orPredicates.toArray(disjArray);
+			Predicate disjunction = cb.or(disjArray);
+			andPredicates.add(disjunction);
+		}
+
+		Predicate[] conjArray = new Predicate[andPredicates.size()];
+		andPredicates.toArray(conjArray);
+		Predicate conjunction = cb.and(conjArray);
+
+		cq.where(conjunction);
+
+		TypedQuery<SportEvent> query = em.createQuery(cq);
+
+
+		if (isFilterText) {
+			query.setParameter(p, toLikeString(arg));
+		}
+
+		String queryString = query.unwrap(org.hibernate.Query.class).getQueryString();
+
+		System.out.println(queryString);
+
+		return query.getResultList();
+	}
+
+	private String toLikeString(SportEventFilter arg) {
+		return "%" + arg.getText() + "%";
 	}
 
 }

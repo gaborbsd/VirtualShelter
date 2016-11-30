@@ -76,8 +76,7 @@ public class SportEventOperationsImpl implements SportEventOperations {
 		}
 
 		SportEvent newEvent = sportEventRepository.saveNewEvent(e);
-		List<FriendShip> usersToNotify = friendShipRepository.findByUser1AndUser2ListenOrUser2AndUser1Listen(owner,
-				true, owner, true);
+		List<FriendShip> usersToNotify = friendShipRepository.findByListeningUser(owner);
 		usersToNotify.forEach(
 				f -> sendEventNotification(f.getUser1().getName().equals(owner.getName()) ? f.getUser2() : f.getUser1()
 			, owner, newEvent, EventSimpleNotification.NEW_EVENT));
