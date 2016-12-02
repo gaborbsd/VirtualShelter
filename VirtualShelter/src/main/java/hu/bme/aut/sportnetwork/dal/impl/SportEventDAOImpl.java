@@ -13,6 +13,9 @@ import javax.persistence.criteria.ParameterExpression;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import hu.aut.bme.sportnetwork.api.impl.SportEventFilter;
 import hu.bme.aut.sportnetwork.dal.SportEventDAOCustom;
 import hu.bme.aut.sportnetwork.entity.Address;
@@ -26,6 +29,8 @@ public class SportEventDAOImpl implements SportEventDAOCustom {
 	@PersistenceContext
 	private EntityManager em;
 	
+	private static final Logger LOGGER = LoggerFactory.getLogger(SportEventDAOImpl.class);
+
 	@Override
 	public SportEvent saveNewEvent(SportEvent e) {
 		TypedQuery<Address> addressQuery = em.createQuery(
@@ -127,7 +132,8 @@ public class SportEventDAOImpl implements SportEventDAOCustom {
 
 		String queryString = query.unwrap(org.hibernate.Query.class).getQueryString();
 
-		System.out.println(queryString);
+		LOGGER.info(queryString);
+		LOGGER.debug(queryString);
 
 		return query.getResultList();
 	}

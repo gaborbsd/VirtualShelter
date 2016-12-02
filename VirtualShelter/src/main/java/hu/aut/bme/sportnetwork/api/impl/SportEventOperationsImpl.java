@@ -144,12 +144,7 @@ public class SportEventOperationsImpl implements SportEventOperations {
 		
 	}
 
-	@Override
-	public void rateUser(long eventID, long userId, int value) {
-		/*SportEvent event = sportEventRepository.findOne(eventID);
-		User toRate = event.getMembers().stream().filter(u -> u.getId() == userId).findFirst().get();
-		toRate.get*/
-	}
+
 
 	@Override
 	@Transactional

@@ -3,6 +3,8 @@ package hu.aut.bme.sportnetwork.api.impl;
 import java.util.Date;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,6 +38,8 @@ public class MessageOperationsImpl implements MessageOperations {
 	@Autowired
 	private AuthOperations authOperation;
 
+	private static Logger LOGGER = LoggerFactory.getLogger(MessageOperations.class);
+
 	@Override
 	public List<Conversation> listConversatinsByUser() {
 		User writer = authOperation.getLoggedInUser();
@@ -66,15 +70,22 @@ public class MessageOperationsImpl implements MessageOperations {
 		Conversation c = conversationRepository.getByUser1AndUser2(writer, writeTo);
 		
 		if (c == null) {
+			c = createNewConversation(writer, writeTo);
+		} 
+		return c;
+	}
+
+		private Conversation createNewConversation(User writer, User writeTo) {
+			Conversation c;
 			c = new Conversation();
 			c.setUser1(writer);
 			c.setUser2(writeTo);
 			c.setActive(false);
-			c.setLastSendTime(new Date());
+		c.setLastSendTime(new Date());
 			c = conversationRepository.save(c);
-		} 
-		return c;
-	}
+			LOGGER.info("conversation created : " + writer.getName() + " , " + writeTo.getName());
+			return c;
+		}
 	
 	private List<Message> writeToConversation(User writer, Conversation c, String message) {
 		Date sendTime = new Date();

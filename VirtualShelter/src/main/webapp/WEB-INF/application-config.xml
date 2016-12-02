@@ -19,9 +19,12 @@
 
 	<context:spring-configured />
 	<context:annotation-config />
+	
 	<jpa:repositories base-package="hu.bme.aut.sportnetwork.dal" 
 	entity-manager-factory-ref="entityManagerFactory"
 		transaction-manager-ref="txManager" />
+		
+		
 
 	<jee:jndi-lookup id="dataSource" jndi-name="jdbc/VShelterPU" />
 

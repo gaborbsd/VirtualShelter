@@ -8,14 +8,14 @@ INSERT INTO address VALUES (7, "Kolcsei Ferenc utca 4", "Miskolc", "Magyarorszag
 INSERT INTO address VALUES (8, "Hargitai utca 2", "Szekszard", "Magyarorszag", "Tolna", 7100);
 INSERT INTO address VALUES (9, "Iszak utca 1", "Kaposvar", "Magyarorszag", "Somogy", 7400);
 
-INSERT INTO user VALUES (1, 34, "andras1@gmail.com",true,false,"Andras vagyok",false,false, "Andras", "a", "+36301234567",NULL,1);
-INSERT INTO user VALUES (2, 23, "bela2@gmail.com",false,false,"Bela vagyok",false,false, "Bela", "b","+36201234567",NULL,2);
-INSERT INTO user VALUES (3, 27, "cecil3@gmail.com",true,false,"Cecil vagyok",false,false, "Cecil", "c", "+36701234567",NULL,3);
-INSERT INTO user VALUES (4, 27, "david4@gmail.com",true,false,"David vagyok",false,false, "David", "d", "+36707654321",NULL,4);
-INSERT INTO user VALUES (5, 12, "elemer5@gmail.com",false,false,"Elemer vagyok",false,false, "Elemer", "e", "+36706254193",NULL,5);
-INSERT INTO user VALUES (6, 44, "ferenc6@gmail.com",true,true,"Ferenc vagyok",false,false, "Ferenc", "f", "+36205291403","Ne karomkodjal az oldalon",6);
-INSERT INTO user VALUES (7, 36, "gabor7@gmail.com",false,false,"Gabor vagyok",false,false, "Gabor", "g", "+36304954720",NULL,7);
-INSERT INTO user VALUES (8, 35, "admin@gmail.com",false,false, "Foadmin boss vagyok",true,false, "Admin", "adminadmin", "+36204213735",NULL,5)
+INSERT INTO user VALUES (1, 34, "andras1@gmail.com",true,false,"Andras vagyok",false,false, "Andras", "42cc48a7dc3274de66d5a7f4e27c43f728c9abd8", "+36301234567","00D4454C92F295EC2A47C153DCF78FAD",NULL,1);
+INSERT INTO user VALUES (2, 23, "bela2@gmail.com",false,false,"Bela vagyok",false,false, "Bela", "7747a1955b6609dce457630a73b535f26895756f","+36201234567","86986EAE6B5308814EA045A65C622E9E",NULL,2);
+INSERT INTO user VALUES (3, 27, "cecil3@gmail.com",true,false,"Cecil vagyok",false,false, "Cecil", "2170be9ab68f3917e411a94fe0f10869f4ad5429", "+36701234567","559AE3DB9DDBCD02E7B7A0012ED29CAB",NULL,3);
+INSERT INTO user VALUES (4, 27, "david4@gmail.com",true,false,"David vagyok",false,false, "David", "dec55448cbd8acd06fce8c017d2f67989237ab2b", "+36707654321","536FABC95D5C6CC8634337C7ADA8BBE7",NULL,4);
+INSERT INTO user VALUES (5, 12, "elemer5@gmail.com",false,false,"Elemer vagyok",false,false, "Elemer", "2fde8a81f558e798ea4eca651269505e67d6b460", "+36706254193","6DE750806F582756B772432FEA1512C8",NULL,5);
+INSERT INTO user VALUES (6, 44, "ferenc6@gmail.com",true,true,"Ferenc vagyok",false,false, "Ferenc", "0535c92335763c29cfff14a3944d655641dffc3a", "+36205291403","1E63AD9C52FEDD735D3E1D461C92C74C","Ne karomkodjal az oldalon",6);
+INSERT INTO user VALUES (7, 36, "gabor7@gmail.com",false,false,"Gabor vagyok",false,false, "Gabor", "926fdd0d52c83023f68b08f22296769ff09a57de", "+36304954720","A7E313F0000419D5887BE0916C003D36",NULL,7);
+INSERT INTO user VALUES (8, 35, "admin@gmail.com",false,false, "Foadmin boss vagyok",true,false, "Admin", "b16cc3d9540dcc1c1991b72b13f500e4012e23ff", "+36204213735","6C911BC410E75AA07BC3AE127CE8498E",NULL,5)
 
 INSERT INTO sportevent VALUES (1, '2016-08-18 10:00:00', "tenisz", true,true, 4,6, 2, 1, "Tennis event 1" ,"TENNIS", 8, 1);
 INSERT INTO sportevent VALUES (2, '2016-08-19 16:00:00', "tenisz", true,true, 4,6, 4, 1, "Tennis event 2", "TENNIS", 8, 1);

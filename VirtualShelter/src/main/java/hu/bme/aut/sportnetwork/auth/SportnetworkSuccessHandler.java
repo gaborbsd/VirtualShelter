@@ -17,24 +17,19 @@ import org.springframework.security.web.RedirectStrategy;
 
 @Component
 public class SportnetworkSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
-	
-	private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
-	
+
 	private static final String USER_HOME = "/index.html";
 	
 	private static final String ADMIN_HOME = "/html/admin/admin.html";
 	
 	private static final String ERROR_HOME = "/error.html";
 	
+	private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
+
 	@Override
     protected void handle(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
             throws IOException {
-        String targetUrl = determineTargetUrl(authentication);
- 
-        if (response.isCommitted()) {
-            throw new RuntimeException("FUCK YOU");
-        }
- 
+		String targetUrl = determineTargetUrl(authentication);
         redirectStrategy.sendRedirect(request, response, targetUrl);
     }
 	

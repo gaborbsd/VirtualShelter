@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -18,9 +19,11 @@ import javax.validation.constraints.Pattern;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import hu.bme.aut.sportnetwork.auth.Roles;
 import hu.bme.aut.sportnetwork.rest.resources.UserArg;
 
 @Entity
+@EntityListeners({ UserListener.class })
 @Table(name="user")
 public class User {
 
@@ -38,7 +41,9 @@ public class User {
 	
 	@Column(nullable = false)
 	private String password;
-	
+
+	private String salt;
+
 	private String introduction;
 
 	@Column(name = "has_warning")
@@ -205,6 +210,23 @@ public class User {
 		this.isDeleted = isDeleted;
 	}
 
+	public String getSalt() {
+		return salt;
+	}
+
+	public void setSalt(String salt) {
+		this.salt = salt;
+	}
+
+	public List<String> getRoles() {
+		List<String> ret = new ArrayList<>();
+		if (isAdmin) {
+			ret.add(Roles.ADMIN);
+		}
+		ret.add(Roles.USER);
+		return ret;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -262,4 +284,5 @@ public class User {
 		r.setRateNumbers(0);
 		return r;
 	}
+
 }

@@ -30,8 +30,6 @@ public interface SportEventOperations {
 	
 	SportEvent cancelEventRequest(long eventID);
 	
-	void rateUser(long eventID, long userId, int value);
-	
 	SportEvent writeComment(long eventID, String comment);
 	
 	SportEvent deleteComment(long commentID);
