@@ -92,15 +92,15 @@ public class SportEvent {
 		return isOpened;
 	}
 
-	public void setOpened(boolean isOpened) {
+	public void setIsOpened(boolean isOpened) {
 		this.isOpened = isOpened;
 	}
 
-	public boolean isPublic() {
+	public boolean getIsPublic() {
 		return isPublic;
 	}
 
-	public void setPublic(boolean isPublic) {
+	public void setIsPublic(boolean isPublic) {
 		this.isPublic = isPublic;
 	}
 

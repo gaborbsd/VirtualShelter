@@ -14,12 +14,14 @@ import hu.bme.aut.sportnetwork.api.SportEventOperations;
 import hu.bme.aut.sportnetwork.api.SportNetworkException;
 import hu.bme.aut.sportnetwork.api.UserOperations;
 import hu.bme.aut.sportnetwork.auth.AuthOperations;
+import hu.bme.aut.sportnetwork.dal.AddressRepository;
 import hu.bme.aut.sportnetwork.dal.CommentDAO;
 import hu.bme.aut.sportnetwork.dal.FriendShipDAO;
 import hu.bme.aut.sportnetwork.dal.NotificationDAO;
 import hu.bme.aut.sportnetwork.dal.SportEventDAO;
 import hu.bme.aut.sportnetwork.dal.SportEventRepository;
 import hu.bme.aut.sportnetwork.dal.UserDAO;
+import hu.bme.aut.sportnetwork.dal.UserRepository;
 import hu.bme.aut.sportnetwork.dal.impl.RateParam;
 import hu.bme.aut.sportnetwork.dal.impl.SportEventDAOImpl;
 import hu.bme.aut.sportnetwork.entity.Address;
@@ -35,9 +37,12 @@ import hu.bme.aut.sportnetwork.rest.resources.RateWrapper;
 
 public class SportEventOperationsImpl implements SportEventOperations {
 
+	@Autowired
+	UserRepository userRepository;
 	
-	UserDAO userRepository;
-	
+	@Autowired
+	AddressRepository addressRepository;
+
 	CommentDAO commentRepository;
 	
 	FriendShipDAO friendShipRepository;
@@ -60,25 +65,29 @@ public class SportEventOperationsImpl implements SportEventOperations {
 	@Override
 	@Transactional
 	public SportEvent create(SportEvent e) {
-		User owner = authOperation.getLoggedInUser();
+
+		User owner = userRepository.findByName("Andras");
+		Address address = addressRepository.findByCountryAndCityAndAddress(e.getAddress().getCountry(),
+				e.getAddress().getCity(), e.getAddress().getAddress());
+
+		if (address != null) {
+			e.setAddress(address);
+		}
+
+		e.setOwner(owner);
+		e.getMembers().add(owner);
+		e.setIsOpened(true);
+
+		return sportEventRepository.save(e);
 		/*
-		 * e.setOwner(owner); e.getMembers().add(owner);
-		 * e.setMemberSize(e.getMembers().size()); e.setIsOpened(true);
-		 * 
-		 * if (e.getAddress().getCountry() == null ||
-		 * e.getAddress().getCountry().isEmpty()) {
-		 * e.getAddress().setCountry(Address.EMPTY); }
-		 * 
-		 * SportEvent newEvent = sportEventRepository.saveNewEvent(e);
 		 * List<FriendShip> usersToNotify =
 		 * friendShipRepository.findByListeningUser(owner);
 		 * usersToNotify.forEach( f ->
 		 * sendEventNotification(f.getUser1().getName().equals(owner.getName())
-		 * ? f.getUser2() : f.getUser1() , owner, newEvent,
+		 * ? f.getUser2() : f.getUser1(), owner, newEvent,
 		 * EventSimpleNotification.NEW_EVENT));
-		 * newEvent.setStatus(EventStatus.OWNER);
 		 */
-		return null;
+		// newEvent.setStatus(EventStatus.OWNER);
 	}
 
 	@Override
