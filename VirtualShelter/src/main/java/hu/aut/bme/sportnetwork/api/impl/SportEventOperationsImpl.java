@@ -26,8 +26,10 @@ import hu.bme.aut.sportnetwork.dal.impl.RateParam;
 import hu.bme.aut.sportnetwork.dal.impl.SportEventDAOImpl;
 import hu.bme.aut.sportnetwork.entity.Address;
 import hu.bme.aut.sportnetwork.entity.Comment;
+import hu.bme.aut.sportnetwork.entity.EventStatus;
 import hu.bme.aut.sportnetwork.entity.Friend;
 import hu.bme.aut.sportnetwork.entity.Notification;
+import hu.bme.aut.sportnetwork.entity.NotificationType;
 import hu.bme.aut.sportnetwork.entity.SportEvent;
 import hu.bme.aut.sportnetwork.entity.Sports;
 import hu.bme.aut.sportnetwork.entity.User;
@@ -155,7 +157,10 @@ public class SportEventOperationsImpl implements SportEventOperations {
 		 * User user = authOperation.getLoggedInUser(); SportEvent ret =
 		 * eagerFetchSportEvent(id); setEventStatus(ret, user); return ret;
 		 */
-		return sportEventRepository.findOne(id);
+		User user = userRepository.findByName("Andras");
+		SportEvent event = sportEventRepository.findById(id);
+		setEventStatus(event, user);
+		return event;
 	}
 
 	@Override
@@ -212,15 +217,23 @@ public class SportEventOperationsImpl implements SportEventOperations {
 	}
 	
 	private void setEventStatus(SportEvent event, User user) {
-		/*
-		 * if (event.getOwner().getName().equals(user.getName())) {
-		 * event.setStatus(EventStatus.OWNER); } else if
-		 * (event.getMembers().contains(user)) {
-		 * event.setStatus(EventStatus.MEMBER); } else if
-		 * (notificationRepositroy.isUserAppliedToEvent(event, user)) {
-		 * event.setStatus(EventStatus.APPLIED); } else {
-		 * event.setStatus(EventStatus.NOT_MEMBER); }
-		 */
+
+		if (event.getOwner().getName().equals(user.getName())) {
+			event.setStatus(EventStatus.OWNER);
+		} else if (event.getMembers().contains(user)) {
+			event.setStatus(EventStatus.MEMBER);
+		} else if (event.getNotifications().stream().anyMatch(n -> isMatch(n, user))) {
+			event.setStatus(EventStatus.APPLIED);
+		} else {
+			event.setStatus(EventStatus.NOT_MEMBER);
+		}
+
+	}
+
+	private boolean isMatch(Notification n, User user) {
+		User u = n.getSender();
+		u.getNotifications().forEach(ne -> System.out.println(ne.getOwner().getName()));
+		return n.getType().equals(NotificationType.EVENT_REQUEST) && n.getSender().getName().equals(user.getName());
 	}
 
 	@Override

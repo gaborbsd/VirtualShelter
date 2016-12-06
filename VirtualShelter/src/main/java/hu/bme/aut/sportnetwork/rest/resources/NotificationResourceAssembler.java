@@ -16,7 +16,7 @@ public class NotificationResourceAssembler extends ResourceAssemblerSupport<Noti
 
 	@Override
 	public NotificationResource toResource(Notification entity) {
-		NotificationResource resource = createResourceWithId(entity.getNotificationId(), entity);
+		NotificationResource resource = createResourceWithId(entity.getId(), entity);
 		return resource;
 	}
 

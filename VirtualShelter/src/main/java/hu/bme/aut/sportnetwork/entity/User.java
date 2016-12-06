@@ -54,6 +54,16 @@ public class User {
 	@Relationship(type = RelationShipTypes.FRIEND_TYPE, direction = Relationship.OUTGOING)
 	private Set<Friend> friends;
 
+	@Relationship(type = RelationShipTypes.MEMBER_TYPE, direction = Relationship.OUTGOING)
+	private Set<Conversation> conversations;
+
+	@Relationship(type = RelationShipTypes.OWNER_TYPE, direction = Relationship.INCOMING)
+	private Set<Notification> notifications;
+
+	@Relationship(type = RelationShipTypes.NOTIFICATION_SENDER_TYPE, direction = Relationship.OUTGOING)
+	private Set<Notification> sendNotification;
+
+
 	public Long getId() {
 		return id;
 	}
@@ -197,4 +207,58 @@ public class User {
 		this.country = country;
 	}
 
+	public Set<SportEvent> getOwnerOf() {
+		if (ownerOf == null) {
+			ownerOf = new HashSet<>();
+		}
+		return ownerOf;
+	}
+
+	public void setOwnerOf(Set<SportEvent> ownerOf) {
+		this.ownerOf = ownerOf;
+	}
+
+	public Set<Friend> getFriends() {
+		if (friends == null) {
+			friends = new HashSet<>();
+		}
+		return friends;
+	}
+
+	public void setFriends(Set<Friend> friends) {
+		this.friends = friends;
+	}
+
+	public Set<Conversation> getConversations() {
+		if (conversations == null) {
+			conversations = new HashSet<>();
+		}
+		return conversations;
+	}
+
+	public void setConversations(Set<Conversation> conversations) {
+		this.conversations = conversations;
+	}
+
+	public Set<Notification> getNotifications() {
+		if (notifications == null) {
+			notifications = new HashSet<>();
+		}
+		return notifications;
+	}
+
+	public void setNotifications(Set<Notification> notifications) {
+		this.notifications = notifications;
+	}
+
+	public Set<Notification> getSendNotification() {
+		if (sendNotification == null) {
+			sendNotification = new HashSet<>();
+		}
+		return sendNotification;
+	}
+
+	public void setSendNotification(Set<Notification> sendNotification) {
+		this.sendNotification = sendNotification;
+	}
 }

@@ -61,15 +61,19 @@ public class SportEventResourceAssembler extends
 
 		resource.setOwner(entity.getOwner().getName());
 
-		/*
-		 * switch (entity.getStatus()) { case OWNER:
-		 * 
-		 * break; case MEMBER: resource.setStatus(1); break; case APPLIED:
-		 * resource.setStatus(2); break; case NOT_MEMBER: resource.setStatus(3);
-		 * }
-		 */
-
-		resource.setStatus(0);
+		switch (entity.getStatus()) {
+		case OWNER:
+			resource.setStatus(0);
+			break;
+		case MEMBER:
+			resource.setStatus(1);
+			break;
+		case APPLIED:
+			resource.setStatus(2);
+			break;
+		case NOT_MEMBER:
+			resource.setStatus(3);
+		}
 
 		resource.add(linkTo(UserController.class).slash(entity.getOwner().getId())
 				.withRel(String.valueOf(entity.getOwner().getId())));

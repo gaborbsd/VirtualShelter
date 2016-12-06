@@ -14,10 +14,10 @@ public class Comment {
 	@GraphId
 	private Long id;
 
-	@EndNode
+	@StartNode
 	private User user;
 
-	@StartNode
+	@EndNode
 	private SportEvent event;
 
 	private String message;

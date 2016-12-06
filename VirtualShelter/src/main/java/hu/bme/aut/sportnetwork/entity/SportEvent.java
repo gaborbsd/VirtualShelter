@@ -9,6 +9,7 @@ import java.util.Set;
 import org.neo4j.ogm.annotation.GraphId;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
+import org.neo4j.ogm.annotation.Transient;
 import org.neo4j.ogm.annotation.typeconversion.DateString;
 
 @NodeEntity
@@ -45,8 +46,14 @@ public class SportEvent {
 	@Relationship(type = RelationShipTypes.MEMBER_TYPE, direction = Relationship.INCOMING)
 	private Set<User> members;
 
-	@Relationship(type = RelationShipTypes.COMMENT_TYPE, direction = Relationship.OUTGOING)
+	@Relationship(type = RelationShipTypes.COMMENT_TYPE, direction = Relationship.INCOMING)
 	private List<Comment> comments;
+
+	@Relationship(type = RelationShipTypes.NOTIFICATION_NEWS_TYPE, direction = Relationship.INCOMING)
+	private Set<Notification> notifications;
+
+	@Transient
+	private EventStatus status;
 
 	public Long getId() {
 		return id;
@@ -164,6 +171,25 @@ public class SportEvent {
 
 	public void setComments(List<Comment> comments) {
 		this.comments = comments;
+	}
+
+	public Set<Notification> getNotifications() {
+		if (notifications == null) {
+			notifications = new HashSet<>();
+		}
+		return notifications;
+	}
+
+	public void setNotifications(Set<Notification> notifications) {
+		this.notifications = notifications;
+	}
+
+	public EventStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(EventStatus status) {
+		this.status = status;
 	}
 
 }
