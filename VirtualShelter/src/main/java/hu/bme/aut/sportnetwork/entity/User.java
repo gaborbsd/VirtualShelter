@@ -51,6 +51,9 @@ public class User {
 	@Relationship(type = RelationShipTypes.MEMBER_TYPE, direction = Relationship.OUTGOING)
 	private Set<SportEvent> membersIn;
 
+	@Relationship(type = RelationShipTypes.FRIEND_TYPE, direction = Relationship.OUTGOING)
+	private Set<Friend> friends;
+
 	public Long getId() {
 		return id;
 	}

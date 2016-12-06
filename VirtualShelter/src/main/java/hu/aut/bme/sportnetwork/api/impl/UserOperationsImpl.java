@@ -13,16 +13,15 @@ import hu.bme.aut.sportnetwork.auth.AuthOperations;
 import hu.bme.aut.sportnetwork.dal.FriendShipDAO;
 import hu.bme.aut.sportnetwork.dal.NotificationDAO;
 import hu.bme.aut.sportnetwork.dal.UserDAO;
+import hu.bme.aut.sportnetwork.dal.UserRepository;
 import hu.bme.aut.sportnetwork.entity.FriendRequestNotification;
-import hu.bme.aut.sportnetwork.entity.FriendShip;
+import hu.bme.aut.sportnetwork.entity.Friend;
 import hu.bme.aut.sportnetwork.entity.FriendStatus;
 import hu.bme.aut.sportnetwork.entity.Notification;
 import hu.bme.aut.sportnetwork.entity.User;
 import hu.bme.aut.sportnetwork.rest.resources.UserArg;
 
 public class UserOperationsImpl implements UserOperations {
-	
-	private UserDAO userRepository;
 
 	private NotificationDAO notificationRepositroy;
 
@@ -31,15 +30,13 @@ public class UserOperationsImpl implements UserOperations {
 	@Autowired
 	private AuthOperations authOperations;
 	
+	@Autowired
+	private UserRepository userRepository;
+
     @Override
 	@Transactional
 	public User findById(long id) {
-		/*
-		 * User me = authOperations.getLoggedInUser(); User u =
-		 * userRepository.findOne(id); u.setFriendStatus(setFriendStatus(me,
-		 * u)); return u;
-		 */
-		return null;
+		return userRepository.findOne(id);
 	}
 
     @Override
@@ -96,7 +93,7 @@ public class UserOperationsImpl implements UserOperations {
 	@Override
 	public List<User> listFriends() {
 		User u = authOperations.getLoggedInUser();
-		List<FriendShip> fl = friendShipRepository.findByUser(u);
+		List<Friend> fl = friendShipRepository.findByUser(u);
 
 		List<User> ret = new ArrayList<>();
 
@@ -227,7 +224,7 @@ public class UserOperationsImpl implements UserOperations {
 
 	@Override
 	public List<User> search(String text) {
-		return userRepository.search(text.toLowerCase());
+		return null;
 	}
 
 	@Override

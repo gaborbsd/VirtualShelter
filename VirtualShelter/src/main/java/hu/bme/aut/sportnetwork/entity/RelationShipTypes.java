@@ -9,4 +9,6 @@ public class RelationShipTypes {
 	public static final String ADDRESS_TYPE = "ADDRESS";
 
 	public static final String COMMENT_TYPE = "COMMENT";
+
+	public static final String FRIEND_TYPE = "FRIEND";
 }

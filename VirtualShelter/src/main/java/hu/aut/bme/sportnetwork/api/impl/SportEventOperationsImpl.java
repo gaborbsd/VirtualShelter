@@ -26,7 +26,7 @@ import hu.bme.aut.sportnetwork.dal.impl.RateParam;
 import hu.bme.aut.sportnetwork.dal.impl.SportEventDAOImpl;
 import hu.bme.aut.sportnetwork.entity.Address;
 import hu.bme.aut.sportnetwork.entity.Comment;
-import hu.bme.aut.sportnetwork.entity.FriendShip;
+import hu.bme.aut.sportnetwork.entity.Friend;
 import hu.bme.aut.sportnetwork.entity.Notification;
 import hu.bme.aut.sportnetwork.entity.SportEvent;
 import hu.bme.aut.sportnetwork.entity.Sports;
