@@ -11,9 +11,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-		<spring-framework.version>4.1.5.RELEASE</spring-framework.version>
-
-		<spring-data-jpa.version>1.7.2.RELEASE</spring-data-jpa.version>
+		<spring-framework.version>4.3.4.RELEASE</spring-framework.version>
 		
 		<spring-security.version>4.0.1.RELEASE</spring-security.version>
 
@@ -54,9 +52,6 @@
 				<configuration>
 					<source>${java.version}</source>
 					<target>${java.version}</target>
-					<compilerArguments>
-						<processor>org.hibernate.jpamodelgen.JPAMetaModelEntityProcessor</processor>
-					</compilerArguments>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -75,9 +70,6 @@
 				<configuration>
 					<stopPort>9966</stopPort>
 					<stopKey>foo</stopKey>
-					<webApp>
-						<jettyEnvXml>src/main/resources/jetty-env.xml</jettyEnvXml>
-					</webApp>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -215,12 +207,6 @@
 			<artifactId>spring-hateoas</artifactId>
 			<version>${spring-hateoas.version}</version>
 		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.data</groupId>
-			<artifactId>spring-data-jpa</artifactId>
-			<version>${spring-data-jpa.version}</version>
-		</dependency>
 		
 		<dependency>
 			<groupId>org.springframework.security</groupId>
@@ -277,12 +263,40 @@
 		</dependency>
 
 		<!-- Database -->
+		
 		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>${mysql-connector.version}</version>
-			<scope>runtime</scope>
+	        <groupId>org.springframework.data</groupId>
+	        <artifactId>spring-data-neo4j</artifactId>
+	        <version>4.1.1.RELEASE</version>
+   		</dependency>
+   		
+   		<dependency>
+		  <groupId>org.neo4j</groupId>
+		  <artifactId>neo4j-kernel</artifactId>
+		  <version>3.0.1</version>
 		</dependency>
+		
+		<dependency>
+            <groupId>org.neo4j.app</groupId>
+            <artifactId>neo4j-server</artifactId>
+            <version>3.0.1</version>
+            <type>test-jar</type>
+        </dependency>
+
+        <dependency>
+            <groupId>org.neo4j</groupId>
+            <artifactId>neo4j-ogm-test</artifactId>
+            <version>2.0.2</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.neo4j.test</groupId>
+            <artifactId>neo4j-harness</artifactId>
+            <version>3.0.1</version>
+            <scope>test</scope>
+        </dependency>
+
 
 		<!-- Logging with SLF4J & LogBack -->
 		<dependency>

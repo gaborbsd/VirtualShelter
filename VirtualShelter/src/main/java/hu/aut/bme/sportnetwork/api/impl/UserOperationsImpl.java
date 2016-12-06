@@ -17,19 +17,15 @@ import hu.bme.aut.sportnetwork.entity.FriendRequestNotification;
 import hu.bme.aut.sportnetwork.entity.FriendShip;
 import hu.bme.aut.sportnetwork.entity.FriendStatus;
 import hu.bme.aut.sportnetwork.entity.Notification;
-import hu.bme.aut.sportnetwork.entity.Rating;
 import hu.bme.aut.sportnetwork.entity.User;
 import hu.bme.aut.sportnetwork.rest.resources.UserArg;
 
 public class UserOperationsImpl implements UserOperations {
 	
-	@Autowired
 	private UserDAO userRepository;
-	
-	@Autowired
+
 	private NotificationDAO notificationRepositroy;
-	
-	@Autowired
+
 	private FriendShipDAO friendShipRepository;
 	
 	@Autowired
@@ -38,10 +34,12 @@ public class UserOperationsImpl implements UserOperations {
     @Override
 	@Transactional
 	public User findById(long id) {
-		User me = authOperations.getLoggedInUser();
-		User u = userRepository.findOne(id);
-		u.setFriendStatus(setFriendStatus(me, u));
-		return u;
+		/*
+		 * User me = authOperations.getLoggedInUser(); User u =
+		 * userRepository.findOne(id); u.setFriendStatus(setFriendStatus(me,
+		 * u)); return u;
+		 */
+		return null;
 	}
 
     @Override
@@ -53,45 +51,46 @@ public class UserOperationsImpl implements UserOperations {
 	@Override
 	@Transactional
 	public User sendFriendRequest(String name) {
-		User sender = authOperations.getLoggedInUser();
-		User u = userRepository.findByName(name);
-		u.setHasNotification(true);
-		u.setFriendStatus(FriendStatus.REQUEST_SENT);
-		Notification not = new FriendRequestNotification(sender);
-		not.setOwner(u);
-		not.setSendTime(new Date());
-		notificationRepositroy.save(not);
-		return u;
+		/*
+		 * User sender = authOperations.getLoggedInUser(); User u =
+		 * userRepository.findByName(name); u.setHasNotification(true);
+		 * u.setFriendStatus(FriendStatus.REQUEST_SENT); Notification not = new
+		 * FriendRequestNotification(sender); not.setOwner(u);
+		 * not.setSendTime(new Date()); notificationRepositroy.save(not); return
+		 * u;
+		 */
+		return null;
 	}
 
 	@Override
 	@Transactional
 	public User acceptFriendRequest(long userId) throws SportNetworkException {
-		User accepter = authOperations.getLoggedInUser();
-		User friend = userRepository.findOne(userId);
-		friend.getRatings().size();
-		friend.setFriendStatus(FriendStatus.FRIEND);
-		FriendRequestNotification not = notificationRepositroy.isFriendRequestBetween(friend, accepter);
-		if (not == null) {
-			throw new SportNetworkException("NO REQUEST");
-		}
-		return friendAccept(accepter, friend, not);
+		/*
+		 * User accepter = authOperations.getLoggedInUser(); User friend =
+		 * userRepository.findOne(userId); friend.getRatings().size();
+		 * friend.setFriendStatus(FriendStatus.FRIEND);
+		 * FriendRequestNotification not =
+		 * notificationRepositroy.isFriendRequestBetween(friend, accepter); if
+		 * (not == null) { throw new SportNetworkException("NO REQUEST"); }
+		 * return friendAccept(accepter, friend, not);
+		 */
+		return null;
 	}
 
 	@Override
 	public User friendAccept(User accepter, User friend, FriendRequestNotification not) {
 
 
-		FriendShip f = new FriendShip();
-		f.setUser1(accepter);
-		f.setUser2(friend);
-		f.setUser1Listen(true);
-		f.setUser2Listen(true);
-		friendShipRepository.save(f);
-
-		notificationRepositroy.delete(not.getNotificationId());
-
-		return friend;
+		/*
+		 * FriendShip f = new FriendShip(); f.setUser1(accepter);
+		 * f.setUser2(friend); f.setUser1Listen(true); f.setUser2Listen(true);
+		 * friendShipRepository.save(f);
+		 * 
+		 * notificationRepositroy.delete(not.getNotificationId());
+		 * 
+		 * return friend;
+		 */
+		return null;
 	}
 
 	@Override
@@ -101,47 +100,48 @@ public class UserOperationsImpl implements UserOperations {
 
 		List<User> ret = new ArrayList<>();
 
-		fl.forEach(f -> ret.add(f.getUser1().getName().equals(u.getName()) ? f.getUser2() : f.getUser1()));
+		// fl.forEach(f -> ret.add(f.getUser1().getName().equals(u.getName()) ?
+		// f.getUser2() : f.getUser1()));
 
 		return ret;
 	}
 
 	@Override
 	public boolean pollNotification() {
-		User user = authOperations.getLoggedInUser();
-		return user.getHasNotification();
+		/*
+		 * User user = authOperations.getLoggedInUser(); return
+		 * user.getHasNotification();
+		 */
+		return false;
 	}
 
 	@Override
 	@Transactional
 	public User getCurrent() {
-		User u = authOperations.getLoggedInUser();
-		u.getRatings().size();
-		u.setFriendStatus(FriendStatus.SELF);
-		return u;
+		/*
+		 * User u = authOperations.getLoggedInUser(); u.getRatings().size();
+		 * u.setFriendStatus(FriendStatus.SELF); return u;
+		 */
+		return null;
 	}
 	
 	private FriendStatus setFriendStatus(User self, User other) {
-		if (self.getName().equals(other.getName())) {
-			return FriendStatus.SELF;
-		}
-
-		if (friendShipRepository.getByUser1AndUser2(self, other) != null) {
-			return FriendStatus.FRIEND;
-		}
-
-		FriendRequestNotification request = notificationRepositroy.isFriendRequestBetween(self, other);
-
-		if (request == null) {
-			return FriendStatus.NOT_FRIEND;
-		}
-
-		if (request.getOwner().getName().equals(self.getName())) {
-			if (request.getIsDeclined()) {
-				return FriendStatus.DECLINED;
-			}
-			return FriendStatus.REQUEST_RECEIVED;
-		}
+		/*
+		 * if (self.getName().equals(other.getName())) { return
+		 * FriendStatus.SELF; }
+		 * 
+		 * if (friendShipRepository.getByUser1AndUser2(self, other) != null) {
+		 * return FriendStatus.FRIEND; }
+		 * 
+		 * FriendRequestNotification request =
+		 * notificationRepositroy.isFriendRequestBetween(self, other);
+		 * 
+		 * if (request == null) { return FriendStatus.NOT_FRIEND; }
+		 * 
+		 * if (request.getOwner().getName().equals(self.getName())) { if
+		 * (request.getIsDeclined()) { return FriendStatus.DECLINED; } return
+		 * FriendStatus.REQUEST_RECEIVED; }
+		 */
 
 		return FriendStatus.REQUEST_SENT;
 	}
@@ -151,12 +151,12 @@ public class UserOperationsImpl implements UserOperations {
 	public User cancelFriendRequest(String name) throws SportNetworkException {
 		User canceler = authOperations.getLoggedInUser();
 		User u = userRepository.findByName(name);
-		u.setFriendStatus(FriendStatus.NOT_FRIEND);
+		// u.setFriendStatus(FriendStatus.NOT_FRIEND);
 		FriendRequestNotification not = notificationRepositroy.isFriendRequestBetween(canceler, u);
 		if (not == null) {
 			throw new SportNetworkException("NO REQUEST");
 		}
-		notificationRepositroy.delete(not.getNotificationId());
+		// notificationRepositroy.delete(not.getNotificationId());
 
 		return u;
 	}
@@ -164,63 +164,63 @@ public class UserOperationsImpl implements UserOperations {
 	@Override
 	@Transactional
 	public User declineFriendRequest(String name) throws SportNetworkException {
-		User decliner = authOperations.getLoggedInUser();
-		User u = userRepository.findByName(name);
-		u.setFriendStatus(FriendStatus.DECLINED);
-		FriendRequestNotification not = notificationRepositroy.isFriendRequestBetween(decliner, u);
-		if (not == null) {
-			throw new SportNetworkException("NO REQUEST");
-		}
-		not.setIsDeclined(true);
-		notificationRepositroy.save(not);
-
-		return u;
+		/*
+		 * User decliner = authOperations.getLoggedInUser(); User u =
+		 * userRepository.findByName(name);
+		 * u.setFriendStatus(FriendStatus.DECLINED); FriendRequestNotification
+		 * not = notificationRepositroy.isFriendRequestBetween(decliner, u); if
+		 * (not == null) { throw new SportNetworkException("NO REQUEST"); }
+		 * not.setIsDeclined(true); notificationRepositroy.save(not);
+		 * 
+		 * return u;
+		 */
+		return null;
 	}
 
 	@Override
 	@Transactional
 	public User deleteFriend(long id) {
-		User deleter = authOperations.getLoggedInUser();
-		User u = userRepository.findOne(id);
-		u.setFriendStatus(FriendStatus.NOT_FRIEND);
-		FriendShip f = friendShipRepository.getByUser1AndUser2(deleter, u);
-
-		friendShipRepository.delete(f.getId());
-
-		return u;
+		/*
+		 * User deleter = authOperations.getLoggedInUser(); User u =
+		 * userRepository.findOne(id);
+		 * u.setFriendStatus(FriendStatus.NOT_FRIEND); FriendShip f =
+		 * friendShipRepository.getByUser1AndUser2(deleter, u);
+		 * 
+		 * friendShipRepository.delete(f.getId());
+		 * 
+		 * return u;
+		 */
+		return null;
 	}
 
 	@Override
 	@Transactional
 	public User modify(UserArg arg) throws SportNetworkException {
-		User current = authOperations.getLoggedInUser();
-		if (!current.getName().equals(arg.getName())) {
-			throw new SportNetworkException("NO RIGHT FOR THIS OPERATION");
-		}
-
-		User u = userRepository.findByEmail(arg.getEmail());
-		if (u != null && !current.getEmail().equals(u.getEmail())) {
-			throw new SportNetworkException("EMAIL ALREADY EXISTS");
-		}
-
-		List<Rating> ratings = current.getRatings();
-
-		User modified = User.toUser(arg);
-
-		for (Rating rating : modified.getRatings()) {
-			if (ratings.stream().allMatch(r -> r.getSport() != rating.getSport())) {
-				ratings.add(rating);
-			}
-		}
-
-		modified.setRatings(ratings);
-		modified.setId(current.getId());
-
-		User saved = userRepository.modifyUser(modified);
-
-		saved.getRatings().size();
-		saved.setFriendStatus(FriendStatus.SELF);
-		return saved;
+		/*
+		 * User current = authOperations.getLoggedInUser(); if
+		 * (!current.getName().equals(arg.getName())) { throw new
+		 * SportNetworkException("NO RIGHT FOR THIS OPERATION"); }
+		 * 
+		 * User u = userRepository.findByEmail(arg.getEmail()); if (u != null &&
+		 * !current.getEmail().equals(u.getEmail())) { throw new
+		 * SportNetworkException("EMAIL ALREADY EXISTS"); }
+		 * 
+		 * List<Rating> ratings = current.getRatings();
+		 * 
+		 * User modified = User.toUser(arg);
+		 * 
+		 * for (Rating rating : modified.getRatings()) { if
+		 * (ratings.stream().allMatch(r -> r.getSport() != rating.getSport())) {
+		 * ratings.add(rating); } }
+		 * 
+		 * modified.setRatings(ratings); modified.setId(current.getId());
+		 * 
+		 * User saved = userRepository.modifyUser(modified);
+		 * 
+		 * saved.getRatings().size(); saved.setFriendStatus(FriendStatus.SELF);
+		 * return saved;
+		 */
+		return null;
 		// userRepository.modifyUser(modified);
 
 	}
@@ -233,17 +233,18 @@ public class UserOperationsImpl implements UserOperations {
 	@Override
 	@Transactional
 	public void warnUser(String name, String message) {
-		User u = userRepository.findByName(name);
-		u.setHasWarning(true);
-		u.setWarningMessage(message);
-		userRepository.save(u);
+		/*
+		 * User u = userRepository.findByName(name); u.setHasWarning(true);
+		 * u.setWarningMessage(message); userRepository.save(u);
+		 */
 	}
 
 	@Override
 	public void deleteUser(Long id) {
-		User u = userRepository.findOne(id);
-		u.setDeleted(true);
-		userRepository.save(u);
+		/*
+		 * User u = userRepository.findOne(id); u.setDeleted(true);
+		 * userRepository.save(u);
+		 */
 
 	}
 }

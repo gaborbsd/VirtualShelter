@@ -5,16 +5,23 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 
+import javax.annotation.PostConstruct;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import hu.bme.aut.sportnetwork.dal.UserDAO;
+import hu.bme.aut.sportnetwork.dal.impl.UserDAOImpl;
 import hu.bme.aut.sportnetwork.entity.User;
 
 public class AuthOperations {
 
-	@Autowired
 	private UserDAO userRepository;
+
+	@PostConstruct
+	public void init() {
+		userRepository = new UserDAOImpl();
+	}
 	
 	final private static Character[] hexArray = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D',
 			'E', 'F' };

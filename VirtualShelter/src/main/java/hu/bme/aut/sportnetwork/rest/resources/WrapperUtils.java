@@ -30,32 +30,32 @@ public class WrapperUtils {
 	}
 
 	public static void addComment(List<CommentWrapper> comments, Comment c) {
-		UserLinkWrapper u = new UserLinkWrapper();
-		u.setId(c.getOwner().getId());
-		u.setName(c.getOwner().getName());
-		CommentWrapper w = new CommentWrapper();
-		w.setMessage(c.getMessage());
-		w.setId(c.getId());
-		w.setMine(c.getOwner().getName().equals(authOperation.getLoggedInUserName()));
-		w.setWriter(u);
-		// w.setDate(c.getDateOfComment());
-		comments.add(w);
+		/*
+		 * UserLinkWrapper u = new UserLinkWrapper();
+		 * u.setId(c.getOwner().getId()); u.setName(c.getOwner().getName());
+		 * CommentWrapper w = new CommentWrapper();
+		 * w.setMessage(c.getMessage()); w.setId(c.getId());
+		 * w.setMine(c.getOwner().getName().equals(authOperation.
+		 * getLoggedInUserName())); w.setWriter(u); //
+		 * w.setDate(c.getDateOfComment()); comments.add(w);
+		 */
 	}
 
 	public static UserLinkWrapper toWrapper(User u) {
 		UserLinkWrapper wrapper = new UserLinkWrapper();
-		wrapper.setId(u.getId());
-		wrapper.setName(u.getName());
+		/*
+		 * wrapper.setId(u.getId()); wrapper.setName(u.getName());
+		 */
 		return wrapper;
 	}
 	
 	public static List<UserLinkWrapper> toWrapperListCloseCurrent(List<User> us) {
 		List<UserLinkWrapper> ret = new ArrayList<>();
-		for (User u : us) {
-			if (!u.getName().equals(authOperation.getLoggedInUserName())) {
-				ret.add(toWrapper(u));
-			}
-		}
+		/*
+		 * for (User u : us) { if
+		 * (!u.getName().equals(authOperation.getLoggedInUserName())) {
+		 * ret.add(toWrapper(u)); } }
+		 */
 		return ret;
 	}
 

@@ -69,11 +69,11 @@ public class AdminController {
 
 	private CommentWrapper toWrapper(Comment c) {
 		CommentWrapper w = new CommentWrapper();
-		w.setId(c.getId());
-		w.setMessage(c.getMessage());
-		UserLinkWrapper uw = new UserLinkWrapper();
-		uw.setName(c.getOwner().getName());
-		w.setWriter(uw);
+		/*
+		 * w.setId(c.getId()); w.setMessage(c.getMessage()); UserLinkWrapper uw
+		 * = new UserLinkWrapper(); uw.setName(c.getOwner().getName());
+		 * w.setWriter(uw);
+		 */
 		return w;
 	}
 }

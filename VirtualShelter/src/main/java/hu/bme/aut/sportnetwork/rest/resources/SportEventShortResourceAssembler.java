@@ -19,25 +19,32 @@ ResourceAssemblerSupport<SportEvent, SportEventShortResource> {
 	
 	@Override
 	public SportEventShortResource toResource(SportEvent entity) {
-		SportEventShortResource resource = createResourceWithId(entity.getId(), entity);
+		SportEventShortResource resource = createResourceWithId(1, entity);
 		return resource;
 	}
 	
 	@Override
 	protected SportEventShortResource instantiateResource(SportEvent entity) {
 		SportEventShortResource resource = new SportEventShortResource();
-		resource.setEventId(entity.getId());
-		resource.setOwnerId(entity.getOwner().getId());
-		resource.setOwner(entity.getOwner().getName());
-		resource.setTitle(entity.getTitle());
-		resource.setDate(entity.getDate());
-		resource.setType(entity.getType());
-		resource.setCity(entity.getAddress().getCity());
-		resource.setMembers(String.valueOf(entity.getMemberSize()) + "/" + String.valueOf(entity.getMaxSize()));
-		resource.setLevels(entity.getLevelIntervalFrom() == entity.getLevelIntervalTo() ? String.valueOf(entity.getLevelIntervalFrom()) :
-			String.valueOf(entity.getLevelIntervalFrom()) + "-" + String.valueOf(entity.getLevelIntervalTo()));
-		
-		resource.add(linkTo(UserController.class).slash(entity.getOwner().getId()).withRel(String.valueOf(entity.getOwner().getId())));
+		/*
+		 * resource.setEventId(entity.getId());
+		 * resource.setOwnerId(entity.getOwner().getId());
+		 * resource.setOwner(entity.getOwner().getName());
+		 * resource.setTitle(entity.getTitle());
+		 * resource.setDate(entity.getDate());
+		 * resource.setType(entity.getType());
+		 * resource.setCity(entity.getAddress().getCity());
+		 * resource.setMembers(String.valueOf(entity.getMemberSize()) + "/" +
+		 * String.valueOf(entity.getMaxSize()));
+		 * resource.setLevels(entity.getLevelIntervalFrom() ==
+		 * entity.getLevelIntervalTo() ?
+		 * String.valueOf(entity.getLevelIntervalFrom()) :
+		 * String.valueOf(entity.getLevelIntervalFrom()) + "-" +
+		 * String.valueOf(entity.getLevelIntervalTo()));
+		 * 
+		 * resource.add(linkTo(UserController.class).slash(entity.getOwner().
+		 * getId()).withRel(String.valueOf(entity.getOwner().getId())));
+		 */
 		return resource;
 	}
 

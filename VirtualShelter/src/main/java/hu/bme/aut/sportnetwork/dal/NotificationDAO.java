@@ -2,18 +2,24 @@ package hu.bme.aut.sportnetwork.dal;
 
 import java.util.List;
 
-import org.springframework.data.domain.Sort;
-import org.springframework.stereotype.Repository;
-
-import hu.bme.aut.sportnetwork.entity.EventRequestNotification;
+import hu.bme.aut.sportnetwork.entity.FriendRequestNotification;
 import hu.bme.aut.sportnetwork.entity.Notification;
 import hu.bme.aut.sportnetwork.entity.SportEvent;
 import hu.bme.aut.sportnetwork.entity.User;
 
-@Repository
-public interface NotificationDAO extends AbstractRepository<Notification>, NotificationDAOCustom{
+public interface NotificationDAO {
 	
-	List<Notification> findByOwnerAndIsDeclined(User owner, Boolean isDeclined, Sort sort);
+	List<Notification> findByOwnerAndIsDeclined(User owner, Boolean isDeclined);
 
+	List<FriendRequestNotification> getFriendRequestSenders(User u);
 
+	boolean isUserAppliedToEvent(SportEvent e, User u);
+
+	void deleteEventRequest(SportEvent e, User u);
+
+	void deleteNotificationsOfEvent(long eventId);
+
+	FriendRequestNotification isFriendRequestBetween(User u1, User u2);
+
+	Notification save(Notification not);
 }

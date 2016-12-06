@@ -6,14 +6,12 @@ import hu.bme.aut.sportnetwork.api.RegistrationOperations;
 import hu.bme.aut.sportnetwork.api.SportNetworkException;
 import hu.bme.aut.sportnetwork.dal.UserDAO;
 import hu.bme.aut.sportnetwork.entity.Address;
-import hu.bme.aut.sportnetwork.entity.Rating;
 import hu.bme.aut.sportnetwork.entity.Sports;
 import hu.bme.aut.sportnetwork.entity.User;
 import hu.bme.aut.sportnetwork.rest.resources.UserArg;
 
 public class RegistrationOperationsImpl implements RegistrationOperations{
-	
-	@Autowired
+
 	UserDAO userRepository;
 
 	@Override
@@ -28,7 +26,7 @@ public class RegistrationOperationsImpl implements RegistrationOperations{
 		if (u != null) {
 			throw new SportNetworkException("EMAIL ALREADY EXISTS");
 		}
-		userRepository.saveNewUser((User.toUser(arg)));
+		// userRepository.saveNewUser((User.toUser(arg)));
 	}
 
 

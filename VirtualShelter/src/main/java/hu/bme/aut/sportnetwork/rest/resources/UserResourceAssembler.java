@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 
 import hu.bme.aut.sportnetwork.entity.Address;
 import hu.bme.aut.sportnetwork.entity.FriendStatus;
-import hu.bme.aut.sportnetwork.entity.Rating;
 import hu.bme.aut.sportnetwork.entity.Sports;
 import hu.bme.aut.sportnetwork.entity.User;
 import hu.bme.aut.sportnetwork.rest.UserController;
@@ -30,75 +29,57 @@ public class UserResourceAssembler extends
 	@Override
 	protected UserResource instantiateResource(User entity) {
 		UserResource resource = new UserResource();
-		resource.setAge(entity.getAge());
-
-		resource.setAddress(toAddress(entity.getAddress()));
-		resource.setDeleted(entity.getDeleted());
-		resource.setEmail(entity.getEmail());
-
-		resource.setInterest(toInterest(entity.getRatings()));
-
-		resource.setIntroduction(entity.getIntroduction());
-		resource.setName(entity.getName());
-
-		if (entity.getPhoneNumber() != null && !entity.getPhoneNumber().isEmpty()) {
-			resource.setPhoneNumber(entity.getPhoneNumber());
-		}
-
-		resource.setStatus(toStatus(entity.getFriendStatus()));
-
-		if (entity.getHasWarning()) {
-			resource.setWarning(entity.getWarningMessage());
-		}
+		/*
+		 * resource.setAge(entity.getAge());
+		 * 
+		 * resource.setAddress(toAddress(entity.getAddress()));
+		 * resource.setDeleted(entity.getDeleted());
+		 * resource.setEmail(entity.getEmail());
+		 * 
+		 * resource.setInterest(toInterest(entity.getRatings()));
+		 * 
+		 * resource.setIntroduction(entity.getIntroduction());
+		 * resource.setName(entity.getName());
+		 * 
+		 * if (entity.getPhoneNumber() != null &&
+		 * !entity.getPhoneNumber().isEmpty()) {
+		 * resource.setPhoneNumber(entity.getPhoneNumber()); }
+		 * 
+		 * resource.setStatus(toStatus(entity.getFriendStatus()));
+		 * 
+		 * if (entity.getHasWarning()) {
+		 * resource.setWarning(entity.getWarningMessage()); }
+		 */
 
 		return resource;
 	}
 
-	private List<InterestWrapper> toInterest(List<Rating> rl) {
-		List<InterestWrapper> ret = new ArrayList<>();
-
-		for (Rating r : rl) {
-			InterestWrapper w = new InterestWrapper();
-			w.setSport(r.getSport().toString());
-
-			double sum = r.getSumValue();
-			double number = r.getRateNumbers();
-
-			w.setRate(r.getRateNumbers() == 0 ? "NOT RATED" : String.valueOf(sum / number));
-
-			ret.add(w);
-		}
-
-		return ret;
-	}
-
-	private int toStatus(FriendStatus fs) {
-		switch (fs) {
-		case SELF:
-			return 1;
-		case FRIEND:
-			return 2;
-		case REQUEST_SENT:
-			return 3;
-		case REQUEST_RECEIVED:
-			return 4;
-		case NOT_FRIEND:
-			return 5;
-		case DECLINED:
-			return 6;
-
-		default:
-			return 0;
-		}
-	}
-
-	private Address toAddress(Address entity) {
-		Address a = new Address();
-		a.setAddress(entity.getAddress());
-		a.setCity(entity.getCity());
-		a.setCountry(entity.getCountry());
-		a.setZipCode(entity.getZipCode());
-		a.setProvince(entity.getProvince());
-		return a;
-	}
+	/*
+	 * private List<InterestWrapper> toInterest(List<Rating> rl) {
+	 * List<InterestWrapper> ret = new ArrayList<>();
+	 * 
+	 * for (Rating r : rl) { InterestWrapper w = new InterestWrapper();
+	 * w.setSport(r.getSport().toString());
+	 * 
+	 * double sum = r.getSumValue(); double number = r.getRateNumbers();
+	 * 
+	 * w.setRate(r.getRateNumbers() == 0 ? "NOT RATED" : String.valueOf(sum /
+	 * number));
+	 * 
+	 * ret.add(w); }
+	 * 
+	 * return ret; }
+	 * 
+	 * private int toStatus(FriendStatus fs) { switch (fs) { case SELF: return
+	 * 1; case FRIEND: return 2; case REQUEST_SENT: return 3; case
+	 * REQUEST_RECEIVED: return 4; case NOT_FRIEND: return 5; case DECLINED:
+	 * return 6;
+	 * 
+	 * default: return 0; } }
+	 * 
+	 * private Address toAddress(Address entity) { Address a = new Address();
+	 * a.setAddress(entity.getAddress()); a.setCity(entity.getCity());
+	 * a.setCountry(entity.getCountry()); a.setZipCode(entity.getZipCode());
+	 * a.setProvince(entity.getProvince()); return a; }
+	 */
 }
