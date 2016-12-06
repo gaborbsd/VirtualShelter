@@ -30,22 +30,27 @@ public class WrapperUtils {
 	}
 
 	public static void addComment(List<CommentWrapper> comments, Comment c) {
-		/*
-		 * UserLinkWrapper u = new UserLinkWrapper();
-		 * u.setId(c.getOwner().getId()); u.setName(c.getOwner().getName());
-		 * CommentWrapper w = new CommentWrapper();
-		 * w.setMessage(c.getMessage()); w.setId(c.getId());
-		 * w.setMine(c.getOwner().getName().equals(authOperation.
-		 * getLoggedInUserName())); w.setWriter(u); //
-		 * w.setDate(c.getDateOfComment()); comments.add(w);
-		 */
+
+		UserLinkWrapper u = new UserLinkWrapper();
+		u.setId(c.getUser().getId());
+		u.setName(c.getUser().getName());
+		CommentWrapper w = new CommentWrapper();
+		w.setMessage(c.getMessage());
+		w.setId(c.getId());
+		// w.setMine(c.getUser().getName().equals(authOperation.getLoggedInUserName()));
+		w.setMine(false);
+		w.setWriter(u);
+		w.setDate(c.getDate());
+		comments.add(w);
+
 	}
 
 	public static UserLinkWrapper toWrapper(User u) {
 		UserLinkWrapper wrapper = new UserLinkWrapper();
-		/*
-		 * wrapper.setId(u.getId()); wrapper.setName(u.getName());
-		 */
+
+		wrapper.setId(u.getId());
+		wrapper.setName(u.getName());
+
 		return wrapper;
 	}
 	

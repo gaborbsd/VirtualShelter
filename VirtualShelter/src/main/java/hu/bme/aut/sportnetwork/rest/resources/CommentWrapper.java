@@ -14,8 +14,8 @@ public class CommentWrapper {
 	
 	private boolean mine;
 	
-	/*@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
-	private Date date;*/
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	private Date date;
 
 	public UserLinkWrapper getWriter() {
 		return writer;
@@ -47,6 +47,14 @@ public class CommentWrapper {
 
 	public void setMine(boolean mine) {
 		this.mine = mine;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
 	}
 	
 	

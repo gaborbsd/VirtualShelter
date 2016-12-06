@@ -34,8 +34,7 @@ import hu.bme.aut.sportnetwork.rest.resources.RateUsersArg;
 import hu.bme.aut.sportnetwork.rest.resources.RateWrapper;
 
 public class SportEventOperationsImpl implements SportEventOperations {
-	
-	SportEventDAO sportEventRepository;
+
 	
 	UserDAO userRepository;
 	
@@ -49,21 +48,13 @@ public class SportEventOperationsImpl implements SportEventOperations {
 	AuthOperations authOperation;
 
 	@Autowired
-	SportEventRepository rep;
+	SportEventRepository sportEventRepository;
 
 	UserOperations userOperation;
 
-	@PostConstruct
-	public void init() {
-		sportEventRepository = new SportEventDAOImpl();
-	}
-
 	@Override
 	public List<SportEvent> findAllOpenedEvents() {
-		SportEvent s = new SportEvent();
-		s.setTitle("Alma");
-		rep.save(s);
-		return sportEventRepository.findByIsOpened(true);
+		return sportEventRepository.findByIsOpenedAndIsPublic(true, true);
 	}
 
 	@Override
@@ -115,7 +106,7 @@ public class SportEventOperationsImpl implements SportEventOperations {
 
 	@Override
 	public List<SportEvent> listPublicOpenedEvents() {
-		return sportEventRepository.findByIsPublic(true);
+		return sportEventRepository.findByIsOpenedAndIsPublic(true, true);
 	}
 
 	@Override
@@ -150,12 +141,12 @@ public class SportEventOperationsImpl implements SportEventOperations {
 
 
 	@Override
-	@Transactional
 	public SportEvent findById(long id) {
-		User user = authOperation.getLoggedInUser();
-		SportEvent ret = eagerFetchSportEvent(id);
-		setEventStatus(ret, user);
-		return ret;
+		/*
+		 * User user = authOperation.getLoggedInUser(); SportEvent ret =
+		 * eagerFetchSportEvent(id); setEventStatus(ret, user); return ret;
+		 */
+		return sportEventRepository.findOne(id);
 	}
 
 	@Override
@@ -192,7 +183,8 @@ public class SportEventOperationsImpl implements SportEventOperations {
 
 	@Override
 	public List<SportEvent> filterPublicEvents(FilterSportEventArg arg) throws Exception{
-		return sportEventRepository.filterPublic(toEventFilter(arg));
+		// return sportEventRepository.filterPublic(toEventFilter(arg));
+		return null;
 	}
 	
 	private SportEventFilter toEventFilter(FilterSportEventArg arg) {
@@ -339,29 +331,39 @@ public class SportEventOperationsImpl implements SportEventOperations {
 
 	@Override
 	public List<SportEvent> findFriendEvents() {
-		List<User> friends = userOperation.listFriends();
-		return sportEventRepository.findByOwnerInAndIsOpened(friends, true);
+		/*
+		 * List<User> friends = userOperation.listFriends(); return
+		 * sportEventRepository.findByOwnerInAndIsOpened(friends, true);
+		 */
+		return null;
 	}
 
 	@Override
 	public List<SportEvent> findMyClosedEvents() {
-		User user = authOperation.getLoggedInUser();
-		return sportEventRepository.findByMembersAndIsOpened(user, false);
+		/*
+		 * User user = authOperation.getLoggedInUser(); return
+		 * sportEventRepository.findByMembersAndIsOpened(user, false);
+		 */
+		return null;
 	}
 
 	@Override
 	public List<SportEvent> findMyEvents() {
-		User user = authOperation.getLoggedInUser();
-		return sportEventRepository.findByMembersAndIsOpened(user, true);
+		/*
+		 * User user = authOperation.getLoggedInUser(); return
+		 * sportEventRepository.findByMembersAndIsOpened(user, true);
+		 */
+		return null;
 	}
 
 	@Override
 	public List<SportEvent> findByTitle(String value) {
-		List<SportEvent> ret = sportEventRepository.findByTitleLike(makeLikeValue(value));
-		if (ret == null) {
-			ret = new ArrayList<>();
-		}
-		return ret;
+		/*
+		 * List<SportEvent> ret =
+		 * sportEventRepository.findByTitleLike(makeLikeValue(value)); if (ret
+		 * == null) { ret = new ArrayList<>(); } return ret;
+		 */
+		return null;
 	}
 
 	private String makeLikeValue(String value) {

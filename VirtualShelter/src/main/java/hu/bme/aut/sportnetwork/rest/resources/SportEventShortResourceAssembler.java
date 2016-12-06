@@ -26,26 +26,23 @@ ResourceAssemblerSupport<SportEvent, SportEventShortResource> {
 	@Override
 	protected SportEventShortResource instantiateResource(SportEvent entity) {
 		SportEventShortResource resource = new SportEventShortResource();
-		/*
-		 * resource.setEventId(entity.getId());
-		 * resource.setOwnerId(entity.getOwner().getId());
-		 * resource.setOwner(entity.getOwner().getName());
-		 * resource.setTitle(entity.getTitle());
-		 * resource.setDate(entity.getDate());
-		 * resource.setType(entity.getType());
-		 * resource.setCity(entity.getAddress().getCity());
-		 * resource.setMembers(String.valueOf(entity.getMemberSize()) + "/" +
-		 * String.valueOf(entity.getMaxSize()));
-		 * resource.setLevels(entity.getLevelIntervalFrom() ==
-		 * entity.getLevelIntervalTo() ?
-		 * String.valueOf(entity.getLevelIntervalFrom()) :
-		 * String.valueOf(entity.getLevelIntervalFrom()) + "-" +
-		 * String.valueOf(entity.getLevelIntervalTo()));
-		 * 
-		 * resource.add(linkTo(UserController.class).slash(entity.getOwner().
-		 * getId()).withRel(String.valueOf(entity.getOwner().getId())));
-		 */
+
+		resource.setEventId(entity.getId());
+		resource.setOwnerId(entity.getOwner().getId());
+		resource.setOwner(entity.getOwner().getName());
+		resource.setTitle(entity.getTitle());
+		resource.setDate(entity.getDate());
+		resource.setType(entity.getType());
+		resource.setCity(entity.getAddress().getCity());
+		resource.setMembers(String.valueOf(entity.getMembers().size()) + "/" + String.valueOf(entity.getMaxSize()));
+		resource.setLevels(entity.getLevelFrom() == entity.getLevelTo() ? String.valueOf(entity.getLevelFrom())
+				: String.valueOf(entity.getLevelFrom()) + "-" + String.valueOf(entity.getLevelTo()));
+
+		resource.add(linkTo(UserController.class).slash(entity.getOwner().getId())
+				.withRel(String.valueOf(entity.getOwner().getId())));
+
 		return resource;
 	}
 
 }
+
