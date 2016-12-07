@@ -1,10 +1,11 @@
 package hu.aut.bme.sportnetwork.api.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
-
-import javax.annotation.PostConstruct;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,12 +13,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import hu.bme.aut.sportnetwork.api.MessageOperations;
+import hu.bme.aut.sportnetwork.api.SportNetworkException;
 import hu.bme.aut.sportnetwork.auth.AuthOperations;
 import hu.bme.aut.sportnetwork.dal.ConversationReporitory;
-import hu.bme.aut.sportnetwork.dal.MessageDAO;
+import hu.bme.aut.sportnetwork.dal.MessageRepository;
 import hu.bme.aut.sportnetwork.dal.NotificationRepository;
 import hu.bme.aut.sportnetwork.dal.UserRepository;
-import hu.bme.aut.sportnetwork.dal.impl.MessageDAOImpl;
 import hu.bme.aut.sportnetwork.entity.Conversation;
 import hu.bme.aut.sportnetwork.entity.Message;
 import hu.bme.aut.sportnetwork.entity.User;
@@ -33,76 +34,87 @@ public class MessageOperationsImpl implements MessageOperations {
 	@Autowired
 	private NotificationRepository notificationRepositroy;
 
-	private MessageDAO messageRepository;
+	@Autowired
+	private MessageRepository messageRepository;
 
 	@Autowired
 	private AuthOperations authOperation;
 
 	private static Logger LOGGER = LoggerFactory.getLogger(MessageOperations.class);
 
-	@PostConstruct
-	public void init() {
-
-		messageRepository = new MessageDAOImpl();
-
-	}
-
 	@Override
 	public List<Conversation> listConversatinsByUser() {
-		User writer = authOperation.getLoggedInUser();
-		return conversationRepository.findByParticipants(writer.getName());
+		return conversationRepository.findByParticipants(authOperation.getLoggedInUserName());
 	}
 
 	@Override
 	public List<Message> listMessagesbyConversation(long conversationId) {
-		Conversation c = conversationRepository.findOne(conversationId);
-		return messageRepository.findByConversation(c);
+		Conversation c = conversationRepository.findByMessages(conversationId);
+		return c.getMessages();
 	}
 
 	@Override
 	@Transactional
-	public List<Message> writeToConversation(long conversationId, String message) {
+	public List<Message> writeToConversation(long conversationId, String message) throws SportNetworkException {
 		User writer = authOperation.getLoggedInUser();
 		
+		if (!writer.getConversations().stream().anyMatch(c -> c.getId() == conversationId)) {
+			throw new SportNetworkException("NOT ALLOWED TO WRITE HERE");
+		}
+
 		Conversation c = conversationRepository.findOne(conversationId);
+
 		
 		return writeToConversation(writer, c, message);
 	}
 
 	@Override
 	public Conversation getConversationWithUser(String userName) {
-		/*
-		 * User writer = authOperation.getLoggedInUser(); User writeTo =
-		 * userRepositroy.findByName(userName); Conversation c =
-		 * conversationRepository.getByUser1AndUser2(writer, writeTo);
-		 * 
-		 * if (c == null) { c = createNewConversation(writer, writeTo); } return
-		 * c;
-		 */
-		return null;
+
+		User writer = authOperation.getLoggedInUser();
+		User writeTo = userRepositroy.findByName(userName);
+
+		Optional<Conversation> conv = writer.getConversations().stream()
+				.filter(c -> containsConversation(writeTo.getConversations(), c)).findFirst();
+		
+		if (conv.isPresent()) {
+			return conv.get();
+		}
+
+		return createNewConversation(writer, writeTo);
 	}
 
-		private Conversation createNewConversation(User writer, User writeTo) {
+	private boolean containsConversation(List<Conversation> conversations, Conversation conv) {
+		return conversations.stream().anyMatch(c -> c.getId() == conv.getId() && c.getMemberSize() == 2);
+	}
+
+	private Conversation createNewConversation(User writer, User writeTo) {
 		Conversation c = null;
-		/*
-		 * c = new Conversation(); c.setUser1(writer); c.setUser2(writeTo);
-		 * c.setActive(false); c.setLastSendTime(new Date());
-		 */
-			c = conversationRepository.save(c);
-			return c;
-		}
+
+		c.getParticipants().add(writer);
+		c.getParticipants().add(writeTo);
+		c.setIsActive(false);
+		c.setLastSendTime(new Date());
+		c.setMemberSize(2);
+		c = conversationRepository.save(c);
+
+		return c;
+	}
 	
 	private List<Message> writeToConversation(User writer, Conversation c, String message) {
 		Date sendTime = new Date();
 		
 		Message m = new Message();
-		/*
-		 * m.setSender(writer); m.setMessage(message); m.setSendTime(sendTime);
-		 * m.setConversation(c);
-		 */
 		
+		m.setWriter(writer);
+		m.setMessage(message);
+		m.setSendTime(sendTime);
+		m.setConversation(c);
+
 		messageRepository.save(m);
 		
+		return conversationRepository.findByMessages(c.getId()).getMessages();
+
 		/*
 		 * Notification not = new MessageNotification(writer, c);
 		 * 
@@ -126,10 +138,6 @@ public class MessageOperationsImpl implements MessageOperations {
 		/*
 		 * if (!c.isActive()) { c.setActive(true); }
 		 */
-		
-		Conversation co = conversationRepository.save(c);
-		
-		return listMessagesbyConversation(co.getId());
 	}
 
 }

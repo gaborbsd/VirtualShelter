@@ -22,12 +22,11 @@ public class MessageResourceAssembler extends ResourceAssemblerSupport<Message, 
 	@Override
 	public MessageResource instantiateResource(Message entity) {
 		MessageResource resource = new MessageResource();
-		/*
-		 * resource.setMessage(entity.getMessage());
-		 * resource.setDate(entity.getSendTime());
-		 * resource.setSender(entity.getSender().getName());
-		 */
 		
+		resource.setMessage(entity.getMessage());
+		resource.setDate(entity.getSendTime());
+		resource.setSender(entity.getWriter().getName());
+
 		return resource;
 	}
 

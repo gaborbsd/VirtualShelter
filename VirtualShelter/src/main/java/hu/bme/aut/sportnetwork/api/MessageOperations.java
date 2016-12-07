@@ -11,7 +11,7 @@ public interface MessageOperations {
 	
 	public List<Message> listMessagesbyConversation(long conversationId);
 	
-	public List<Message> writeToConversation(long conversationId, String message);
+	public List<Message> writeToConversation(long conversationId, String message) throws SportNetworkException;
 	
 	public Conversation getConversationWithUser(String userName);
 }

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import hu.bme.aut.sportnetwork.api.MessageOperations;
+import hu.bme.aut.sportnetwork.api.SportNetworkException;
 import hu.bme.aut.sportnetwork.entity.Conversation;
 import hu.bme.aut.sportnetwork.entity.Message;
 import hu.bme.aut.sportnetwork.rest.resources.ConversationResource;
@@ -56,7 +57,7 @@ public class MessageController {
 	}
 	
 	@RequestMapping(value="write", method=RequestMethod.POST) 
-	ResponseEntity<List<MessageResource>> writeMessage(@RequestBody WriteMessageArg arg) {
+	ResponseEntity<List<MessageResource>> writeMessage(@RequestBody WriteMessageArg arg) throws SportNetworkException {
 		List<Message> messages = messageOperation.writeToConversation(arg.getConversationId(), arg.getMessage());
 		List<MessageResource> resourceList = messageResourceAssembler.toResources(messages);
 		return new ResponseEntity<List<MessageResource>>(resourceList, HttpStatus.OK);

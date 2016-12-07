@@ -1,7 +1,9 @@
 package hu.bme.aut.sportnetwork.entity;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.neo4j.ogm.annotation.GraphId;
@@ -19,11 +21,13 @@ public class Conversation {
 	private Set<User> participants;
 
 	@Relationship(type = RelationShipTypes.MESSAGE_TYPE, direction = Relationship.INCOMING)
-	private Set<Message> messages;
+	private List<Message> messages;
 
 	private boolean isActive;
 
 	private String lastMessage;
+
+	private int memberSize;
 
 	@DateString("yy-MM-dd HH:mm:ss")
 	private Date lastSendTime;
@@ -71,15 +75,23 @@ public class Conversation {
 		this.lastSendTime = lastSendTime;
 	}
 
-	public Set<Message> getMessages() {
+	public List<Message> getMessages() {
 		if (messages == null) {
-			messages = new HashSet<>();
+			messages = new ArrayList<>();
 		}
 		return messages;
 	}
 
-	public void setMessages(Set<Message> messages) {
+	public void setMessages(List<Message> messages) {
 		this.messages = messages;
+	}
+
+	public int getMemberSize() {
+		return memberSize;
+	}
+
+	public void setMemberSize(int memberSize) {
+		this.memberSize = memberSize;
 	}
 
 }
