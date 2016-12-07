@@ -14,13 +14,13 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
-import hu.bme.aut.sportnetwork.dal.UserDAO;
+import hu.bme.aut.sportnetwork.dal.UserRepository;
 import hu.bme.aut.sportnetwork.entity.User;
 
 public class SportnetworkAuthenticationProvider implements AuthenticationProvider {
 	
 	@Autowired
-	UserDAO userRepository;
+	UserRepository userRepository;
 
 	static Logger LOGGER = LoggerFactory.getLogger(SportnetworkAuthenticationProvider.class);
 

@@ -1,27 +1,20 @@
 package hu.bme.aut.sportnetwork.auth;
 
-import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
-
-import javax.annotation.PostConstruct;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 
-import hu.bme.aut.sportnetwork.dal.UserDAO;
-import hu.bme.aut.sportnetwork.dal.impl.UserDAOImpl;
+import hu.bme.aut.sportnetwork.dal.UserRepository;
 import hu.bme.aut.sportnetwork.entity.User;
 
 public class AuthOperations {
 
-	private UserDAO userRepository;
-
-	@PostConstruct
-	public void init() {
-		userRepository = new UserDAOImpl();
-	}
+	@Autowired
+	private UserRepository userRepository;
 	
 	final private static Character[] hexArray = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D',
 			'E', 'F' };
@@ -34,7 +27,7 @@ public class AuthOperations {
 		}
 		return u;
 	}
-	
+
 	public String getLoggedInUserName() {
 		return SecurityContextHolder.getContext().getAuthentication().getName();
 	}

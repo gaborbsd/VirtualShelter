@@ -2,6 +2,7 @@ package hu.aut.bme.sportnetwork.api.impl;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import javax.annotation.PostConstruct;
 
@@ -12,25 +13,25 @@ import org.springframework.transaction.annotation.Transactional;
 
 import hu.bme.aut.sportnetwork.api.MessageOperations;
 import hu.bme.aut.sportnetwork.auth.AuthOperations;
-import hu.bme.aut.sportnetwork.dal.ConversationDAO;
+import hu.bme.aut.sportnetwork.dal.ConversationReporitory;
 import hu.bme.aut.sportnetwork.dal.MessageDAO;
-import hu.bme.aut.sportnetwork.dal.NotificationDAO;
-import hu.bme.aut.sportnetwork.dal.UserDAO;
-import hu.bme.aut.sportnetwork.dal.impl.ConversationDAOImpl;
+import hu.bme.aut.sportnetwork.dal.NotificationRepository;
+import hu.bme.aut.sportnetwork.dal.UserRepository;
 import hu.bme.aut.sportnetwork.dal.impl.MessageDAOImpl;
-import hu.bme.aut.sportnetwork.dal.impl.NotificationDAOImpl;
-import hu.bme.aut.sportnetwork.dal.impl.UserDAOImpl;
 import hu.bme.aut.sportnetwork.entity.Conversation;
 import hu.bme.aut.sportnetwork.entity.Message;
 import hu.bme.aut.sportnetwork.entity.User;
 
 public class MessageOperationsImpl implements MessageOperations {
 	
-	private ConversationDAO conversationRepository;
+	@Autowired
+	private ConversationReporitory conversationRepository;
 
-	private UserDAO userRepositroy;
+	@Autowired
+	private UserRepository userRepositroy;
 
-	private NotificationDAO notificationRepositroy;
+	@Autowired
+	private NotificationRepository notificationRepositroy;
 
 	private MessageDAO messageRepository;
 
@@ -42,12 +43,6 @@ public class MessageOperationsImpl implements MessageOperations {
 	@PostConstruct
 	public void init() {
 
-		conversationRepository = new ConversationDAOImpl();
-
-		userRepositroy = new UserDAOImpl();
-
-		notificationRepositroy = new NotificationDAOImpl();
-
 		messageRepository = new MessageDAOImpl();
 
 	}
@@ -55,8 +50,7 @@ public class MessageOperationsImpl implements MessageOperations {
 	@Override
 	public List<Conversation> listConversatinsByUser() {
 		User writer = authOperation.getLoggedInUser();
-		List<Conversation> ret = conversationRepository.findByUserAndActive(writer);
-		return ret;
+		return conversationRepository.findByParticipants(writer.getName());
 	}
 
 	@Override
@@ -77,14 +71,15 @@ public class MessageOperationsImpl implements MessageOperations {
 
 	@Override
 	public Conversation getConversationWithUser(String userName) {
-		User writer = authOperation.getLoggedInUser();
-		User writeTo = userRepositroy.findByName(userName);
-		Conversation c = conversationRepository.getByUser1AndUser2(writer, writeTo);
-		
-		if (c == null) {
-			c = createNewConversation(writer, writeTo);
-		} 
-		return c;
+		/*
+		 * User writer = authOperation.getLoggedInUser(); User writeTo =
+		 * userRepositroy.findByName(userName); Conversation c =
+		 * conversationRepository.getByUser1AndUser2(writer, writeTo);
+		 * 
+		 * if (c == null) { c = createNewConversation(writer, writeTo); } return
+		 * c;
+		 */
+		return null;
 	}
 
 		private Conversation createNewConversation(User writer, User writeTo) {

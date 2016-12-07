@@ -49,8 +49,8 @@ public class SportEvent {
 	@Relationship(type = RelationShipTypes.COMMENT_TYPE, direction = Relationship.INCOMING)
 	private List<Comment> comments;
 
-	@Relationship(type = RelationShipTypes.NOTIFICATION_NEWS_TYPE, direction = Relationship.INCOMING)
-	private Set<Notification> notifications;
+	@Relationship(type = RelationShipTypes.EVENT_REQUEST_TYPE, direction = Relationship.INCOMING)
+	private List<User> applications;
 
 	@Transient
 	private EventStatus status;
@@ -173,15 +173,15 @@ public class SportEvent {
 		this.comments = comments;
 	}
 
-	public Set<Notification> getNotifications() {
-		if (notifications == null) {
-			notifications = new HashSet<>();
+	public List<User> getApplications() {
+		if (applications == null) {
+			applications = new ArrayList<>();
 		}
-		return notifications;
+		return applications;
 	}
 
-	public void setNotifications(Set<Notification> notifications) {
-		this.notifications = notifications;
+	public void setApplications(List<User> applications) {
+		this.applications = applications;
 	}
 
 	public EventStatus getStatus() {

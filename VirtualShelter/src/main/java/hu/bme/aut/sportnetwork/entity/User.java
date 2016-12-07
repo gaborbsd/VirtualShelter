@@ -8,6 +8,11 @@ import java.util.Set;
 import org.neo4j.ogm.annotation.GraphId;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
+import org.neo4j.ogm.annotation.Transient;
+
+import hu.bme.aut.sportnetwork.auth.AuthOperations;
+import hu.bme.aut.sportnetwork.auth.Roles;
+import hu.bme.aut.sportnetwork.rest.resources.UserArg;
 
 @NodeEntity
 public class User {
@@ -55,14 +60,19 @@ public class User {
 	private Set<Friend> friends;
 
 	@Relationship(type = RelationShipTypes.MEMBER_TYPE, direction = Relationship.OUTGOING)
-	private Set<Conversation> conversations;
+	private List<Conversation> conversations;
 
-	@Relationship(type = RelationShipTypes.OWNER_TYPE, direction = Relationship.INCOMING)
-	private Set<Notification> notifications;
+	@Relationship(type = RelationShipTypes.RATING_TYPE, direction = Relationship.OUTGOING)
+	private List<Rating> ratings;
 
-	@Relationship(type = RelationShipTypes.NOTIFICATION_SENDER_TYPE, direction = Relationship.OUTGOING)
-	private Set<Notification> sendNotification;
+	@Relationship(type = RelationShipTypes.FRIEND_REQUEST_TYPE, direction = Relationship.DIRECTION)
+	private List<FriendRequest> friendRequests;
 
+	@Relationship(type = RelationShipTypes.EVENT_REQUEST_TYPE, direction = Relationship.OUTGOING)
+	private List<SportEvent> eventApplications;
+
+	@Transient
+	private FriendStatus friendStatus;
 
 	public Long getId() {
 		return id;
@@ -128,7 +138,7 @@ public class User {
 		this.hasNotification = hasNotification;
 	}
 
-	public boolean isHasWarning() {
+	public boolean getHasWarning() {
 		return hasWarning;
 	}
 
@@ -180,7 +190,13 @@ public class User {
 	}
 
 	public List<String> getRoles() {
-		return new ArrayList<>();
+		List<String> ret = new ArrayList<>();
+		if (isAdmin) {
+			ret.add(Roles.ADMIN);
+		}
+		ret.add(Roles.USER);
+		return ret;
+
 	}
 
 	public String getCity() {
@@ -229,36 +245,94 @@ public class User {
 		this.friends = friends;
 	}
 
-	public Set<Conversation> getConversations() {
+	public List<Conversation> getConversations() {
 		if (conversations == null) {
-			conversations = new HashSet<>();
+			conversations = new ArrayList<>();
 		}
 		return conversations;
 	}
 
-	public void setConversations(Set<Conversation> conversations) {
+	public void setConversations(List<Conversation> conversations) {
 		this.conversations = conversations;
 	}
 
-	public Set<Notification> getNotifications() {
-		if (notifications == null) {
-			notifications = new HashSet<>();
+	public List<Rating> getRatings() {
+		if (ratings == null) {
+			return new ArrayList<>();
 		}
-		return notifications;
+		return ratings;
 	}
 
-	public void setNotifications(Set<Notification> notifications) {
-		this.notifications = notifications;
-	}
-
-	public Set<Notification> getSendNotification() {
-		if (sendNotification == null) {
-			sendNotification = new HashSet<>();
+	public void setRatings(List<Rating> ratings) {
+		if (ratings == null) {
+			ratings = new ArrayList<Rating>();
 		}
-		return sendNotification;
+		this.ratings = ratings;
 	}
 
-	public void setSendNotification(Set<Notification> sendNotification) {
-		this.sendNotification = sendNotification;
+	public List<FriendRequest> getFriendRequests() {
+		if (friendRequests == null) {
+			friendRequests = new ArrayList<>();
+		}
+		return friendRequests;
 	}
+
+	public void setFriendRequests(List<FriendRequest> friendRequests) {
+		this.friendRequests = friendRequests;
+	}
+
+	public List<SportEvent> getEventApplications() {
+		if (eventApplications == null) {
+			eventApplications = new ArrayList<>();
+		}
+		return eventApplications;
+	}
+
+	public void setEventApplications(List<SportEvent> eventApplications) {
+		this.eventApplications = eventApplications;
+	}
+
+	public FriendStatus getFriendStatus() {
+		return friendStatus;
+	}
+
+	public void setFriendStatus(FriendStatus friendStatus) {
+		this.friendStatus = friendStatus;
+	}
+
+	public static User toUser(UserArg arg) {
+		User u = new User();
+		u.setAddress(arg.getAddress().getAddress());
+		u.setCity(arg.getAddress().getCity());
+		u.setAdmin(false);
+		u.setAge(arg.getAge());
+		u.setDeleted(false);
+		u.setEmail(arg.getEmail());
+		u.setHasNotification(false);
+		u.setHasWarning(false);
+		u.setIntroduction(arg.getIntroduction());
+		u.setName(arg.getName());
+		u.setPhoneNumber(arg.getPhoneNumber());
+		u.setPassword(arg.getPassword());
+		arg.getInterest().forEach(i -> setRating(u, i));
+		setPassword(u);
+		return u;
+
+	}
+
+	private static void setRating(User u, Sports i) {
+		Rating r = new Rating();
+		r.setUser(u);
+		r.setSumValue(0);
+		r.setRateNumbers(0);
+		r.setSport(i);
+	}
+
+	private static void setPassword(User u) {
+		byte[] salt = AuthOperations.getSalt();
+		String securePassword = AuthOperations.get_SHA_1_SecurePassword(u.getPassword(), salt);
+		u.setPassword(securePassword);
+		u.setSalt(AuthOperations.toHexString(salt));
+	}
+
 }

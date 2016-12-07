@@ -27,6 +27,7 @@ public class SportnetworkConfig extends Neo4jConfiguration {
 		return super.getSession();
 	}
 
+	@Bean
 	public org.neo4j.ogm.config.Configuration getConfig() {
 		org.neo4j.ogm.config.Configuration config = new org.neo4j.ogm.config.Configuration();
 		config.driverConfiguration().setDriverClassName("org.neo4j.ogm.drivers.http.driver.HttpDriver")

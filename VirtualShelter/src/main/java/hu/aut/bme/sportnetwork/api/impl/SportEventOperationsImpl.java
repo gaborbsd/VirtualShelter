@@ -17,13 +17,10 @@ import hu.bme.aut.sportnetwork.auth.AuthOperations;
 import hu.bme.aut.sportnetwork.dal.AddressRepository;
 import hu.bme.aut.sportnetwork.dal.CommentDAO;
 import hu.bme.aut.sportnetwork.dal.FriendShipDAO;
-import hu.bme.aut.sportnetwork.dal.NotificationDAO;
-import hu.bme.aut.sportnetwork.dal.SportEventDAO;
+import hu.bme.aut.sportnetwork.dal.NotificationRepository;
 import hu.bme.aut.sportnetwork.dal.SportEventRepository;
-import hu.bme.aut.sportnetwork.dal.UserDAO;
 import hu.bme.aut.sportnetwork.dal.UserRepository;
 import hu.bme.aut.sportnetwork.dal.impl.RateParam;
-import hu.bme.aut.sportnetwork.dal.impl.SportEventDAOImpl;
 import hu.bme.aut.sportnetwork.entity.Address;
 import hu.bme.aut.sportnetwork.entity.Comment;
 import hu.bme.aut.sportnetwork.entity.EventStatus;
@@ -49,7 +46,8 @@ public class SportEventOperationsImpl implements SportEventOperations {
 	
 	FriendShipDAO friendShipRepository;
 
-	NotificationDAO notificationRepositroy;
+	@Autowired
+	NotificationRepository notificationRepositroy;
 	
 	@Autowired
 	AuthOperations authOperation;
@@ -68,7 +66,7 @@ public class SportEventOperationsImpl implements SportEventOperations {
 	@Transactional
 	public SportEvent create(SportEvent e) {
 
-		User owner = userRepository.findByName("Andras");
+		User owner = authOperation.getLoggedInUser();
 		Address address = addressRepository.findByCountryAndCityAndAddress(e.getAddress().getCountry(),
 				e.getAddress().getCity(), e.getAddress().getAddress());
 
@@ -80,7 +78,10 @@ public class SportEventOperationsImpl implements SportEventOperations {
 		e.getMembers().add(owner);
 		e.setIsOpened(true);
 
-		return sportEventRepository.save(e);
+		SportEvent newEvent = sportEventRepository.save(e);
+
+		setEventStatus(newEvent, owner);
+		return newEvent;
 		/*
 		 * List<FriendShip> usersToNotify =
 		 * friendShipRepository.findByListeningUser(owner);
@@ -89,7 +90,7 @@ public class SportEventOperationsImpl implements SportEventOperations {
 		 * ? f.getUser2() : f.getUser1(), owner, newEvent,
 		 * EventSimpleNotification.NEW_EVENT));
 		 */
-		// newEvent.setStatus(EventStatus.OWNER);
+
 	}
 
 	@Override
@@ -153,11 +154,7 @@ public class SportEventOperationsImpl implements SportEventOperations {
 
 	@Override
 	public SportEvent findById(long id) {
-		/*
-		 * User user = authOperation.getLoggedInUser(); SportEvent ret =
-		 * eagerFetchSportEvent(id); setEventStatus(ret, user); return ret;
-		 */
-		User user = userRepository.findByName("Andras");
+		User user = authOperation.getLoggedInUser();
 		SportEvent event = sportEventRepository.findById(id);
 		setEventStatus(event, user);
 		return event;
@@ -222,7 +219,7 @@ public class SportEventOperationsImpl implements SportEventOperations {
 			event.setStatus(EventStatus.OWNER);
 		} else if (event.getMembers().contains(user)) {
 			event.setStatus(EventStatus.MEMBER);
-		} else if (event.getNotifications().stream().anyMatch(n -> isMatch(n, user))) {
+		} else if (event.getApplications().stream().anyMatch(a -> a.getName().equals(user.getName()))) {
 			event.setStatus(EventStatus.APPLIED);
 		} else {
 			event.setStatus(EventStatus.NOT_MEMBER);
@@ -230,18 +227,12 @@ public class SportEventOperationsImpl implements SportEventOperations {
 
 	}
 
-	private boolean isMatch(Notification n, User user) {
-		User u = n.getSender();
-		u.getNotifications().forEach(ne -> System.out.println(ne.getOwner().getName()));
-		return n.getType().equals(NotificationType.EVENT_REQUEST) && n.getSender().getName().equals(user.getName());
-	}
-
 	@Override
 	@Transactional
 	public SportEvent cancelEventRequest(long eventID) {
 		User canceler = authOperation.getLoggedInUser();
 		SportEvent event = eagerFetchSportEvent(eventID);
-		notificationRepositroy.deleteEventRequest(event, canceler);
+		// notificationRepositroy.deleteEventRequest(event, canceler);
 		// event.setStatus(EventStatus.NOT_MEMBER);
 		return event;
 	}

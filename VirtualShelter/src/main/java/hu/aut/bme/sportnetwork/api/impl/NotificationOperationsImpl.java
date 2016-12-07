@@ -9,20 +9,20 @@ import hu.bme.aut.sportnetwork.api.NotificationOperations;
 import hu.bme.aut.sportnetwork.api.SportNetworkException;
 import hu.bme.aut.sportnetwork.api.UserOperations;
 import hu.bme.aut.sportnetwork.auth.AuthOperations;
-import hu.bme.aut.sportnetwork.dal.NotificationDAO;
-import hu.bme.aut.sportnetwork.dal.UserDAO;
-import hu.bme.aut.sportnetwork.entity.FriendRequestNotification;
+import hu.bme.aut.sportnetwork.dal.NotificationRepository;
+import hu.bme.aut.sportnetwork.dal.UserRepository;
 import hu.bme.aut.sportnetwork.entity.Notification;
-import hu.bme.aut.sportnetwork.entity.User;
 
 public class NotificationOperationsImpl implements NotificationOperations {
 
-	private NotificationDAO notificationRepositroy;
+	@Autowired
+	private NotificationRepository notificationRepositroy;
 	
 	@Autowired
 	private AuthOperations authOperations;
 
-	private UserDAO userRepository;
+	@Autowired
+	private UserRepository userRepository;
 
 	private UserOperations userOperation;
 

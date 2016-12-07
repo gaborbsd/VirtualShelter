@@ -63,19 +63,35 @@ CREATE
 CREATE (n1:Notification {isDeclined: false, sendTime: '2016-11-12 18:10:45', type: 'FRIEND_REQUEST'})
 CREATE
     (n1)-[:OWNER]->(A),
-    (F)-[:SENT]->(n1)
+    (F)-[:SENT]->(n1),
+    (F)-[:FRIEND_REQUEST]->(A)
 CREATE (n2:Notification {isDeclined: false, sendTime: '2016-11-12 18:10:45', type: 'FRIEND_REQUEST'})
 CREATE
     (n2)-[:OWNER]->(C),
-    (A)-[:SENT]->(n2)
+    (A)-[:SENT]->(n2),
+    (A)-[:FRIEND_REQUEST]->(C)
 CREATE (n3:Notification {isDeclined: false, sendTime: '2016-11-13 19:10:45', type: 'EVENT_REQUEST'})
 CREATE
     (n3)-[:OWNER]->(D),
     (A)-[:SENT]->(n3),
-    (n3)-[:NEWS]->(k1)
+    (n3)-[:NEWS]->(k1),
+    (A)-[:APPLIED]->(k1)
 CREATE (n4:Notification {isDeclined: false, sendTime: '2016-11-13 19:10:45', type: 'EVENT_REQUEST'})
 CREATE
     (n4)-[:OWNER]->(B),
     (E)-[:SENT]->(n4),
-    (n4)-[:NEWS]->(f1)
+    (n4)-[:NEWS]->(f1),
+    (E)-[:APPLIED]->(f1)
+CREATE (r1:Rating {sport: 'TENNIS', rateNumbers: 3, sumValue: 23})
+CREATE
+    (A)-[:RATING]->(r1)
+CREATE (r2:Rating {sport: 'HANDBALL', rateNumbers: 0, sumValue: 0})
+CREATE
+    (A)-[:RATING]->(r2)
+CREATE (r3:Rating {sport: 'FOOTBALL', rateNumbers: 1, sumValue: 5})
+CREATE
+    (A)-[:RATING]->(r3)
+CREATE (r4:Rating {sport: 'FOOTBALL', rateNumbers: 1, sumValue: 3})
+CREATE
+    (D)-[:RATING]->(r4)
 

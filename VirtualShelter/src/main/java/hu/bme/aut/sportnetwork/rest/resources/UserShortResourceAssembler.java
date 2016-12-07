@@ -23,17 +23,19 @@ public class UserShortResourceAssembler extends ResourceAssemblerSupport<User, U
 	protected UserShortResource instantiateResource(User entity) {
 		UserShortResource ret = new UserShortResource();
 
-		/*
-		 * ret.setAge(entity.getAge());
-		 * ret.setCity(entity.getAddress().getCity());
-		 * ret.setUserId(entity.getId()); ret.setName(entity.getName());
-		 * ret.setWarned(entity.getHasWarning());
-		 * 
-		 * StringBuilder b = new StringBuilder(" "); for (int i = 0; i <
-		 * entity.getRatings().size() && i < 3; i++) {
-		 * b.append(entity.getRatings().get(i).getSport().toString());
-		 * b.append(" "); } ret.setInterest(b.toString());
-		 */
+		ret.setAge(entity.getAge());
+		ret.setCity(entity.getCity());
+		ret.setUserId(entity.getId());
+		ret.setName(entity.getName());
+		ret.setWarned(entity.getHasWarning());
+
+		StringBuilder b = new StringBuilder(" ");
+		for (int i = 0; i < entity.getRatings().size() && i < 3; i++) {
+			b.append(entity.getRatings().get(i).getSport().toString());
+			b.append(" ");
+		}
+		ret.setInterest(b.toString());
+
 		return ret;
 	}
 

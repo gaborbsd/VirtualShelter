@@ -4,7 +4,6 @@ import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 import org.springframework.stereotype.Component;
 
 import hu.bme.aut.sportnetwork.entity.Notification;
-import hu.bme.aut.sportnetwork.entity.FriendRequestNotification;
 import hu.bme.aut.sportnetwork.rest.NotificationController;
 
 @Component

@@ -2,7 +2,7 @@ package hu.bme.aut.sportnetwork.api;
 
 import java.util.List;
 
-import hu.bme.aut.sportnetwork.entity.FriendRequestNotification;
+import hu.bme.aut.sportnetwork.entity.Notification;
 import hu.bme.aut.sportnetwork.entity.User;
 import hu.bme.aut.sportnetwork.rest.resources.UserArg;
 
@@ -22,7 +22,7 @@ public interface UserOperations {
 
 	User getCurrent();
 
-	User friendAccept(User accepter, User friend, FriendRequestNotification not);
+	User friendAccept(User accepter, User friend, Notification not);
 
 	User cancelFriendRequest(String name) throws SportNetworkException;
 

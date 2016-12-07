@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 import hu.bme.aut.sportnetwork.auth.AuthOperations;
 import hu.bme.aut.sportnetwork.entity.Conversation;
+import hu.bme.aut.sportnetwork.entity.User;
 import hu.bme.aut.sportnetwork.rest.MessageController;
 
 @Component
@@ -27,15 +28,16 @@ public class ConversationResourceAssembler extends ResourceAssemblerSupport<Conv
 	@Override
 	public ConversationResource instantiateResource(Conversation entity) {
 		ConversationResource resource = new ConversationResource();
-		/*
-		 * resource.setDate(entity.getLastSendTime());
-		 * resource.setMessage(entity.getLastMessage());
-		 * resource.setPublicId(entity.getId());
-		 * resource.setUserName(entity.getUser1().getName().equals(
-		 * authOperations.getLoggedInUserName()) ? entity.getUser2().getName() :
-		 * entity.getUser1().getName());
-		 */
 		
+		resource.setDate(entity.getLastSendTime());
+		resource.setMessage(entity.getLastMessage());
+		resource.setPublicId(entity.getId());
+		for (User u : entity.getParticipants()) {
+			if (!u.getName().equals(authOperations.getLoggedInUserName())) {
+				resource.setUserName(u.getName());
+			}
+		}
+
 		return resource;
 	}
 
