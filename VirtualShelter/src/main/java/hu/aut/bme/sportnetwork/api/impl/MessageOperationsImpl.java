@@ -89,7 +89,7 @@ public class MessageOperationsImpl implements MessageOperations {
 	}
 
 	private Conversation createNewConversation(User writer, User writeTo) {
-		Conversation c = null;
+		Conversation c = new Conversation();
 
 		c.getParticipants().add(writer);
 		c.getParticipants().add(writeTo);

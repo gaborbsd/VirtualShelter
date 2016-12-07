@@ -12,7 +12,7 @@ import hu.bme.aut.sportnetwork.entity.Message;
 @Repository
 public interface ConversationReporitory extends GraphRepository<Conversation> {
 
-	@Query("MATCH (user:User {name: {0}})-[:MEMBER]->(c:Conversation) WITH c MATCH p=(c)<-[:MEMBER*0..1]-() RETURN p ORDER BY c.lastSendTime")
+	@Query("MATCH (user:User {name: {0}})-[:MEMBER]->(c:Conversation) WITH c MATCH p=(c {isActive: true})<-[:MEMBER*0..1]-() RETURN p ORDER BY c.lastSendTime")
 	List<Conversation> findByParticipants(String userName);
 
 	@Query("MATCH (n:Conversation) WHERE id(n) = {0} WITH n MATCH (n)-[m:WROTE_TO]-(u) RETURN n,m,u ORDER BY m.sendTime DESC")

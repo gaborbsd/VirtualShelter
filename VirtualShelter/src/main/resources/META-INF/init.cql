@@ -47,14 +47,14 @@ CREATE
     (E)-[:FRIEND {listenToNotifications: true}]->(A),
     (G)-[:FRIEND {listenToNotifications: true}]->(F),
     (F)-[:FRIEND {listenToNotifications: true}]->(G)
-CREATE (c1:Conversation {isActive: true, lastMessage: 'Mizu?', lastSendTime: '2016-08-20 16:00:00'})
+CREATE (c1:Conversation {isActive: true, memberSize: 2, lastMessage: 'Mizu?', lastSendTime: '2016-08-20 16:00:00'})
 CREATE
     (A)-[:MEMBER]->(c1),
     (B)-[:MEMBER]->(c1),
     (A)-[:WROTE_TO {message: 'Csa', sendTime:'2016-08-18 10:00:00'}]->(c1),
     (B)-[:WROTE_TO {message: 'Csa', sendTime:'2016-08-18 12:00:00'}]->(c1),
     (A)-[:WROTE_TO {message: 'Mizu?', sendTime:'2016-08-20 16:00:00'}]->(c1)
-CREATE (c2:Conversation {isActive: true, lastMessage: 'Szeva', lastSendTime: '2016-08-18 14:00:00'})
+CREATE (c2:Conversation {isActive: true, memberSize: 2, lastMessage: 'Szeva', lastSendTime: '2016-08-18 14:00:00'})
 CREATE
     (A)-[:MEMBER]->(c2),
     (C)-[:MEMBER]->(c2),
