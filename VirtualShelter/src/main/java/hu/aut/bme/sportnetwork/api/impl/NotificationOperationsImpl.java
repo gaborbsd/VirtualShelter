@@ -3,6 +3,8 @@ package hu.aut.bme.sportnetwork.api.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.transaction.annotation.Transactional;
 
 import hu.bme.aut.sportnetwork.api.NotificationOperations;
@@ -29,13 +31,11 @@ public class NotificationOperationsImpl implements NotificationOperations {
 	@Override
 	@Transactional
 	public List<Notification> getNotifications() {
-		/*
-		 * User user = authOperations.getLoggedInUser();
-		 * user.setHasNotification(false); userRepository.save(user); return
-		 * notificationRepositroy.findByOwnerAndIsDeclined(user, false, new
-		 * Sort(Sort.Direction.DESC, "sendTime"));
-		 */
-		return null;
+
+		// user.setHasNotification(false);
+		String user = authOperations.getLoggedInUserName();
+		userRepository.updateNotificationsByName(user, false);
+		return notificationRepositroy.findByOwnerName(user, new Sort(Direction.DESC, Notification.FIELD_DATE));
 	}
 
 	@Override

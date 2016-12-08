@@ -43,7 +43,7 @@ public class MessageController {
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-	ResponseEntity<List<MessageResource>> listConversationMessages(@PathVariable Long id) {
+	ResponseEntity<List<MessageResource>> listConversationMessages(@PathVariable Long id) throws SportNetworkException {
 		List<Message> messages = messageOperation.listMessagesbyConversation(id);
 		List<MessageResource> resourceList = messageResourceAssembler.toResources(messages);
 		return new ResponseEntity<List<MessageResource>>(resourceList, HttpStatus.OK);

@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 import hu.bme.aut.sportnetwork.api.SportNetworkException;
 import hu.bme.aut.sportnetwork.api.UserOperations;
 import hu.bme.aut.sportnetwork.auth.AuthOperations;
-import hu.bme.aut.sportnetwork.dal.FriendShipDAO;
 import hu.bme.aut.sportnetwork.dal.NotificationRepository;
 import hu.bme.aut.sportnetwork.dal.UserRepository;
 import hu.bme.aut.sportnetwork.entity.Friend;
@@ -25,8 +24,6 @@ public class UserOperationsImpl implements UserOperations {
 
 	@Autowired
 	private NotificationRepository notificationRepositroy;
-
-	private FriendShipDAO friendShipRepository;
 	
 	@Autowired
 	private AuthOperations authOperations;
@@ -96,7 +93,6 @@ public class UserOperationsImpl implements UserOperations {
 	@Override
 	public List<User> listFriends() {
 		User u = authOperations.getLoggedInUser();
-		List<Friend> fl = friendShipRepository.findByUser(u);
 
 		List<User> ret = new ArrayList<>();
 
@@ -108,11 +104,7 @@ public class UserOperationsImpl implements UserOperations {
 
 	@Override
 	public boolean pollNotification() {
-		/*
-		 * User user = authOperations.getLoggedInUser(); return
-		 * user.getHasNotification();
-		 */
-		return false;
+		return userRepository.getHasNotificationByName(authOperations.getLoggedInUserName());
 	}
 
 	@Override

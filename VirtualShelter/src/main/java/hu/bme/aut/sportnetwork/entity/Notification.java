@@ -32,6 +32,8 @@ public class Notification {
 
 	public static final String EVENT_RATE_MESSAGE = " is closed. Rate the members ";
 
+	public static final String FIELD_DATE = "sendTime";
+
 	@GraphId
 	private Long id;
 
@@ -48,6 +50,8 @@ public class Notification {
 	private Conversation conversation;
 
 	private boolean isDeclined;
+
+	private String message;
 
 	@DateString("yy-MM-dd HH:mm:ss")
 	private Date sendTime;
@@ -119,6 +123,14 @@ public class Notification {
 
 	public void setModificationTime(Date modificationTime) {
 		this.modificationTime = modificationTime;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
 	}
 
 	public NotificationType getType() {

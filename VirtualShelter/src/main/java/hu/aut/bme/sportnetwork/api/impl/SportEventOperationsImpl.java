@@ -15,8 +15,7 @@ import hu.bme.aut.sportnetwork.api.SportNetworkException;
 import hu.bme.aut.sportnetwork.api.UserOperations;
 import hu.bme.aut.sportnetwork.auth.AuthOperations;
 import hu.bme.aut.sportnetwork.dal.AddressRepository;
-import hu.bme.aut.sportnetwork.dal.CommentDAO;
-import hu.bme.aut.sportnetwork.dal.FriendShipDAO;
+import hu.bme.aut.sportnetwork.dal.CommentRepositroy;
 import hu.bme.aut.sportnetwork.dal.NotificationRepository;
 import hu.bme.aut.sportnetwork.dal.SportEventRepository;
 import hu.bme.aut.sportnetwork.dal.UserRepository;
@@ -42,9 +41,8 @@ public class SportEventOperationsImpl implements SportEventOperations {
 	@Autowired
 	AddressRepository addressRepository;
 
-	CommentDAO commentRepository;
-	
-	FriendShipDAO friendShipRepository;
+	@Autowired
+	CommentRepositroy commentRepository;
 
 	@Autowired
 	NotificationRepository notificationRepositroy;

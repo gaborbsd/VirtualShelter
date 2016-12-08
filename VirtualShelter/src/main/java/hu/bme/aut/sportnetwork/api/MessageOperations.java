@@ -9,7 +9,7 @@ public interface MessageOperations {
 
 	public List<Conversation> listConversatinsByUser();
 	
-	public List<Message> listMessagesbyConversation(long conversationId);
+	public List<Message> listMessagesbyConversation(long conversationId) throws SportNetworkException;
 	
 	public List<Message> writeToConversation(long conversationId, String message) throws SportNetworkException;
 	

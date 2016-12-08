@@ -43,7 +43,7 @@ public class SportEvent {
 
 	private int maxSize;
 
-	@Relationship(type = RelationShipTypes.MEMBER_TYPE, direction = Relationship.INCOMING)
+	@Relationship(type = RelationShipTypes.MEMBER_TYPE, direction = Relationship.UNDIRECTED)
 	private Set<User> members;
 
 	@Relationship(type = RelationShipTypes.COMMENT_TYPE, direction = Relationship.INCOMING)

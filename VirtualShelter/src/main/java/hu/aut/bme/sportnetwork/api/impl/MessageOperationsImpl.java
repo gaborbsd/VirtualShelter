@@ -48,8 +48,11 @@ public class MessageOperationsImpl implements MessageOperations {
 	}
 
 	@Override
-	public List<Message> listMessagesbyConversation(long conversationId) {
+	public List<Message> listMessagesbyConversation(long conversationId) throws SportNetworkException {
 		Conversation c = conversationRepository.findByMessages(conversationId);
+		if (c == null) {
+			throw new SportNetworkException("NO CONVERSATION WITH ID" + conversationId);
+		}
 		return c.getMessages();
 	}
 

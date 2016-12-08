@@ -1,5 +1,4 @@
 MATCH (n) DETACH DELETE n
-
 CREATE (Ad1:Address {city: 'Szekszard', country: 'HUN', address: 'Hargitai utca 2'})
 CREATE (A:User {name: 'Andras', email: 'andras1@gmail.com', hasNotification: true, hasWarning: false, isAdmin: false, deleted: false, password: '42cc48a7dc3274de66d5a7f4e27c43f728c9abd8', salt: '00D4454C92F295EC2A47C153DCF78FAD', age: 34, phoneNumber: '+36301234567', introduction: 'Andras vagyok', country: 'HUN', city: 'Szekszard'})
 CREATE (t1:SportEvent {title:'Tennis event 1', date:'2016-08-18 10:00:00', levelFrom: 4, levelTo: 6, isOpened: true, isPublic: true, type: 'TENNIS', description: 'tenisz', maxSize: 2})
